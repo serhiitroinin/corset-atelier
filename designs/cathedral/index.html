@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vesna — Cathedral, in colour. Gothic revival corsetry, laced by hand</title>
-<meta name="description" content="Vesna: steel-boned couture corsets in ruby, emerald, sapphire, amethyst, gold and bone. Collection I — Cathedral. Find your size with the Rite of Measure.">
+<title>Vesna — Cathedral, in colour. Gothic revival corsetry, ready to wear</title>
+<meta name="description" content="Vesna: steel-boned corsets, ready to wear, in ruby, emerald, sapphire, amethyst, gold and bone. Collection I — Cathedral. Find your size with the Rite of Measure.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Pirata+One&display=swap" rel="stylesheet">
@@ -254,6 +254,25 @@ footer a:hover{color:var(--pale);text-decoration-color:var(--gold)}
 .back{position:fixed;left:1rem;bottom:1rem;z-index:60;font:400 .58rem/1 var(--caps);letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--bone);background:rgba(10,7,8,.88);border:1px solid var(--line);border-radius:999px;padding:.75rem 1.1rem;transition:color .3s,border-color .3s,background .3s}
 .back:hover{color:var(--pale);border-color:var(--gold);background:var(--ox)}
 
+
+/* ---------- ready-to-wear ---------- */
+.usp{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--hair);background:rgba(10,7,8,.6);position:relative;z-index:1}
+.usp li{padding:1.3rem 1rem;text-align:center;font-size:.92rem;line-height:1.4;color:var(--bone);border-left:1px solid var(--hair)}
+.usp li:first-child{border-left:0}
+.usp b{display:block;font:600 .62rem/1 var(--caps);letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem}
+@media (max-width:760px){.usp{grid-template-columns:1fr 1fr}.usp li:nth-child(odd){border-left:0}.usp li:nth-child(n+3){border-top:1px solid var(--hair)}}
+.card{position:relative}
+.badge{position:absolute;top:0;left:0;z-index:4;font:600 .54rem/1 var(--caps);letter-spacing:.24em;text-transform:uppercase;color:var(--pale);border:1px solid rgb(var(--c));background:rgba(var(--c),.22);padding:.5rem .6rem}
+.rate{font-size:.88rem;color:var(--pale);margin:0 auto .9rem}
+.rate span{color:var(--bone)}
+.rate .stock{color:#9fd3b4}
+.card .foot{flex-wrap:wrap;gap:.8rem 1.1rem}
+.size-sel{-webkit-appearance:none;appearance:none;background:transparent;border:1px solid var(--hair);border-radius:0;color:var(--pale);font:600 .6rem/1 var(--caps);letter-spacing:.2em;text-transform:uppercase;padding:.6rem .8rem;cursor:pointer;transition:border-color .3s}
+.size-sel:hover,.size-sel:focus{border-color:var(--gold);outline:none}
+.size-sel.need{border-color:#e0637a}
+.size-sel option{background:#140a0d;color:#e4ded2}
+.avg{display:block;color:var(--gold);font-weight:400;margin-bottom:.4rem}
+
 /* ---------- reveals ---------- */
 .js .rv{opacity:0;transform:translateY(28px);transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
 .js .rv.in{opacity:1;transform:none}
@@ -284,7 +303,7 @@ html,body{overflow-x:clip;max-width:100%}
     <div>
       <button class="burger" id="burger" aria-expanded="false" aria-controls="links" aria-label="Open menu"><i></i><i></i><i></i></button>
       <nav class="links" id="links" aria-label="Primary">
-        <a href="#reliquary">Corsets</a><a href="#mtm">Made to Measure</a><a href="#rite">Fit Guide</a><a href="#journal">Journal</a>
+        <a href="#reliquary">Shop</a><a href="#silhouettes">Styles</a><a href="#rite">Size Guide</a><a href="#testimony">Reviews</a>
       </nav>
     </div>
     <a class="mark" href="#top" aria-label="Vesna, home">Vesna<span>.</span></a>
@@ -302,17 +321,24 @@ html,body{overflow-x:clip;max-width:100%}
   <div class="hero-copy">
     <p class="label">Collection II &nbsp;·&nbsp; Cathedral, in colour &nbsp;·&nbsp; MMXXVI</p>
     <h1 id="h1"><span class="g">Blessed</span> <span class="it">are the tightly laced.</span></h1>
-    <p class="lede">Steel-boned corsetry in every colour the windows throw — ruby, emerald, sapphire, amethyst, gold and bone. Nine silhouettes, cut, bound and consecrated by hand.</p>
-    <div class="cta-row"><a class="btn" href="#reliquary">Enter the collection</a><a class="btn ghost" href="#rite">Find your size</a></div>
+    <p class="lede">Steel-boned corsetry in every colour the windows throw — ruby, emerald, sapphire, amethyst, gold and bone. Nine silhouettes, twelve sizes, in stock and at your door this week. From €119.</p>
+    <div class="cta-row"><a class="btn" href="#reliquary">Shop the collection</a><a class="btn ghost" href="#rite">Find your size</a></div>
     <p class="hint" aria-hidden="true">Your cursor carries the candle</p>
   </div>
 </section>
+
+<ul class="usp" aria-label="Shopping with Vesna">
+  <li><b>Ships in 24 hours</b>Free in the EU over €150</li>
+  <li><b>First exchange free</b>30 days, postage on us</li>
+  <li><b>Sizes 18–40″</b>Every style, every colour</li>
+  <li><b>Pay in three</b>Interest-free with Klarna</li>
+</ul>
 
 <section id="reliquary" aria-labelledby="h-rel">
   <div class="wrap">
     <header class="head rv"><span class="num">I</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
       <h2 id="h-rel">The <span class="it">Reliquary</span></h2>
-      <p>Nine pieces, from Elizabethan stays to an Edwardian longline, each made in runs of forty. Choose by order, or by the window whose light you would stand in.</p></header>
+      <p>Nine styles, from Elizabethan stays to an Edwardian longline, in stock in sizes 18–40″. Shop by order, or by the window whose light you would stand in.</p></header>
     <div class="filters rv">
       <div class="chips" id="chips" role="group" aria-label="Filter by style"></div>
       <div class="windows" id="windows" role="group" aria-label="Filter by colour"></div>
@@ -330,10 +356,10 @@ html,body{overflow-x:clip;max-width:100%}
       <p>Choose the architecture first. The colour follows — every order is cut in every glass.</p></header>
     <figure class="forms candle rv"><img src="../../assets/img/cathedral/forms.jpg" alt="Five corsets in ruby, emerald, sapphire, gold and ivory on antique dress forms in a stone sacristy, coloured window light across them" width="1800" height="1200" loading="lazy"></figure>
     <div class="sils rv">
-      <a href="#reliquary" data-go="Overbust"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M14 22c8-10 22-10 32 0 10-10 24-10 32 0-2 22-12 34-14 46 2 14 10 26 14 42-10 10-54 10-64 0 4-16 12-28 14-42-2-12-12-24-14-46z"/><path d="M46 22v96M30 20c2 30 6 40 4 50-1 12-6 28-8 44M62 20c-2 30-6 40-4 50 1 12 6 28 8 44"/></svg><h3>Overbust</h3><p>Bust to hip. The full nave — it needs no other garment.</p><span class="label">From €520</span></a>
-      <a href="#reliquary" data-go="Underbust"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M16 40c18-7 42-7 60 0-2 14-10 22-12 32 2 12 10 22 14 36-10 9-54 9-64 0 4-14 12-24 14-36-2-10-10-18-12-32z"/><path d="M46 36v80M31 37c2 18 5 26 4 35-1 10-6 22-8 38M61 37c-2 18-5 26-4 35 1 10 6 22 8 38"/></svg><h3>Underbust</h3><p>Ribs to hip. Worn over silk, under wool, beside everything.</p><span class="label">From €320</span></a>
-      <a href="#reliquary" data-go="Waspie"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M20 50c16-5 36-5 52 0-2 8-7 12-8 18 1 7 6 12 9 22-12 7-42 7-54 0 3-10 8-15 9-22-1-6-6-10-8-18z"/><path d="M46 46v48M33 47c1 9 3 14 3 21s-3 13-5 24M59 47c-1 9-3 14-3 21s3 13 5 24"/></svg><h3>Waspie</h3><p>A cincture of eighteen centimetres. The waist alone, confessed.</p><span class="label">From €230</span></a>
-      <a href="#reliquary" data-go="Longline"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M16 26c18-7 42-7 60 0-2 16-11 26-13 38 2 16 13 30 17 56-12 8-56 8-68 0 4-26 15-40 17-56-2-12-11-22-13-38z"/><path d="M46 22v102M31 23c2 20 6 30 5 41-1 14-9 30-11 58M61 23c-2 20-6 30-5 41 1 14 9 30 11 58"/></svg><h3>Longline</h3><p>Descends over the hip for the smoothest line and deepest hold.</p><span class="label">From €560</span></a>
+      <a href="#reliquary" data-go="Overbust"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M14 22c8-10 22-10 32 0 10-10 24-10 32 0-2 22-12 34-14 46 2 14 10 26 14 42-10 10-54 10-64 0 4-16 12-28 14-42-2-12-12-24-14-46z"/><path d="M46 22v96M30 20c2 30 6 40 4 50-1 12-6 28-8 44M62 20c-2 30-6 40-4 50 1 12 6 28 8 44"/></svg><h3>Overbust</h3><p>Bust to hip. The full nave — it needs no other garment.</p><span class="label">From €249</span></a>
+      <a href="#reliquary" data-go="Underbust"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M16 40c18-7 42-7 60 0-2 14-10 22-12 32 2 12 10 22 14 36-10 9-54 9-64 0 4-14 12-24 14-36-2-10-10-18-12-32z"/><path d="M46 36v80M31 37c2 18 5 26 4 35-1 10-6 22-8 38M61 37c-2 18-5 26-4 35 1 10 6 22 8 38"/></svg><h3>Underbust</h3><p>Ribs to hip. Worn over silk, under wool, beside everything.</p><span class="label">From €169</span></a>
+      <a href="#reliquary" data-go="Waspie"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M20 50c16-5 36-5 52 0-2 8-7 12-8 18 1 7 6 12 9 22-12 7-42 7-54 0 3-10 8-15 9-22-1-6-6-10-8-18z"/><path d="M46 46v48M33 47c1 9 3 14 3 21s-3 13-5 24M59 47c-1 9-3 14-3 21s3 13 5 24"/></svg><h3>Waspie</h3><p>A cincture of eighteen centimetres. The waist alone, confessed.</p><span class="label">From €119</span></a>
+      <a href="#reliquary" data-go="Longline"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M16 26c18-7 42-7 60 0-2 16-11 26-13 38 2 16 13 30 17 56-12 8-56 8-68 0 4-26 15-40 17-56-2-12-11-22-13-38z"/><path d="M46 22v102M31 23c2 20 6 30 5 41-1 14-9 30-11 58M61 23c-2 20-6 30-5 41 1 14 9 30 11 58"/></svg><h3>Longline</h3><p>Descends over the hip for the smoothest line and deepest hold.</p><span class="label">From €279</span></a>
     </div>
   </div>
 </section>
@@ -381,17 +407,17 @@ html,body{overflow-x:clip;max-width:100%}
 <div class="band" aria-hidden="true"></div>
 <section class="craft" id="craft" data-zone aria-labelledby="h-craft">
   <div class="wrap">
-    <figure class="candle rv"><img src="../../assets/img/cathedral/detail.jpg" alt="Macro view of an emerald velvet corset back: antique gold eyelets, ruby silk ribbon lacing and hand-stitched boning channels" width="1800" height="1200" loading="lazy"><figcaption class="label">Eyelets set one at a time, by lamplight</figcaption></figure>
+    <figure class="candle rv"><img src="../../assets/img/cathedral/detail.jpg" alt="Macro view of an emerald velvet corset back: antique gold eyelets, ruby silk ribbon lacing and topstitched boning channels" width="1800" height="1200" loading="lazy"><figcaption class="label">Two-part eyelets, steel-backed, on every piece</figcaption></figure>
     <div class="rv" style="--d:.15s">
       <span class="num">IV</span>
       <h2 class="h2" id="h-craft">Built like a <span class="it">vault</span>. Worn like a vow.</h2>
-      <p>Thirty-one hours, four layers, one maker from first chalk line to last knot. Nothing here is glued, fused, or plastic.</p>
+      <p>The same construction as a corset at three times the price: four layers, steel throughout, and two hundred wears of testing before a style reaches the shop. Nothing here is glued, fused, or plastic.</p>
       <ol class="layers">
         <li><div><b>The bones</b>24 to 32 spiral steel bones flex with the breath; flat steels flank the eyelets so the back never buckles.</div></li>
-        <li><div><b>The busk</b>A 12 mm stainless spoon busk, wider at the belly, fastened with five hand-set loops and studs.</div></li>
+        <li><div><b>The busk</b>A 12 mm stainless spoon busk, wider at the belly, fastened with five loops and studs.</div></li>
         <li><div><b>The waist tape</b>Herringbone cotton tape stitched into every seam at the waistline. It carries the tension so the fabric never has to.</div></li>
         <li><div><b>The layers</b>Velvet, brocade, damask, satin or leather face, fused to nothing; English cotton coutil strength layer; floating cotton lining dyed to match the glass.</div></li>
-        <li><div><b>The finishing</b>Bone channels topstitched in silk thread, leather binding slip-stitched by hand, two-part eyelets set one at a time.</div></li>
+        <li><div><b>The finishing</b>Bone channels double-topstitched, edges bound in matching satin or leather, two-part eyelets that will not pull through.</div></li>
       </ol>
     </div>
   </div>
@@ -401,7 +427,7 @@ html,body{overflow-x:clip;max-width:100%}
 <section id="testimony" aria-labelledby="h-test">
   <div class="wrap">
     <header class="head rv"><span class="num">V</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
-      <h2 id="h-test">Testimony</h2><p>From the congregation — with their measurements, because a review without numbers is only a prayer.</p></header>
+      <h2 id="h-test">Testimony</h2><p><b class="avg">✦ 4.8 of 5 · 2,140 verified reviews.</b> From the congregation — with their measurements, because a review without numbers is only a prayer.</p></header>
     <div class="revs">
       <article class="rev rv"><p class="stars" aria-label="Five out of five">✦✦✦✦✦</p><blockquote>“I expected costume. I received armour. The Rite put me in a 24 and the gap sat perfectly parallel by the second week.”</blockquote><cite>Ilse V. — Utrecht</cite>
         <dl><div><dt>Waist</dt><dd>71 cm</dd></div><div><dt>Underbust</dt><dd>78 cm</dd></div><div><dt>Bought</dt><dd>Lady Chapel, 24″</dd></div><div><dt>Height</dt><dd>168 cm</dd></div></dl></article>
@@ -417,9 +443,9 @@ html,body{overflow-x:clip;max-width:100%}
   <div class="candle">
     <img src="../../assets/img/cathedral/gold.jpg" alt="" width="1050" height="1400" loading="lazy">
     <div class="inner rv"><span class="num">VI</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
-      <h2 class="h2" id="h-mtm">Made to <span class="it">your</span> measure</h2>
-      <p>Fourteen measurements, a calico toile posted to your door, one video fitting, and a corset drafted for no other body on earth, in any glass you name. Six weeks. From €780.</p>
-      <a class="btn" href="#vespers">Request a commission</a></div>
+      <h2 class="h2" id="h-mtm">Matins to <span class="it">midnight</span></h2>
+      <p>Over a white shirt at ten, under a blazer at six, alone with a long skirt after dark. Every style is cut to be worn out, not kept in a box — styling notes come with each one.</p>
+      <a class="btn" href="#reliquary">Shop the bestsellers</a></div>
   </div>
 </section>
 
@@ -428,7 +454,7 @@ html,body{overflow-x:clip;max-width:100%}
   <div class="wrap" id="journal">
     <span class="num">VII</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
     <h2 class="h2" id="h-vesp">Vespers — <span class="it">the journal, by letter</span></h2>
-    <p style="max-width:36rem;margin-inline:auto">One letter a month at dusk: new pieces before they are public, essays on lacing and lineage, commission openings. Never more.</p>
+    <p style="max-width:36rem;margin-inline:auto">One letter a month at dusk: new pieces before they are public, restocks, new colours, private sales. Never more.</p>
     <form id="news" novalidate><label for="email" class="skip">Email address</label><input id="email" type="email" placeholder="your@email" autocomplete="email" required><button type="submit">Join →</button></form>
     <p class="note" id="news-note" role="status"></p>
   </div>
@@ -440,10 +466,10 @@ html,body{overflow-x:clip;max-width:100%}
     <svg class="orn wide" aria-hidden="true" style="margin-bottom:3rem"><use href="#orn"/></svg>
     <div class="fgrid">
       <div><a class="mark" href="#top" style="font-size:2.6rem">Vesna<span>.</span></a><p style="margin-top:1rem;max-width:20rem" class="it">A corset house. Womenswear to follow, when it is ready and not before.</p></div>
-      <div><h3>Shipping</h3><p>Tracked, insured, in a linen box the colour of your corset. Free within the EU over €250; worldwide in 3–7 days.</p></div>
+      <div><h3>Shipping</h3><p>Dispatched within 24 hours, tracked. Free within the EU over €150; worldwide in 3–7 days. Pay in three with Klarna.</p></div>
       <div><h3>The fit promise</h3><p>If the size is wrong, we exchange it once, free, within 30 days — postage both ways on us. Unworn returns refunded in full.</p></div>
       <div><h3>Care</h3><p>Never wash. Air after wearing, spot-clean the lining, store flat or hung by the laces. <a href="#craft">Seasoning guide</a></p></div>
-      <div><h3>Contact</h3><p><a href="mailto:atelier@vesna.example">atelier@vesna.example</a><br>Fittings by appointment<br>Mon–Fri, 10–18 CET</p></div>
+      <div><h3>Contact</h3><p><a href="mailto:help@vesna.example">help@vesna.example</a><br>Live chat and sizing help<br>Mon–Sat, 9–20 CET</p></div>
     </div>
     <div class="fine label"><span>© MMXXVI Vesna Corset House</span><span>Privacy · Terms · Imprint</span></div>
   </div>
@@ -461,22 +487,24 @@ html,body{overflow-x:clip;max-width:100%}
 
   /* ----- products ----- */
   var products = [
-    {n:'Vespertine', k:'Overbust', t:'Overbust', g:'Emerald', p:520, img:'cathedral/hero.jpg', pos:'45% 26%', zoom:1.5, alt:'Vespertine overbust corset in emerald silk velvet with an antique gold busk', s:'28 spiral steel bones · emerald silk velvet over coutil · 4″ reduction'},
-    {n:'Sanctus', k:'Overbust · couture', t:'Overbust', g:'Ruby', p:780, img:'cathedral/ruby.jpg', pos:'50% 30%', zoom:1.35, alt:'Sanctus overbust corset in ruby silk brocade with gold thread embroidery and a sweetheart neckline', s:'32 steel bones · ruby silk brocade, gold-work embroidery · 5″ reduction'},
-    {n:'Lady Chapel', k:'Underbust', t:'Underbust', g:'Sapphire', p:340, img:'cathedral/sapphire.jpg', pos:'45% 34%', zoom:1.4, alt:'Lady Chapel underbust corset in sapphire duchess satin over a white poet blouse', s:'24 spiral steel bones · sapphire duchess satin · sizes 18–40 · 4″ reduction'},
-    {n:'Cloister', k:'Longline', t:'Longline', g:'Bone', p:590, img:'cathedral/ivory.jpg', pos:'50% 36%', zoom:1.35, alt:'Cloister longline corset in ivory damask with pearl buttons over a sheer lace blouse', s:'30 steel bones · ivory silk damask · pearl-button busk cover · 4″ reduction'},
-    {n:'Compline', k:'Waspie', t:'Waspie', g:'Amethyst', p:230, img:'cathedral/amethyst.jpg', pos:'45% 28%', zoom:1.9, alt:'Compline waspie in amethyst velvet cinched over a long black crepe dress', s:'16 spiral steel bones · amethyst cotton velvet · 18 cm tall · 3″ reduction'},
-    {n:'Gloriana', k:'Elizabethan stays', t:'Stays', g:'Gold', p:460, img:'cathedral/gold.jpg', pos:'45% 38%', zoom:1.35, alt:'Gloriana Elizabethan-style stays in antique gold brocade with shoulder straps and tabbed hem over an ivory chemise', s:'Fully boned in flat steel · gold brocade · straps & tabbed hem · 2″ reduction'},
-    {n:'Rosary', k:'Edwardian longline', t:'Longline', g:'Rose', p:640, img:'cathedral/rose.jpg', pos:'52% 36%', zoom:1.35, alt:'Rosary Edwardian longline corset in dusty rose silk under black Chantilly lace', s:'28 steel bones · rose silk, Chantilly lace overlay · straight-front busk · 4″ reduction'},
-    {n:'Pilgrim', k:'Underbust', t:'Underbust', g:'Cognac', p:360, img:'cathedral/cognac.jpg', pos:'55% 32%', zoom:1.5, alt:'Pilgrim underbust corset in cognac leather with brass swing-hook clasps over a cream linen shirt', s:'22 spiral steel bones · cognac bridle leather · brass swing hooks · 3″ reduction'},
-    {n:'Nocturne', k:'Underbust', t:'Underbust', g:'Jet', p:320, img:'noir/hero.jpg', pos:'50% 22%', zoom:1.35, alt:'Nocturne black leather underbust corset worn over a high-necked satin gown', s:'24 spiral steel bones · jet nappa leather on cotton coutil · 4″ reduction'}
+    {n:'Vespertine', k:'Overbust', t:'Overbust', g:'Emerald', p:249, b:'Bestseller', r:4.9, c:412, img:'cathedral/hero.jpg', pos:'45% 26%', zoom:1.5, alt:'Vespertine overbust corset in emerald silk velvet with an antique gold busk', s:'28 spiral steel bones · emerald cotton velvet over coutil · 4″ reduction'},
+    {n:'Sanctus', k:'Overbust · embroidered', t:'Overbust', g:'Ruby', p:329, b:'Limited', r:4.8, c:96, img:'cathedral/ruby.jpg', pos:'50% 30%', zoom:1.35, alt:'Sanctus overbust corset in ruby silk brocade with gold thread embroidery and a sweetheart neckline', s:'32 steel bones · ruby jacquard brocade, gold embroidery · 5″ reduction'},
+    {n:'Lady Chapel', k:'Underbust', t:'Underbust', g:'Sapphire', p:169, b:'Bestseller', r:4.8, c:538, img:'cathedral/sapphire.jpg', pos:'45% 34%', zoom:1.4, alt:'Lady Chapel underbust corset in sapphire duchess satin over a white poet blouse', s:'24 spiral steel bones · sapphire duchess satin · 4″ reduction'},
+    {n:'Cloister', k:'Longline', t:'Longline', g:'Bone', p:279, r:4.7, c:143, img:'cathedral/ivory.jpg', pos:'50% 36%', zoom:1.35, alt:'Cloister longline corset in ivory damask with pearl buttons over a sheer lace blouse', s:'30 steel bones · ivory damask · pearl-button busk cover · 4″ reduction'},
+    {n:'Compline', k:'Waspie', t:'Waspie', g:'Amethyst', p:119, b:'New', r:4.8, c:87, img:'cathedral/amethyst.jpg', pos:'45% 28%', zoom:1.9, alt:'Compline waspie in amethyst velvet cinched over a long black crepe dress', s:'16 spiral steel bones · amethyst cotton velvet · 18 cm tall · 3″ reduction'},
+    {n:'Gloriana', k:'Elizabethan stays', t:'Stays', g:'Gold', p:229, r:4.7, c:121, img:'cathedral/gold.jpg', pos:'45% 38%', zoom:1.35, alt:'Gloriana Elizabethan-style stays in antique gold brocade with shoulder straps and tabbed hem over an ivory chemise', s:'Fully boned in flat steel · gold brocade · straps & tabbed hem · 2″ reduction'},
+    {n:'Rosary', k:'Edwardian longline', t:'Longline', g:'Rose', p:299, b:'New', r:4.9, c:64, img:'cathedral/rose.jpg', pos:'52% 36%', zoom:1.35, alt:'Rosary Edwardian longline corset in dusty rose silk under black Chantilly lace', s:'28 steel bones · rose satin, Chantilly-style lace overlay · straight-front busk · 4″ reduction'},
+    {n:'Pilgrim', k:'Underbust', t:'Underbust', g:'Cognac', p:219, r:4.8, c:209, img:'cathedral/cognac.jpg', pos:'55% 32%', zoom:1.5, alt:'Pilgrim underbust corset in cognac leather with brass swing-hook clasps over a cream linen shirt', s:'22 spiral steel bones · cognac Italian leather · brass swing hooks · 3″ reduction'},
+    {n:'Nocturne', k:'Underbust', t:'Underbust', g:'Jet', p:199, r:4.9, c:377, img:'noir/hero.jpg', pos:'50% 22%', zoom:1.35, alt:'Nocturne black leather underbust corset worn over a high-necked satin gown', s:'24 spiral steel bones · jet nappa leather on cotton coutil · 4″ reduction'}
   ];
   $('#grid').innerHTML = products.map(function(p, i){
     var st = 'object-position:' + p.pos + (p.zoom ? ';transform-origin:' + p.pos + ';scale:' + p.zoom : '');
+    var sizes = '<option value="">Size</option>' + [18,20,22,24,26,28,30,32,34,36,38,40].map(function(z){ return '<option value="' + z + '">' + z + '″</option>'; }).join('');
     return '<article class="card rv" data-zone data-t="' + p.t + '" data-g="' + p.g + '" style="--c:' + GLASS[p.g] + ';--d:' + (i % 3) * 0.12 + 's">' +
+      (p.b ? '<span class="badge">' + p.b + '</span>' : '') +
       '<figure class="arch"><div class="clip candle" style="--tint:' + GLASS[p.g] + '"><img src="' + IMG + p.img + '" alt="' + p.alt + '" width="1050" height="1400" loading="lazy" style="' + st + '"></div></figure>' +
-      '<p class="label kind">' + p.k + '</p><h3>' + p.n + '</h3><p class="glass"><i aria-hidden="true"></i>' + p.g + ' glass</p><p class="spec">' + p.s + '</p>' +
-      '<div class="foot"><span class="price">€' + p.p + '</span><button class="add" type="button" data-name="' + p.n + '" aria-label="Add ' + p.n + ' to bag">Add to bag</button></div></article>';
+      '<p class="label kind">' + p.k + '</p><h3>' + p.n + '</h3><p class="glass"><i aria-hidden="true"></i>' + p.g + ' glass</p><p class="spec">' + p.s + '</p><p class="rate" aria-label="Rated ' + p.r + ' of 5 from ' + p.c + ' reviews">✦ ' + p.r.toFixed(1) + ' <span>(' + p.c + ')</span> · <span class="stock">In stock</span></p>' +
+      '<div class="foot"><span class="price">€' + p.p + '</span><select class="size-sel" aria-label="Size for ' + p.n + '">' + sizes + '</select><button class="add" type="button" data-name="' + p.n + '" aria-label="Add ' + p.n + ' to bag">Add to bag</button></div></article>';
   }).join('');
 
   /* ----- filters: by order, by glass ----- */
@@ -504,6 +532,8 @@ html,body{overflow-x:clip;max-width:100%}
   var count = 0, badge = $('#count');
   document.addEventListener('click', function(e){
     var b = e.target.closest('.add'); if (!b || b.id === 'reset') return;
+    var sel = $('.size-sel', b.closest('.card'));
+    if (sel && !sel.value) { sel.classList.add('need'); sel.focus(); b.textContent = 'Choose a size'; setTimeout(function(){ b.textContent = 'Add to bag'; sel.classList.remove('need'); }, 1600); return; }
     count++; badge.textContent = count;
     $('.cart').setAttribute('aria-label', 'Bag, ' + count + (count === 1 ? ' item' : ' items'));
     badge.classList.add('bump'); b.textContent = 'Laid in your bag';
@@ -596,11 +626,12 @@ html,body{overflow-x:clip;max-width:100%}
     if (w === null || u === null || !gEl) { var bad = $('[aria-invalid=true]', form) || $('#g1'); bad.focus(); return; }
     var r = fitCalc(w, u, gEl.value), cm = function(i){ return (Math.round(i * 2.54 * 2) / 2).toString(); };
     $('#r-size').textContent = r.size;
+    $$('.size-sel').forEach(function(x){ x.value = String(r.size); });
     $('#r-sil').textContent = r.sil;
     $('#r-gap').textContent = cm(r.gapStart) + ' cm → ' + cm(Math.max(r.gapEnd, 0.5)) + ' cm';
     drawLace(r.gapStart);
     $('#r-why').innerHTML = r.outOfRange
-      ? 'Your measure falls beyond our standing sizes (18–40″). We suggest the nearest, <em>' + r.size + '″</em> — but a body like yours deserves a <a href="#mtm">made-to-measure commission</a>.'
+      ? 'Your measure falls outside our current range (18–40″). The nearest size is <em>' + r.size + '″</em> — <a href="mailto:help@vesna.example">write to us</a> and we will tell you when extended sizes arrive.'
       : 'Your waist is ' + r.wIn.toFixed(1) + '″. For ' + gEl.value + ' wear we take ' + r.reduce + '″ and round down to an even size. Expect a gap near ' + cm(r.gapStart) + ' cm at first lacing, easing to about ' + cm(Math.max(r.gapEnd, 0.5)) + ' cm, edges parallel, once the corset is seasoned.';
     $('#await').hidden = true;
     var res = $('#res'); res.hidden = true; void res.offsetWidth; res.hidden = false;
