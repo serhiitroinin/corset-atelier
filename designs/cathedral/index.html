@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesna — Cathedral, in colour. Gothic revival corsetry, laced by hand</title>
+<meta name="description" content="Vesna: steel-boned couture corsets in ruby, emerald, sapphire, amethyst, gold and bone. Collection I — Cathedral. Find your size with the Rite of Measure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Pirata+One&display=swap" rel="stylesheet">
+<script>document.documentElement.className = 'js';</script>
+<style>
+:root{
+  --black:#0a0708; --pitch:#160e10; --ox:#5b0f1a; --blood:#8c1c2b; --bone:#b8b2a7; --pale:#e4ded2; --gold:#9c8454;
+  --ruby:#7a1626; --emerald:#0e3a2d; --sapphire:#13264d; --amethyst:#38204a; --amber:#a36f26; --rosy:#8d5560; --cognac:#7a4a26; --parch:#e8e0cf; --ink:#1b1214;
+  --line:rgba(156,132,84,.38); --hair:rgba(184,178,167,.16);
+  --goth:"Pirata One","UnifrakturCook",serif; --serif:"EB Garamond",Georgia,serif; --caps:"Cinzel","Trajan Pro",serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--black);color:var(--bone);font:400 19px/1.62 var(--serif);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(70% 55% at 50% -12%,rgba(122,22,38,.34),transparent 62%),radial-gradient(55% 60% at -8% 38%,rgba(19,38,77,.42),transparent 60%),radial-gradient(55% 60% at 108% 62%,rgba(14,58,45,.42),transparent 60%),radial-gradient(60% 40% at 50% 112%,rgba(56,32,74,.4),transparent 60%)}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+h1,h2,h3,p,figure,ul{margin:0;padding:0}
+ul{list-style:none}
+:focus-visible{outline:1px solid var(--pale);outline-offset:4px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ox);color:var(--pale);padding:.6rem 1rem;z-index:100}
+.skip:focus{left:0}
+.wrap{width:min(1240px,100% - 2.5rem);margin-inline:auto;position:relative;z-index:1}
+.label{font:400 .66rem/1.4 var(--caps);letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+.it{font-style:italic}
+section{position:relative;padding:clamp(4.5rem,10vw,8.5rem) 0}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.7em;font:600 .68rem/1 var(--caps);letter-spacing:.3em;text-transform:uppercase;text-decoration:none;color:var(--pale);background:var(--ox);border:1px solid var(--blood);padding:1.15rem 1.9rem;cursor:pointer;transition:background .4s,border-color .4s,color .4s,letter-spacing .4s}
+.btn:hover{background:#73131f;border-color:var(--gold);letter-spacing:.36em}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--bone)}
+.btn.ghost:hover{background:rgba(91,15,26,.35);border-color:var(--gold);color:var(--pale)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .5s,border-color .5s;border-bottom:1px solid transparent}
+.nav.solid{background:rgba(10,7,8,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:var(--hair)}
+.nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:76px}
+.mark{font:400 2.15rem/1 var(--goth);color:var(--pale);text-decoration:none;letter-spacing:.02em;justify-self:center}
+.mark span{color:var(--blood)}
+.links{display:flex;gap:2rem}
+.links a,.cart{font:400 .64rem/1 var(--caps);letter-spacing:.28em;text-transform:uppercase;text-decoration:none;color:var(--bone);position:relative;padding:.5rem 0}
+.links a::after{content:"";position:absolute;left:50%;right:50%;bottom:0;height:1px;background:var(--gold);transition:left .4s,right .4s}
+.links a:hover{color:var(--pale)}.links a:hover::after{left:0;right:0}
+.cart{justify-self:end;background:none;border:0;cursor:pointer;display:flex;align-items:center;gap:.7rem}
+.cart b{display:inline-grid;place-items:center;min-width:1.75rem;height:1.75rem;border:1px solid var(--line);border-radius:50% 50% 50% 50%/70% 70% 30% 30%;font:500 .85rem/1 var(--serif);letter-spacing:0;color:var(--pale);transition:background .4s,transform .4s}
+.cart b.bump{background:var(--blood);transform:scale(1.25)}
+.burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer;padding:0;color:var(--bone)}
+.burger i{display:block;width:24px;height:1px;background:currentColor;margin:6px 0;transition:transform .4s,opacity .3s}
+.burger[aria-expanded=true] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded=true] i:nth-child(2){opacity:0}
+.burger[aria-expanded=true] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:900px){
+  .burger{display:block}
+  .links{position:fixed;inset:76px 0 0 0;height:calc(100dvh - 76px);background:var(--black);flex-direction:column;align-items:center;justify-content:center;gap:2.2rem;visibility:hidden;opacity:0;transition:opacity .4s,visibility .4s}
+  .links.open{visibility:visible;opacity:1}
+  .links a{font-size:.85rem}
+  .cart span{position:absolute;left:-999px}
+}
+
+/* ---------- candlelight + arches ---------- */
+.arch{position:relative}
+.arch .clip{position:relative;width:100%;height:100%;clip-path:url(#archClip);background:var(--pitch);overflow:hidden}
+.arch svg.rim{position:absolute;inset:-7px;width:calc(100% + 14px);height:calc(100% + 7px);pointer-events:none;overflow:visible}
+.arch svg.rim path{fill:none;stroke:var(--gold);stroke-width:1;opacity:.6;vector-effect:non-scaling-stroke}
+.candle{--mx:50%;--my:34%;--r:360px;--dk:.8;--tint:255,172,92}
+.candle::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:radial-gradient(circle var(--r) at var(--mx) var(--my),rgba(var(--tint),.2) 0,rgba(var(--tint),.1) 32%,rgba(10,7,8,calc(var(--dk)*.75)) 65%,rgba(10,7,8,var(--dk)) 100%)}
+.candle img{filter:saturate(1.05) contrast(1.04);transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+@media (hover:none){.candle::after{animation:flicker 6s ease-in-out infinite}.candle{--r:300px;--dk:.74}}
+@keyframes flicker{0%,100%{opacity:1}12%{opacity:.8}20%{opacity:.93}34%{opacity:.72}48%{opacity:.9}61%{opacity:.76}74%{opacity:.96}86%{opacity:.82}}
+
+/* ---------- hero ---------- */
+.hero{padding:112px 0 0;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end}
+.trip{display:grid;grid-template-columns:1fr 1.32fr 1fr;gap:clamp(.6rem,2.4vw,2.2rem);align-items:end;width:min(1080px,100% - 2.5rem);margin-inline:auto;position:relative;z-index:1}
+.trip .arch{aspect-ratio:3/5}
+.trip .arch.mid{aspect-ratio:3/4.5}
+.trip .candle{--dk:.62}
+.hero-copy{position:relative;z-index:3;text-align:center;margin-top:clamp(-15rem,-17vw,-6rem);padding:clamp(5rem,12vw,9rem) 1.25rem clamp(3rem,6vw,5rem);background:linear-gradient(180deg,transparent 0,rgba(10,7,8,.86) 38%,var(--black) 62%)}
+.hero h1{font:400 clamp(2.7rem,7.6vw,6.6rem)/.98 var(--serif);color:var(--pale);letter-spacing:-.015em;margin:.9rem 0 1.4rem}
+.hero h1 .g{font-family:var(--goth);font-size:1.12em;color:var(--pale);letter-spacing:.01em;display:block;text-shadow:0 0 40px rgba(140,28,43,.7)}
+.hero p.lede{max-width:34rem;margin:0 auto 2.2rem;font-size:1.18rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.hint{margin-top:2.4rem;font:400 .6rem/1 var(--caps);letter-spacing:.34em;text-transform:uppercase;color:var(--gold);opacity:.85}
+@media (hover:none){.hint{display:none}}
+@media (max-width:640px){.trip{grid-template-columns:.42fr 1.5fr .42fr}.trip .arch{aspect-ratio:1/4}.trip .arch.mid{aspect-ratio:3/4.4}.hero-copy{margin-top:-5.5rem}}
+
+/* ---------- section heads ---------- */
+.head{text-align:center;max-width:46rem;margin:0 auto clamp(3rem,6vw,5rem)}
+.num{font:400 1rem/1 var(--caps);letter-spacing:.4em;color:var(--blood);display:block;margin-bottom:1.1rem;padding-left:.4em}
+.head h2,.h2{font:400 clamp(2.2rem,5vw,3.9rem)/1.04 var(--serif);color:var(--pale);letter-spacing:-.01em;margin:.8rem 0 1.1rem}
+.orn{display:block;width:min(340px,80%);height:24px;margin:0 auto;color:var(--gold)}
+.orn.wide{width:min(720px,90%);margin-block:0}
+
+/* ---------- products ---------- */
+#reliquary{background:linear-gradient(180deg,var(--black) 0,#1f0a12 18%,#2b0e18 55%,#170910 100%)}
+.hero{background:radial-gradient(90% 60% at 50% 30%,rgba(122,22,38,.35),transparent 70%),radial-gradient(50% 50% at 12% 40%,rgba(163,111,38,.18),transparent 70%),radial-gradient(50% 50% at 88% 40%,rgba(19,38,77,.4),transparent 70%)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2.5rem,5vw,4.5rem) clamp(1.5rem,3.5vw,3.5rem)}
+.card{text-align:center;display:flex;flex-direction:column}
+.card:nth-child(3n+2){margin-top:clamp(0rem,5vw,4.5rem)}
+.card .arch{aspect-ratio:3/4.3;margin-bottom:1.5rem}
+.card .candle{--r:320px;--dk:.55;--my:30%}
+.card:hover .candle img,.card:focus-within .candle img{transform:scale(1.045)}
+.card h3{font:500 1.75rem/1.1 var(--serif);font-style:italic;color:var(--pale)}
+.card .kind{margin:.2rem 0 .55rem}
+.card .spec{font-size:.95rem;line-height:1.45;color:var(--bone);max-width:21rem;margin:0 auto 1rem}
+.card .foot{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:1.2rem;padding-top:1rem;border-top:1px solid var(--hair)}
+.price{font:400 1.3rem/1 var(--serif);color:var(--pale)}
+.add{font:600 .62rem/1 var(--caps);letter-spacing:.28em;text-transform:uppercase;background:none;border:0;border-bottom:1px solid var(--blood);color:var(--pale);padding:.55rem .1rem;cursor:pointer;transition:color .3s,border-color .3s,letter-spacing .3s}
+.add:hover{color:#fff;border-color:var(--gold);letter-spacing:.34em}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.card:nth-child(3n+2){margin-top:0}.card:nth-child(even){margin-top:3rem}}
+@media (max-width:520px){.grid{grid-template-columns:1fr;max-width:22rem;margin-inline:auto}.card:nth-child(even){margin-top:0}}
+
+.card[hidden]{display:none}
+.card .glass{display:inline-flex;align-items:center;gap:.55rem;margin:.1rem auto .7rem;font:400 .6rem/1 var(--caps);letter-spacing:.26em;text-transform:uppercase;color:var(--bone)}
+.card .glass i{width:.7rem;height:1.05rem;border-radius:50% 50% 0 0/60% 60% 0 0;background:rgb(var(--c));box-shadow:0 0 14px rgba(var(--c),.8);border:1px solid rgba(228,222,210,.35)}
+.card .arch .rim path{stroke:rgb(var(--c));opacity:.75}
+.filters{display:flex;flex-direction:column;align-items:center;gap:1.6rem;margin:-1.5rem auto clamp(3rem,6vw,4.5rem)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+.chip{font:600 .6rem/1 var(--caps);letter-spacing:.26em;text-transform:uppercase;color:var(--bone);background:transparent;border:1px solid var(--hair);padding:.8rem 1.1rem;cursor:pointer;transition:all .35s}
+.chip:hover{border-color:var(--line);color:var(--pale)}
+.chip[aria-pressed=true]{background:var(--ox);border-color:var(--blood);color:var(--pale)}
+.windows{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(.5rem,1.6vw,1.1rem)}
+.win{background:none;border:0;padding:0;cursor:pointer;display:grid;justify-items:center;gap:.55rem;font:400 .54rem/1 var(--caps);letter-spacing:.22em;text-transform:uppercase;color:var(--bone)}
+.win i{display:block;width:clamp(2.1rem,4.6vw,3rem);aspect-ratio:1/2.1;border-radius:50% 50% 0 0/28% 28% 0 0;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.28),transparent 38%),radial-gradient(120% 60% at 50% 20%,rgb(var(--c)),rgba(var(--c),.45) 70%,rgba(10,7,8,.9));box-shadow:0 0 0 0 rgba(var(--c),0);transition:box-shadow .5s,transform .5s;position:relative;overflow:hidden}
+.win i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 49%,rgba(10,7,8,.75) 49% 51%,transparent 51%),linear-gradient(0deg,transparent 32%,rgba(10,7,8,.75) 32% 33.5%,transparent 33.5% 65%,rgba(10,7,8,.75) 65% 66.5%,transparent 66.5%)}
+.win:hover i,.win[aria-pressed=true] i{box-shadow:0 0 34px 2px rgba(var(--c),.75);transform:translateY(-3px)}
+.win[aria-pressed=true]{color:var(--pale)}
+.none{text-align:center;font-style:italic;margin-top:2rem}
+.none[hidden]{display:none}
+/* stained-glass lead band between sections */
+.band{height:10px;position:relative;z-index:1;border-block:1px solid rgba(10,7,8,.9);background:repeating-linear-gradient(90deg,#7a1626 0 56px,#0a0708 56px 59px,#a36f26 59px 99px,#0a0708 99px 102px,#0e3a2d 102px 170px,#0a0708 170px 173px,#13264d 173px 235px,#0a0708 235px 238px,#38204a 238px 286px,#0a0708 286px 289px,#8d5560 289px 330px,#0a0708 330px 333px);opacity:.9}
+
+/* ---------- silhouettes ---------- */
+.sil{background:linear-gradient(180deg,#0b2a21,#0e3a2d 45%,#08211a);border-block:1px solid var(--hair)}
+.sil .forms{aspect-ratio:3/1.25;border:1px solid var(--line);margin-bottom:clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden;--r:520px;--dk:.6;--my:50%;--tint:120,220,170}
+@media (max-width:700px){.sil .forms{aspect-ratio:3/2}}
+.sils{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
+.sils a{background:#0b2d23;text-decoration:none;text-align:center;padding:2.8rem 1.2rem 2.4rem;display:block;position:relative;overflow:hidden;transition:background .5s}
+.sils a::before{content:"";position:absolute;inset:auto 0 0 0;height:0;background:linear-gradient(0deg,rgba(163,111,38,.5),transparent);transition:height .6s}
+.sils a:hover::before,.sils a:focus-visible::before{height:100%}
+.sils svg{width:92px;height:128px;margin:0 auto 1.4rem;display:block;position:relative;stroke:var(--bone);fill:none;stroke-width:1;transition:stroke .4s,transform .6s}
+.sils a:hover svg{stroke:var(--pale);transform:translateY(-4px)}
+.sils h3{font:italic 400 1.6rem/1.1 var(--serif);color:var(--pale);position:relative}
+.sils p{font-size:.95rem;line-height:1.4;margin-top:.5rem;position:relative}
+.sils .label{display:block;margin-top:1.1rem;position:relative}
+@media (max-width:860px){.sils{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- fit finder ---------- */
+.rite{overflow:hidden;background:linear-gradient(180deg,#0c1833,#13264d 50%,#0a1430)}
+.rose{position:absolute;left:50%;top:50%;width:min(1100px,150vw);aspect-ratio:1;transform:translate(-50%,-50%);color:#8fb0ff;opacity:.22;pointer-events:none;animation:turn 240s linear infinite}
+@keyframes turn{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.altar{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:rgba(8,12,28,.9);position:relative;max-width:1080px;margin-inline:auto}
+.altar::before{content:"";position:absolute;inset:7px;border:1px solid var(--hair);pointer-events:none}
+.altar form,.altar .oracle{padding:clamp(2rem,4.5vw,3.8rem)}
+.field{margin-bottom:1.9rem}
+.field label,.field legend{display:block;font:400 .66rem/1.4 var(--caps);letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;padding:0}
+.inp{display:flex;align-items:baseline;border-bottom:1px solid var(--line);transition:border-color .3s}
+.inp:focus-within{border-color:var(--pale)}
+.inp input{flex:1;min-width:0;background:none;border:0;color:var(--pale);font:italic 400 2.3rem/1.2 var(--serif);padding:.2rem 0;outline:none;-moz-appearance:textfield;appearance:textfield}
+.inp input::-webkit-outer-spin-button,.inp input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.inp input::placeholder{color:rgba(184,178,167,.3)}
+.inp span{font:400 .7rem var(--caps);letter-spacing:.25em;color:var(--bone)}
+.help{font-size:.9rem;line-height:1.4;margin-top:.45rem;color:var(--bone)}
+.err{color:#e0808c;font-size:.92rem;font-style:italic;min-height:1.3em;margin-top:.3rem}
+fieldset{border:0;padding:0;margin:0 0 2rem}
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.7rem}
+.goals input{position:absolute;opacity:0;pointer-events:none}
+.goals label{margin:0;text-align:center;border:1px solid var(--hair);border-radius:50% 50% 0 0/42% 42% 0 0;padding:2rem .3rem 1rem;cursor:pointer;color:var(--bone);letter-spacing:.18em;font-size:.66rem;transition:all .35s}
+.goals label em{display:block;font:italic 400 .95rem/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--bone);margin-top:.45rem}
+.goals label:hover{border-color:var(--line)}
+.goals input:checked+label{background:var(--ox);border-color:var(--blood);color:var(--pale)}
+.goals input:checked+label em{color:var(--pale)}
+.goals input:focus-visible+label{outline:1px solid var(--pale);outline-offset:3px}
+.altar form .btn{width:100%}
+.oracle{border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(91,15,26,.22),transparent 70%)}
+.oracle .await{font-style:italic;font-size:1.2rem;max-width:20rem;margin:1.2rem auto 0}
+.size{font:400 clamp(5.5rem,11vw,8.5rem)/.9 var(--serif);color:var(--pale);margin:.6rem 0 .2rem}
+.size sup{font:400 .22em var(--caps);letter-spacing:.2em;vertical-align:top;position:relative;top:.9em;margin-left:.3em;color:var(--gold)}
+.verdict{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hair);border-block:1px solid var(--hair);margin:1.4rem 0}
+.verdict div{background:#0a1126;padding:1rem .5rem}
+.verdict strong{display:block;font:italic 400 1.35rem/1.2 var(--serif);color:var(--pale);margin-top:.3rem}
+#lace{width:150px;height:120px;margin:0 auto .4rem;display:block}
+#lace .edge{stroke:var(--bone);stroke-width:1.2;fill:none}#lace .cord{stroke:var(--blood);stroke-width:1.4;fill:none}#lace .eye{fill:var(--gold)}
+.why{font-size:.98rem;line-height:1.5}
+.res[hidden],.await[hidden]{display:none}
+.res{animation:rise .9s cubic-bezier(.2,.7,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}}
+@media (max-width:820px){.altar{grid-template-columns:1fr}.oracle{border-left:0;border-top:1px solid var(--line)}}
+
+/* ---------- craft (parchment) ---------- */
+.craft{background:var(--parch);color:#3a2c2e;background-image:radial-gradient(90% 60% at 10% 0,rgba(122,22,38,.12),transparent 60%),radial-gradient(80% 60% at 100% 100%,rgba(19,38,77,.12),transparent 60%)}
+.craft .h2{color:var(--ink)}.craft .num{color:var(--ruby)}.craft .label{color:#6a5223}
+.craft .layers,.craft .layers li{border-color:rgba(27,18,20,.18)}
+.craft .layers b{color:var(--ink)}.craft .layers li::before{color:var(--ruby);filter:none}
+.craft figure{border-color:rgba(27,18,20,.4);box-shadow:0 30px 60px -30px rgba(27,18,20,.6)}
+.craft figcaption.label{color:var(--gold)}
+.craft .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+.craft figure{position:relative;aspect-ratio:3/2;border:1px solid var(--line);overflow:hidden}
+.craft figure.candle{--r:460px;--dk:.5;--my:50%;--tint:120,220,170}
+.craft figcaption{position:absolute;left:0;bottom:0;z-index:3;padding:.7rem 1rem;background:rgba(10,7,8,.85)}
+.craft h2{text-align:left}
+.layers{counter-reset:l;margin-top:2rem;border-top:1px solid var(--hair)}
+.layers li{counter-increment:l;display:grid;grid-template-columns:3.2rem 1fr;padding:1.05rem 0;border-bottom:1px solid var(--hair);font-size:1rem;line-height:1.5}
+.layers li::before{content:counter(l,lower-roman) ".";font:italic 400 1.2rem var(--serif);color:var(--blood);filter:brightness(1.6)}
+.layers b{font:600 .68rem var(--caps);letter-spacing:.26em;text-transform:uppercase;color:var(--pale);display:block;margin-bottom:.15rem}
+@media (max-width:900px){.craft .wrap{grid-template-columns:1fr}}
+
+/* ---------- reviews ---------- */
+#testimony{background:linear-gradient(180deg,#1d1027,#38204a 55%,#1a0e24)}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,3rem)}
+.rev{border:1px solid var(--hair);border-radius:50% 50% 0 0/16% 16% 0 0;padding:4.2rem 1.9rem 2rem;text-align:center;background:linear-gradient(180deg,rgba(10,7,8,.55),transparent);transition:border-color .5s}
+.rev:hover{border-color:var(--line)}
+.rev .stars{color:var(--gold);letter-spacing:.5em;font-size:.8rem;padding-left:.5em}
+.rev blockquote{margin:1.1rem 0 1.5rem;font:italic 400 1.22rem/1.5 var(--serif);color:var(--pale)}
+.rev cite{font:600 .66rem var(--caps);letter-spacing:.28em;text-transform:uppercase;font-style:normal;color:var(--pale)}
+.rev dl{margin:1rem 0 0;padding-top:1rem;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1fr;gap:.6rem .4rem;font-size:.93rem}
+.rev dt{font:400 .56rem var(--caps);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.rev dd{margin:0;color:var(--pale)}
+@media (max-width:900px){.revs{grid-template-columns:1fr;max-width:30rem;margin-inline:auto}}
+
+/* ---------- made to measure ---------- */
+.mtm{padding:0}
+.mtm .candle{position:relative;min-height:min(86vh,760px);display:grid;place-items:center;--r:560px;--dk:.78;--my:40%;--tint:255,190,110}
+.mtm img{position:absolute;inset:0;object-position:50% 42%}
+.mtm .inner{position:relative;z-index:3;text-align:center;max-width:40rem;padding:4rem 1.5rem;margin:3rem 1.25rem;background:rgba(10,7,8,.8);border:1px solid var(--line);outline:1px solid var(--hair);outline-offset:6px}
+.mtm .inner p{margin:0 auto 2rem}
+
+/* ---------- newsletter + footer ---------- */
+.vespers{text-align:center;padding-bottom:clamp(4rem,8vw,6rem);background:linear-gradient(180deg,#3d0b14,#7a1626 60%,#4a0d18)}
+.vespers .num{color:var(--pale)}
+.vespers form{display:flex;max-width:34rem;margin:2rem auto 0;border-bottom:1px solid var(--line)}
+.vespers input{flex:1;min-width:0;background:none;border:0;color:var(--pale);font:italic 400 1.25rem var(--serif);padding:.9rem .2rem;outline:none}
+.vespers input::placeholder{color:rgba(228,222,210,.7)}
+.vespers p{color:var(--pale)}
+.vespers form:focus-within{border-color:var(--pale)}
+.vespers button{background:none;border:0;color:var(--pale);font:600 .66rem var(--caps);letter-spacing:.3em;text-transform:uppercase;cursor:pointer;padding:0 .4rem;transition:color .3s}
+.vespers button:hover{color:var(--gold)}
+.note{min-height:1.6em;margin-top:1rem;font-style:italic}
+footer{border-top:1px solid var(--hair);padding:4rem 0 6rem;font-size:.98rem;position:relative;z-index:1}
+.fgrid{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:2.5rem}
+footer h3{font:600 .64rem var(--caps);letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+footer p{line-height:1.5}
+footer a{text-decoration-color:var(--line);text-underline-offset:4px}
+footer a:hover{color:var(--pale);text-decoration-color:var(--gold)}
+.fine{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--hair);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+@media (max-width:980px){.fgrid{grid-template-columns:1fr 1fr}.fgrid>div:first-child{grid-column:1/-1}}
+.back{position:fixed;left:1rem;bottom:1rem;z-index:60;font:400 .58rem/1 var(--caps);letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--bone);background:rgba(10,7,8,.88);border:1px solid var(--line);border-radius:999px;padding:.75rem 1.1rem;transition:color .3s,border-color .3s,background .3s}
+.back:hover{color:var(--pale);border-color:var(--gold);background:var(--ox)}
+
+/* ---------- reveals ---------- */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .js .rv{opacity:1;transform:none}
+  .candle{--dk:.62}
+}
+html,body{overflow-x:clip;max-width:100%}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="archClip" clipPathUnits="objectBoundingBox"><path d="M0,1 V0.4 C0,0.22 0.24,0.07 0.5,0 C0.76,0.07 1,0.22 1,0.4 V1 Z"/></clipPath>
+    <symbol id="orn" viewBox="0 0 340 24"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M0 12H138M202 12H340"/><path d="M170 2l10 10-10 10-10-10z"/><path d="M170 7l5 5-5 5-5-5z" fill="currentColor" stroke="none"/><circle cx="148" cy="12" r="3"/><circle cx="192" cy="12" r="3"/><path d="M138 12c-8-9-20-9-26 0 6 9 18 9 26 0zM202 12c8-9 20-9 26 0-6 9-18 9-26 0z"/><path d="M96 12l-5-4-5 4 5 4zM244 12l5-4 5 4-5 4z"/></g></symbol>
+    <symbol id="rose" viewBox="-100 -100 200 200"><g fill="none" stroke="currentColor" stroke-width=".35"><circle r="98"/><circle r="92"/><circle r="62"/><circle r="30"/><circle r="12"/>
+      <g id="pet"><path d="M0-30C10-44 10-54 0-62C-10-54-10-44 0-30Z"/><path d="M0-62C16-72 16-84 0-92C-16-84-16-72 0-62Z"/><circle cy="-77" r="5"/><path d="M0-12V-30"/></g>
+      <use href="#pet" transform="rotate(30)"/><use href="#pet" transform="rotate(60)"/><use href="#pet" transform="rotate(90)"/><use href="#pet" transform="rotate(120)"/><use href="#pet" transform="rotate(150)"/><use href="#pet" transform="rotate(180)"/><use href="#pet" transform="rotate(210)"/><use href="#pet" transform="rotate(240)"/><use href="#pet" transform="rotate(270)"/><use href="#pet" transform="rotate(300)"/><use href="#pet" transform="rotate(330)"/></g></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <div>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="links" aria-label="Open menu"><i></i><i></i><i></i></button>
+      <nav class="links" id="links" aria-label="Primary">
+        <a href="#reliquary">Corsets</a><a href="#mtm">Made to Measure</a><a href="#rite">Fit Guide</a><a href="#journal">Journal</a>
+      </nav>
+    </div>
+    <a class="mark" href="#top" aria-label="Vesna, home">Vesna<span>.</span></a>
+    <button class="cart" type="button" aria-label="Bag"><span>Bag</span><b id="count" aria-live="polite">0</b></button>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top" data-zone aria-labelledby="h1">
+  <div class="trip">
+    <figure class="arch rv"><div class="clip candle" style="--tint:255,90,110"><img src="../../assets/img/cathedral/ruby.jpg" alt="Model in a ruby silk brocade overbust corset with gold embroidery, lit by red stained-glass light" width="1050" height="1400" style="object-position:50% 20%"></div></figure>
+    <figure class="arch mid rv" style="--d:.15s"><div class="clip candle" style="--tint:120,230,170"><img src="../../assets/img/cathedral/hero.jpg" alt="Cathedral campaign: a woman in an emerald velvet overbust corset and sweeping green skirt in a cathedral nave, stained-glass light behind her" width="1050" height="1400" fetchpriority="high" style="object-position:50% 12%"></div></figure>
+    <figure class="arch rv" style="--d:.3s"><div class="clip candle" style="--tint:110,160,255"><img src="../../assets/img/cathedral/sapphire.jpg" alt="Model in a sapphire satin underbust corset over a white poet blouse, in blue cloister light" width="1050" height="1400" style="object-position:50% 20%"></div></figure>
+  </div>
+  <div class="hero-copy">
+    <p class="label">Collection II &nbsp;·&nbsp; Cathedral, in colour &nbsp;·&nbsp; MMXXVI</p>
+    <h1 id="h1"><span class="g">Blessed</span> <span class="it">are the tightly laced.</span></h1>
+    <p class="lede">Steel-boned corsetry in every colour the windows throw — ruby, emerald, sapphire, amethyst, gold and bone. Nine silhouettes, cut, bound and consecrated by hand.</p>
+    <div class="cta-row"><a class="btn" href="#reliquary">Enter the collection</a><a class="btn ghost" href="#rite">Find your size</a></div>
+    <p class="hint" aria-hidden="true">Your cursor carries the candle</p>
+  </div>
+</section>
+
+<section id="reliquary" aria-labelledby="h-rel">
+  <div class="wrap">
+    <header class="head rv"><span class="num">I</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
+      <h2 id="h-rel">The <span class="it">Reliquary</span></h2>
+      <p>Nine pieces, from Elizabethan stays to an Edwardian longline, each made in runs of forty. Choose by order, or by the window whose light you would stand in.</p></header>
+    <div class="filters rv">
+      <div class="chips" id="chips" role="group" aria-label="Filter by style"></div>
+      <div class="windows" id="windows" role="group" aria-label="Filter by colour"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="none" id="none" role="status" hidden>No piece stands in that light yet. <button class="add" type="button" id="reset">Show all nine</button></p>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true"></div>
+<section class="sil" id="silhouettes" data-zone aria-labelledby="h-sil">
+  <div class="wrap">
+    <header class="head rv"><span class="num">II</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
+      <h2 id="h-sil">Four <span class="it">orders</span> of silhouette</h2>
+      <p>Choose the architecture first. The colour follows — every order is cut in every glass.</p></header>
+    <figure class="forms candle rv"><img src="../../assets/img/cathedral/forms.jpg" alt="Five corsets in ruby, emerald, sapphire, gold and ivory on antique dress forms in a stone sacristy, coloured window light across them" width="1800" height="1200" loading="lazy"></figure>
+    <div class="sils rv">
+      <a href="#reliquary" data-go="Overbust"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M14 22c8-10 22-10 32 0 10-10 24-10 32 0-2 22-12 34-14 46 2 14 10 26 14 42-10 10-54 10-64 0 4-16 12-28 14-42-2-12-12-24-14-46z"/><path d="M46 22v96M30 20c2 30 6 40 4 50-1 12-6 28-8 44M62 20c-2 30-6 40-4 50 1 12 6 28 8 44"/></svg><h3>Overbust</h3><p>Bust to hip. The full nave — it needs no other garment.</p><span class="label">From €520</span></a>
+      <a href="#reliquary" data-go="Underbust"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M16 40c18-7 42-7 60 0-2 14-10 22-12 32 2 12 10 22 14 36-10 9-54 9-64 0 4-14 12-24 14-36-2-10-10-18-12-32z"/><path d="M46 36v80M31 37c2 18 5 26 4 35-1 10-6 22-8 38M61 37c-2 18-5 26-4 35 1 10 6 22 8 38"/></svg><h3>Underbust</h3><p>Ribs to hip. Worn over silk, under wool, beside everything.</p><span class="label">From €320</span></a>
+      <a href="#reliquary" data-go="Waspie"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M20 50c16-5 36-5 52 0-2 8-7 12-8 18 1 7 6 12 9 22-12 7-42 7-54 0 3-10 8-15 9-22-1-6-6-10-8-18z"/><path d="M46 46v48M33 47c1 9 3 14 3 21s-3 13-5 24M59 47c-1 9-3 14-3 21s3 13 5 24"/></svg><h3>Waspie</h3><p>A cincture of eighteen centimetres. The waist alone, confessed.</p><span class="label">From €230</span></a>
+      <a href="#reliquary" data-go="Longline"><svg viewBox="0 0 92 128" aria-hidden="true"><path d="M16 26c18-7 42-7 60 0-2 16-11 26-13 38 2 16 13 30 17 56-12 8-56 8-68 0 4-26 15-40 17-56-2-12-11-22-13-38z"/><path d="M46 22v102M31 23c2 20 6 30 5 41-1 14-9 30-11 58M61 23c-2 20-6 30-5 41 1 14 9 30 11 58"/></svg><h3>Longline</h3><p>Descends over the hip for the smoothest line and deepest hold.</p><span class="label">From €560</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true"></div>
+<section class="rite" id="rite" aria-labelledby="h-rite">
+  <svg class="rose" aria-hidden="true"><use href="#rose"/></svg>
+  <div class="wrap">
+    <header class="head rv"><span class="num">III</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
+      <h2 id="h-rite">The Rite <span class="it">of Measure</span></h2>
+      <p>A corset is sized by the waist it closes to, not the dress size you were told. Two numbers and one intention — we will name your size, your silhouette, and the gap your laces should keep.</p></header>
+    <div class="altar rv">
+      <form id="fit" novalidate>
+        <div class="field"><label for="waist">Natural waist</label>
+          <div class="inp"><input id="waist" name="waist" type="number" inputmode="decimal" min="50" max="130" step="0.5" placeholder="72" aria-describedby="waist-h waist-e" required><span>cm</span></div>
+          <p class="help" id="waist-h">The narrowest point, usually two fingers above the navel. Tape snug, breath out.</p><p class="err" id="waist-e" role="alert"></p></div>
+        <div class="field"><label for="under">Underbust</label>
+          <div class="inp"><input id="under" name="under" type="number" inputmode="decimal" min="55" max="140" step="0.5" placeholder="80" aria-describedby="under-h under-e" required><span>cm</span></div>
+          <p class="help" id="under-h">Around the ribcage, directly beneath the bust, tape level.</p><p class="err" id="under-e" role="alert"></p></div>
+        <fieldset><legend class="label">Your intention</legend>
+          <div class="goals">
+            <input type="radio" name="goal" id="g1" value="everyday"><label for="g1">Everyday<em>gentle, all-day</em></label>
+            <input type="radio" name="goal" id="g2" value="shaping"><label for="g2">Shaping<em>a defined waist</em></label>
+            <input type="radio" name="goal" id="g3" value="occasion"><label for="g3">Occasion<em>one dramatic night</em></label>
+          </div><p class="err" id="goal-e" role="alert"></p></fieldset>
+        <button class="btn" type="submit">Reveal my size</button>
+      </form>
+      <div class="oracle" aria-live="polite">
+        <div class="await" id="await"><p class="label">The oracle waits</p><p class="await">Give us your measure, and the answer will be written here.</p></div>
+        <div class="res" id="res" hidden>
+          <p class="label">Your Vesna size</p>
+          <p class="size"><span id="r-size">24</span><sup>inch</sup></p>
+          <svg id="lace" viewBox="0 0 150 120" role="img" aria-label="Diagram of the lacing gap at the back of the corset"></svg>
+          <div class="verdict">
+            <div><span class="label">Silhouette</span><strong id="r-sil">Underbust</strong></div>
+            <div><span class="label">Lacing gap</span><strong id="r-gap">5 cm</strong></div>
+          </div>
+          <p class="why" id="r-why"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true"></div>
+<section class="craft" id="craft" data-zone aria-labelledby="h-craft">
+  <div class="wrap">
+    <figure class="candle rv"><img src="../../assets/img/cathedral/detail.jpg" alt="Macro view of an emerald velvet corset back: antique gold eyelets, ruby silk ribbon lacing and hand-stitched boning channels" width="1800" height="1200" loading="lazy"><figcaption class="label">Eyelets set one at a time, by lamplight</figcaption></figure>
+    <div class="rv" style="--d:.15s">
+      <span class="num">IV</span>
+      <h2 class="h2" id="h-craft">Built like a <span class="it">vault</span>. Worn like a vow.</h2>
+      <p>Thirty-one hours, four layers, one maker from first chalk line to last knot. Nothing here is glued, fused, or plastic.</p>
+      <ol class="layers">
+        <li><div><b>The bones</b>24 to 32 spiral steel bones flex with the breath; flat steels flank the eyelets so the back never buckles.</div></li>
+        <li><div><b>The busk</b>A 12 mm stainless spoon busk, wider at the belly, fastened with five hand-set loops and studs.</div></li>
+        <li><div><b>The waist tape</b>Herringbone cotton tape stitched into every seam at the waistline. It carries the tension so the fabric never has to.</div></li>
+        <li><div><b>The layers</b>Velvet, brocade, damask, satin or leather face, fused to nothing; English cotton coutil strength layer; floating cotton lining dyed to match the glass.</div></li>
+        <li><div><b>The finishing</b>Bone channels topstitched in silk thread, leather binding slip-stitched by hand, two-part eyelets set one at a time.</div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true"></div>
+<section id="testimony" aria-labelledby="h-test">
+  <div class="wrap">
+    <header class="head rv"><span class="num">V</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
+      <h2 id="h-test">Testimony</h2><p>From the congregation — with their measurements, because a review without numbers is only a prayer.</p></header>
+    <div class="revs">
+      <article class="rev rv"><p class="stars" aria-label="Five out of five">✦✦✦✦✦</p><blockquote>“I expected costume. I received armour. The Rite put me in a 24 and the gap sat perfectly parallel by the second week.”</blockquote><cite>Ilse V. — Utrecht</cite>
+        <dl><div><dt>Waist</dt><dd>71 cm</dd></div><div><dt>Underbust</dt><dd>78 cm</dd></div><div><dt>Bought</dt><dd>Lady Chapel, 24″</dd></div><div><dt>Height</dt><dd>168 cm</dd></div></dl></article>
+      <article class="rev rv" style="--d:.12s"><p class="stars" aria-label="Five out of five">✦✦✦✦✦</p><blockquote>“Wore the Sanctus to my own wedding, eleven hours, danced until two. Not one bone shifted. My grandmother wept, then asked where to order.”</blockquote><cite>Morgane D. — Lyon</cite>
+        <dl><div><dt>Waist</dt><dd>86 cm</dd></div><div><dt>Underbust</dt><dd>92 cm</dd></div><div><dt>Bought</dt><dd>Sanctus, 30″</dd></div><div><dt>Height</dt><dd>175 cm</dd></div></dl></article>
+      <article class="rev rv" style="--d:.24s"><p class="stars" aria-label="Five out of five">✦✦✦✦✦</p><blockquote>“First size was too kind to me. They exchanged it for a 20 without a single question, postage paid. The Compline now lives over every shirt I own.”</blockquote><cite>Asha R. — Berlin</cite>
+        <dl><div><dt>Waist</dt><dd>63 cm</dd></div><div><dt>Underbust</dt><dd>70 cm</dd></div><div><dt>Bought</dt><dd>Compline, 20″</dd></div><div><dt>Height</dt><dd>160 cm</dd></div></dl></article>
+    </div>
+  </div>
+</section>
+
+<section class="mtm" id="mtm" data-zone aria-labelledby="h-mtm">
+  <div class="candle">
+    <img src="../../assets/img/cathedral/gold.jpg" alt="" width="1050" height="1400" loading="lazy">
+    <div class="inner rv"><span class="num">VI</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
+      <h2 class="h2" id="h-mtm">Made to <span class="it">your</span> measure</h2>
+      <p>Fourteen measurements, a calico toile posted to your door, one video fitting, and a corset drafted for no other body on earth, in any glass you name. Six weeks. From €780.</p>
+      <a class="btn" href="#vespers">Request a commission</a></div>
+  </div>
+</section>
+
+<div class="band" aria-hidden="true"></div>
+<section class="vespers" id="vespers" aria-labelledby="h-vesp">
+  <div class="wrap" id="journal">
+    <span class="num">VII</span><svg class="orn" aria-hidden="true"><use href="#orn"/></svg>
+    <h2 class="h2" id="h-vesp">Vespers — <span class="it">the journal, by letter</span></h2>
+    <p style="max-width:36rem;margin-inline:auto">One letter a month at dusk: new pieces before they are public, essays on lacing and lineage, commission openings. Never more.</p>
+    <form id="news" novalidate><label for="email" class="skip">Email address</label><input id="email" type="email" placeholder="your@email" autocomplete="email" required><button type="submit">Join →</button></form>
+    <p class="note" id="news-note" role="status"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <svg class="orn wide" aria-hidden="true" style="margin-bottom:3rem"><use href="#orn"/></svg>
+    <div class="fgrid">
+      <div><a class="mark" href="#top" style="font-size:2.6rem">Vesna<span>.</span></a><p style="margin-top:1rem;max-width:20rem" class="it">A corset house. Womenswear to follow, when it is ready and not before.</p></div>
+      <div><h3>Shipping</h3><p>Tracked, insured, in a linen box the colour of your corset. Free within the EU over €250; worldwide in 3–7 days.</p></div>
+      <div><h3>The fit promise</h3><p>If the size is wrong, we exchange it once, free, within 30 days — postage both ways on us. Unworn returns refunded in full.</p></div>
+      <div><h3>Care</h3><p>Never wash. Air after wearing, spot-clean the lining, store flat or hung by the laces. <a href="#craft">Seasoning guide</a></p></div>
+      <div><h3>Contact</h3><p><a href="mailto:atelier@vesna.example">atelier@vesna.example</a><br>Fittings by appointment<br>Mon–Fri, 10–18 CET</p></div>
+    </div>
+    <div class="fine label"><span>© MMXXVI Vesna Corset House</span><span>Privacy · Terms · Imprint</span></div>
+  </div>
+</footer>
+
+<a class="back" href="../../index.html">← All directions</a>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var IMG = '../../assets/img/';
+  var GLASS = {Ruby:'196,30,58', Emerald:'24,150,110', Sapphire:'52,96,200', Amethyst:'132,80,176', Gold:'206,150,60', Bone:'226,216,196', Rose:'200,120,140', Cognac:'170,98,44', Jet:'90,84,88'};
+
+  /* ----- products ----- */
+  var products = [
+    {n:'Vespertine', k:'Overbust', t:'Overbust', g:'Emerald', p:520, img:'cathedral/hero.jpg', pos:'45% 26%', zoom:1.5, alt:'Vespertine overbust corset in emerald silk velvet with an antique gold busk', s:'28 spiral steel bones · emerald silk velvet over coutil · 4″ reduction'},
+    {n:'Sanctus', k:'Overbust · couture', t:'Overbust', g:'Ruby', p:780, img:'cathedral/ruby.jpg', pos:'50% 30%', zoom:1.35, alt:'Sanctus overbust corset in ruby silk brocade with gold thread embroidery and a sweetheart neckline', s:'32 steel bones · ruby silk brocade, gold-work embroidery · 5″ reduction'},
+    {n:'Lady Chapel', k:'Underbust', t:'Underbust', g:'Sapphire', p:340, img:'cathedral/sapphire.jpg', pos:'45% 34%', zoom:1.4, alt:'Lady Chapel underbust corset in sapphire duchess satin over a white poet blouse', s:'24 spiral steel bones · sapphire duchess satin · sizes 18–40 · 4″ reduction'},
+    {n:'Cloister', k:'Longline', t:'Longline', g:'Bone', p:590, img:'cathedral/ivory.jpg', pos:'50% 36%', zoom:1.35, alt:'Cloister longline corset in ivory damask with pearl buttons over a sheer lace blouse', s:'30 steel bones · ivory silk damask · pearl-button busk cover · 4″ reduction'},
+    {n:'Compline', k:'Waspie', t:'Waspie', g:'Amethyst', p:230, img:'cathedral/amethyst.jpg', pos:'45% 28%', zoom:1.9, alt:'Compline waspie in amethyst velvet cinched over a long black crepe dress', s:'16 spiral steel bones · amethyst cotton velvet · 18 cm tall · 3″ reduction'},
+    {n:'Gloriana', k:'Elizabethan stays', t:'Stays', g:'Gold', p:460, img:'cathedral/gold.jpg', pos:'45% 38%', zoom:1.35, alt:'Gloriana Elizabethan-style stays in antique gold brocade with shoulder straps and tabbed hem over an ivory chemise', s:'Fully boned in flat steel · gold brocade · straps & tabbed hem · 2″ reduction'},
+    {n:'Rosary', k:'Edwardian longline', t:'Longline', g:'Rose', p:640, img:'cathedral/rose.jpg', pos:'52% 36%', zoom:1.35, alt:'Rosary Edwardian longline corset in dusty rose silk under black Chantilly lace', s:'28 steel bones · rose silk, Chantilly lace overlay · straight-front busk · 4″ reduction'},
+    {n:'Pilgrim', k:'Underbust', t:'Underbust', g:'Cognac', p:360, img:'cathedral/cognac.jpg', pos:'55% 32%', zoom:1.5, alt:'Pilgrim underbust corset in cognac leather with brass swing-hook clasps over a cream linen shirt', s:'22 spiral steel bones · cognac bridle leather · brass swing hooks · 3″ reduction'},
+    {n:'Nocturne', k:'Underbust', t:'Underbust', g:'Jet', p:320, img:'noir/hero.jpg', pos:'50% 22%', zoom:1.35, alt:'Nocturne black leather underbust corset worn over a high-necked satin gown', s:'24 spiral steel bones · jet nappa leather on cotton coutil · 4″ reduction'}
+  ];
+  $('#grid').innerHTML = products.map(function(p, i){
+    var st = 'object-position:' + p.pos + (p.zoom ? ';transform-origin:' + p.pos + ';scale:' + p.zoom : '');
+    return '<article class="card rv" data-zone data-t="' + p.t + '" data-g="' + p.g + '" style="--c:' + GLASS[p.g] + ';--d:' + (i % 3) * 0.12 + 's">' +
+      '<figure class="arch"><div class="clip candle" style="--tint:' + GLASS[p.g] + '"><img src="' + IMG + p.img + '" alt="' + p.alt + '" width="1050" height="1400" loading="lazy" style="' + st + '"></div></figure>' +
+      '<p class="label kind">' + p.k + '</p><h3>' + p.n + '</h3><p class="glass"><i aria-hidden="true"></i>' + p.g + ' glass</p><p class="spec">' + p.s + '</p>' +
+      '<div class="foot"><span class="price">€' + p.p + '</span><button class="add" type="button" data-name="' + p.n + '" aria-label="Add ' + p.n + ' to bag">Add to bag</button></div></article>';
+  }).join('');
+
+  /* ----- filters: by order, by glass ----- */
+  var fStyle = 'All', fGlass = null;
+  $('#chips').innerHTML = ['All','Overbust','Underbust','Waspie','Longline','Stays'].map(function(t){
+    return '<button class="chip" type="button" data-t="' + t + '" aria-pressed="' + (t === 'All') + '">' + t + '</button>'; }).join('');
+  $('#windows').innerHTML = Object.keys(GLASS).map(function(g){
+    return '<button class="win" type="button" data-g="' + g + '" aria-pressed="false" style="--c:' + GLASS[g] + '"><i aria-hidden="true"></i>' + g + '</button>'; }).join('');
+  function applyFilters(){
+    var shown = 0;
+    $$('#grid .card').forEach(function(c){
+      var ok = (fStyle === 'All' || c.dataset.t === fStyle) && (!fGlass || c.dataset.g === fGlass);
+      c.hidden = !ok; if (ok) { shown++; c.classList.add('in'); }
+    });
+    $$('.chip').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.t === fStyle); });
+    $$('.win').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.g === fGlass); });
+    $('#none').hidden = shown > 0;
+  }
+  $('#chips').addEventListener('click', function(e){ var b = e.target.closest('.chip'); if (!b) return; fStyle = b.dataset.t; applyFilters(); });
+  $('#windows').addEventListener('click', function(e){ var b = e.target.closest('.win'); if (!b) return; fGlass = fGlass === b.dataset.g ? null : b.dataset.g; applyFilters(); });
+  $('#reset').addEventListener('click', function(){ fStyle = 'All'; fGlass = null; applyFilters(); });
+  $$('[data-go]').forEach(function(a){ a.addEventListener('click', function(){ fStyle = a.dataset.go; fGlass = null; applyFilters(); }); });
+
+  /* ----- cart ----- */
+  var count = 0, badge = $('#count');
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('.add'); if (!b || b.id === 'reset') return;
+    count++; badge.textContent = count;
+    $('.cart').setAttribute('aria-label', 'Bag, ' + count + (count === 1 ? ' item' : ' items'));
+    badge.classList.add('bump'); b.textContent = 'Laid in your bag';
+    setTimeout(function(){ badge.classList.remove('bump'); }, 450);
+    setTimeout(function(){ b.textContent = 'Add to bag'; }, 1600);
+  });
+
+  /* ----- arch rims ----- */
+  $$('.arch').forEach(function(a){
+    a.insertAdjacentHTML('beforeend', '<svg class="rim" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,100 V40 C0,22 24,7 50,0 C76,7 100,22 100,40 V100"/></svg>');
+  });
+
+  /* ----- nav ----- */
+  var nav = $('#nav'), burger = $('#burger'), links = $('#links');
+  var onScroll = function(){ nav.classList.toggle('solid', window.scrollY > 30 || links.classList.contains('open')); };
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  function setMenu(open){
+    links.classList.toggle('open', open); burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : ''; onScroll();
+  }
+  burger.addEventListener('click', function(){ setMenu(!links.classList.contains('open')); });
+  links.addEventListener('click', function(e){ if (e.target.tagName === 'A') setMenu(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setMenu(false); });
+
+  /* ----- candlelight: the pointer carries the flame ----- */
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    $$('[data-zone]').forEach(function(zone){
+      var candles = $$('.candle', zone), pending = null;
+      zone.addEventListener('pointermove', function(e){
+        if (pending) { pending = e; return; }
+        pending = e;
+        requestAnimationFrame(function(){
+          var ev = pending; pending = null;
+          candles.forEach(function(c){
+            var r = c.getBoundingClientRect();
+            c.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+            c.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+          });
+        });
+      });
+    });
+  }
+
+  /* ----- reveals ----- */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(en){ if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold:0,rootMargin:'0px 0px -8% 0px'});
+    $$('.rv').forEach(function(el){ io.observe(el); });
+  } else { $$('.rv').forEach(function(el){ el.classList.add('in'); }); }
+
+  /* ----- fit finder ----- */
+  var REDUCE = {everyday:2, shaping:3, occasion:4};
+  function fitCalc(waistCm, underCm, goal){
+    var wIn = waistCm / 2.54, raw = wIn - REDUCE[goal];
+    var size = Math.floor(raw / 2) * 2, clamped = Math.min(40, Math.max(18, size));
+    var diff = underCm - waistCm, sil;
+    if (goal === 'occasion') sil = 'Overbust';
+    else if (goal === 'shaping') sil = (waistCm >= 80 || diff >= 12) ? 'Longline' : 'Underbust';
+    else sil = diff < 6 ? 'Waspie' : 'Underbust';
+    // first wear: laced to ~1" under natural waist; seasoned: laced to the goal reduction
+    var gapStart = Math.max(1, wIn - 1 - clamped), gapEnd = Math.max(0, raw - clamped);
+    return {size:clamped, outOfRange:size !== clamped, sil:sil, gapStart:gapStart, gapEnd:gapEnd, reduce:REDUCE[goal], wIn:wIn};
+  }
+  function drawLace(gapIn){
+    var g = Math.min(34, 6 + gapIn * 7), l = 75 - g, r = 75 + g, h = '', y;
+    h += '<path class="edge" d="M' + (l - 26) + ' 6Q' + (l - 6) + ' 60 ' + (l - 26) + ' 114M' + (r + 26) + ' 6Q' + (r + 6) + ' 60 ' + (r + 26) + ' 114"/>';
+    h += '<path class="edge" d="M' + l + ' 6V114M' + r + ' 6V114"/>';
+    for (y = 14; y < 100; y += 16) h += '<path class="cord" d="M' + l + ' ' + y + 'L' + r + ' ' + (y + 16) + 'M' + r + ' ' + y + 'L' + l + ' ' + (y + 16) + '"/>';
+    for (y = 14; y <= 110; y += 16) h += '<circle class="eye" cx="' + l + '" cy="' + y + '" r="2"/><circle class="eye" cx="' + r + '" cy="' + y + '" r="2"/>';
+    $('#lace').innerHTML = h;
+  }
+  var form = $('#fit');
+  function setErr(id, msg, input){ $('#' + id).textContent = msg; if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false'); return !msg; }
+  function checkNum(input, errId, name, lo, hi){
+    var v = parseFloat(String(input.value).replace(',', '.'));
+    if (input.value.trim() === '' || isNaN(v)) { setErr(errId, 'Enter your ' + name + ' in centimetres.', input); return null; }
+    if (v < lo || v > hi) { setErr(errId, 'That reads outside ' + lo + '–' + hi + ' cm. Check the tape is in centimetres.', input); return null; }
+    setErr(errId, '', input); return v;
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var wEl = $('#waist'), uEl = $('#under');
+    var w = checkNum(wEl, 'waist-e', 'natural waist', 50, 130);
+    var u = checkNum(uEl, 'under-e', 'underbust', 55, 140);
+    var gEl = $('input[name=goal]:checked', form);
+    setErr('goal-e', gEl ? '' : 'Choose an intention.');
+    if (w !== null && u !== null && u < w - 4) { setErr('under-e', 'Underbust is rarely this much smaller than the waist. Measure once more.', uEl); u = null; }
+    if (w === null || u === null || !gEl) { var bad = $('[aria-invalid=true]', form) || $('#g1'); bad.focus(); return; }
+    var r = fitCalc(w, u, gEl.value), cm = function(i){ return (Math.round(i * 2.54 * 2) / 2).toString(); };
+    $('#r-size').textContent = r.size;
+    $('#r-sil').textContent = r.sil;
+    $('#r-gap').textContent = cm(r.gapStart) + ' cm → ' + cm(Math.max(r.gapEnd, 0.5)) + ' cm';
+    drawLace(r.gapStart);
+    $('#r-why').innerHTML = r.outOfRange
+      ? 'Your measure falls beyond our standing sizes (18–40″). We suggest the nearest, <em>' + r.size + '″</em> — but a body like yours deserves a <a href="#mtm">made-to-measure commission</a>.'
+      : 'Your waist is ' + r.wIn.toFixed(1) + '″. For ' + gEl.value + ' wear we take ' + r.reduce + '″ and round down to an even size. Expect a gap near ' + cm(r.gapStart) + ' cm at first lacing, easing to about ' + cm(Math.max(r.gapEnd, 0.5)) + ' cm, edges parallel, once the corset is seasoned.';
+    $('#await').hidden = true;
+    var res = $('#res'); res.hidden = true; void res.offsetWidth; res.hidden = false;
+  });
+  $$('#fit input[type=number]').forEach(function(i){ i.addEventListener('input', function(){ if (i.getAttribute('aria-invalid') === 'true') setErr(i.id + '-e', '', i); }); });
+
+  /* ----- newsletter ----- */
+  $('#news').addEventListener('submit', function(e){
+    e.preventDefault();
+    var em = $('#email'), ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim());
+    $('#news-note').textContent = ok ? 'It is done. Watch for us at dusk.' : 'That address does not look complete.';
+    em.setAttribute('aria-invalid', ok ? 'false' : 'true'); if (ok) em.value = ''; else em.focus();
+  });
+})();
+</script>
+</body>
+</html>
