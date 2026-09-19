@@ -1,0 +1,7 @@
+#!/bin/bash
+# usage: gen4.sh <logname> "<numbered image list>"  — Ivoire II (ready-to-wear) imagery
+cd "$(dirname "$0")"
+codex exec --skip-git-repo-check --sandbox workspace-write "Use your built-in image generation tool (not the CLI fallback) to generate the following separate images, one at a time, and save them as PNG in assets/img/maison/ with exactly these names. They are for a premium READY-TO-WEAR women's corset brand with a quiet-luxury look (think COS, Toteme, The Row campaign mood at House of CB prices) — NOT couture, NOT costume, NOT period drama. Palette: ivory, bone, sand, caramel, soft black; warm natural daylight; pale plaster or limestone walls; calm, minimal, editorial. Corsets are clean production garments: smooth panels, neat topstitched boning channels, no embroidery, no ruffles. ON-MODEL images: adult women of varied ethnicity and body type in modern everyday styling (shirts, tailored trousers, jeans, knitwear, slip skirts), relaxed natural pose, corset clearly visible bust to hip, centred. PACKSHOT images: the garment ALONE, front view, ghost-mannequin / invisible-mannequin e-commerce product photo, perfectly centred on a plain seamless warm off-white background, soft even light, no person, no hanger, no props, whole garment in frame with margin. No text, no logos, no watermarks.
+$2
+After saving all of them, list the files." < /dev/null > "logs/$1.log" 2>&1
+echo "done $1"

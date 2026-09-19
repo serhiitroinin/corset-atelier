@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesna — Steel-boned corsets, ready to wear</title>
+<meta name="description" content="Vesna. Steel-boned corsets, ready to wear, from €99. In stock in sizes 18–40″, shipped in 24 hours, first exchange free. See any piece on you with virtual try-on.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#f3eee6; --linen:#e6dccd; --sand:#cdbfae; --bronze:#8a6f4d; --ink:#1b1815; --mute:#5e554b;
+  --serif:"Cormorant Garamond","Cormorant",Garamond,"Times New Roman",serif;
+  --sans:"Jost","Figtree",system-ui,sans-serif;
+  --pad:clamp(28px,6vw,104px); --lace-x:50%;
+  --ease:cubic-bezier(.19,.7,.12,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+h1,h2,h3,p,figure,ul,ol,dl,dd,blockquote,fieldset{margin:0;padding:0}
+ul,ol{list-style:none} fieldset{border:0;min-width:0}
+button,input,select{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+.dark :focus-visible{outline-color:var(--bone)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bone);padding:10px 16px;z-index:100}
+.skip:focus{left:8px}
+
+/* type */
+.label{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--mute);line-height:1.6}
+.serif{font-family:var(--serif);font-weight:300}
+h2{font-family:var(--serif);font-weight:300;font-size:clamp(38px,5vw,76px);line-height:1;letter-spacing:-.01em}
+h2 em,h1 em,h3 em{font-style:italic;font-weight:300}
+.no{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--bronze);line-height:1}
+.body{max-width:40ch;color:var(--mute)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:14px;min-height:48px;padding:0 28px;border:1px solid var(--ink);background:transparent;cursor:pointer;text-decoration:none;
+  font-size:11px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);transition:background .7s var(--ease),color .7s var(--ease)}
+.btn:hover{background:var(--ink);color:var(--bone)}
+.dark .btn{border-color:var(--bone);color:var(--bone)} .dark .btn:hover{background:var(--bone);color:var(--ink)}
+.link{display:inline-flex;align-items:center;min-height:40px;background:none;border:0;padding:0;cursor:pointer;text-decoration:none;font-size:11px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);
+  background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-size:100% 1px;background-position:0 calc(50% + 14px);transition:background-size .8s var(--ease)}
+.link:hover{background-size:0 1px;background-position:100% calc(50% + 14px)}
+
+/* signature: lacing line */
+.lace{position:fixed;top:0;bottom:0;left:var(--lace-x);width:1px;z-index:0;pointer-events:none}
+.lace i{position:absolute;inset:0;background:var(--sand);transform-origin:top;transform:scaleY(var(--p,1))}
+.lace b{position:absolute;left:-1px;top:-18px;width:3px;height:18px;background:var(--bronze);transform:translateY(calc(var(--p,1)*100vh))}
+.stitch{position:absolute;top:0;left:var(--lace-x);width:14px;height:42px;transform:translate(-50%,-50%);z-index:3;pointer-events:none}
+.stitch svg{width:100%;height:100%;overflow:visible}
+.stitch path{fill:none;stroke:var(--bronze);stroke-width:1;stroke-dasharray:18;stroke-dashoffset:0}
+.js .stitch path{stroke-dashoffset:18;transition:stroke-dashoffset 1.6s var(--ease)}
+.js .stitch.in path{stroke-dashoffset:0}
+.stitch path:nth-child(2){transition-delay:.15s}.stitch path:nth-child(3){transition-delay:.3s}.stitch path:nth-child(4){transition-delay:.45s}.stitch path:nth-child(5){transition-delay:.6s}.stitch path:nth-child(6){transition-delay:.75s}
+
+/* reveals */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity 1.6s var(--ease),transform 1.6s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+.js .clip img{clip-path:inset(0 0 100% 0);transform:scale(1.1);transition:clip-path 2s var(--ease),transform 2.6s var(--ease)}
+.js .clip.in img{clip-path:inset(0);transform:none}
+.d1{transition-delay:.15s!important}.d2{transition-delay:.3s!important}.d3{transition-delay:.45s!important}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px var(--pad);background:rgba(243,238,230,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid transparent;transition:border-color .8s}
+.nav.stuck{border-color:var(--sand)}
+.wordmark{font-family:var(--serif);font-weight:300;font-size:30px;letter-spacing:.34em;text-transform:uppercase;text-decoration:none;line-height:1;margin-right:-.34em;display:inline-flex;align-items:center;min-height:40px}
+.menu{display:flex;gap:clamp(20px,3vw,48px)}
+.menu a{text-decoration:none;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;padding:13px 0;position:relative}
+.menu a::after{content:"";position:absolute;left:0;right:0;bottom:7px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .8s var(--ease)}
+.menu a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-r{display:flex;align-items:center;gap:22px}
+.bag,.burger{background:none;border:0;cursor:pointer;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;padding:10px 0;min-height:44px}
+.bag span{font-family:var(--serif);font-style:italic;font-size:17px;letter-spacing:0;text-transform:none;margin-left:4px;display:inline-block;transition:transform .6s var(--ease)}
+.bag.bump span{transform:translateY(-4px)}
+.burger{display:none}
+
+main{position:relative;z-index:1}
+section{position:relative}
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(12px,2vw,32px)}
+.fig{background:var(--linen);overflow:hidden;position:relative}
+
+/* hero */
+.hero{position:relative;height:60vw;max-height:none}
+.hl{font-family:var(--serif);font-weight:300;font-size:7.6vw;line-height:1;letter-spacing:-.015em;white-space:nowrap;margin:0}
+.hl span{display:block}.hl span+span{padding-left:20vw;font-style:italic}
+.hero h1{position:absolute;left:6vw;top:11vw;z-index:1}
+.hero-fig{position:absolute;left:50vw;top:1.5vw;width:42vw;aspect-ratio:3/4;z-index:2}
+.hero-fig::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,24,21,.55),rgba(27,24,21,.28) 38%,rgba(27,24,21,0) 62%)}
+.hero-fig .hl{position:absolute;left:-44vw;top:9.5vw;color:var(--bone);z-index:2}
+.hero-meta{position:absolute;left:6vw;top:2.4vw}
+.hero-copy{position:absolute;left:6vw;bottom:2.5vw;width:30vw;max-width:440px;z-index:1}
+.hero-copy p{margin-bottom:28px;color:var(--mute);font-size:clamp(14px,1.15vw,17px)}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px}
+.hero-cap{position:absolute;left:52vw;top:58.2vw;width:40vw;display:flex;justify-content:space-between}
+
+/* section head */
+.sec{padding-top:clamp(90px,12vw,190px)}
+.head{align-items:end;margin-bottom:clamp(48px,7vw,110px)}
+.head .no{grid-column:1/3}
+.head h2{grid-column:1/7;margin-top:18px}
+.head .body{grid-column:8/12;align-self:end}
+
+/* feature product */
+.feat{align-items:end;margin-bottom:clamp(70px,10vw,160px)}
+.feat .fig{grid-column:1/7;aspect-ratio:3/4}
+.feat .info{grid-column:8/12;padding-bottom:4px}
+.feat.alt .fig{grid-column:8/13;grid-row:1}
+.feat.alt .info{grid-column:2/6;grid-row:1}
+.info h3{font-family:var(--serif);font-weight:300;font-size:clamp(40px,4.4vw,64px);line-height:1;margin:14px 0 6px}
+.price{font-family:var(--serif);font-size:24px;font-weight:400}
+.spec{font-size:13px;letter-spacing:.04em;color:var(--mute);margin:18px 0 8px;padding-top:18px;border-top:1px solid var(--sand)}
+.info .body{margin-bottom:30px;font-size:15px}
+.fig img{transition:transform 2.4s var(--ease)}
+.feat .fig:hover img,.card .fig:hover img{transform:scale(1.035)}
+
+/* rail */
+.rail-top{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px}
+.rail-top h3{font-family:var(--serif);font-weight:300;font-style:italic;font-size:30px;background:var(--bone);padding-right:16px}
+.rail-ctrl{display:flex;gap:6px;background:var(--bone)}
+.rail-ctrl button{width:48px;height:48px;border:1px solid var(--sand);background:transparent;cursor:pointer;font-family:var(--serif);font-size:20px;transition:border-color .6s,background .6s,color .6s}
+.rail-ctrl button:hover{border-color:var(--ink);background:var(--ink);color:var(--bone)}
+.rail{display:flex;gap:clamp(16px,2.4vw,40px);overflow-x:auto;scroll-snap-type:x proximity;padding:0 var(--pad) 6px;scroll-padding-left:var(--pad);scrollbar-width:none;cursor:grab}
+.rail::-webkit-scrollbar{display:none}
+.card{flex:0 0 clamp(250px,27vw,400px);scroll-snap-align:start;background:var(--bone)}
+.card .fig{aspect-ratio:3/4;margin-bottom:18px}
+.card-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.card h4{font-family:var(--serif);font-weight:400;font-size:27px;margin:0;line-height:1.1}
+.card .spec{margin:6px 0 10px;padding:0;border:0;font-size:12.5px;line-height:1.55}
+.card .label{display:block;margin-bottom:4px}
+.rail-bar{height:1px;background:var(--sand);margin:34px var(--pad) clamp(70px,10vw,160px);position:relative}
+.rail-bar i{position:absolute;left:0;top:-1px;height:3px;width:25%;background:var(--ink);transition:transform .5s linear}
+
+/* silhouettes */
+.sil{display:grid;grid-template-columns:repeat(4,1fr)}
+.sil a{display:block;text-decoration:none;text-align:center;padding:clamp(28px,4vw,60px) 16px;border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);transition:background 1s var(--ease)}
+.sil a:hover{background:var(--linen)}
+.sil svg{width:108px;height:162px;margin:0 auto 26px;display:block;overflow:visible}
+.sil svg path{fill:none;stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke;transition:stroke 1s}
+.sil svg .x{stroke:var(--bronze)}
+.sil a:hover svg{transform:translateY(-4px)} .sil svg{transition:transform 1.2s var(--ease)}
+.sil h3{font-family:var(--serif);font-weight:300;font-size:32px;line-height:1.1}
+.sil p{font-size:13.5px;color:var(--mute);max-width:24ch;margin:8px auto 14px;line-height:1.6}
+
+/* fit finder */
+.fit{background:var(--linen);margin-top:clamp(90px,12vw,190px);padding-top:clamp(70px,9vw,140px);padding-bottom:clamp(70px,9vw,140px)}
+.fit-grid{align-items:stretch}
+.fit-l{grid-column:1/7;padding-right:clamp(0px,3vw,56px)}
+.fit-r{grid-column:7/13;background:var(--bone);padding:clamp(28px,4vw,64px);display:grid;grid-template-columns:1fr auto;gap:24px;align-content:start;min-height:520px}
+.fit-l h2{margin:18px 0 22px}
+.sentence{font-family:var(--serif);font-weight:300;font-size:clamp(26px,2.7vw,40px);line-height:1.55;margin:clamp(30px,4vw,56px) 0 12px}
+.sentence label{cursor:text}
+.sentence input{width:3.2ch;box-sizing:content-box;background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;text-align:center;font-family:var(--serif);font-style:italic;font-size:1em;padding:0 4px;color:var(--ink);-moz-appearance:textfield;appearance:textfield}
+.sentence input::-webkit-outer-spin-button,.sentence input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.sentence input::placeholder{color:#8d8175;opacity:1}
+.sentence input:focus{outline:0;border-bottom:2px solid var(--bronze)}
+.sentence input[aria-invalid=true]{border-bottom:2px solid #8c2f1f}
+.goals{display:flex;flex-wrap:wrap;gap:0;margin:8px 0 8px}
+.goals legend{margin-bottom:14px;padding-top:22px}
+.goals label{position:relative;cursor:pointer}
+.goals input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+.goals span{display:block;padding:14px 22px;border:1px solid var(--ink);margin-right:-1px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;transition:background .6s var(--ease),color .6s var(--ease)}
+.goals input:checked+span{background:var(--ink);color:var(--bone)}
+.goals input:focus-visible+span{outline:1px solid var(--ink);outline-offset:3px}
+.goal-note{font-size:13.5px;color:var(--mute);min-height:1.7em;margin-bottom:26px}
+.err{color:#8c2f1f;font-size:14px;min-height:1.7em;margin:4px 0 14px;font-weight:400}
+.res-size{font-family:var(--serif);font-weight:300;font-size:clamp(110px,13vw,200px);line-height:.8;letter-spacing:-.03em;margin:22px 0 8px}
+.res-size sup{font-size:.3em;font-style:italic;vertical-align:top;position:relative;top:.2em;margin-left:4px;color:var(--bronze)}
+.res-size .empty{color:var(--sand)}
+.res dl{margin-top:30px;border-top:1px solid var(--sand)}
+.res dl div{display:flex;justify-content:space-between;gap:20px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--sand)}
+.res dd{font-family:var(--serif);font-size:22px;text-align:right;line-height:1.25}
+.res-note{font-size:13.5px;color:var(--mute);margin:20px 0 24px;max-width:36ch}
+.gapviz{width:clamp(110px,12vw,170px);align-self:start;text-align:center}
+.gapviz svg{width:100%;height:auto;display:block}
+.gapviz .pn{fill:var(--linen);stroke:var(--ink);stroke-width:.75}
+.gapviz .lc{fill:none;stroke:var(--bronze);stroke-width:1}
+.gapviz circle{fill:var(--bone);stroke:var(--ink);stroke-width:.75}
+.res.updated .res-size,.res.updated dl{animation:settle 1.6s var(--ease)}
+@keyframes settle{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* craft */
+.craft .fig{grid-column:1/8;aspect-ratio:3/2;align-self:start;position:sticky;top:110px}
+.craft ol{grid-column:9/13;counter-reset:c}
+.craft li{counter-increment:c;padding:24px 0;border-top:1px solid var(--sand);display:grid;grid-template-columns:44px 1fr;background:var(--bone)}
+.craft li:last-child{border-bottom:1px solid var(--sand)}
+.craft li::before{content:"0" counter(c);font-family:var(--serif);font-style:italic;color:var(--bronze);font-size:18px;padding-top:6px}
+.craft h3{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.15;margin-bottom:6px}
+.craft li p{font-size:14.5px;color:var(--mute);line-height:1.65}
+
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,56px);align-items:start}
+.rev{background:var(--bone);padding:8px 0 0}
+.rev:nth-child(2){margin-top:clamp(40px,7vw,120px)}.rev:nth-child(3){margin-top:clamp(20px,3.5vw,60px)}
+.rev blockquote{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(23px,2vw,30px);line-height:1.35;margin-bottom:26px}
+.rev blockquote::before{content:"“";display:block;font-size:64px;line-height:.6;color:var(--bronze);font-style:normal;margin-bottom:10px}
+.rev footer{border-top:1px solid var(--sand);padding-top:14px}
+.rev cite{font-style:normal;font-family:var(--serif);font-size:20px;display:block;margin-bottom:4px}
+
+/* mtm */
+.mtm{background:var(--ink);color:var(--bone);margin-top:clamp(90px,12vw,190px)}
+.mtm .grid{align-items:center}
+.mtm .fig{grid-column:1/6;aspect-ratio:4/5;background:#2a2622;margin:clamp(40px,6vw,96px) 0}
+.mtm .txt{grid-column:7/12;padding:clamp(50px,7vw,110px) 0}
+.mtm h2{margin:18px 0 26px}.mtm .label{color:var(--sand)}.mtm .body{color:#d9cfc2;margin-bottom:22px}
+.mtm ul{margin:0 0 36px;border-top:1px solid #4a433b}
+.mtm li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #4a433b;font-size:14px;color:#d9cfc2}
+.mtm li b{font-family:var(--serif);font-weight:400;font-size:19px;color:var(--bone)}
+
+/* newsletter + footer */
+.news{padding-top:clamp(80px,10vw,150px);padding-bottom:clamp(80px,10vw,150px)}
+.news h2{grid-column:1/7;font-size:clamp(34px,4vw,60px)}
+.news form{grid-column:8/13;align-self:end;background:var(--bone)}
+.news .row{display:flex;border-bottom:1px solid var(--ink);margin-top:10px}
+.news input{flex:1;min-width:0;background:transparent;border:0;padding:14px 0;font-family:var(--serif);font-size:24px;font-weight:300}
+.news input:focus{outline:0}.news .row:focus-within{border-bottom-width:2px}
+.news input::placeholder{color:#857a6e;font-style:italic;opacity:1}
+.news button{border:0;background:none;cursor:pointer;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;padding:0 0 0 18px;min-height:48px}
+.news .msg{font-size:13.5px;color:var(--mute);margin-top:12px;min-height:1.7em}
+footer.site{border-top:1px solid var(--sand);padding-top:clamp(50px,6vw,90px);padding-bottom:110px;position:relative;z-index:1;background:var(--bone)}
+.fcols{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(24px,3vw,56px)}
+.fcols h3{margin-bottom:14px;font-family:var(--sans)}
+.fcols p{font-size:14px;color:var(--mute);line-height:1.7}
+.fcols a{text-underline-offset:4px;text-decoration-thickness:1px}
+.fbase{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:20px;margin-top:clamp(50px,7vw,100px)}
+.fbase .wordmark{display:inline;min-height:0;font-size:clamp(54px,11vw,170px);letter-spacing:.2em;line-height:.8;margin-right:0}
+
+.pill{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--bone);border:1px solid var(--sand);color:var(--ink);text-decoration:none;font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;padding:0 16px;min-height:40px;display:inline-flex;align-items:center;border-radius:40px;transition:background .6s,color .6s,border-color .6s}
+.pill:hover{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+
+@media (max-width:899px){
+  :root{--lace-x:13px}
+  .burger{display:block}
+  .wordmark{font-size:25px}
+  .menu{position:fixed;inset:0;top:0;background:var(--bone);flex-direction:column;justify-content:center;gap:10px;padding:0 var(--pad);visibility:hidden;opacity:0;transition:opacity .7s var(--ease),visibility 0s .7s;z-index:-1}
+  .menu.open{visibility:visible;opacity:1;transition:opacity .7s var(--ease)}
+  .menu a{font-family:var(--serif);font-weight:300;font-size:42px;letter-spacing:0;text-transform:none;display:block;padding:6px 0}
+  .hero{height:auto;padding:12px var(--pad) 0;display:flex;flex-direction:column}
+  .hero-meta,.hero h1,.hero-fig,.hero-copy,.hero-cap{position:static;width:auto}
+  .hero h1,.hero-fig{top:auto;left:auto}
+  .hero-meta{order:0;margin-bottom:14px}
+  .hero-fig{order:1;margin-left:12%;margin-right:calc(var(--pad)*-1)}
+  .hero-fig .hl,.hero-fig::after{display:none}
+  .hero-cap{order:5;margin:30px 0 0;display:flex}
+  .nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bone)}
+  .hero h1{order:3;font-size:clamp(46px,14.5vw,110px);margin-top:-.62em;position:relative;z-index:3;white-space:normal}
+  .hero h1 span:first-child{background:var(--bone);display:inline-block;padding:.08em .2em 0 0}
+  .hl span+span{padding-left:12%}
+  .hero-copy{order:4;margin-top:26px;max-width:none}
+  .hero-copy p{font-size:16px}
+  .head h2,.head .no,.head .body{grid-column:1/-1}.head .body{margin-top:22px}
+  .feat .fig,.feat.alt .fig{grid-column:1/-1;grid-row:auto}
+  .feat .info,.feat.alt .info{grid-column:1/-1;grid-row:auto;margin-top:22px}
+  .feat.alt .fig{margin-left:12%}
+  .sil{grid-template-columns:repeat(2,1fr)}.sil a:nth-child(n+3){border-top:0}
+  .sil a{background:var(--bone)}
+  .fit-l,.fit-r{grid-column:1/-1;padding-right:0}.fit-r{margin-top:40px;min-height:0}
+  .craft .fig{grid-column:1/-1;position:relative;top:0;margin-right:calc(var(--pad)*-1)}
+  .craft ol{grid-column:1/-1;margin-top:36px}
+  .revs{grid-template-columns:1fr;gap:48px}.rev:nth-child(n){margin-top:0}
+  .mtm .fig{grid-column:1/-1;margin-bottom:0;aspect-ratio:4/3}.mtm .txt{grid-column:1/-1}
+  .news h2,.news form{grid-column:1/-1}.news form{margin-top:36px}
+  .fcols{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:520px){
+  .fit-r{grid-template-columns:1fr}.gapviz{width:130px;justify-self:start;order:2}
+  .fcols{grid-template-columns:1fr}
+  .goals span{padding:13px 15px;letter-spacing:.18em}
+  .nav-r{gap:14px}
+}
+@media (min-width:900px){html:not(.rm){scroll-behavior:smooth}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+  .js .rv{opacity:1;transform:none}.js .clip img{clip-path:none;transform:none}.js .stitch path{stroke-dashoffset:0}
+}
+/* maison: trust strip, buy row, try-on */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(36px,5vw,72px);border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);background:var(--bone)}
+.trust li{padding:18px 10px;text-align:center;color:var(--ink)}
+.trust li+li{border-left:1px solid var(--sand)}
+.rate{font-size:12.5px;letter-spacing:.04em;color:var(--mute);margin:0 0 6px}
+.rate b{color:var(--bronze);font-weight:400}
+.info .rate{margin-bottom:14px}
+.buy{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px}
+.size{-webkit-appearance:none;appearance:none;min-height:48px;padding:0 30px 0 2px;border:0;border-bottom:1px solid var(--ink);border-radius:0;cursor:pointer;
+  background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231b1815'/%3E%3C/svg%3E") no-repeat right 4px center/11px 7px;
+  font-family:var(--serif);font-style:italic;font-size:20px;line-height:1}
+.size:focus{outline:0;border-bottom:2px solid var(--bronze)}
+.size.need{border-bottom:2px solid #8c2f1f}
+.card .size{min-height:44px}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.btn:disabled:hover{background:transparent;color:var(--ink)}
+
+.tryon{padding-bottom:clamp(70px,10vw,160px)}
+.try-grid{align-items:start}
+.try-l{grid-column:1/7;background:var(--bone)}
+.try-r{grid-column:8/13;position:sticky;top:96px}
+.step{border-top:1px solid var(--sand);padding:22px 0 32px}
+.step-h{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+.step-h i{font-family:var(--serif);font-style:italic;color:var(--bronze);font-size:18px;letter-spacing:0;text-transform:none}
+.hint{font-size:13.5px;color:var(--mute);line-height:1.6;max-width:52ch}
+.drop{border:1px dashed var(--bronze);padding:clamp(22px,3vw,36px);transition:background .6s var(--ease),border-color .6s}
+.drop.over{background:var(--linen);border-color:var(--ink);border-style:solid}
+.drop-t{font-size:clamp(24px,2.2vw,30px);line-height:1.2;margin-bottom:6px}
+.drop-a{display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;margin-top:20px}
+.drop-prev{display:flex;align-items:center;gap:22px}
+.drop-prev .th{flex:0 0 96px;height:128px;background:var(--linen);overflow:hidden}
+.drop-prev p{font-family:var(--serif);font-size:22px;line-height:1.2}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px clamp(10px,1.4vw,20px)}
+.tile{position:relative;display:block;cursor:pointer}
+.tile input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer}
+.tile-fig{display:block;aspect-ratio:3/4;background:var(--linen);overflow:hidden;outline:1px solid transparent;outline-offset:3px;transition:outline-color .6s var(--ease)}
+.tile-fig img{transition:transform 1.6s var(--ease)}
+.tile:hover .tile-fig img{transform:scale(1.04)}
+.tile-n{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--serif);font-size:21px;line-height:1.2;padding-top:10px}
+.tile-n::after{content:"×";color:var(--bronze);font-style:italic;opacity:0;transition:opacity .6s}
+.tile input:checked~.tile-fig{outline-color:var(--ink)}
+.tile input:checked~.tile-n::after{opacity:1}
+.tile input:focus-visible~.tile-fig{outline:2px solid var(--bronze)}
+.consent{position:relative;display:flex;align-items:center;gap:14px;min-height:44px;cursor:pointer;font-size:15px;color:var(--ink);margin-bottom:8px}
+.consent input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer}
+.consent i{flex:0 0 18px;height:18px;border:1px solid var(--ink);position:relative;transition:background .5s var(--ease)}
+.consent i::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid var(--bone);border-width:0 1px 1px 0;transform:rotate(45deg);opacity:0}
+.consent input:checked~i{background:var(--ink)}.consent input:checked~i::after{opacity:1}
+.consent input:focus-visible~i{outline:1px solid var(--ink);outline-offset:4px}
+.try-go{display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;margin-top:26px}
+.tryon .err{margin:14px 0 0;min-height:0}
+.dev{margin-top:26px;border-top:1px solid var(--sand)}
+.dev summary{cursor:pointer;min-height:44px;display:flex;align-items:center;list-style:none;color:var(--mute)}
+.dev summary::-webkit-details-marker{display:none}
+.dev summary::after{content:"+";margin-left:auto;font-family:var(--serif);font-size:20px;letter-spacing:0}
+.dev[open] summary::after{content:"–"}
+.dev .row{display:flex;flex-wrap:wrap;align-items:center;gap:0 22px;margin:6px 0 12px}
+.dev input{flex:1 1 200px;min-width:0;background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:10px 0;font-family:var(--serif);font-size:20px;font-weight:300}
+.dev input:focus{outline:0;border-bottom:2px solid var(--bronze)}
+.stage{position:relative;aspect-ratio:2/3;background:var(--linen);overflow:hidden;display:grid;place-items:center;text-align:center}
+.stage img{position:absolute;inset:0;object-fit:contain;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;transition:opacity 1.2s var(--ease),filter 1.2s var(--ease)}
+.stage img.dim{opacity:.28;filter:grayscale(1);object-fit:cover}
+.stage[data-state=done] img{cursor:pointer;animation:settle 1.6s var(--ease)}
+.st-in{position:relative;z-index:2;padding:24px;width:100%}
+.st-in .serif{font-size:clamp(26px,2.4vw,34px);line-height:1.25;font-style:italic;margin:10px 0 0}
+.st-load::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(100deg,rgba(243,238,230,0) 30%,rgba(243,238,230,.75) 50%,rgba(243,238,230,0) 70%);transform:translateX(-100%);animation:sheen 3.6s var(--ease) infinite}
+.st-load{position:absolute;inset:0;display:grid;place-items:center}
+.line{display:block;position:relative;overflow:hidden;width:min(220px,60%);height:1px;background:var(--sand);margin:26px auto 18px}
+.line i{position:absolute;inset:0;background:var(--ink);animation:lacing 3.2s ease-in-out infinite}
+@keyframes sheen{to{transform:translateX(100%)}}
+@keyframes lacing{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+.st-tag{position:absolute;z-index:3;left:14px;top:12px;background:var(--bone);color:var(--ink);padding:5px 10px}
+.st-act{margin-top:18px}
+.st-act .links{display:flex;flex-wrap:wrap;gap:0 26px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--sand)}
+@media (max-width:899px){
+  .trust{grid-template-columns:repeat(2,1fr)}
+  .trust li{letter-spacing:.2em;padding:16px 6px}
+  .trust li:nth-child(3){border-left:0}
+  .trust li:nth-child(n+3){border-top:1px solid var(--sand)}
+  .try-l,.try-r{grid-column:1/-1}
+  .try-r{position:relative;top:0;margin-top:40px}
+}
+@media (min-width:900px){.stage{max-height:calc(100vh - 250px);min-height:420px;width:100%}}
+@media (max-width:520px){
+  .tile-n{font-size:18px}
+  .drop-prev .th{flex-basis:78px;height:104px}
+}
+@media (prefers-reduced-motion:reduce){
+  .st-load::before{animation:none;opacity:0}
+  .line i{animation:none;transform:none;opacity:.5}
+  .stage[data-state=done] img{animation:none}
+}
+html,body{overflow-x:clip;max-width:100%}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="lace" aria-hidden="true"><i></i><b></b></div>
+
+<header class="nav" id="nav">
+  <a class="wordmark" href="#top" aria-label="Vesna, home">Vesna</a>
+  <nav aria-label="Primary">
+    <ul class="menu" id="menu">
+      <li><a href="#collection">Corsets</a></li>
+      <li><a href="#tryon">Try it on</a></li>
+      <li><a href="#fit">Fit Guide</a></li>
+      <li><a href="#styling">Styling</a></li>
+    </ul>
+  </nav>
+  <div class="nav-r">
+    <button class="bag" id="bag" type="button" aria-live="polite" aria-label="Bag, 0 items">Bag <span id="bagN">0</span></button>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+<section class="hero" aria-labelledby="h1">
+  <p class="label hero-meta">N°00 &nbsp;—&nbsp; Autumn, Winter &nbsp;·&nbsp; Ready to wear</p>
+  <h1 class="hl" id="h1"><span>The waist,</span><span>quietly held.</span></h1>
+  <figure class="fig hero-fig clip" data-rv>
+    <img src="../../assets/img/maison/hero.jpg" alt="A woman in an ivory satin strapless corset top, cream trousers and a camel coat worn open" width="1200" height="1600" fetchpriority="high">
+    <p class="hl" aria-hidden="true"><span>The waist,</span><span>quietly held.</span></p>
+  </figure>
+  <p class="label hero-cap"><span>Aurèle, in ivory satin</span><span>€229</span></p>
+  <div class="hero-copy rv d2" data-rv>
+    <p>Steel-boned corsets, ready to wear. In stock in sizes 18 to 40″, and on their way within 24 hours. Nothing announces itself. Everything holds.</p>
+    <div class="hero-cta"><a class="btn" href="#collection">View the collection</a><a class="link" href="#fit">Find your size</a></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <ul class="trust rv" data-rv aria-label="Service">
+    <li class="label">Ships in 24 hours</li>
+    <li class="label">First exchange free</li>
+    <li class="label">Sizes 18–40″</li>
+    <li class="label">Pay in three</li>
+  </ul>
+</div>
+
+<section class="sec wrap" id="collection" aria-labelledby="h-col">
+  <span class="stitch" aria-hidden="true" data-rv><svg viewBox="0 0 14 42"><path d="M1 1 13 13"/><path d="M13 1 1 13"/><path d="M1 15 13 27"/><path d="M13 15 1 27"/><path d="M1 29 13 41"/><path d="M13 29 1 41"/></svg></span>
+  <header class="grid head">
+    <span class="no rv" data-rv>N°01</span>
+    <h2 id="h-col" class="rv" data-rv>The <em>collection</em></h2>
+    <p class="body rv d1" data-rv>Six pieces. Each built on cotton coutil and boned in sprung steel. In stock in sizes 18 to 40″, shipped within 24 hours. The first exchange is free, and you may pay in three with Klarna.</p>
+  </header>
+
+  <article class="grid feat">
+    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p1.jpg" alt="Model wearing the Séverine underbust corset in bone coutil over a white shirt, with tailored trousers" width="1200" height="1600"></figure>
+    <div class="info rv d1" data-rv>
+      <span class="label">Underbust &nbsp;·&nbsp; 1 / 6</span>
+      <h3>Séverine</h3>
+      <p class="price">€149</p>
+      <p class="spec">20 spiral steel bones · herringbone coutil, bone · 3" reduction</p>
+      <p class="rate"><b aria-hidden="true">★</b> 4.8 (312) · In stock</p>
+      <p class="body">The house underbust, and where most begin. A clean front, a soft point at the hip, a waist that arrives without drama. Made to go over a shirt.</p>
+      <div class="buy">
+        <label class="vh" for="sz-severine">Size, Séverine</label>
+        <select class="size" id="sz-severine" data-for="severine"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
+        <button class="btn" type="button" data-add="Séverine">Add to bag</button>
+        <a class="link" href="#tryon" data-try="severine">Try it on</a>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section aria-label="More from the collection">
+  <div class="wrap rail-top">
+    <h3>Four more, in stock</h3>
+    <div class="rail-ctrl"><button type="button" id="prev" aria-label="Previous products">←</button><button type="button" id="next" aria-label="Next products">→</button></div>
+  </div>
+  <div class="rail" id="rail" tabindex="0" role="group" aria-label="Product rail, scroll horizontally">
+    <article class="card">
+      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p2.jpg" alt="Model wearing the Aurèle strapless overbust corset in ivory satin with straight blue jeans" width="1200" height="1600"></figure>
+      <span class="label">Overbust · 2 / 6</span>
+      <div class="card-h"><h4>Aurèle</h4><span class="price">€229</span></div>
+      <p class="spec">24 spiral steel bones · ivory satin on coutil · 4" reduction</p>
+      <p class="rate"><b aria-hidden="true">★</b> 4.9 (486) · In stock</p>
+      <div class="buy">
+        <label class="vh" for="sz-aurele">Size, Aurèle</label>
+        <select class="size" id="sz-aurele" data-for="aurele"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
+        <button class="link" type="button" data-add="Aurèle">Add to bag</button>
+        <a class="link" href="#tryon" data-try="aurele">Try it on</a>
+      </div>
+    </article>
+    <article class="card">
+      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p3.jpg" alt="Model wearing the Odile waspie in sand cotton sateen over a fine knit dress" width="1200" height="1600"></figure>
+      <span class="label">Waspie · 3 / 6</span>
+      <div class="card-h"><h4>Odile</h4><span class="price">€99</span></div>
+      <p class="spec">14 flat &amp; spiral bones · sand cotton sateen · 3" reduction</p>
+      <p class="rate"><b aria-hidden="true">★</b> 4.7 (641) · In stock</p>
+      <div class="buy">
+        <label class="vh" for="sz-odile">Size, Odile</label>
+        <select class="size" id="sz-odile" data-for="odile"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
+        <button class="link" type="button" data-add="Odile">Add to bag</button>
+        <a class="link" href="#tryon" data-try="odile">Try it on</a>
+      </div>
+    </article>
+    <article class="card">
+      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p4.jpg" alt="Model wearing the Maren longline underbust corset in caramel coutil over a fine turtleneck" width="1200" height="1600"></figure>
+      <span class="label">Longline · 4 / 6</span>
+      <div class="card-h"><h4>Maren</h4><span class="price">€199</span></div>
+      <p class="spec">26 spiral steel bones · caramel double coutil · 4" reduction</p>
+      <p class="rate"><b aria-hidden="true">★</b> 4.8 (203) · In stock</p>
+      <div class="buy">
+        <label class="vh" for="sz-maren">Size, Maren</label>
+        <select class="size" id="sz-maren" data-for="maren"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
+        <button class="link" type="button" data-add="Maren">Add to bag</button>
+        <a class="link" href="#tryon" data-try="maren">Try it on</a>
+      </div>
+    </article>
+    <article class="card">
+      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p5.jpg" alt="Model wearing the Colombe sweetheart overbust corset in soft black satin with a slip skirt and an open blazer" width="1200" height="1600"></figure>
+      <span class="label">Overbust · 5 / 6</span>
+      <div class="card-h"><h4>Colombe</h4><span class="price">€249</span></div>
+      <p class="spec">28 spiral steel bones · soft black satin on coutil · sweetheart · 4" reduction</p>
+      <p class="rate"><b aria-hidden="true">★</b> 4.8 (159) · In stock</p>
+      <div class="buy">
+        <label class="vh" for="sz-colombe">Size, Colombe</label>
+        <select class="size" id="sz-colombe" data-for="colombe"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
+        <button class="link" type="button" data-add="Colombe">Add to bag</button>
+        <a class="link" href="#tryon" data-try="colombe">Try it on</a>
+      </div>
+    </article>
+  </div>
+  <div class="rail-bar" aria-hidden="true"><i id="railBar"></i></div>
+
+  <article class="grid feat alt wrap">
+    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p6.jpg" alt="Model wearing the Isaure square-neck corset with straps in champagne satin under an open cardigan, with linen trousers" width="1200" height="1600"></figure>
+    <div class="info rv d1" data-rv>
+      <span class="label">Overbust, with straps &nbsp;·&nbsp; 6 / 6</span>
+      <h3>Isaure</h3>
+      <p class="price">€219</p>
+      <p class="spec">22 spiral steel bones · champagne satin on coutil · 3" reduction</p>
+      <p class="rate"><b aria-hidden="true">★</b> 4.8 (119) · In stock</p>
+      <p class="body">A square neckline and two quiet straps. It reads as a top, and behaves as a corset. Under a cardigan at noon, alone in the evening.</p>
+      <div class="buy">
+        <label class="vh" for="sz-isaure">Size, Isaure</label>
+        <select class="size" id="sz-isaure" data-for="isaure"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
+        <button class="btn" type="button" data-add="Isaure">Add to bag</button>
+        <a class="link" href="#tryon" data-try="isaure">Try it on</a>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="sec wrap tryon" id="tryon" aria-labelledby="h-try" style="padding-top:clamp(20px,4vw,60px)">
+  <span class="stitch" aria-hidden="true" data-rv><svg viewBox="0 0 14 42"><path d="M1 1 13 13"/><path d="M13 1 1 13"/><path d="M1 15 13 27"/><path d="M13 15 1 27"/><path d="M1 29 13 41"/><path d="M13 29 1 41"/></svg></span>
+  <header class="grid head" style="padding-top:clamp(70px,8vw,130px)">
+    <span class="no rv" data-rv>N°02</span>
+    <h2 id="h-try" class="rv" data-rv>See it <em>on you</em></h2>
+    <p class="body rv d1" data-rv>One photograph, one piece. A preview of you wearing it, in about a minute.</p>
+  </header>
+  <div class="grid try-grid">
+    <form class="try-l rv" data-rv id="tryForm" novalidate>
+      <div class="step" role="group" aria-labelledby="ts1">
+        <p class="label step-h" id="ts1"><i>01</i>Your photo</p>
+        <div class="drop" id="drop">
+          <input class="vh" id="tryFile" type="file" accept="image/*" capture="user" tabindex="-1" aria-label="Your photo">
+          <div id="dropEmpty">
+            <p class="serif drop-t">Drop a photo here</p>
+            <p class="hint">Full upper body, facing forward, in good light, in fitted clothes.</p>
+            <div class="drop-a"><button class="btn" type="button" id="tryPick">Choose a photo</button><button class="link" type="button" id="tryCam">Use the camera</button></div>
+          </div>
+          <div class="drop-prev" id="dropPrev" hidden>
+            <span class="th"><img id="tryThumb" alt="Your photo, as it will be sent"></span>
+            <div><p>Your photo</p><span class="label" id="tryMeta"></span><br><button class="link" type="button" id="tryRemove">Remove</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="step" role="radiogroup" aria-labelledby="ts2" id="tryPieces">
+        <p class="label step-h" id="ts2"><i>02</i>Choose a piece</p>
+        <div class="tiles">
+          <label class="tile"><input type="radio" name="piece" value="severine"><span class="tile-fig"><img src="../../assets/img/maison/g1.jpg" alt="" width="900" height="1200" loading="lazy"></span><span class="tile-n">Séverine</span></label>
+          <label class="tile"><input type="radio" name="piece" value="aurele"><span class="tile-fig"><img src="../../assets/img/maison/g2.jpg" alt="" width="900" height="1200" loading="lazy"></span><span class="tile-n">Aurèle</span></label>
+          <label class="tile"><input type="radio" name="piece" value="odile"><span class="tile-fig"><img src="../../assets/img/maison/g3.jpg" alt="" width="900" height="1200" loading="lazy"></span><span class="tile-n">Odile</span></label>
+          <label class="tile"><input type="radio" name="piece" value="maren"><span class="tile-fig"><img src="../../assets/img/maison/g4.jpg" alt="" width="900" height="1200" loading="lazy"></span><span class="tile-n">Maren</span></label>
+          <label class="tile"><input type="radio" name="piece" value="colombe"><span class="tile-fig"><img src="../../assets/img/maison/g5.jpg" alt="" width="900" height="1200" loading="lazy"></span><span class="tile-n">Colombe</span></label>
+          <label class="tile"><input type="radio" name="piece" value="isaure"><span class="tile-fig"><img src="../../assets/img/maison/g6.jpg" alt="" width="900" height="1200" loading="lazy"></span><span class="tile-n">Isaure</span></label>
+        </div>
+      </div>
+      <div class="step" role="group" aria-labelledby="ts3">
+        <p class="label step-h" id="ts3"><i>03</i>Try it on</p>
+        <label class="consent"><input type="checkbox" id="tryConsent" required><i aria-hidden="true"></i><span>I am over 18 and this is a photo of me.</span></label>
+        <p class="hint">Your photo is sent to our AI image provider to generate the preview. It is not stored by Vesna. Results are AI approximations, not a fit guarantee.</p>
+        <div class="try-go"><button class="btn" type="submit" id="tryGo" disabled>Try it on</button><span class="label" id="tryNeed">Add a photo, a piece and your confirmation</span></div>
+        <p class="err" id="tryErr" role="alert"></p>
+        <button class="link" type="button" id="tryRetry" hidden>Try again</button>
+        <details class="dev" id="tryDev">
+          <summary class="label">Developer: use your own OpenAI API key</summary>
+          <label class="vh" for="tryKey">OpenAI API key</label>
+          <div class="row"><input id="tryKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-…"><button class="link" type="button" id="tryKeySave">Save key</button><button class="link" type="button" id="tryKeyForget">Forget key</button></div>
+          <p class="hint" id="tryKeyMsg">For the site owner. The key is kept in this browser only and requests go from here directly to OpenAI.</p>
+        </details>
+      </div>
+    </form>
+
+    <div class="try-r rv d1" data-rv>
+      <div class="stage" id="stage" data-state="idle">
+        <img id="stImg" alt="" hidden draggable="false">
+        <div class="st-in" id="stIdle"><span class="label">Your preview</span><p class="serif">It will appear here.</p></div>
+        <div class="st-load" id="stLoad" hidden><div class="st-in"><span class="label" id="stPiece">Preview</span><p class="serif" id="stText" role="status">Reading your photo…</p><span class="line" aria-hidden="true"><i></i></span><span class="label" id="stTime">Usually 20 to 60 seconds</span></div></div>
+        <span class="label st-tag" id="stTag" hidden>AI preview</span>
+      </div>
+      <div class="st-act" id="stAct" hidden>
+        <div class="links"><button class="link" type="button" id="stTog" aria-pressed="false">View original</button><a class="link" id="stDl" href="#" download="vesna-preview.png">Download</a><button class="link" type="button" id="stAgain">Try another piece</button></div>
+        <div class="buy">
+          <label class="vh" for="sz-stage">Size</label>
+          <select class="size" id="sz-stage"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
+          <button class="btn" type="button" id="stAdd" data-add="">Add to bag</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap" id="silhouette" aria-labelledby="h-sil" style="padding-top:clamp(20px,4vw,60px)">
+  <span class="stitch" aria-hidden="true" data-rv><svg viewBox="0 0 14 42"><path d="M1 1 13 13"/><path d="M13 1 1 13"/><path d="M1 15 13 27"/><path d="M13 15 1 27"/><path d="M1 29 13 41"/><path d="M13 29 1 41"/></svg></span>
+  <header class="grid head" style="padding-top:clamp(70px,8vw,130px)">
+    <span class="no rv" data-rv>N°03</span>
+    <h2 id="h-sil" class="rv" data-rv>By <em>silhouette</em></h2>
+    <p class="body rv d1" data-rv>Four lines. The difference is where the corset begins, and where it lets go.</p>
+  </header>
+  <div class="sil rv" data-rv>
+    <a href="#collection">
+      <svg viewBox="0 0 88 132" aria-hidden="true"><path d="M14 22 C24 10 38 12 44 24 C50 12 64 10 74 22 C74 48 64 58 64 74 C64 92 72 104 76 116 C56 126 32 126 12 116 C16 104 24 92 24 74 C24 58 14 48 14 22Z"/><path class="x" d="M44 24V122M40 40l8 8m0-8l-8 8M40 60l8 8m0-8l-8 8M40 80l8 8m0-8l-8 8M40 100l8 8m0-8l-8 8"/></svg>
+      <h3>Overbust</h3><p>From hip to neckline. A garment in itself.</p><span class="label">Aurèle · Colombe · Isaure</span>
+    </a>
+    <a href="#collection">
+      <svg viewBox="0 0 88 132" aria-hidden="true"><path d="M16 44 C30 36 58 36 72 44 C70 58 64 64 64 78 C64 94 72 104 76 116 C56 126 32 126 12 116 C16 104 24 94 24 78 C24 64 18 58 16 44Z"/><path class="x" d="M44 38V122M40 52l8 8m0-8l-8 8M40 72l8 8m0-8l-8 8M40 92l8 8m0-8l-8 8"/></svg>
+      <h3>Underbust</h3><p>Sits beneath the bust. The one to live in.</p><span class="label">Séverine</span>
+    </a>
+    <a href="#collection">
+      <svg viewBox="0 0 88 132" aria-hidden="true"><path d="M20 58 C34 52 54 52 68 58 C66 66 64 70 64 78 C64 86 67 92 70 100 C54 106 34 106 18 100 C21 92 24 86 24 78 C24 70 22 66 20 58Z"/><path class="x" d="M44 54V104M40 64l8 8m0-8l-8 8M40 84l8 8m0-8l-8 8"/></svg>
+      <h3>Waspie</h3><p>A short band at the waist. Over a shirt, a dress, a coat.</p><span class="label">Odile</span>
+    </a>
+    <a href="#collection">
+      <svg viewBox="0 0 88 132" aria-hidden="true"><path d="M16 34 C30 26 58 26 72 34 C70 50 64 56 64 70 C64 88 76 100 80 124 C58 132 30 132 8 124 C12 100 24 88 24 70 C24 56 18 50 16 34Z"/><path class="x" d="M44 28V129M40 42l8 8m0-8l-8 8M40 62l8 8m0-8l-8 8M40 82l8 8m0-8l-8 8M40 102l8 8m0-8l-8 8"/></svg>
+      <h3>Longline</h3><p>Extends over the hip. Smooth under a bias skirt.</p><span class="label">Maren</span>
+    </a>
+  </div>
+</section>
+
+<section class="fit wrap" id="fit" aria-labelledby="h-fit">
+  <span class="stitch" aria-hidden="true" data-rv><svg viewBox="0 0 14 42"><path d="M1 1 13 13"/><path d="M13 1 1 13"/><path d="M1 15 13 27"/><path d="M13 15 1 27"/><path d="M1 29 13 41"/><path d="M13 29 1 41"/></svg></span>
+  <div class="grid fit-grid">
+    <form class="fit-l" id="fitForm" novalidate>
+      <span class="no">N°04</span>
+      <h2 id="h-fit">Two measurements.<br><em>One answer.</em></h2>
+      <p class="body">A corset is sized by its closed waist, in inches, smaller than your own. Take a soft tape, stand as you stand, and do not pull.</p>
+      <p class="sentence">
+        <label for="waist">My natural waist is</label> <input id="waist" name="waist" type="number" inputmode="decimal" min="50" max="130" step="0.5" placeholder="72" aria-describedby="fitErr" required> cm,
+        <label for="under">my underbust</label> <input id="under" name="under" type="number" inputmode="decimal" min="55" max="150" step="0.5" placeholder="80" aria-describedby="fitErr" required> cm.
+      </p>
+      <fieldset class="goals">
+        <legend class="label">I would wear it for</legend>
+        <label><input type="radio" name="goal" value="everyday" checked><span>Everyday</span></label>
+        <label><input type="radio" name="goal" value="shaping"><span>Shaping</span></label>
+        <label><input type="radio" name="goal" value="occasion"><span>Occasion</span></label>
+      </fieldset>
+      <p class="goal-note" id="goalNote">A gentle two inches. Comfortable from morning to dinner.</p>
+      <p class="err" id="fitErr" role="alert"></p>
+      <button class="btn" type="submit">Find my size</button>
+    </form>
+
+    <div class="fit-r res" id="res" aria-live="polite">
+      <div>
+        <span class="label">Your Vesna size</span>
+        <p class="res-size"><span id="rSize" class="empty">—</span><sup id="rUnit" hidden>in</sup></p>
+        <dl>
+          <div><dt class="label">Silhouette</dt><dd id="rSil">—</dd></div>
+          <div><dt class="label">Reduction</dt><dd id="rRed">—</dd></div>
+          <div><dt class="label">Gap, first wearings</dt><dd id="rGap1">—</dd></div>
+          <div><dt class="label">Gap, once seasoned</dt><dd id="rGap2">—</dd></div>
+        </dl>
+        <p class="res-note" id="rNote">Your size, a silhouette, and the lacing gap to expect at the back. It takes a moment.</p>
+        <a class="link" id="rLink" href="#collection" hidden>View the collection</a>
+      </div>
+      <figure class="gapviz" aria-hidden="true">
+        <svg viewBox="0 0 200 260"><rect class="pn" id="pL" x="14" y="8" height="244" width="80"/><rect class="pn" id="pR" y="8" height="244" width="80" x="106"/><path class="lc" id="lc" d=""/><g id="ey"></g></svg>
+        <figcaption class="label" id="gapCap" style="margin-top:12px">Back lacing</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec wrap craft" id="craft" aria-labelledby="h-craft">
+  <span class="stitch" aria-hidden="true" data-rv><svg viewBox="0 0 14 42"><path d="M1 1 13 13"/><path d="M13 1 1 13"/><path d="M1 15 13 27"/><path d="M13 15 1 27"/><path d="M1 29 13 41"/><path d="M13 29 1 41"/></svg></span>
+  <header class="grid head">
+    <span class="no rv" data-rv>N°05</span>
+    <h2 id="h-craft" class="rv" data-rv>What you <em>do not</em> see</h2>
+    <p class="body rv d1" data-rv>Most of a corset is hidden. Ours is built the way corsets at three times the price are built. Steel throughout, and tested for 200 wears.</p>
+  </header>
+  <div class="grid">
+    <figure class="fig clip" data-rv><img src="../../assets/img/maison/detail.jpg" alt="The back of a bone coutil corset laid flat on linen: two-part eyelets, crossed lacing, stitched bone channels and bound edges" width="1800" height="1200"></figure>
+    <ol>
+      <li class="rv" data-rv><div><h3>The bones</h3><p>Spiral steel at the curves, flat steel at the back. No plastic, anywhere. Each bone tipped and cased in its own channel so it never finds the cloth.</p></div></li>
+      <li class="rv" data-rv><div><h3>The busk</h3><p>A steel busk, five or six loops. It closes with one quiet sound and stays closed.</p></div></li>
+      <li class="rv" data-rv><div><h3>The waist tape</h3><p>A band of grosgrain stitched inside at the narrowest point. It takes the strain, so the seams need not.</p></div></li>
+      <li class="rv" data-rv><div><h3>The layers</h3><p>Coutil for strength, satin or sateen for the eye, cotton against the skin. Cut on grain. Always.</p></div></li>
+      <li class="rv" data-rv><div><h3>The test</h3><p>Two-part eyelets that do not pull through. Bound edges, stitched flat. Every style is laced, worn and unlaced 200 times before it goes on sale.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec wrap" id="letters" aria-labelledby="h-rev">
+  <span class="stitch" aria-hidden="true" data-rv><svg viewBox="0 0 14 42"><path d="M1 1 13 13"/><path d="M13 1 1 13"/><path d="M1 15 13 27"/><path d="M13 15 1 27"/><path d="M1 29 13 41"/><path d="M13 29 1 41"/></svg></span>
+  <header class="grid head">
+    <span class="no rv" data-rv>N°06</span>
+    <h2 id="h-rev" class="rv" data-rv>From those <em>who wear it</em></h2>
+    <p class="body rv d1" data-rv><span class="label" style="display:block;margin-bottom:10px;color:var(--ink)"><b style="color:var(--bronze);font-weight:400" aria-hidden="true">★</b> 4.8 of 5 · 1,920 verified reviews</span>With their measurements, because yours are the only ones that matter.</p>
+  </header>
+  <div class="revs">
+    <article class="rev rv" data-rv>
+      <blockquote>I expected to feel dressed up. I feel held instead, which is better. The fit finder said 24 and it was right to the centimetre.</blockquote>
+      <footer><cite>Hélène M., Lyon</cite><span class="label">Waist 69 cm · Underbust 76 cm · Séverine, size 24</span></footer>
+    </article>
+    <article class="rev rv d1" data-rv>
+      <blockquote>Six hours at a wedding, seated dinner included. I forgot about it until someone asked where it was from.</blockquote>
+      <footer><cite>Ingrid S., Copenhagen</cite><span class="label">Waist 82 cm · Underbust 88 cm · Colombe, size 28</span></footer>
+    </article>
+    <article class="rev rv d2" data-rv>
+      <blockquote>My first size was too ambitious. They exchanged it within the week, no questions, and included a note on lacing. It now closes to two fingers.</blockquote>
+      <footer><cite>Amara O., Amsterdam</cite><span class="label">Waist 94 cm · Underbust 97 cm · Maren, size 34</span></footer>
+    </article>
+  </div>
+</section>
+
+<section class="mtm dark wrap" id="styling" aria-labelledby="h-mtm">
+  <span class="stitch" aria-hidden="true" data-rv><svg viewBox="0 0 14 42"><path d="M1 1 13 13"/><path d="M13 1 1 13"/><path d="M1 15 13 27"/><path d="M13 15 1 27"/><path d="M1 29 13 41"/><path d="M13 29 1 41"/></svg></span>
+  <div class="grid">
+    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p5.jpg" alt="The Colombe corset in soft black satin, worn with a slip skirt under an open blazer" width="1200" height="1600" style="object-position:50% 30%"></figure>
+    <div class="txt rv d1" data-rv>
+      <span class="no">N°07</span>
+      <h2 id="h-mtm">Morning <em>to evening</em></h2>
+      <p class="body">One piece, three ways through the day. It asks for nothing special: what is already in the wardrobe will do.</p>
+      <ul>
+        <li><span>Over a shirt, with trousers</span><b>At nine</b></li>
+        <li><span>Under a blazer, buttoned once</span><b>At six</b></li>
+        <li><span>Alone, with a slip skirt</span><b>After dark</b></li>
+      </ul>
+      <a class="btn" href="#collection">Shop the collection</a>
+    </div>
+  </div>
+</section>
+
+<section class="news wrap" aria-labelledby="h-news">
+  <div class="grid">
+    <h2 id="h-news" class="rv" data-rv>Four letters a year.<br><em>Rarely more.</em></h2>
+    <form id="newsForm" novalidate class="rv d1" data-rv>
+      <label class="label" for="email">New colours and restocks, first</label>
+      <div class="row"><input id="email" type="email" autocomplete="email" placeholder="your@address" required aria-describedby="newsMsg"><button type="submit">Subscribe</button></div>
+      <p class="msg" id="newsMsg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site wrap">
+  <div class="fcols">
+    <div><h3 class="label">Shipping &amp; payment</h3><p>In stock and shipped within 24 hours. Two to four days within the EU, free over €120. Pay in three with Klarna, at no extra cost.</p></div>
+    <div><h3 class="label">The fit promise</h3><p>If the size is not right, the first exchange is free within 30 days. Laced and tried is fine. Returns within 30 days.</p></div>
+    <div><h3 class="label">Care</h3><p>Air after wearing. Spot clean, never wash. Store flat or hung by the laces. <a href="#craft">Seasoning your corset</a></p></div>
+    <div><h3 class="label">Contact</h3><p><a href="mailto:help@vesna.example">help@vesna.example</a><br>Live chat, Mon–Sat 9–20 CET<br>We answer within the day.</p></div>
+  </div>
+  <div class="fbase"><span class="wordmark" aria-hidden="true">Vesna</span><span class="label">© 2026 Vesna &nbsp;·&nbsp; Terms &nbsp;·&nbsp; Privacy</span></div>
+</footer>
+
+<a class="pill" href="../../index.html">← All directions</a>
+
+<script>
+/* ------------------------------------------------------------------
+   VIRTUAL TRY-ON CONFIG
+   Mode 1: set `endpoint` to a server proxy that holds the API key.
+           POST {person:<jpeg dataURL>, garment:<id>} -> {image:<dataURL>} | {error} (non-2xx)
+   Mode 2: leave `endpoint` empty. The site owner can paste an OpenAI key in the
+           "Developer" panel (kept in localStorage `vesna_openai_key`) and the
+           browser calls OpenAI /v1/images/edits directly. Demo use only.
+   `garmentBase` is the public, absolute location of the packshots g1…g6.jpg
+   (used by the proxy, and as a fallback here if the relative fetch fails).
+------------------------------------------------------------------- */
+var TRYON = {
+  endpoint: '',            // e.g. 'https://corset-tryon.vercel.app/api/tryon' — server proxy that holds the API key
+  model: 'gpt-image-1',
+  garmentBase: 'https://serhiitroinin.github.io/corset-atelier/assets/img/maison/'
+};
+window.TRYON = TRYON;
+
+(function(){
+  var root=document.documentElement, rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('js'); if(rm) root.classList.add('rm');
+  var $=function(id){return document.getElementById(id)};
+
+  /* lacing line: draws with scroll progress */
+  var nav=$('nav'), ticking=false;
+  function onScroll(){
+    var max=root.scrollHeight-window.innerHeight, p=max>0?Math.min(1,Math.max(0,window.scrollY/max)):1;
+    root.style.setProperty('--p', rm?1:(0.04+p*0.96).toFixed(4));
+    nav.classList.toggle('stuck', window.scrollY>10);
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll)}},{passive:true});
+  window.addEventListener('resize',onScroll); onScroll();
+
+  /* reveals */
+  var els=document.querySelectorAll('[data-rv]');
+  if('IntersectionObserver' in window && !rm){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){io.observe(el)});
+  } else { els.forEach(function(el){el.classList.add('in')}); }
+
+  /* mobile menu */
+  var burger=$('burger'), menu=$('menu');
+  function setMenu(open){menu.classList.toggle('open',open);burger.setAttribute('aria-expanded',open);burger.textContent=open?'Close':'Menu';document.body.style.overflow=open?'hidden':''}
+  burger.addEventListener('click',function(){setMenu(!menu.classList.contains('open'))});
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A')setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);burger.focus()}});
+
+  /* bag */
+  var count=0, bag=$('bag'), bagN=$('bagN');
+  document.querySelectorAll('.size').forEach(function(s){s.addEventListener('change',function(){s.classList.remove('need')})});
+  document.querySelectorAll('[data-add]').forEach(function(b){
+    b.setAttribute('data-label',b.textContent);
+    b.addEventListener('click',function(){
+      var wrap=b.closest('.buy'), s=wrap?wrap.querySelector('.size'):null;
+      clearTimeout(b._t);
+      if(s&&!s.value){
+        s.classList.add('need'); s.focus(); b.textContent='Choose a size';
+        b._t=setTimeout(function(){b.textContent=b.getAttribute('data-label')},1800); return;
+      }
+      count++; bagN.textContent=count; bag.setAttribute('aria-label','Bag, '+count+(count===1?' item':' items'));
+      bag.classList.add('bump'); b.textContent=b.getAttribute('data-add')+(s?', '+s.value+'″':'')+' — added';
+      setTimeout(function(){bag.classList.remove('bump')},600);
+      b._t=setTimeout(function(){b.textContent=b.getAttribute('data-label')},2200);
+    });
+  });
+
+  /* rail */
+  var rail=$('rail'), bar=$('railBar');
+  function step(dir){var c=rail.querySelector('.card');var w=c?c.getBoundingClientRect().width+24:320;rail.scrollBy({left:dir*w,behavior:rm?'auto':'smooth'})}
+  $('prev').addEventListener('click',function(){step(-1)}); $('next').addEventListener('click',function(){step(1)});
+  function railBar(){var max=rail.scrollWidth-rail.clientWidth, vis=rail.clientWidth/rail.scrollWidth;bar.style.width=(Math.min(1,vis)*100)+'%';bar.style.transform='translateX('+((max>0?rail.scrollLeft/max:0)*(1/Math.min(1,vis)-1)*100)+'%)'}
+  rail.addEventListener('scroll',railBar,{passive:true}); window.addEventListener('resize',railBar); railBar();
+  var drag=null;
+  rail.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&!e.target.closest('button,a,select'))drag={x:e.clientX,s:rail.scrollLeft}});
+  window.addEventListener('pointermove',function(e){if(drag){rail.style.scrollSnapType='none';rail.scrollLeft=drag.s-(e.clientX-drag.x)}});
+  window.addEventListener('pointerup',function(){if(drag){drag=null;rail.style.scrollSnapType=''}});
+
+  /* fit finder */
+  var RED={everyday:2,shaping:3,occasion:4};
+  var NOTES={everyday:'A gentle two inches. Comfortable from morning to dinner.',shaping:'Three inches. A defined waist, worn for some hours at a time.',occasion:'Four inches. For the evening, the photograph, the entrance.'};
+  var form=$('fitForm'), waistI=$('waist'), underI=$('under'), err=$('fitErr'), res=$('res');
+  form.querySelectorAll('input[name=goal]').forEach(function(r){r.addEventListener('change',function(){$('goalNote').textContent=NOTES[r.value]})});
+
+  var half=30, anim;
+  function drawGap(h){
+    half=h; var xl=100-h, xr=100+h, d='', e='';
+    for(var i=0;i<8;i++){var y=25+i*30;
+      if(i<7) d+='M'+xl+' '+y+'L'+xr+' '+(y+30)+'M'+xr+' '+y+'L'+xl+' '+(y+30);
+      e+='<circle cx="'+xl+'" cy="'+y+'" r="2.6"/><circle cx="'+xr+'" cy="'+y+'" r="2.6"/>';}
+    $('lc').setAttribute('d',d); $('ey').innerHTML=e;
+    $('pL').setAttribute('width',Math.max(1,xl+9-14)); $('pR').setAttribute('x',xr-9); $('pR').setAttribute('width',Math.max(1,186-(xr-9)));
+  }
+  function tweenGap(to){
+    cancelAnimationFrame(anim); if(rm){drawGap(to);return}
+    var from=half, t0=null, dur=1800;
+    (function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/dur);k=1-Math.pow(1-k,4);drawGap(from+(to-from)*k);if(k<1)anim=requestAnimationFrame(f)})(performance.now());
+  }
+  drawGap(30);
+
+  function half5(n){return Math.round(n*2)/2}
+  function fail(input,msg){err.textContent=msg;input.setAttribute('aria-invalid','true');input.focus();return false}
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault(); err.textContent='';
+    waistI.removeAttribute('aria-invalid'); underI.removeAttribute('aria-invalid');
+    var w=parseFloat(waistI.value), u=parseFloat(underI.value), goal=form.elements.goal.value;
+    if(!isFinite(w)) return fail(waistI,'Please enter your natural waist in centimetres.');
+    if(w<50||w>130) return fail(waistI,'A natural waist is usually between 50 and 130 cm. Please check the tape.');
+    if(!isFinite(u)) return fail(underI,'Please enter your underbust in centimetres.');
+    if(u<55||u>150) return fail(underI,'An underbust is usually between 55 and 150 cm. Please check the tape.');
+    if(u<w-25||u>w+45) return fail(underI,'These two measurements are unusually far apart. Please measure once more.');
+
+    var red=RED[goal], wi=w/2.54, raw=Math.floor((wi-red)/2)*2, size=Math.min(40,Math.max(18,raw)), off=raw!==size;
+    var diff=u-w, sil;
+    if(goal==='occasion') sil=diff<4?'Longline overbust':'Overbust';
+    else if(goal==='shaping') sil=(w>=80||diff<6)?'Longline':'Underbust';
+    else sil=diff>=12?'Waspie':'Underbust';
+    var seasoned=Math.max(0,(wi-red-size)*2.54), first=seasoned+red*2.54*0.5;
+    if(off){seasoned=first=NaN}
+
+    $('rSize').textContent=size; $('rSize').className=''; $('rUnit').hidden=false;
+    $('rSil').textContent=sil;
+    $('rRed').textContent=off?'To be advised':(red+'" · '+half5(w-size*2.54-seasoned)+' cm');
+    $('rGap1').textContent=off?'—':('about '+half5(first)+' cm');
+    $('rGap2').textContent=off?'—':(seasoned<1?'nearly closed':'about '+half5(seasoned)+' cm, parallel');
+    $('rNote').textContent=off
+      ?'Your measurements sit outside our range of 18 to 40. Size '+size+' is the nearest, and it may not be right. Write to us before you order and we will tell you honestly.'
+      :'A '+Math.round(wi)+'" waist, less '+red+' for '+goal+' wear, rounded down to an even size. Size '+size+' is now selected on every piece. Under 8 cm of gap at first lacing is correct.';
+    var link=$('rLink'); link.hidden=false; link.textContent=off?'Ask us about sizing':'View the '+sil.toLowerCase(); link.setAttribute('href',off?'mailto:help@vesna.example?subject=Sizing':'#collection');
+    if(!off) document.querySelectorAll('.size').forEach(function(s){s.value=String(size);s.classList.remove('need')});
+    $('gapCap').textContent=off?'Back lacing':'≈ '+half5(first)+' cm at first';
+    tweenGap(off?30:10+Math.min(12,first)*3);
+    res.classList.remove('updated'); void res.offsetWidth; res.classList.add('updated');
+    if(window.innerWidth<900) res.scrollIntoView({behavior:rm?'auto':'smooth',block:'center'});
+  });
+  [waistI,underI].forEach(function(i){i.addEventListener('input',function(){i.removeAttribute('aria-invalid');err.textContent=''})});
+
+  /* virtual try-on */
+  var GARMENTS={
+    severine:{name:'Séverine',file:'g1.jpg',desc:'the Séverine, an underbust corset in bone-coloured (warm off-white) herringbone cotton coutil; it sits beneath the bust and ends at the high hip, with a steel busk closure down the centre front and lacing at the back'},
+    aurele:{name:'Aurèle',file:'g2.jpg',desc:'the Aurèle, a strapless overbust corset in ivory satin with a softly curved straight neckline; it ends at the high hip, with a steel busk closure down the centre front and lacing at the back'},
+    odile:{name:'Odile',file:'g3.jpg',desc:'the Odile, a waspie (short waist cincher) in sand-coloured matte cotton sateen; it covers only the waist, from below the ribs to the top of the hip, with a short steel busk closure at the front and lacing at the back'},
+    maren:{name:'Maren',file:'g4.jpg',desc:'the Maren, a longline underbust corset in caramel cotton coutil; it sits beneath the bust and extends smoothly over the hip, with a long steel busk closure down the centre front and lacing at the back'},
+    colombe:{name:'Colombe',file:'g5.jpg',desc:'the Colombe, a strapless overbust corset in soft black satin with a sweetheart neckline; it ends at the high hip, with a steel busk closure down the centre front and lacing at the back'},
+    isaure:{name:'Isaure',file:'g6.jpg',desc:'the Isaure, an overbust corset in champagne satin with a square neckline and two narrow shoulder straps; it ends at the high hip, with a steel busk closure down the centre front and lacing at the back'}
+  };
+  var GARMENT_REL='../../assets/img/maison/', KEY_NAME='vesna_openai_key';
+  function tryPrompt(g){
+    return 'Virtual try-on. Image 1 is a photo of a person. Image 2 is a product photo of a corset: '+g.desc+'. Produce a photorealistic photo of the SAME person from image 1 wearing the corset from image 2 as a top layer. Keep the person\'s face, hair, skin tone, body shape, pose, the rest of their outfit, the background and the lighting unchanged. Reproduce the corset\'s exact colour, fabric, neckline, length and closure; fit it naturally to their body with realistic folds and shadows. Do not slim or reshape the body. Do not add text or logos. Tasteful, fully clothed fashion e-commerce image.';
+  }
+  function getKey(){try{return (window.localStorage.getItem(KEY_NAME)||'').trim()}catch(e){return ''}}
+  function blobToDataURL(blob){
+    return new Promise(function(ok,no){var fr=new FileReader();fr.onload=function(){ok(fr.result)};fr.onerror=function(){no(new Error('Your photo could not be read.'))};fr.readAsDataURL(blob)});
+  }
+  function fetchGarment(g,signal){
+    function get(u){return fetch(u,{signal:signal}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.blob()})}
+    return get(GARMENT_REL+g.file).catch(function(e){
+      if(e&&e.name==='AbortError')throw e;
+      return get(TRYON.garmentBase+g.file);
+    }).catch(function(e){
+      if(e&&e.name==='AbortError')throw e;
+      throw new Error('The product image for '+g.name+' could not be loaded.');
+    });
+  }
+  /* The one place requests are made. Resolves with a data URL of the generated image. */
+  function runTryOn(personBlob, garmentId){
+    var g=GARMENTS[garmentId], ctrl=new AbortController(), p;
+    var timer=setTimeout(function(){ctrl.abort()},120000), key=getKey();
+    if(!g) p=Promise.reject(new Error('Please choose a piece.'));
+    else if(TRYON.endpoint){
+      p=blobToDataURL(personBlob).then(function(person){
+        return fetch(TRYON.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({person:person,garment:garmentId}),signal:ctrl.signal});
+      }).then(function(r){
+        return r.json().catch(function(){return {}}).then(function(j){
+          if(!r.ok||!j||!j.image) throw new Error((j&&j.error)||('The try-on service answered '+r.status+'. Please try again.'));
+          return j.image;
+        });
+      });
+    } else if(key){
+      p=fetchGarment(g,ctrl.signal).then(function(garmentBlob){
+        var fd=new FormData();
+        fd.append('model',TRYON.model);
+        fd.append('image[]',personBlob,'person.jpg');
+        fd.append('image[]',garmentBlob,'garment.jpg');
+        fd.append('prompt',tryPrompt(g));
+        fd.append('size','1024x1536');
+        fd.append('quality','medium');
+        fd.append('input_fidelity','high');
+        return fetch('https://api.openai.com/v1/images/edits',{method:'POST',headers:{'Authorization':'Bearer '+key},body:fd,signal:ctrl.signal});
+      }).then(function(r){
+        return r.json().catch(function(){return {}}).then(function(j){
+          if(!r.ok) throw new Error((j&&j.error&&j.error.message)||('OpenAI answered '+r.status+'.'));
+          var b64=j&&j.data&&j.data[0]&&j.data[0].b64_json;
+          if(!b64) throw new Error('No image came back. Please try again.');
+          return 'data:image/png;base64,'+b64;
+        });
+      });
+    } else {
+      var nc=new Error('The try-on service is not connected yet.'); nc.code='NOT_CONNECTED'; p=Promise.reject(nc);
+    }
+    return p.then(function(url){clearTimeout(timer);return url},function(e){
+      clearTimeout(timer);
+      if(e&&e.name==='AbortError') e=new Error('That took longer than two minutes, so we stopped. Please try again.');
+      else if(e instanceof TypeError) e=new Error('We could not reach the try-on service. Check your connection and try again.');
+      throw e;
+    });
+  }
+
+  var tf=$('tryForm'), fileI=$('tryFile'), drop=$('drop'), go=$('tryGo'), consent=$('tryConsent'), tErr=$('tryErr'), retry=$('tryRetry'),
+      dev=$('tryDev'), keyI=$('tryKey'), keyMsg=$('tryKeyMsg'), stage=$('stage'), stImg=$('stImg'), stTag=$('stTag'), tog=$('stTog'), stAdd=$('stAdd');
+  var person=null, personURL='', resultURL='', busy=false, showOrig=false, tick=null, lastId='';
+  var WAIT=['Reading your photo…','Taking the line of the waist…','Lacing…','Settling the cloth…','Finishing…'];
+
+  function piece(){var r=tf.querySelector('input[name=piece]:checked');return r?r.value:''}
+  function ready(){
+    var miss=[]; if(!person)miss.push('a photo'); if(!piece())miss.push('a piece'); if(!consent.checked)miss.push('your confirmation');
+    go.disabled=busy||miss.length>0;
+    $('tryNeed').textContent=busy?'':(miss.length?'Still needed: '+miss.join(', '):'Ready');
+  }
+  function showErr(msg,canRetry){tErr.textContent=msg||'';retry.hidden=!(msg&&canRetry)}
+  function setStage(st){
+    stage.setAttribute('data-state',st);
+    $('stIdle').hidden=st!=='idle'; $('stLoad').hidden=st!=='load';
+    stImg.hidden=st==='idle'; stImg.classList.toggle('dim',st==='load');
+    stTag.hidden=st!=='done'; $('stAct').hidden=st!=='done';
+  }
+  function view(orig){
+    showOrig=orig; stImg.src=orig?personURL:resultURL;
+    tog.setAttribute('aria-pressed',orig?'true':'false'); tog.textContent=orig?'View preview':'View original';
+    stTag.textContent=orig?'Your photo':'AI preview';
+  }
+
+  /* step 1: photo -> canvas -> long side <= 1280 -> JPEG .9 */
+  function clearPhoto(){
+    if(personURL)URL.revokeObjectURL(personURL);
+    person=null; personURL=''; fileI.value=''; $('dropPrev').hidden=true; $('dropEmpty').hidden=false;
+    if(!busy)setStage('idle'); ready();
+  }
+  function loadPhoto(file){
+    if(!file)return; showErr('');
+    if(file.type&&!/^image\//.test(file.type)){showErr('That file is not an image. Please choose a photo.');return}
+    var src=URL.createObjectURL(file), im=new Image();
+    im.onload=function(){
+      var w=im.naturalWidth, h=im.naturalHeight, k=Math.min(1,1280/Math.max(w,h));
+      var c=document.createElement('canvas'); c.width=Math.max(1,Math.round(w*k)); c.height=Math.max(1,Math.round(h*k));
+      var cx=c.getContext('2d'); cx.fillStyle='#fff'; cx.fillRect(0,0,c.width,c.height); cx.drawImage(im,0,0,c.width,c.height);
+      URL.revokeObjectURL(src);
+      c.toBlob(function(b){
+        if(!b){showErr('Your photo could not be prepared. Please try another.');return}
+        if(personURL)URL.revokeObjectURL(personURL);
+        person=b; personURL=URL.createObjectURL(b);
+        $('tryThumb').src=personURL; $('tryMeta').textContent=c.width+' × '+c.height+' · '+Math.max(1,Math.round(b.size/1024))+' KB';
+        $('dropEmpty').hidden=true; $('dropPrev').hidden=false;
+        if(!busy)setStage('idle'); ready();
+      },'image/jpeg',0.9);
+    };
+    im.onerror=function(){URL.revokeObjectURL(src);showErr('That photo could not be opened. A JPEG or PNG works best.')};
+    im.src=src;
+  }
+  $('tryPick').addEventListener('click',function(){fileI.removeAttribute('capture');fileI.click()});
+  $('tryCam').addEventListener('click',function(){fileI.setAttribute('capture','user');fileI.click()});
+  fileI.addEventListener('change',function(){loadPhoto(fileI.files&&fileI.files[0])});
+  $('tryRemove').addEventListener('click',function(){clearPhoto();$('tryPick').focus()});
+  ['dragenter','dragover'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add('over')})});
+  ['dragleave','dragend','drop'].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove('over')})});
+  drop.addEventListener('drop',function(e){var f=e.dataTransfer&&e.dataTransfer.files;if(f&&f[0])loadPhoto(f[0])});
+
+  /* step 2: piece, also preselected from the product links */
+  tf.querySelectorAll('input[name=piece]').forEach(function(r){r.addEventListener('change',ready)});
+  document.querySelectorAll('[data-try]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var r=tf.querySelector('input[name=piece][value="'+a.getAttribute('data-try')+'"]');
+      if(r){r.checked=true;ready()}
+    });
+  });
+  consent.addEventListener('change',ready);
+
+  /* developer key (mode 2 only) */
+  if(TRYON.endpoint) dev.hidden=true;
+  if(getKey()) keyMsg.textContent='A key is saved in this browser.';
+  function saveKey(){
+    var v=keyI.value.trim(); if(!v){keyI.focus();return}
+    try{window.localStorage.setItem(KEY_NAME,v);keyI.value='';keyMsg.textContent='Key saved in this browser. Requests go directly to OpenAI.';showErr('')}
+    catch(e){keyMsg.textContent='This browser would not store the key.'}
+  }
+  $('tryKeySave').addEventListener('click',saveKey);
+  keyI.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();saveKey()}});
+  $('tryKeyForget').addEventListener('click',function(){
+    try{window.localStorage.removeItem(KEY_NAME)}catch(e){}
+    keyI.value=''; keyMsg.textContent='Key forgotten.';
+  });
+
+  /* step 3 */
+  function startWait(){
+    var t0=Date.now(), i=0; $('stText').textContent=WAIT[0]; $('stTime').textContent='Usually 20 to 60 seconds';
+    clearInterval(tick);
+    tick=setInterval(function(){
+      var sec=Math.round((Date.now()-t0)/1000), n=Math.min(WAIT.length-1,Math.floor(sec/9));
+      if(n!==i){i=n;$('stText').textContent=WAIT[n]}
+      $('stTime').textContent=sec+' s · usually 20 to 60';
+    },1000);
+  }
+  function start(){
+    if(busy)return; ready(); if(go.disabled)return;
+    showErr('');
+    var id=piece(), g=GARMENTS[id];
+    if(!TRYON.endpoint&&!getKey()){
+      showErr('The try-on service is not connected yet. If this is your site, add a server endpoint or enter an OpenAI API key below.',false);
+      dev.hidden=false; dev.open=true; return;
+    }
+    busy=true; lastId=id; ready(); go.textContent='Working…';
+    $('stPiece').textContent=g.name; stImg.src=personURL; stImg.alt=''; setStage('load'); startWait();
+    if(window.innerWidth<900) stage.scrollIntoView({behavior:rm?'auto':'smooth',block:'center'});
+    runTryOn(person,id).then(function(url){
+      resultURL=url; stImg.alt='AI preview of you wearing the '+g.name; view(false); setStage('done');
+      var dl=$('stDl'); dl.href=url; dl.setAttribute('download','vesna-'+id+'-preview.png');
+      stAdd.setAttribute('data-add',g.name); stAdd.setAttribute('data-label','Add '+g.name+' to bag'); stAdd.textContent='Add '+g.name+' to bag';
+      var ps=$('sz-'+id); if(ps&&ps.value)$('sz-stage').value=ps.value;
+    },function(e){
+      setStage('idle'); showErr((e&&e.message)||'Something went wrong. Please try again.',true);
+      if(window.innerWidth<900) tErr.scrollIntoView({behavior:rm?'auto':'smooth',block:'center'});
+    }).then(function(){busy=false;clearInterval(tick);go.textContent='Try it on';ready()});
+  }
+  tf.addEventListener('submit',function(ev){ev.preventDefault();start()});
+  retry.addEventListener('click',start);
+  tog.addEventListener('click',function(){view(!showOrig)});
+  stImg.addEventListener('pointerdown',function(e){if(stage.getAttribute('data-state')==='done'){e.preventDefault();view(true)}});
+  ['pointerup','pointerleave','pointercancel'].forEach(function(t){stImg.addEventListener(t,function(){if(stage.getAttribute('data-state')==='done'&&showOrig)view(false)})});
+  stImg.addEventListener('contextmenu',function(e){if(showOrig)e.preventDefault()});
+  $('stAgain').addEventListener('click',function(){
+    setStage('idle'); var r=tf.querySelector('input[name=piece]:checked')||tf.querySelector('input[name=piece]');
+    $('tryPieces').scrollIntoView({behavior:rm?'auto':'smooth',block:'center'}); if(r)r.focus({preventScroll:true});
+  });
+  ready();
+
+  /* newsletter */
+  $('newsForm').addEventListener('submit',function(ev){
+    ev.preventDefault(); var em=$('email'), msg=$('newsMsg');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())){msg.textContent='That address does not look complete.';em.setAttribute('aria-invalid','true');em.focus();return}
+    em.removeAttribute('aria-invalid'); msg.textContent='Thank you. The next letter will find you.'; em.value='';
+  });
+})();
+</script>
+</body>
+</html>
