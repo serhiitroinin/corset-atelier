@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesna Blanc — Bridal corsetry, made to measure</title>
+<meta name="description" content="Vesna Blanc: bridal corset bodices and separates, made to measure over twelve unhurried weeks. Book a fitting or begin your measurements.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#fffdf9; --cream:#f6f0e7; --champ:#e9dfd2; --gold:#b99b6b; --gold-d:#7a5f35; --ink:#2e2a27; --mute:#5e564e;
+  --disp:"Italiana","Gilda Display",Georgia,serif; --body:"Mulish","Montserrat",system-ui,sans-serif;
+  --tape:22px; --hair:1px solid rgba(185,155,107,.55);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{margin:0;background:var(--white);color:var(--ink);font:300 16px/1.75 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--disp);font-weight:400;margin:0;letter-spacing:.01em;line-height:1.08}
+h2{font-size:clamp(2.1rem,4.6vw,3.6rem)}
+p{margin:0 0 1em}
+:focus-visible{outline:2px solid var(--gold-d);outline-offset:3px}
+.label{font:500 .69rem/1.4 var(--body);letter-spacing:.32em;text-transform:uppercase;color:var(--gold-d)}
+.wrap{width:min(1240px,100% - 48px);margin-inline:auto}
+section{padding:clamp(72px,10vw,140px) 0}
+.head{text-align:center;max-width:680px;margin:0 auto clamp(40px,6vw,72px)}
+.head .label{display:block;margin-bottom:18px}
+.head p{color:var(--mute);margin:22px auto 0;max-width:52ch}
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;margin:26px auto 0;color:var(--gold)}
+.orn::before,.orn::after{content:"";height:1px;width:min(90px,18vw);background:currentColor;opacity:.7}
+.orn i{width:7px;height:7px;border:1px solid currentColor;transform:rotate(45deg)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 34px;border:1px solid var(--ink);background:var(--ink);color:var(--white);font:500 .72rem/1 var(--body);letter-spacing:.28em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .4s,color .4s,border-color .4s}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--gold)}
+.btn.ghost:hover{background:var(--champ)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ph{background:linear-gradient(160deg,var(--cream),var(--champ));overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s cubic-bezier(.2,.6,.2,1)}
+html.js .rv{opacity:0;transform:translateY(22px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.6,.2,1);transition-delay:var(--d,0s)}
+html.js .rv.in{opacity:1;transform:none}
+
+/* ——— measuring tape progress ——— */
+.tape{position:fixed;inset:0 0 auto 0;height:var(--tape);z-index:60;background:var(--white);border-bottom:var(--hair);pointer-events:none}
+.tape-band{position:absolute;inset:0;overflow:hidden;clip-path:inset(0 100% 0 0);
+  background:
+   linear-gradient(90deg,var(--ink) 1px,transparent 1px) 0 100%/100px 13px repeat-x,
+   linear-gradient(90deg,var(--ink) 1px,transparent 1px) 0 100%/50px 9px repeat-x,
+   linear-gradient(90deg,rgba(46,42,39,.7) 1px,transparent 1px) 0 100%/10px 5px repeat-x,
+   linear-gradient(#f3e6c8,#ead9b4)}
+.tape-band span{position:absolute;top:1px;font:600 9px/1 var(--body);letter-spacing:.05em;color:var(--ink);transform:translateX(4px)}
+.tape-tip{position:absolute;top:0;left:0;width:5px;height:var(--tape);margin-left:-5px;background:linear-gradient(90deg,#d8c08f,#a88754);box-shadow:1px 0 0 rgba(46,42,39,.25)}
+.tape-tag{position:absolute;top:calc(var(--tape) + 5px);left:0;padding:4px 8px;background:var(--ink);color:var(--white);font:500 9px/1 var(--body);letter-spacing:.18em;white-space:nowrap;opacity:0;transition:opacity .4s}
+.tape-tag.on{opacity:1}
+
+/* ——— nav ——— */
+.nav{position:sticky;top:var(--tape);z-index:50;background:rgba(255,253,249,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:var(--hair)}
+.nav-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:78px}
+.nav ul{display:flex;gap:clamp(18px,2.6vw,40px);list-style:none;margin:0;padding:0;align-items:center}
+.nav ul.r{justify-content:flex-end}
+.nav a,.bag{font:500 .68rem/1 var(--body);letter-spacing:.26em;text-transform:uppercase;text-decoration:none;color:var(--ink);padding:8px 0;background:none;border:0;cursor:pointer;position:relative}
+.nav li a::after{content:"";position:absolute;left:0;right:.26em;bottom:2px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .5s}
+.nav li a:hover::after{transform:scaleX(1)}
+.brand{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;padding:8px 0}
+.brand svg{width:30px;height:30px}
+.brand b{font:400 1.5rem/1 var(--disp);letter-spacing:.34em;text-transform:uppercase;margin-right:-.34em}
+.bag span{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:6px;border:1px solid var(--gold);border-radius:50%;font-size:.62rem;letter-spacing:0;transition:background .4s,color .4s}
+.bag span.bump{background:var(--ink);color:var(--white)}
+.burger{display:none;width:44px;height:44px;background:none;border:0;cursor:pointer;padding:0;justify-self:start}
+.burger i{display:block;width:24px;height:1px;background:var(--ink);margin:6px 0;transition:transform .4s}
+.burger[aria-expanded=true] i:first-child{transform:translateY(3.5px) rotate(45deg)}
+.burger[aria-expanded=true] i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+.m-only{display:none}
+@media(max-width:900px){
+  .burger{display:block}.m-only{display:block;justify-self:end}
+  .nav-in{min-height:66px}
+  .nav ul{display:none}
+  .nav.open ul{display:flex;flex-direction:column;gap:0;grid-column:1/-1;text-align:center}
+  .nav.open ul.l{grid-row:2}.nav.open ul.r{grid-row:3;padding-bottom:18px}
+  .nav.open li{width:100%;border-top:var(--hair)}
+  .nav.open li a,.nav.open li .bag{display:block;width:100%;padding:18px 0}
+  .nav.open li.bag-li{display:none}
+}
+
+/* ——— hero ——— */
+.hero{padding:clamp(40px,6vw,80px) 0 clamp(64px,8vw,110px);text-align:center;background:radial-gradient(120% 70% at 50% 0,var(--white) 40%,var(--cream))}
+.hero h1{font-size:clamp(2.7rem,7.4vw,6.4rem);max-width:13ch;margin:18px auto 0}
+.hero h1 em{font-style:normal;color:var(--gold-d)}
+.hero-grid{display:grid;grid-template-columns:1fr minmax(260px,430px) 1fr;gap:clamp(24px,4vw,64px);align-items:center;margin-top:clamp(36px,5vw,60px)}
+.arch{aspect-ratio:3/4;border-radius:999px 999px 0 0;position:relative}
+.arch-frame{position:relative;padding:12px;border:var(--hair);border-radius:999px 999px 0 0}
+.side{color:var(--mute);font-size:.95rem}
+.side.l{text-align:right}.side.r{text-align:left}
+.side .num{display:block;font:400 2.6rem/1 var(--disp);color:var(--ink);margin-bottom:8px}
+.side hr{border:0;border-top:var(--hair);width:60px;margin:22px 0}
+.side.l hr{margin-left:auto}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:clamp(32px,4vw,48px)}
+.hero-note{margin-top:20px;font-size:.85rem;color:var(--mute)}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr 1fr}.arch-frame{grid-column:1/-1;width:min(400px,100%);margin:auto}.side{text-align:center!important}.side hr{margin-inline:auto!important}}
+
+/* ——— lookbook ——— */
+.look{background:var(--cream);border-block:var(--hair)}
+.look-top{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+.look-ctrl{display:flex;gap:10px}
+.look-ctrl button{width:50px;height:50px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--ink);font-size:1.05rem;cursor:pointer;transition:background .4s,color .4s}
+.look-ctrl button:hover{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.rail{display:flex;gap:clamp(16px,2.4vw,32px);overflow-x:auto;scroll-snap-type:x mandatory;padding:0 max(24px,calc((100vw - 1240px)/2)) 24px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
+.rail figure{flex:0 0 clamp(250px,30vw,400px);margin:0;scroll-snap-align:center}
+.rail figure.wide{flex-basis:clamp(300px,46vw,620px)}
+.rail .ph{height:clamp(340px,40vw,530px)}
+.rail figure:hover img{transform:scale(1.04)}
+.rail figcaption{display:flex;justify-content:space-between;gap:12px;padding-top:14px;border-top:var(--hair);margin-top:14px;font-size:.88rem;color:var(--mute)}
+.rail figcaption b{font:400 1.2rem/1.2 var(--disp);color:var(--ink)}
+
+/* ——— products ——— */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(40px,5vw,72px) clamp(20px,3vw,44px)}
+.card{text-align:center;display:flex;flex-direction:column}
+.card .ph{aspect-ratio:3/4;position:relative}
+.card:nth-child(3n+2) .ph{border-radius:999px 999px 0 0}
+.card:hover .ph img{transform:scale(1.045)}
+.lead{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(255,253,249,.94);padding:7px 14px;font:500 .62rem/1 var(--body);letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+.card h3{font-size:1.65rem;margin-top:22px}
+.card .spec{font-size:.84rem;color:var(--mute);margin:8px auto 0;max-width:32ch;flex:1}
+.card .row{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:16px;padding-top:16px;border-top:var(--hair)}
+.price{font:400 1.2rem/1 var(--disp)}
+.price small{font:500 .62rem/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d);margin-right:6px}
+.add{background:none;border:0;border-bottom:1px solid var(--ink);padding:6px 0;font:500 .66rem/1 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--ink);cursor:pointer;transition:color .3s,border-color .3s}
+.add:hover{color:var(--gold-d);border-color:var(--gold)}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.card:nth-child(3n+2) .ph{border-radius:0}.card:nth-child(4n+2) .ph,.card:nth-child(4n+3) .ph{border-radius:999px 999px 0 0}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.card .ph{border-radius:0!important}}
+
+/* ——— silhouettes ——— */
+.sil{background:var(--cream);border-block:var(--hair)}
+.sil-grid{display:grid;grid-template-columns:repeat(4,1fr);border:var(--hair);background:var(--white)}
+.sil-grid a{display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(28px,4vw,52px) 18px;text-decoration:none;border-right:var(--hair);transition:background .5s}
+.sil-grid a:last-child{border-right:0}
+.sil-grid a:hover{background:var(--cream)}
+.sil-grid svg{width:84px;height:120px;stroke:var(--ink);fill:none;stroke-width:1;transition:transform .7s}
+.sil-grid svg .g{stroke:var(--gold)}
+.sil-grid a:hover svg{transform:translateY(-6px)}
+.sil-grid h3{font-size:1.5rem;margin:18px 0 6px}
+.sil-grid p{font-size:.84rem;color:var(--mute);margin:0;max-width:24ch}
+@media(max-width:820px){.sil-grid{grid-template-columns:1fr 1fr}.sil-grid a:nth-child(2){border-right:0}.sil-grid a:nth-child(-n+2){border-bottom:var(--hair)}}
+
+/* ——— fit finder ——— */
+.fit-box{position:relative;border:1px solid var(--gold);padding:clamp(8px,1vw,12px);background:var(--white)}
+.fit-in{border:var(--hair);display:grid;grid-template-columns:1fr 1fr}
+.fit-form{padding:clamp(28px,4.5vw,64px);border-right:var(--hair)}
+.fit-res{padding:clamp(28px,4.5vw,64px);background:var(--cream);display:flex;flex-direction:column;justify-content:center;text-align:center;min-height:460px}
+.field{margin-bottom:28px}
+.field label,.field legend{display:block;font:500 .68rem/1.4 var(--body);letter-spacing:.26em;text-transform:uppercase;color:var(--gold-d);margin-bottom:6px;padding:0}
+.field .hint{font-size:.82rem;color:var(--mute);margin:0 0 6px}
+.cm{display:flex;align-items:baseline;border-bottom:1px solid var(--ink)}
+.cm input{flex:1;min-width:0;border:0;background:none;font:400 2.2rem/1.3 var(--disp);color:var(--ink);padding:4px 0;outline-offset:6px}
+.cm input::placeholder{color:#b9aea0}
+.cm span{font:500 .7rem var(--body);letter-spacing:.24em;color:var(--mute)}
+input[type=number]{-moz-appearance:textfield;appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+fieldset{border:0;padding:0;margin:0}
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:var(--hair);margin-top:8px}
+.goals label{margin:0;position:relative;cursor:pointer;text-align:center;border-right:var(--hair)}
+.goals label:last-child{border-right:0}
+.goals input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+.goals span{display:block;padding:15px 4px;font:500 .64rem/1.3 var(--body);letter-spacing:.18em;color:var(--ink);transition:background .4s,color .4s}
+.goals input:checked+span{background:var(--ink);color:var(--white)}
+.goals input:focus-visible+span{outline:2px solid var(--gold-d);outline-offset:2px}
+.err{color:#8c2f22;font-size:.88rem;min-height:1.6em;margin:-8px 0 12px;font-weight:400}
+.res-size{font:400 clamp(4.5rem,9vw,7.5rem)/1 var(--disp)}
+.res-size sup{font-size:.3em;letter-spacing:.2em;vertical-align:top;position:relative;top:.7em;margin-left:6px;color:var(--gold-d);font-family:var(--body);font-weight:500}
+.res-dl{display:grid;grid-template-columns:1fr 1fr;border-top:var(--hair);border-bottom:var(--hair);margin:26px 0 20px}
+.res-dl div{padding:18px 8px}
+.res-dl div+div{border-left:var(--hair)}
+.res-dl dt{font:500 .62rem/1 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-d);margin-bottom:8px}
+.res-dl dd{margin:0;font:400 1.45rem/1.15 var(--disp)}
+.gauge{position:relative;height:34px;margin:6px 0 4px;border-bottom:1px solid var(--ink);background:linear-gradient(90deg,var(--ink) 1px,transparent 1px) 0 100%/calc(100%/11) 10px repeat-x,linear-gradient(90deg,rgba(46,42,39,.6) 1px,transparent 1px) 0 100%/calc(100%/22) 5px repeat-x}
+.gauge i{position:absolute;bottom:0;width:1px;height:30px;background:var(--gold-d);left:0;transition:left 1.2s cubic-bezier(.2,.7,.2,1)}
+.gauge i::before{content:"";position:absolute;top:-4px;left:-4px;width:9px;height:9px;background:var(--gold);transform:rotate(45deg)}
+.gauge-l{display:flex;justify-content:space-between;font:500 .62rem var(--body);letter-spacing:.14em;color:var(--mute)}
+.res-note{font-size:.88rem;color:var(--mute);margin:18px auto 0;max-width:42ch}
+.res-empty svg{width:70px;height:70px;margin:0 auto 20px;display:block}
+.res-empty h3{font-size:1.9rem;margin-bottom:12px}
+.res-empty p{color:var(--mute);max-width:36ch;margin-inline:auto}
+@media(max-width:860px){.fit-in{grid-template-columns:1fr}.fit-form{border-right:0;border-bottom:var(--hair)}.fit-res{min-height:0}}
+
+/* ——— timeline ——— */
+.time{background:linear-gradient(var(--white),var(--cream))}
+.steps{position:relative;display:grid;grid-template-columns:repeat(5,1fr);list-style:none;margin:0;padding:0;counter-reset:s}
+.steps::before,.steps::after{content:"";position:absolute;top:9px;left:10%;right:10%;height:1px;background:var(--champ)}
+.steps::after{background:var(--gold-d);transform-origin:left;transform:scaleX(0);transition:transform 2.6s cubic-bezier(.3,.6,.2,1) .3s}
+.steps.in::after{transform:scaleX(1)}
+.steps li{position:relative;text-align:center;padding:0 12px}
+.steps li::before{content:"";display:block;width:19px;height:19px;margin:0 auto 26px;border:1px solid var(--gold-d);background:var(--white);transform:rotate(45deg);position:relative;z-index:1;box-shadow:inset 0 0 0 4px var(--white),inset 0 0 0 10px var(--gold)}
+.steps h3{font-size:1.5rem;margin:8px 0 8px}
+.steps p{font-size:.86rem;color:var(--mute);margin:0 auto;max-width:24ch}
+@media(max-width:860px){
+  .steps{grid-template-columns:1fr;gap:34px;max-width:420px;margin:auto}
+  .steps::before,.steps::after{top:0;bottom:0;left:9px;right:auto;width:1px;height:auto;transform-origin:top}
+  .steps::after{transform:scaleY(0)}.steps.in::after{transform:scaleY(1)}
+  .steps li{text-align:left;padding:0 0 0 48px}.steps li::before{position:absolute;left:0;top:2px;margin:0}.steps p{margin:0}
+}
+
+/* ——— craft ——— */
+.craft-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,96px);align-items:center}
+.craft-img{position:relative;padding:12px;border:var(--hair)}
+.craft-img .ph{aspect-ratio:3/2}
+.craft h2{margin:16px 0 22px}
+.craft ol{list-style:none;padding:0;margin:30px 0 0;counter-reset:c}
+.craft li{counter-increment:c;display:grid;grid-template-columns:54px 1fr;padding:18px 0;border-top:var(--hair)}
+.craft li:last-child{border-bottom:var(--hair)}
+.craft li::before{content:"0" counter(c);font:400 1.3rem/1.3 var(--disp);color:var(--gold-d)}
+.craft li b{font:400 1.25rem/1.3 var(--disp);display:block}
+.craft li span{font-size:.88rem;color:var(--mute)}
+@media(max-width:860px){.craft-grid{grid-template-columns:1fr}}
+
+/* ——— reviews ——— */
+.rev{background:var(--cream);border-block:var(--hair)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px)}
+.rev blockquote{margin:0;background:var(--white);border:var(--hair);padding:clamp(28px,3vw,44px);text-align:center;display:flex;flex-direction:column}
+.rev blockquote::before{content:"“";font:400 3.6rem/.6 var(--disp);color:var(--gold);display:block;margin-top:14px}
+.rev blockquote p{font:400 1.28rem/1.5 var(--disp);flex:1}
+.rev cite{font-style:normal;font:500 .7rem var(--body);letter-spacing:.24em;text-transform:uppercase}
+.rev .meas{margin-top:14px;padding-top:14px;border-top:var(--hair);font-size:.8rem;color:var(--mute);line-height:1.7}
+@media(max-width:900px){.rev-grid{grid-template-columns:1fr;max-width:560px;margin:auto}}
+
+/* ——— booking ——— */
+.book-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(32px,6vw,90px);align-items:center}
+.book-img{border-radius:999px 999px 0 0;aspect-ratio:3/4;max-width:460px;width:100%;margin:auto}
+.book h2{margin:16px 0 20px}
+.book-form{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px;margin-top:32px}
+.book-form .full{grid-column:1/-1}
+.f label{display:block;font:500 .66rem/1.4 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-d);margin-bottom:4px}
+.f input,.f select{width:100%;border:0;border-bottom:1px solid var(--ink);border-radius:0;background:transparent;padding:10px 0;font:300 1rem var(--body);color:var(--ink);min-height:44px}
+.ok{grid-column:1/-1;border:1px solid var(--gold);padding:18px 22px;background:var(--cream);font-size:.95rem;margin:0}
+.ok:empty{display:none}
+@media(max-width:860px){.book-grid{grid-template-columns:1fr}.book-img{max-width:320px}}
+@media(max-width:480px){.book-form{grid-template-columns:1fr}}
+
+/* ——— newsletter + footer ——— */
+.news{background:var(--ink);color:var(--white);text-align:center;padding:clamp(64px,8vw,110px) 0}
+.news .label{color:#d9c196}
+.news h2{margin:16px 0 14px}
+.news p{color:#d8d0c6;max-width:46ch;margin-inline:auto}
+.news form{display:flex;max-width:520px;margin:30px auto 0;border-bottom:1px solid #d9c196}
+.news input{flex:1;min-width:0;background:none;border:0;color:var(--white);font:300 1rem var(--body);padding:14px 0}
+.news input::placeholder{color:#b8aea2}
+.news button{background:none;border:0;color:#d9c196;font:500 .7rem var(--body);letter-spacing:.26em;text-transform:uppercase;cursor:pointer;padding:0 0 0 18px}
+.news button:hover{color:var(--white)}
+.news :focus-visible{outline-color:#d9c196}
+.news .msg{min-height:1.6em;margin-top:16px;font-size:.9rem;color:#d9c196}
+footer{padding:clamp(56px,7vw,90px) 0 110px;text-align:center}
+.foot-crest svg{width:54px;height:54px;margin:0 auto 34px;display:block}
+.foot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:left;border-top:var(--hair);padding-top:44px}
+.foot-grid h3{font:500 .68rem var(--body);letter-spacing:.28em;text-transform:uppercase;color:var(--gold-d);margin-bottom:12px}
+.foot-grid p{font-size:.88rem;color:var(--mute);margin:0}
+.foot-grid a{text-underline-offset:4px;text-decoration-color:var(--gold)}
+.legal{margin-top:54px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.foot-grid{grid-template-columns:1fr;text-align:center}}
+
+/* ——— fixed pills ——— */
+.pill{position:fixed;left:16px;bottom:16px;z-index:70;background:rgba(255,253,249,.95);border:1px solid var(--gold);border-radius:999px;padding:10px 16px;font:500 .62rem/1 var(--body);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink);transition:background .4s}
+.pill:hover{background:var(--champ)}
+.pill.book-pill{left:auto;right:16px;background:var(--ink);color:var(--white);border-color:var(--ink);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .5s,transform .5s,background .4s,color .4s}
+.pill.book-pill.on{opacity:1;transform:none;pointer-events:auto}
+.pill.book-pill:hover{background:var(--white);color:var(--ink)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
+  html.js .rv{opacity:1;transform:none}
+  .steps::after{transform:none!important}
+  .ph img{transform:none!important}
+}
+html,body{overflow-x:clip;max-width:100%}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="crest" viewBox="0 0 60 60">
+    <circle cx="30" cy="30" r="28.5" fill="none" stroke="#b99b6b" stroke-width=".8"/>
+    <circle cx="30" cy="30" r="25" fill="none" stroke="#b99b6b" stroke-width=".5" stroke-dasharray="1 2.2"/>
+    <path d="M17 17h9M34 17h9" stroke="#2e2a27" stroke-width=".9"/>
+    <path d="M21.5 17 30 44 38.5 17" fill="none" stroke="#2e2a27" stroke-width="1"/>
+    <path d="M19.4 17 30 47.5" fill="none" stroke="#2e2a27" stroke-width="2.2"/>
+    <path d="M26.5 25.5l7 3.5m-7 0 7-3.5M28 32l4 2.6m-4 0 4-2.6" stroke="#b99b6b" stroke-width=".8"/>
+    <path d="M30 6.5l1.6 2.4L30 11.3l-1.6-2.4zM30 50.2l1.2 1.8-1.2 1.8-1.2-1.8z" fill="#b99b6b"/>
+  </symbol>
+</svg>
+
+<div class="tape" aria-hidden="true">
+  <div class="tape-band" id="tapeBand"></div>
+  <div class="tape-tip" id="tapeTip"></div>
+  <div class="tape-tag" id="tapeTag">0 cm</div>
+</div>
+
+<header class="nav" id="nav">
+  <nav class="wrap nav-in" aria-label="Primary">
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="nav" aria-label="Menu"><i></i><i></i></button>
+    <ul class="l">
+      <li><a href="#bodices">Corsets</a></li>
+      <li><a href="#book">Made to Measure</a></li>
+    </ul>
+    <a class="brand" href="#top" aria-label="Vesna Blanc — home">
+      <svg aria-hidden="true"><use href="#crest"/></svg><b>Vesna</b>
+    </a>
+    <ul class="r">
+      <li><a href="#fit">Fit Guide</a></li>
+      <li><a href="#craft">Journal</a></li>
+      <li class="bag-li"><button class="bag" type="button" aria-label="Bag">Bag <span class="count">0</span></button></li>
+    </ul>
+    <button class="bag m-only" type="button" aria-label="Bag">Bag <span class="count">0</span></button>
+  </nav>
+  <span class="sr" aria-live="polite" id="bagLive"></span>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <span class="label rv">Blanc · The bridal atelier · By appointment</span>
+    <h1 class="rv" style="--d:.1s">Laced once, <em>remembered</em> always</h1>
+    <div class="orn rv" style="--d:.2s"><i></i></div>
+    <div class="hero-grid">
+      <div class="side l rv" style="--d:.3s">
+        <span class="num">12 weeks</span>
+        From first conversation to final lacing. Unhurried, and entirely yours.
+        <hr>
+        <span class="label">Bodices from €420</span>
+      </div>
+      <div class="arch-frame rv" style="--d:.15s">
+        <div class="arch ph"><img src="../../assets/img/bridal/hero.jpg" alt="Bride in an ivory silk corset bodice with a softly draped skirt, standing in window light" width="900" height="1200" fetchpriority="high"></div>
+      </div>
+      <div class="side r rv" style="--d:.4s">
+        <span class="num">3 fittings</span>
+        A cotton toile is cut to your measurements before silk is ever touched.
+        <hr>
+        <span class="label">In atelier or by video</span>
+      </div>
+    </div>
+    <div class="hero-cta rv">
+      <a class="btn" href="#book">Book a fitting</a>
+      <a class="btn ghost" href="#fit">Begin your measurements</a>
+    </div>
+    <p class="hero-note rv">There is no obligation in a first appointment. Only tea, fabric, and time.</p>
+  </div>
+</section>
+
+<section class="look" aria-labelledby="lookH">
+  <div class="wrap look-top">
+    <div><span class="label">Lookbook · Collection IV</span><h2 id="lookH" style="margin-top:14px">First Light</h2></div>
+    <div class="look-ctrl"><button type="button" id="prev" aria-label="Previous look">←</button><button type="button" id="next" aria-label="Next look">→</button></div>
+  </div>
+  <div class="rail" id="rail" tabindex="0" aria-label="Lookbook, scroll horizontally">
+    <figure><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p1.jpg" alt="Model in an overbust bridal corset, three-quarter view" width="900" height="1200" style="object-position:50% 20%"></div><figcaption><b>Look 01</b><span>Aurelie bodice, silk duchesse</span></figcaption></figure>
+    <figure class="wide"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/detail.jpg" alt="Close view of hand-stitched lacing eyelets on ivory silk" width="1200" height="800"></div><figcaption><b>Look 02</b><span>Hand-worked eyelets, silk ribbon lacing</span></figcaption></figure>
+    <figure><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p3.jpg" alt="Model wearing a longline bridal corset with separates" width="900" height="1200" style="object-position:50% 30%"></div><figcaption><b>Look 03</b><span>Odile longline with column skirt</span></figcaption></figure>
+    <figure><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p2.jpg" alt="Ivory corset displayed on a dress form in the atelier" width="900" height="1200"></div><figcaption><b>Look 04</b><span>Séverine, on the form</span></figcaption></figure>
+    <figure class="wide"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/hero.jpg" alt="Cropped view of a bride's corseted waist and draped skirt" width="900" height="1200" style="object-position:50% 62%"></div><figcaption><b>Look 05</b><span>The waist, in window light</span></figcaption></figure>
+    <figure><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p1.jpg" alt="Detail of a bridal corset neckline and shoulder" width="900" height="1200" style="object-position:50% 0;transform-origin:top"></div><figcaption><b>Look 06</b><span>Sweetheart line, hand-rolled edge</span></figcaption></figure>
+  </div>
+</section>
+
+<section id="bodices" aria-labelledby="bodH">
+  <div class="wrap">
+    <div class="head rv"><span class="label">Bodices &amp; separates</span><h2 id="bodH">The bridal collection</h2><p>Each piece is cut to order. Prices begin at the figures shown and settle once your fabric and finishing are chosen together. A deposit of thirty percent reserves your place.</p><div class="orn"><i></i></div></div>
+    <div class="grid">
+      <article class="card rv"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p1.jpg" alt="Aurelie overbust bridal bodice in ivory silk duchesse" width="900" height="1200"><span class="lead">Lead time · 10 weeks</span></div><h3>Aurelie Bodice</h3><p class="spec">Overbust · 26 spiral steel bones · silk duchesse over cotton coutil · 3" reduction</p><div class="row"><span class="price"><small>from</small>€1,480</span><button class="add" type="button" data-name="Aurelie Bodice">Add to bag</button></div></article>
+      <article class="card rv" style="--d:.12s"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p2.jpg" alt="Séverine couture corset on a dress form" width="900" height="1200"><span class="lead">Lead time · 12 weeks</span></div><h3>Séverine Couture</h3><p class="spec">Overbust · 32 bones · Chantilly lace appliqué, hand-placed · silk-covered busk · 4" reduction</p><div class="row"><span class="price"><small>from</small>€2,400</span><button class="add" type="button" data-name="Séverine Couture">Add to bag</button></div></article>
+      <article class="card rv" style="--d:.24s"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p3.jpg" alt="Odile longline bridal corset worn with a column skirt" width="900" height="1200"><span class="lead">Lead time · 10 weeks</span></div><h3>Odile Longline</h3><p class="spec">Longline · 28 spiral &amp; flat steel bones · silk crêpe · smooth over the hip · 3" reduction</p><div class="row"><span class="price"><small>from</small>€1,120</span><button class="add" type="button" data-name="Odile Longline">Add to bag</button></div></article>
+      <article class="card rv"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/hero.jpg" alt="Liane underbust corset worn over a draped silk slip" width="900" height="1200" style="object-position:50% 55%"><span class="lead">Lead time · 8 weeks</span></div><h3>Liane Underbust</h3><p class="spec">Underbust · 20 spiral steel bones · silk satin · worn over a slip or beneath a gown · 3" reduction</p><div class="row"><span class="price"><small>from</small>€760</span><button class="add" type="button" data-name="Liane Underbust">Add to bag</button></div></article>
+      <article class="card rv" style="--d:.12s"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p3.jpg" alt="Perle waspie cinching the waist of a bridal separate" width="900" height="1200" style="object-position:50% 58%"><span class="lead">Lead time · 6 weeks</span></div><h3>Perle Waspie</h3><p class="spec">Waspie · 16 spiral steel bones · silk faille · freshwater pearl closure · 2" reduction</p><div class="row"><span class="price"><small>from</small>€420</span><button class="add" type="button" data-name="Perle Waspie">Add to bag</button></div></article>
+      <article class="card rv" style="--d:.24s"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/p1.jpg" alt="Isaure corset top with detachable organza sleeves" width="900" height="1200" style="object-position:50% 12%"><span class="lead">Lead time · 9 weeks</span></div><h3>Isaure &amp; Sleeves</h3><p class="spec">Overbust separate · 24 bones · silk mikado · detachable organza sleeves · 3" reduction</p><div class="row"><span class="price"><small>from</small>€1,690</span><button class="add" type="button" data-name="Isaure and Sleeves">Add to bag</button></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="sil" aria-labelledby="silH">
+  <div class="wrap">
+    <div class="head rv"><span class="label">Shop by silhouette</span><h2 id="silH">Four lines, one waist</h2></div>
+    <div class="sil-grid rv">
+      <a href="#bodices"><svg viewBox="0 0 84 120" aria-hidden="true"><path d="M16 22c8-8 18-6 26 2 8-8 18-10 26-2-2 22-10 36-12 50 1 14 6 26 10 36-16 8-32 8-48 0 4-10 9-22 10-36-2-14-10-28-12-50z"/><path class="g" d="M42 24v88M30 34l-2 78M54 34l2 78"/></svg><h3>Overbust</h3><p>The complete bodice. Shapes and supports; no bra beneath.</p></a>
+      <a href="#bodices"><svg viewBox="0 0 84 120" aria-hidden="true"><path d="M18 40c8 5 16 6 24 2 8 4 16 3 24-2-2 12-8 22-9 32 1 12 5 22 9 30-16 8-32 8-48 0 4-8 8-18 9-30-1-10-7-20-9-32z"/><path class="g" d="M42 42v66M31 46l-2 60M53 46l2 60"/></svg><h3>Underbust</h3><p>Begins beneath the bust. Layers over a slip or under a gown.</p></a>
+      <a href="#bodices"><svg viewBox="0 0 84 120" aria-hidden="true"><path d="M22 54c7 4 13 5 20 2 7 3 13 2 20-2-2 8-5 13-5 19 0 7 3 12 6 18-14 6-28 6-42 0 3-6 6-11 6-18 0-6-3-11-5-19z"/><path class="g" d="M42 56v40M32 58l-1 36M52 58l1 36"/></svg><h3>Waspie</h3><p>A narrow cinch at the waist alone. The lightest way to be laced.</p></a>
+      <a href="#bodices"><svg viewBox="0 0 84 120" aria-hidden="true"><path d="M17 12c8-7 17-5 25 2 8-7 17-9 25-2-2 20-10 32-11 46 1 18 8 34 13 52-18 8-36 8-54 0 5-18 12-34 13-52-1-14-9-26-11-46z"/><path class="g" d="M42 14v102M30 24l-5 90M54 24l5 90"/></svg><h3>Longline</h3><p>Extends over the hip for an unbroken line beneath bias silk.</p></a>
+    </div>
+  </div>
+</section>
+
+<section id="fit" aria-labelledby="fitH">
+  <div class="wrap">
+    <div class="head rv"><span class="label">The fit finder</span><h2 id="fitH">Begin your measurements</h2><p>Two numbers and an intention. We will suggest a size, a silhouette, and how your lacing should look on the first day. Everything is confirmed by hand at your fitting.</p><div class="orn"><i></i></div></div>
+    <div class="fit-box rv"><div class="fit-in">
+      <form class="fit-form" id="fitForm" novalidate>
+        <div class="field"><label for="waist">Natural waist</label><p class="hint" id="wh">The narrowest point, usually just above the navel. Tape level, snug, not tight.</p><div class="cm"><input id="waist" name="waist" type="number" inputmode="decimal" min="50" max="130" step="0.5" placeholder="68" aria-describedby="wh fitErr" required><span>CM</span></div></div>
+        <div class="field"><label for="under">Underbust</label><p class="hint" id="uh">Around the ribcage, directly beneath the bust.</p><div class="cm"><input id="under" name="under" type="number" inputmode="decimal" min="55" max="140" step="0.5" placeholder="76" aria-describedby="uh fitErr" required><span>CM</span></div></div>
+        <fieldset class="field"><legend>Your intention</legend>
+          <div class="goals">
+            <label><input type="radio" name="goal" value="everyday" checked><span>EVERYDAY</span></label>
+            <label><input type="radio" name="goal" value="shaping"><span>SHAPING</span></label>
+            <label><input type="radio" name="goal" value="occasion"><span>OCCASION</span></label>
+          </div>
+        </fieldset>
+        <p class="err" id="fitErr" role="alert"></p>
+        <button class="btn" type="submit" style="width:100%">Find my size</button>
+      </form>
+      <div class="fit-res" id="fitRes" aria-live="polite">
+        <div class="res-empty">
+          <svg aria-hidden="true"><use href="#crest"/></svg>
+          <h3>Your size will appear here</h3>
+          <p>A soft tape, a mirror, and a quiet minute are all you need. Breathe normally as you measure.</p>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<section class="time" aria-labelledby="timeH">
+  <div class="wrap">
+    <div class="head rv"><span class="label">The fitting journey</span><h2 id="timeH">Twelve weeks, gently kept</h2><p>You will always know what comes next. We hold the calendar, so that you need not.</p></div>
+    <ol class="steps" id="steps">
+      <li class="rv"><span class="label">12 weeks before</span><h3>Begin</h3><p>Send your measurements and wedding date. We reserve your place in the workroom.</p></li>
+      <li class="rv" style="--d:.15s"><span class="label">Week 11</span><h3>Consultation</h3><p>An hour together with silks, laces and sketches. Your design is agreed and drawn.</p></li>
+      <li class="rv" style="--d:.3s"><span class="label">Week 7</span><h3>Toile fitting</h3><p>A cotton toile, boned and laced on you. Every seam is pinned and corrected.</p></li>
+      <li class="rv" style="--d:.45s"><span class="label">Week 2</span><h3>Final lacing</h3><p>Your finished bodice. We teach whoever will lace you on the morning itself.</p></li>
+      <li class="rv" style="--d:.6s"><span class="label">The day</span><h3>Yours</h3><p>Pressed, boxed in tissue, with spare laces and our telephone number, just in case.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="craft" id="craft" aria-labelledby="craftH">
+  <div class="wrap craft-grid">
+    <div class="craft-img rv"><div class="ph"><img loading="lazy" src="../../assets/img/bridal/detail.jpg" alt="Macro view of hand stitching along a boning channel in ivory silk" width="1200" height="800"></div></div>
+    <div class="rv" style="--d:.15s">
+      <span class="label">Journal · Inside the bodice</span>
+      <h2 id="craftH">What holds you, quietly</h2>
+      <p style="color:var(--mute)">A bridal corset must do its work for fourteen hours and never once be noticed. This is how ours are made.</p>
+      <ol>
+        <li><div><b>Spiral and flat steel bones</b><span>Spiral steel flexes with you at the sides; flat steel keeps the back lacing perfectly straight.</span></div></li>
+        <li><div><b>A silk-covered busk</b><span>The front closure, wrapped by hand so no metal shows against the silk.</span></div></li>
+        <li><div><b>The waist tape</b><span>A hidden band of herringbone twill that takes the strain, so seams never do.</span></div></li>
+        <li><div><b>Three layers</b><span>Silk outside, English cotton coutil for strength, fine cotton lawn against the skin.</span></div></li>
+        <li><div><b>Hand finishing</b><span>Bound edges, flossed bone ends, and your initials and date stitched inside in pale blue.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rev" aria-labelledby="revH">
+  <div class="wrap">
+    <div class="head rv"><span class="label">In their words</span><h2 id="revH">Vesna brides</h2></div>
+    <div class="rev-grid">
+      <blockquote class="rv"><p>I danced until two and forgot I was wearing it. My mother learned to lace it in ten minutes at the final fitting.</p><cite>Marguerite L. · Aurelie Bodice</cite><div class="meas">Waist 71 cm · Underbust 79 cm<br>Bought size 24 · laced to a 4 cm gap</div></blockquote>
+      <blockquote class="rv" style="--d:.15s"><p>I was anxious about ordering from abroad. The toile arrived, we fitted by video, and the finished piece was exact.</p><cite>Ingrid S. · Odile Longline</cite><div class="meas">Waist 84 cm · Underbust 90 cm<br>Bought size 30 · laced to a 5 cm gap</div></blockquote>
+      <blockquote class="rv" style="--d:.3s"><p>Nothing about it felt like a costume. It felt like my own posture, only calmer. I have worn the waspie twice since.</p><cite>Naoko F. · Perle Waspie</cite><div class="meas">Waist 64 cm · Underbust 72 cm<br>Bought size 22 · laced to a 3 cm gap</div></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="book" id="book" aria-labelledby="bookH">
+  <div class="wrap book-grid">
+    <div class="book-img ph rv"><img loading="lazy" src="../../assets/img/bridal/p2.jpg" alt="A bridal corset in progress on the atelier dress form" width="900" height="1200" style="object-position:50% 35%"></div>
+    <div class="rv" style="--d:.15s">
+      <span class="label">Made to measure · By appointment</span>
+      <h2 id="bookH">Book a fitting</h2>
+      <p style="color:var(--mute);max-width:52ch">Tell us when you would like to come, and when you will be married. We reply within two working days with a confirmed hour. Appointments are private, ninety minutes, and you are welcome to bring two guests.</p>
+      <form class="book-form" id="bookForm">
+        <div class="f"><label for="bn">Your name</label><input id="bn" name="name" type="text" autocomplete="name" required></div>
+        <div class="f"><label for="be">Email</label><input id="be" name="email" type="email" autocomplete="email" required></div>
+        <div class="f"><label for="bw">Wedding or occasion date</label><input id="bw" name="wedding" type="date"></div>
+        <div class="f"><label for="bd">Preferred fitting date</label><input id="bd" name="date" type="date" required></div>
+        <div class="f"><label for="bt">Time of day</label><select id="bt" name="time"><option>Morning</option><option>Afternoon</option><option>Early evening</option></select></div>
+        <div class="f"><label for="bp">Where</label><select id="bp" name="place"><option>In the atelier</option><option>By video, with a posted toile</option></select></div>
+        <div class="full"><button class="btn" type="submit">Request my fitting</button></div>
+        <p class="ok" id="bookOk" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="news" aria-labelledby="newsH">
+  <div class="wrap">
+    <span class="label">Letters from the workroom</span>
+    <h2 id="newsH">A quiet note, once a month</h2>
+    <p>New silks as they arrive, appointment openings, and considered advice on being laced for a long day.</p>
+    <form id="newsForm"><label class="sr" for="ne">Email address</label><input id="ne" type="email" placeholder="Your email address" autocomplete="email" required><button type="submit">Subscribe</button></form>
+    <p class="msg" id="newsMsg" role="status"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-crest"><svg aria-hidden="true"><use href="#crest"/></svg></div>
+    <div class="foot-grid">
+      <div><h3>Shipping</h3><p>Insured, signed-for courier worldwide, boxed flat in acid-free tissue. Complimentary within the EU.</p></div>
+      <div><h3>Our fit promise</h3><p>If your bodice does not fit as it should, we alter or remake it at no cost. Ready-cut pieces exchange freely within 30 days.</p></div>
+      <div><h3>Care</h3><p>Air after wearing, never wash. Store flat, loosely laced. We offer a specialist clean and re-press after the day.</p></div>
+      <div><h3>Contact</h3><p><a href="mailto:blanc@vesna.example">blanc@vesna.example</a><br>Tuesday to Saturday, 10 – 18h<br>Visits by appointment only</p></div>
+    </div>
+    <p class="legal">© 2026 Vesna Corset House · Blanc bridal atelier</p>
+  </div>
+</footer>
+
+<a class="pill" href="../../index.html">← All directions</a>
+<a class="pill book-pill" id="bookPill" href="#book">Book a fitting</a>
+
+<script>
+(function(){
+  var d=document, $=function(s){return d.querySelector(s)};
+  d.documentElement.classList.add('js');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* measuring tape: 10px = 1cm, extends with scroll */
+  var band=$('#tapeBand'), tip=$('#tapeTip'), tag=$('#tapeTag'), bookPill=$('#bookPill'), bookSec=$('#book');
+  for(var n=1;n<=40;n++){var s=d.createElement('span');s.textContent=n*10;s.style.left=(n*100)+'px';band.appendChild(s);}
+  var ticking=false;
+  function tape(){
+    ticking=false;
+    var max=d.documentElement.scrollHeight-window.innerHeight, y=window.scrollY||0;
+    var p=max>0?Math.min(1,Math.max(0,y/max)):0, W=window.innerWidth, x=p*W;
+    band.style.clipPath='inset(0 '+(100-p*100).toFixed(2)+'% 0 0)';
+    tip.style.transform='translateX('+x.toFixed(1)+'px)';
+    tag.textContent=(x/10).toFixed(1)+' cm';
+    tag.style.transform='translateX('+Math.max(0,Math.min(W-70,x-64)).toFixed(1)+'px)';
+    tag.classList.toggle('on',p>0.01);
+    var r=bookSec.getBoundingClientRect();
+    bookPill.classList.toggle('on',y>500&&(r.top>window.innerHeight||r.bottom<0));
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(tape);}}
+  window.addEventListener('scroll',req,{passive:true});
+  window.addEventListener('resize',req);
+  tape();
+
+  /* mobile nav */
+  var nav=$('#nav'), burger=$('#burger');
+  burger.addEventListener('click',function(){
+    var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o);
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.closest('li a')){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');}
+  });
+
+  /* bag */
+  var count=0, counts=d.querySelectorAll('.count'), live=$('#bagLive');
+  d.querySelectorAll('.add').forEach(function(b){
+    b.addEventListener('click',function(){
+      count++;
+      counts.forEach(function(c){c.textContent=count;c.classList.add('bump');setTimeout(function(){c.classList.remove('bump');},700);});
+      live.textContent=b.dataset.name+' added. Bag holds '+count+(count===1?' piece.':' pieces.');
+      var t=b.textContent;b.textContent='Added';setTimeout(function(){b.textContent=t;},1400);
+    });
+  });
+
+  /* lookbook */
+  var rail=$('#rail');
+  function slide(dir){rail.scrollBy({left:dir*Math.min(rail.clientWidth*.8,460),behavior:reduce?'auto':'smooth'});}
+  $('#prev').addEventListener('click',function(){slide(-1);});
+  $('#next').addEventListener('click',function(){slide(1);});
+
+  /* reveals */
+  var rv=d.querySelectorAll('.rv, #steps');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(function(el){io.observe(el);});
+  } else rv.forEach(function(el){el.classList.add('in');});
+
+  /* fit finder */
+  var form=$('#fitForm'), err=$('#fitErr'), res=$('#fitRes');
+  var RED={everyday:2,shaping:4,occasion:3};
+  function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var wEl=form.waist, uEl=form.under, w=parseFloat(wEl.value), u=parseFloat(uEl.value), goal=form.goal.value;
+    wEl.removeAttribute('aria-invalid');uEl.removeAttribute('aria-invalid');err.textContent='';
+    if(!isFinite(w)||w<50||w>130){err.textContent='Please enter your natural waist in centimetres, between 50 and 130.';wEl.setAttribute('aria-invalid','true');wEl.focus();return;}
+    if(!isFinite(u)||u<55||u>140){err.textContent='Please enter your underbust in centimetres, between 55 and 140.';uEl.setAttribute('aria-invalid','true');uEl.focus();return;}
+    if(u<w-12){err.textContent='Your underbust reads much smaller than your waist. Could you check both once more?';uEl.setAttribute('aria-invalid','true');uEl.focus();return;}
+    var wi=w/2.54, red=RED[goal], raw=Math.floor((wi-red)/2)*2, size=Math.min(40,Math.max(18,raw)), bespoke=raw<18||raw>40;
+    var spring=u-w, sil, why;
+    if(goal==='occasion'){sil=spring>=14?'Overbust':'Longline';why=spring>=14?'A full bodice will carry the day without a bra beneath.':'A longline keeps an unbroken line beneath a gown.';}
+    else if(goal==='shaping'){sil=spring>=10?'Underbust':'Longline';why=spring>=10?'Your ribcage-to-waist curve suits an underbust beautifully.':'A longer line distributes shaping gently over the hip.';}
+    else{sil=spring>=8?'Underbust':'Waspie';why=spring>=8?'Comfortable for long wear, and easy beneath separates.':'A light cinch is the kindest place to begin.';}
+    var first=Math.max(2.5,(wi-red/2-size)*2.54), settled=Math.max(2,(wi-red-size)*2.54+2);
+    var pos=((size-18)/22*100).toFixed(1);
+    res.innerHTML='<div><span class="label">Your recommended size</span>'+
+      '<div class="res-size">'+size+'<sup>IN</sup></div>'+
+      '<div class="gauge" aria-hidden="true"><i id="gMark"></i></div><div class="gauge-l" aria-hidden="true"><span>18</span><span>24</span><span>30</span><span>36</span><span>40</span></div>'+
+      '<dl class="res-dl"><div><dt>Silhouette</dt><dd>'+sil+'</dd></div><div><dt>Lacing gap</dt><dd>'+first.toFixed(0)+' cm, easing to '+settled.toFixed(0)+'</dd></div></dl>'+
+      '<p class="res-note">Your waist of '+esc(w)+' cm is '+wi.toFixed(1)+'″. For '+goal+' wear we allow a '+red+'″ reduction. '+why+' The gap at the back should be parallel, like two rails.'+
+      (bespoke?' <strong>Your measurements fall outside our standard block, so we would cut yours entirely to measure.</strong>':'')+'</p>'+
+      '<p style="margin:22px 0 0"><a class="btn ghost" href="#book">Confirm at a fitting</a></p></div>';
+    var m=d.getElementById('gMark');
+    requestAnimationFrame(function(){requestAnimationFrame(function(){m.style.left=pos+'%';});});
+  });
+
+  /* booking + newsletter */
+  var bd=$('#bd');try{bd.min=new Date().toISOString().slice(0,10);}catch(_){}
+  $('#bookForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=e.target, when=f.date.value?new Date(f.date.value+'T12:00').toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'}):'your chosen date';
+    $('#bookOk').textContent='Thank you, '+f.name.value.trim().split(' ')[0]+'. We have noted '+when+', '+f.time.value.toLowerCase()+'. A confirmed hour will reach you within two working days.';
+    f.querySelector('button').textContent='Request received';
+  });
+  $('#newsForm').addEventListener('submit',function(e){
+    e.preventDefault();$('#newsMsg').textContent='Thank you. Your first letter will arrive with the new month.';e.target.reset();
+  });
+})();
+</script>
+</body>
+</html>

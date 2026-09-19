@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vesna — Pattern Room. Engineering for the body.</title>
+<meta name="description" content="Vesna drafts steel-boned corsets to the millimetre. Made to measure first. Specifications published, tolerances stated.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f5f1e8;--navy:#1c2b4a;--red:#c8402f;--redt:#b23526;--grid:#9aa3b2;--mute:#566077;--white:#fff;
+--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--sans:"Space Grotesk",system-ui,sans-serif;--w:1320px;--pad:24px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--navy);background-color:var(--paper);line-height:1.5;
+background-image:linear-gradient(rgba(154,163,178,.34) 1px,transparent 1px),linear-gradient(90deg,rgba(154,163,178,.34) 1px,transparent 1px),linear-gradient(rgba(154,163,178,.15) 1px,transparent 1px),linear-gradient(90deg,rgba(154,163,178,.15) 1px,transparent 1px);
+background-size:80px 80px,80px 80px,16px 16px,16px 16px;overflow-x:hidden}
+body::before{content:"";position:fixed;top:0;bottom:0;left:50%;transform:translateX(-50%);width:min(calc(var(--w) - 2*var(--pad)),calc(100% - 2*var(--pad)));pointer-events:none;z-index:0;
+background:repeating-linear-gradient(90deg,rgba(200,64,47,.16) 0 1px,transparent 1px calc(100%/12));border-right:1px solid rgba(200,64,47,.16)}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.w{max-width:var(--w);margin:0 auto;padding:0 var(--pad);position:relative;z-index:1}
+.m{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+.mute{color:var(--mute)}.redt{color:var(--redt)}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;line-height:1}
+h2{font-size:clamp(2rem,4.4vw,3.6rem)}
+section{padding:clamp(64px,9vw,128px) 0;position:relative}
+.sh{display:grid;grid-template-columns:repeat(12,1fr);gap:0 16px;align-items:end;border-bottom:1px solid var(--navy);padding-bottom:18px;margin-bottom:40px}
+.sh .no{grid-column:span 2;color:var(--redt)}.sh h2{grid-column:span 7}.sh .meta{grid-column:span 3;text-align:right;color:var(--mute)}
+.btn{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;padding:15px 22px;border:1px solid var(--navy);background:var(--navy);color:var(--paper);text-decoration:none;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+.btn.ghost{background:var(--paper);color:var(--navy)}.btn.ghost:hover{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+.btn i{font-style:normal;transition:transform .2s}.btn:hover i{transform:translateX(4px)}
+/* title strip + nav */
+.strip{background:var(--navy);color:var(--paper);position:relative;z-index:2}
+.strip .w{display:flex;justify-content:space-between;gap:16px;padding-top:7px;padding-bottom:7px;white-space:nowrap;overflow:hidden}
+.strip span:nth-child(n+3){display:none}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(245,241,232,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--navy)}
+nav.top .w{display:flex;align-items:center;justify-content:space-between;height:64px}
+.mark{font-size:1.5rem;font-weight:700;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:baseline;gap:10px}
+.mark small{font-family:var(--mono);font-size:.62rem;font-weight:400;letter-spacing:.1em;color:var(--mute)}
+.links{display:flex;gap:30px;list-style:none;padding:0}
+.links a{text-decoration:none;position:relative;padding:6px 0}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.links a:hover::after{transform:scaleX(1)}
+.navr{display:flex;gap:10px;align-items:center}
+.cart,.burger{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;background:none;border:1px solid var(--navy);color:var(--navy);padding:9px 12px;cursor:pointer}
+.cart b{display:inline-block;min-width:22px;margin-left:6px;padding:1px 4px;background:var(--navy);color:var(--paper);font-weight:500;text-align:center;transition:background .2s}
+.cart.bump b{background:var(--red)}
+.burger{display:none}
+/* hero */
+.hero{padding:clamp(36px,5vw,72px) 0 clamp(56px,7vw,96px)}
+.hero .w{display:grid;grid-template-columns:repeat(12,1fr);gap:32px 16px;align-items:end}
+.hl{grid-column:1/8;padding-bottom:12px}
+.hero h1{font-size:clamp(3rem,8.6vw,8rem);margin:22px 0 28px;line-height:.92}
+.hero h1 em{font-style:normal;color:var(--red)}
+.lede{max-width:34em;font-size:1.1rem;margin-bottom:32px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:44px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--navy);background:var(--paper);max-width:560px}
+.stats div{padding:14px 16px;border-right:1px solid var(--navy)}.stats div:last-child{border:0}
+.stats b{display:block;font-size:1.7rem;font-weight:500;letter-spacing:-.03em}
+.plate{grid-column:8/13;display:grid;grid-template-columns:1fr 38px;grid-template-rows:auto 34px}
+.fig{position:relative;aspect-ratio:3/4;background:var(--navy);border:1px solid var(--navy)}
+.fig svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fig svg *{vector-effect:non-scaling-stroke}
+.chip{position:absolute;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;padding:4px 8px;background:var(--paper);color:var(--navy);border:1px solid var(--navy);white-space:nowrap;transform:translateY(-50%)}
+.chip.r{background:var(--red);border-color:var(--red);color:#fff}
+.vdim{position:relative;border-top:1px solid var(--navy);border-bottom:1px solid var(--navy);margin-left:12px}
+.vdim::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--navy)}
+.vdim span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(90deg);white-space:nowrap;background:var(--paper);padding:0 8px}
+.hdim{display:flex;justify-content:space-between;align-items:center;padding-top:10px;color:var(--mute)}
+.crop::before,.crop::after{content:"";position:absolute;width:14px;height:14px;border:1px solid var(--red);pointer-events:none;z-index:2}
+.crop::before{top:-7px;left:-7px;border-right:0;border-bottom:0}.crop::after{bottom:-7px;right:-7px;border-left:0;border-top:0}
+/* exploded */
+.ex{background:var(--navy);color:var(--paper)}
+.ex .sh{border-color:var(--paper)}.ex .sh .no{color:#ff8d7c}.ex .sh .meta,.ex .mute{color:#b9c2d3}
+.exg{display:grid;grid-template-columns:repeat(12,1fr);gap:24px 16px}
+.stage{grid-column:1/10;align-self:start;border:1px solid rgba(245,241,232,.4);background:linear-gradient(rgba(245,241,232,.07) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(245,241,232,.07) 1px,transparent 1px) 0 0/24px 24px;overflow-x:auto}
+.stage svg{display:block;width:100%;min-width:660px;height:auto}
+.ly{cursor:pointer;outline:none}
+.ly .s{stroke:var(--paper);stroke-width:1.4;transition:stroke .2s}
+.ly.on .s,.ly:hover .s{stroke:#ff8d7c}
+.ly .tag{transition:opacity .2s}
+.ly.on circle,.ly:hover circle{fill:var(--red);stroke:var(--red)}
+.ctl{display:flex;align-items:center;gap:16px;padding:14px 18px;border-top:1px solid rgba(245,241,232,.4);min-width:660px}
+.ctl output{min-width:5ch;text-align:right}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:24px;background:transparent;cursor:ew-resize;min-width:0}
+input[type=range]::-webkit-slider-runnable-track{height:1px;background:currentColor}
+input[type=range]::-moz-range-track{height:1px;background:currentColor}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:24px;margin-top:-12px;background:var(--red);border:0;border-radius:0}
+input[type=range]::-moz-range-thumb{width:12px;height:24px;background:var(--red);border:0;border-radius:0}
+.bom{grid-column:10/13;list-style:none;padding:0;counter-reset:b;border-top:1px solid rgba(245,241,232,.4)}
+.bom li{counter-increment:b;display:grid;grid-template-columns:30px 1fr;padding:11px 0;border-bottom:1px solid rgba(245,241,232,.4);cursor:default;transition:background .2s,padding .2s}
+.bom li::before{content:"0" counter(b);font-family:var(--mono);font-size:.72rem;color:#ff8d7c;padding-top:3px}
+.bom li.on{background:rgba(245,241,232,.1);padding-left:8px}
+.bom b{font-weight:500;display:block}.bom span{grid-column:2;font-size:.86rem;color:#c9d0de}
+/* products */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--paper);border:1px solid var(--navy);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--navy)}
+.card header{display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--navy)}
+.ph{aspect-ratio:4/5;overflow:hidden;border-bottom:1px solid var(--navy);position:relative;background:#dfd9cb}
+.ph img{transition:transform .6s cubic-bezier(.2,.7,.2,1)}.card:hover .ph img{transform:scale(1.04)}
+.ph .chip{transform:none;left:10px;bottom:10px}
+.card h3{font-size:1.6rem;padding:14px 12px 4px}
+.card .line{padding:0 12px 12px;font-size:.92rem;color:var(--mute)}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.72rem}
+th,td{text-align:left;padding:7px 12px;border-top:1px solid rgba(28,43,74,.25);font-weight:400;vertical-align:top}
+th{color:var(--mute);text-transform:uppercase;letter-spacing:.06em;width:42%}
+.buy{display:flex;margin-top:auto;border-top:1px solid var(--navy)}
+.buy .p{flex:1;padding:13px 12px;font-size:1.25rem;font-weight:500}
+.buy button{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;border:0;border-left:1px solid var(--navy);background:var(--navy);color:var(--paper);padding:0 20px;cursor:pointer;transition:background .2s;min-width:128px}
+.buy button:hover,.buy button.ok{background:var(--red)}
+.card.mtm{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+.card.mtm header{border-color:rgba(245,241,232,.4)}.card.mtm .ph{background:none;border-color:rgba(245,241,232,.4);display:grid;place-items:center;padding:18px}
+.card.mtm .line{color:#c9d0de}.card.mtm .buy{border-color:rgba(245,241,232,.4)}
+.card.mtm .buy a{flex:0 0 auto;font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:grid;place-items:center;padding:0 20px;background:var(--red);color:#fff}
+/* silhouettes */
+.sil{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--navy);background:var(--paper)}
+.sil a{padding:20px;border-right:1px solid var(--navy);text-decoration:none;display:block;transition:background .25s,color .25s}
+.sil a:last-child{border:0}
+.sil a:hover{background:var(--navy);color:var(--paper)}
+.sil svg{width:100%;height:auto;max-height:230px;margin:10px 0 14px}
+.sil svg .o{fill:none;stroke:currentColor;stroke-width:1.5}.sil svg .d{stroke:var(--red);stroke-width:1;fill:none}.sil a:hover .d{stroke:#ff8d7c}
+.sil svg text{font-family:var(--mono);font-size:9px;fill:currentColor}
+.sil h3{font-size:1.5rem;margin-bottom:6px}.sil p{font-size:.9rem}
+.sil .m{display:flex;justify-content:space-between}
+/* fit finder */
+.fit .inst{background:var(--paper);border:1px solid var(--navy);box-shadow:8px 8px 0 var(--navy)}
+.inst>header{display:flex;justify-content:space-between;gap:12px;padding:10px 16px;background:var(--navy);color:var(--paper)}
+.led{display:inline-block;width:8px;height:8px;border-radius:50%;background:#5fd08a;margin-right:8px}
+.inst.bad .led{background:var(--red)}
+.tape{position:relative;height:96px;overflow:hidden;border-bottom:1px solid var(--navy);background:#fffdf6}
+.strp{position:absolute;left:50%;top:0;height:100%;width:1440px;transition:transform .45s cubic-bezier(.2,.8,.2,1);
+background:repeating-linear-gradient(90deg,var(--navy) 0 1px,transparent 1px 12px) 0 0/100% 12px no-repeat,repeating-linear-gradient(90deg,var(--navy) 0 1px,transparent 1px 60px) 0 0/100% 22px no-repeat,repeating-linear-gradient(90deg,var(--navy) 0 2px,transparent 2px 120px) 0 0/100% 34px no-repeat}
+.strp span{position:absolute;top:38px;transform:translateX(-50%);font-family:var(--mono);font-size:.72rem}
+.strp .redz{position:absolute;bottom:0;height:22px;background:repeating-linear-gradient(135deg,rgba(200,64,47,.85) 0 3px,transparent 3px 7px);border-left:2px solid var(--red);transition:left .45s,width .45s}
+.strp .redz em{position:absolute;left:6px;top:-16px;font:500 .62rem var(--mono);color:var(--redt);white-space:nowrap;letter-spacing:.06em}
+.needle{position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--red);transform:translateX(-1px)}
+.needle::after{content:"";position:absolute;top:0;left:-5px;border:6px solid transparent;border-top-color:var(--red)}
+.tape .m{position:absolute;right:10px;top:64px;color:var(--mute);background:#fffdf6;padding:0 4px}
+.body{display:grid;grid-template-columns:5fr 7fr}
+.inp{padding:24px;border-right:1px solid var(--navy);display:grid;gap:22px;align-content:start}
+.f label,.f legend{display:flex;justify-content:space-between;margin-bottom:8px;padding:0;width:100%}
+.f .row{display:flex;gap:14px;align-items:center}
+.f input[type=number],.news input{font-family:var(--mono);font-size:1.15rem;width:112px;padding:10px;border:1px solid var(--navy);background:#fff;color:var(--navy);border-radius:0}
+.f input[aria-invalid=true]{border-color:var(--red);box-shadow:inset 0 0 0 1px var(--red)}
+fieldset{border:0;padding:0;min-width:0}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--navy)}
+.seg label{display:block;margin:0;position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer;width:100%;height:100%}
+.seg span{display:block;padding:12px 6px;text-align:center;border-right:1px solid var(--navy);font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.seg label:last-child span{border:0}
+.seg input:checked+span{background:var(--navy);color:var(--paper)}
+.seg input:focus-visible+span{outline:2px solid var(--red);outline-offset:-4px}
+.err{color:var(--redt);min-height:1.4em;font-family:var(--mono);font-size:.76rem}
+.out{display:grid;grid-template-columns:1fr 1fr;outline:none}
+.cell{padding:20px 24px;border-bottom:1px solid var(--navy);border-right:1px solid var(--navy)}
+.cell:nth-child(even){border-right:0}
+.cell.big{grid-column:1/3;border-right:0;display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.cell .v{font-size:1.7rem;font-weight:500;letter-spacing:-.03em;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums}
+.cell.big .v{font-size:clamp(4rem,9vw,7rem);line-height:.85;color:var(--red)}
+.cell.big .v sub{font-size:.3em;vertical-align:baseline;color:var(--navy);font-family:var(--mono);letter-spacing:0;margin-left:6px}
+.cell small{display:block;font-family:var(--mono);font-size:.7rem;color:var(--mute);margin-top:4px}
+.note{grid-column:1/3;padding:16px 24px;font-size:.92rem;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+/* construction */
+.con .w>div{display:grid;grid-template-columns:repeat(12,1fr);gap:32px 16px;align-items:start}
+.con figure{grid-column:1/8;position:relative}
+.con .fig{aspect-ratio:3/2}
+.con figcaption{display:flex;justify-content:space-between;padding-top:10px;color:var(--mute)}
+.con .spec{grid-column:8/13;background:var(--paper);border:1px solid var(--navy)}
+.con .spec p{padding:16px 12px;font-size:.98rem}
+.con td b{font-weight:500;color:var(--redt)}
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev{background:var(--paper);border:1px solid var(--navy);display:flex;flex-direction:column}
+.rev header{display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--navy)}
+.rev blockquote{padding:20px 12px 24px;font-size:1.12rem;line-height:1.4;flex:1}
+.rev cite{font-style:normal;display:block;padding:0 12px 14px}
+/* mtm + news + footer */
+.mtmx{background:var(--red);color:#fff}
+.mtmx .w{display:grid;grid-template-columns:repeat(12,1fr);gap:32px 16px;align-items:center}
+.mtmx .t{grid-column:1/7}.mtmx h2{margin:16px 0 20px}.mtmx p{max-width:32em;margin-bottom:28px}
+.mtmx .btn{background:#fff;color:var(--navy);border-color:#fff}.mtmx .btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.mtmx ol{list-style:none;padding:0;margin:0 0 28px;border-top:1px solid rgba(255,255,255,.6);font-family:var(--mono);font-size:.8rem;max-width:34rem}
+.mtmx li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.6)}
+.mtmx .pat{grid-column:7/13}.pat svg{width:100%;height:auto}
+.news .w{display:grid;grid-template-columns:repeat(12,1fr);gap:24px 16px;align-items:end}
+.news h2{grid-column:1/7;font-size:clamp(1.8rem,3.4vw,2.8rem)}
+.news form{grid-column:7/13}.news .row{display:flex}.news input{flex:1;width:auto;min-width:0;font-size:1rem;padding:15px;border-right:0}
+.news label{display:block;margin-bottom:8px}
+footer{background:var(--navy);color:var(--paper);position:relative;z-index:1;padding:56px 0 84px}
+.ft{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(245,241,232,.45)}
+.ft div{padding:18px;border-right:1px solid rgba(245,241,232,.45)}.ft div:last-child{border:0}
+.ft h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:#ff8d7c;margin-bottom:10px}
+.ft p{font-size:.92rem;color:#dfe4ee}
+.tb{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;margin-top:20px;color:#b9c2d3}
+.pill{position:fixed;left:16px;bottom:16px;z-index:50;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:8px 12px;background:var(--paper);border:1px solid var(--navy);box-shadow:3px 3px 0 var(--navy);transition:transform .2s,box-shadow .2s}
+.pill:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--red)}
+/* reveals */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.2s .3s}.js .in .draw{stroke-dashoffset:0}
+@media (min-width:760px){.strip span:nth-child(n+3){display:inline}}
+@media (max-width:1020px){
+.hl,.plate{grid-column:1/13}.plate{max-width:560px}
+.stage,.bom{grid-column:1/13}.bom{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.grid,.revs{grid-template-columns:1fr 1fr}.sil{grid-template-columns:1fr 1fr}.sil a:nth-child(2){border-right:0}.sil a:nth-child(-n+2){border-bottom:1px solid var(--navy)}
+.con figure,.con .spec,.mtmx .t,.mtmx .pat,.news h2,.news form{grid-column:1/13}
+.ft{grid-template-columns:1fr 1fr}.ft div:nth-child(2){border-right:0}.ft div:nth-child(-n+2){border-bottom:1px solid rgba(245,241,232,.45)}}
+@media (max-width:820px){
+.burger{display:block}
+.links{position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--navy);display:none}
+.links.open{display:flex}.links a{display:block;padding:16px var(--pad);border-top:1px solid rgba(28,43,74,.25);font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.sh .no,.sh h2,.sh .meta{grid-column:1/13;text-align:left}.sh h2{margin:10px 0}
+.body{grid-template-columns:1fr}.inp{border-right:0;border-bottom:1px solid var(--navy)}}
+@media (max-width:620px){
+:root{--pad:16px}.mark small{display:none}
+.grid,.revs,.bom{grid-template-columns:1fr}.stats b{font-size:1.25rem}.stats div{padding:10px}
+.chip{font-size:.58rem;padding:3px 5px}.cell,.note{padding:16px}.inp{padding:16px}
+.fit .inst{box-shadow:4px 4px 0 var(--navy)}.news .row{flex-direction:column}.news input{border-right:1px solid var(--navy);border-bottom:0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}.js .rv{opacity:1;transform:none}.js .draw{stroke-dashoffset:0}}
+html,body{overflow-x:clip;max-width:100%}
+</style>
+</head>
+<body>
+<div class="strip m"><div class="w"><span>Vesna Pattern Room</span><span>DWG VS-000 · Rev 2026.09</span><span>Scale 1:1 · Units cm / in</span><span>Made to measure: 5 wk lead · Free fit exchange 60 d</span></div></div>
+
+<nav class="top" aria-label="Primary"><div class="w">
+  <a class="mark" href="#top">Vesna <small>PATTERN ROOM</small></a>
+  <ul class="links" id="links">
+    <li><a href="#corsets">Corsets</a></li><li><a href="#mtm">Made to Measure</a></li><li><a href="#fit">Fit Guide</a></li><li><a href="#construction">Journal</a></li>
+  </ul>
+  <div class="navr">
+    <button class="cart" type="button" id="cart" aria-live="polite" aria-label="Bag, 0 items">BAG<b id="count">00</b></button>
+    <button class="burger" type="button" id="burger" aria-expanded="false" aria-controls="links">MENU</button>
+  </div>
+</div></nav>
+
+<main id="top">
+<section class="hero"><div class="w">
+  <div class="hl rv">
+    <p class="m redt">Fig. 01 — Steel-boned corsetry, drafted not guessed</p>
+    <h1>Engineering<br>for the <em>body.</em></h1>
+    <p class="lede">A corset is a load-bearing structure worn for hours. We treat it like one: twelve measurements in, six panels per side out, every bone placed for a reason we are willing to publish.</p>
+    <div class="cta"><a class="btn" href="#fit">Run the fit finder <i aria-hidden="true">→</i></a><a class="btn ghost" href="#exploded">See what is inside</a></div>
+    <div class="stats" role="list">
+      <div role="listitem"><b>±3 mm</b><span class="m mute">Waist tolerance</span></div>
+      <div role="listitem"><b>24–32</b><span class="m mute">Steel bones</span></div>
+      <div role="listitem"><b>12</b><span class="m mute">Measurements taken</span></div>
+    </div>
+  </div>
+  <div class="plate rv" style="--d:.15s">
+    <div class="fig crop">
+      <img src="../../assets/img/blueprint/hero.jpg" width="900" height="1200" alt="Model in an ivory Vesna corset with contrast-stitched bone channels, worn over a white shirt and charcoal trousers" fetchpriority="high">
+      <svg viewBox="0 0 300 400" preserveAspectRatio="none" aria-hidden="true" fill="none">
+        <g stroke="#1c2b4a" stroke-width="1"><path class="draw" pathLength="1" d="M160 98H300"/><path class="draw" pathLength="1" d="M176 154L230 192H300"/></g>
+        <g stroke="#c8402f" stroke-width="1.5"><path class="draw" pathLength="1" d="M0 136H167"/><path d="M116 129v14M167 129v14"/></g>
+        <circle cx="160" cy="98" r="2.5" fill="#1c2b4a"/><circle cx="176" cy="154" r="2.5" fill="#1c2b4a"/>
+      </svg>
+      <span class="chip" style="right:-1px;top:24.5%">BUST 86.0 cm</span>
+      <span class="chip r" style="left:-1px;top:34%">WAIST 61.0 cm</span>
+      <span class="chip" style="right:-1px;top:48%">HIP SPRING +25.0</span>
+    </div>
+    <div class="vdim m" aria-hidden="true"><span>CF LENGTH 34.5 cm</span></div>
+    <div class="hdim m"><span>Plate 01 · VS-OB-028 “Cantilever”</span><span>24 in</span></div>
+  </div>
+</div></section>
+
+<section class="ex" id="exploded"><div class="w">
+  <header class="sh rv"><span class="m no">§ 01 — Assembly</span><h2>Seven layers. None of them decorative.</h2><span class="m meta">Exploded view · drag to separate</span></header>
+  <div class="exg">
+    <div class="stage rv" id="stage">
+      <svg viewBox="0 -24 1000 524" role="img" aria-label="Exploded diagram of a Vesna corset showing seven layers from outer fabric to lining">
+        <defs>
+          <path id="sil" d="M10 30Q45 0 80 28Q115 0 150 30C146 90 128 120 126 150C128 190 150 230 156 270Q80 310 4 270C10 230 32 190 34 150C32 120 14 90 10 30Z"/>
+          <clipPath id="cs"><use href="#sil"/></clipPath>
+          <pattern id="hb" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8L4 0L8 8" fill="none" stroke="#9aa3b2" stroke-width=".8"/></pattern>
+        </defs>
+        <g id="layers" font-family="IBM Plex Mono,monospace" font-size="15" text-anchor="middle">
+          <g class="ly" tabindex="0" aria-label="Layer 1, outer fabric"><g transform="skewY(-10)"><use class="s" href="#sil" fill="#2b4170"/><g clip-path="url(#cs)" stroke="#f5f1e8" stroke-width=".8" fill="none" opacity=".7"><path d="M45 10C50 100 58 120 58 150C58 190 45 240 42 295M115 10C110 100 102 120 102 150C102 190 115 240 118 295M80 28V300"/></g></g></g>
+          <g class="ly" tabindex="0" aria-label="Layer 2, coutil strength layer"><g transform="skewY(-10)"><use href="#sil" fill="#f5f1e8"/><use class="s" href="#sil" fill="url(#hb)"/></g></g>
+          <g class="ly" tabindex="0" aria-label="Layer 3, waist tape"><g transform="skewY(-10)"><use class="s" href="#sil" fill="none" stroke-dasharray="4 4" pointer-events="all"/><rect class="s" x="34" y="139" width="92" height="22" fill="#c8402f"/></g></g>
+          <g class="ly" tabindex="0" aria-label="Layer 4, spiral steel bones"><g transform="skewY(-10)"><use class="s" href="#sil" fill="none" stroke-dasharray="4 4" pointer-events="all"/><g clip-path="url(#cs)" stroke="#f5f1e8" stroke-width="5" stroke-dasharray="1.6 1.6" fill="none"><path d="M26 20Q52 150 24 285M44 12Q62 150 46 292M62 18Q70 150 64 296M98 18Q90 150 96 296M116 12Q98 150 114 292M134 20Q108 150 136 285"/></g></g></g>
+          <g class="ly" tabindex="0" aria-label="Layer 5, flat steel bones"><g transform="skewY(-10)"><use class="s" href="#sil" fill="none" stroke-dasharray="4 4" pointer-events="all"/><g stroke="#f5f1e8" stroke-width="6" stroke-linecap="round" fill="none"><path d="M18 40Q46 150 14 262M142 40Q114 150 146 262"/></g></g></g>
+          <g class="ly" tabindex="0" aria-label="Layer 6, busk"><g transform="skewY(-10)"><use class="s" href="#sil" fill="none" stroke-dasharray="4 4" pointer-events="all"/><rect class="s" x="70" y="30" width="9" height="258" fill="#fff"/><rect class="s" x="81" y="30" width="9" height="258" fill="#fff"/><g fill="#c8402f"><circle cx="74.5" cy="60" r="3"/><circle cx="74.5" cy="110" r="3"/><circle cx="74.5" cy="160" r="3"/><circle cx="74.5" cy="210" r="3"/><circle cx="74.5" cy="260" r="3"/></g></g></g>
+          <g class="ly" tabindex="0" aria-label="Layer 7, lining"><g transform="skewY(-10)"><use class="s" href="#sil" fill="#fff"/><use href="#sil" fill="none" stroke="#9aa3b2" stroke-dasharray="3 3" transform="translate(8 15) scale(.9)"/></g></g>
+        </g>
+      </svg>
+      <div class="ctl m"><label for="exr">Separation</label><input type="range" id="exr" min="0" max="100" value="0" aria-describedby="exo"><output id="exo" for="exr">0 mm</output></div>
+    </div>
+    <ol class="bom rv" id="bom" style="--d:.1s">
+      <li><b>Outer fabric</b><span>Wool barathea, silk duchesse or cotton sateen. Carries no load; that is why it stays smooth.</span></li>
+      <li><b>Coutil strength layer</b><span>Herringbone cotton, 310 g/m². Zero stretch on grain. The actual corset.</span></li>
+      <li><b>Waist tape</b><span>25 mm petersham, stitched through every seam. Stops the waist growing by even a millimetre.</span></li>
+      <li><b>Spiral steel bones</b><span>7 mm, flex in two axes. Placed on curves: side, hip, bust.</span></li>
+      <li><b>Flat steel bones</b><span>Sprung steel, 12 mm. Either side of the grommets and busk, where nothing should bend.</span></li>
+      <li><b>Busk</b><span>Stainless, 13 mm wide, five loop-and-pin. Rated well past anything lacing can apply.</span></li>
+      <li><b>Lining</b><span>Cotton lawn, floated. Replaceable after a decade of wear.</span></li>
+    </ol>
+  </div>
+</div></section>
+
+<section id="corsets"><div class="w">
+  <header class="sh rv"><span class="m no">§ 02 — Catalogue</span><h2>Standard parts, sizes 18–40.</h2><span class="m meta">5 models · ships in 4 days</span></header>
+  <div class="grid">
+    <article class="card rv"><header class="m"><span>VS-UB-024</span><span class="mute">Underbust · Rev C</span></header>
+      <div class="ph"><img src="../../assets/img/blueprint/p1.jpg" width="900" height="1200" loading="lazy" alt="Meridian underbust corset in grey herringbone, worn over an ivory cotton dress" style="transform-origin:50% 25%;scale:1.25"><span class="chip">WAIST −10 cm</span></div>
+      <h3>Meridian</h3><p class="line">24 spiral steel bones · grey herringbone coutil · 4" reduction</p>
+      <table><tr><th scope="row">Length CF</th><td>28.0 cm</td></tr><tr><th scope="row">Rib / hip spring</th><td>+15 / +25 cm</td></tr><tr><th scope="row">Mass</th><td>540 g</td></tr></table>
+      <div class="buy"><span class="p">€290</span><button type="button" data-add>Add to bag</button></div></article>
+    <article class="card rv" style="--d:.08s"><header class="m"><span>VS-OB-028</span><span class="mute">Overbust · Rev B</span></header>
+      <div class="ph"><img src="../../assets/img/blueprint/hero.jpg" width="900" height="1200" loading="lazy" alt="Cantilever overbust corset in ivory twill, laced over a high-collared white shirt" style="transform-origin:44% 14%;scale:2"><span class="chip">6 PANELS / SIDE</span></div>
+      <h3>Cantilever</h3><p class="line">28 steel bones · ivory cotton twill on coutil · 4" reduction</p>
+      <table><tr><th scope="row">Length CF</th><td>34.5 cm</td></tr><tr><th scope="row">Bust support</th><td>Cup A–F, gored</td></tr><tr><th scope="row">Mass</th><td>710 g</td></tr></table>
+      <div class="buy"><span class="p">€460</span><button type="button" data-add>Add to bag</button></div></article>
+    <article class="card rv" style="--d:.16s"><header class="m"><span>VS-WS-016</span><span class="mute">Waspie · Rev D</span></header>
+      <div class="ph"><img src="../../assets/img/blueprint/p3.jpg" width="900" height="1200" loading="lazy" alt="Tangent two-tone waspie in grey and ivory, worn over a white T-shirt with pleated trousers" style="transform-origin:50% 30.6%;scale:1.7"><span class="chip">19 cm TALL</span></div>
+      <h3>Tangent</h3><p class="line">16 spiral steel bones · two-tone coutil · 3" reduction</p>
+      <table><tr><th scope="row">Length CF</th><td>19.0 cm</td></tr><tr><th scope="row">Rib / hip spring</th><td>+10 / +18 cm</td></tr><tr><th scope="row">Mass</th><td>310 g</td></tr></table>
+      <div class="buy"><span class="p">€260</span><button type="button" data-add>Add to bag</button></div></article>
+    <article class="card rv"><header class="m"><span>VS-LL-026</span><span class="mute">Longline · Rev B</span></header>
+      <div class="ph"><img src="../../assets/img/blueprint/detail.jpg" width="1500" height="1000" loading="lazy" alt="Datum longline corset, back lacing through brass grommets over the hip flare" style="object-position:28% 50%"><span class="chip">HIP +30 cm</span></div>
+      <h3>Datum</h3><p class="line">26 steel bones · cotton sateen on coutil · 4" reduction</p>
+      <table><tr><th scope="row">Length CF</th><td>36.0 cm</td></tr><tr><th scope="row">Rib / hip spring</th><td>+15 / +30 cm</td></tr><tr><th scope="row">Mass</th><td>680 g</td></tr></table>
+      <div class="buy"><span class="p">€380</span><button type="button" data-add>Add to bag</button></div></article>
+    <article class="card rv" style="--d:.08s"><header class="m"><span>VS-OB-032</span><span class="mute">Overbust · Rev A</span></header>
+      <div class="ph"><img src="../../assets/img/blueprint/p2.jpg" width="900" height="1200" loading="lazy" alt="Parabola overbust corset in ivory silk on a grey dress form, showing six panels per side and a six-stud busk"><span class="chip">SILK DUCHESSE</span></div>
+      <h3>Parabola</h3><p class="line">32 steel bones · silk duchesse on double coutil · 5" reduction</p>
+      <table><tr><th scope="row">Length CF</th><td>37.0 cm</td></tr><tr><th scope="row">Bust support</th><td>Cup B–G, gored</td></tr><tr><th scope="row">Mass</th><td>820 g</td></tr></table>
+      <div class="buy"><span class="p">€640</span><button type="button" data-add>Add to bag</button></div></article>
+    <article class="card mtm rv" style="--d:.16s"><header class="m"><span>VS-MTM-000</span><span>Your number</span></header>
+      <div class="ph"><svg class="pp" viewBox="0 0 330 260" aria-hidden="true"></svg></div>
+      <h3>Drafted from zero</h3><p class="line">Any model above, recut to twelve of your measurements. One toile fitting by post.</p>
+      <table><tr><th scope="row" style="color:#b9c2d3">Lead time</th><td>5 weeks</td></tr><tr><th scope="row" style="color:#b9c2d3">Surcharge</th><td>+ €120 on any model</td></tr></table>
+      <div class="buy"><span class="p">from €380</span><a href="#mtm">Start draft</a></div></article>
+  </div>
+</div></section>
+
+<section id="silhouettes" style="padding-top:0"><div class="w">
+  <header class="sh rv"><span class="m no">§ 03 — Geometry</span><h2>Shop by silhouette.</h2><span class="m meta">4 envelopes · CF length shown</span></header>
+  <div class="sil rv">
+    <a href="#corsets"><span class="m"><span>A</span><span>VS-OB</span></span>
+      <svg viewBox="0 0 150 190" aria-hidden="true"><path class="o" d="M28 40Q50 14 70 38Q90 14 112 40C110 80 98 92 97 108C98 130 110 146 114 164Q70 182 26 164C30 146 42 130 43 108C42 92 30 80 28 40ZM70 38V173M49 28C52 80 58 96 58 108C58 130 50 150 48 171M91 28C88 80 82 96 82 108C82 130 90 150 92 171"/><path class="d" d="M132 26V176M127 26h10M127 176h10"/><text x="141" y="104" transform="rotate(90 141 104)" text-anchor="middle">37 cm</text></svg>
+      <h3>Overbust</h3><p>Bust to hip in one structure. Replaces the bra, distributes load across the whole torso.</p></a>
+    <a href="#corsets"><span class="m"><span>B</span><span>VS-UB</span></span>
+      <svg viewBox="0 0 150 190" aria-hidden="true"><path class="o" d="M30 64Q70 50 110 64C108 88 98 96 97 108C98 130 108 144 112 160Q70 176 28 160C32 144 42 130 43 108C42 96 32 88 30 64ZM70 57V168M50 59C53 90 58 98 58 108C58 130 50 148 49 166M90 59C87 90 82 98 82 108C82 130 90 148 91 166"/><path class="d" d="M132 57V168M127 57h10M127 168h10"/><text x="141" y="112" transform="rotate(90 141 112)" text-anchor="middle">28 cm</text></svg>
+      <h3>Underbust</h3><p>The general-purpose part. Under the bust to the high hip; works with every wardrobe.</p></a>
+    <a href="#corsets"><span class="m"><span>C</span><span>VS-WS</span></span>
+      <svg viewBox="0 0 150 190" aria-hidden="true"><path class="o" d="M36 78Q70 70 104 78C102 94 98 100 97 108C98 120 104 130 106 140Q70 150 34 140C36 130 42 120 43 108C42 100 38 94 36 78ZM70 74V145M54 75C56 96 58 100 58 108C58 122 55 132 54 143M86 75C84 96 82 100 82 108C82 122 85 132 86 143"/><path class="d" d="M132 74V145M127 74h10M127 145h10"/><text x="141" y="110" transform="rotate(90 141 110)" text-anchor="middle">19 cm</text></svg>
+      <h3>Waspie</h3><p>Minimum viable corset. A short, stiff band at the waist; sits over dresses and under jackets.</p></a>
+    <a href="#corsets"><span class="m"><span>D</span><span>VS-LL</span></span>
+      <svg viewBox="0 0 150 190" aria-hidden="true"><path class="o" d="M30 56Q70 42 110 56C108 84 98 94 97 106C98 134 114 152 120 180Q70 192 20 180C26 152 42 134 43 106C42 94 32 84 30 56ZM70 49V186M50 51C53 86 58 96 58 106C58 136 47 160 44 184M90 51C87 86 82 96 82 106C82 136 93 160 96 184"/><path class="d" d="M136 49V186M131 49h10M131 186h10"/><text x="145" y="118" transform="rotate(90 145 118)" text-anchor="middle">36 cm</text></svg>
+      <h3>Longline</h3><p>Extends over the hip for long torsos and a smooth line under bias-cut skirts.</p></a>
+  </div>
+</div></section>
+
+<section class="fit" id="fit" style="padding-top:0"><div class="w">
+  <header class="sh rv"><span class="m no">§ 04 — Instrument</span><h2>Fit finder. Two numbers, one answer.</h2><span class="m meta">Live readout · no account</span></header>
+  <div class="inst rv" id="inst">
+    <header class="m"><span><i class="led" aria-hidden="true"></i><span id="status">Reading</span></span><span>VS-FF-01 · Calibrated in cm</span></header>
+    <div class="tape" aria-hidden="true"><div class="strp" id="strp"><div class="redz" id="redz"><em id="redl"></em></div></div><div class="needle"></div><span class="m">Natural waist →</span></div>
+    <form class="body" id="ff" novalidate>
+      <div class="inp">
+        <div class="f"><label class="m" for="waist"><span>01 Natural waist</span><span class="mute">50–130 cm</span></label>
+          <div class="row"><input type="number" id="waist" inputmode="decimal" min="50" max="130" step="0.5" value="71" aria-describedby="err"><input type="range" id="waistr" min="50" max="130" step="0.5" value="71" aria-label="Natural waist slider"></div></div>
+        <div class="f"><label class="m" for="ub"><span>02 Underbust</span><span class="mute">55–150 cm</span></label>
+          <div class="row"><input type="number" id="ub" inputmode="decimal" min="55" max="150" step="0.5" value="80" aria-describedby="err"><input type="range" id="ubr" min="55" max="150" step="0.5" value="80" aria-label="Underbust slider"></div></div>
+        <fieldset class="f"><legend class="m"><span>03 Goal</span><span class="mute">sets reduction</span></legend>
+          <div class="seg"><label><input type="radio" name="goal" value="everyday" checked><span>Everyday −2"</span></label><label><input type="radio" name="goal" value="shaping"><span>Shaping −3"</span></label><label><input type="radio" name="goal" value="occasion"><span>Occasion −4"</span></label></div></fieldset>
+        <p class="err" id="err" role="alert"></p>
+        <p class="m mute">Measure standing, exhaled, tape level, snug not tight. The narrowest point, usually 2–3 cm above the navel.</p>
+      </div>
+      <div class="out" id="out" tabindex="-1" aria-live="polite" aria-atomic="true">
+        <div class="cell big"><div><span class="m mute">Recommended corset size</span><div class="v" id="oSize">24<sub>in</sub></div></div><div><small id="oSizeCm"></small><small id="oRed"></small></div></div>
+        <div class="cell"><span class="m mute">Silhouette</span><div class="v" id="oSil">—</div><small id="oSilWhy"></small></div>
+        <div class="cell"><span class="m mute">Expected lacing gap</span><div class="v" id="oGap">—</div><small id="oGapWhy"></small></div>
+        <div class="note"><span id="oNote"></span><a class="btn" id="oCta" href="#corsets">View matching parts <i aria-hidden="true">→</i></a></div>
+      </div>
+    </form>
+  </div>
+</div></section>
+
+<section class="con" id="construction" style="padding-top:0"><div class="w">
+  <header class="sh rv"><span class="m no">§ 05 — Construction</span><h2>What holds, and why it keeps holding.</h2><span class="m meta">Journal · Note 014</span></header>
+  <div>
+    <figure class="rv"><div class="fig crop"><img src="../../assets/img/blueprint/detail.jpg" width="1500" height="1000" loading="lazy" alt="Macro view of corset back lacing: flat cotton laces through steel-rimmed grommets, twin-stitched bone channels and hand-felled binding">
+      <svg viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#1c2b4a"><path class="draw" pathLength="1" d="M68 20H0"/><path class="draw" pathLength="1" d="M186 100H300"/><path class="draw" pathLength="1" d="M60 158H0"/><g fill="#1c2b4a" stroke="none"><circle cx="68" cy="20" r="2.5"/><circle cx="186" cy="100" r="2.5"/><circle cx="60" cy="158" r="2.5"/></g></svg>
+      <span class="chip" style="left:-1px;top:10%">GROMMET 5 mm · PITCH 22</span><span class="chip r" style="right:-1px;top:50%">BONE CHANNEL 9 mm</span><span class="chip" style="left:-1px;top:79%">BINDING FELLED BY HAND</span></div>
+      <figcaption class="m"><span>Plate 02 · Back lacing, VS-LL-026</span><span>Macro 1:0.4</span></figcaption></figure>
+    <div class="spec rv" style="--d:.12s"><p>Every Vesna is cut on grain, seamed twice and finished by one maker, who signs the inside of the waist tape. The numbers below are the ones we check before it leaves.</p>
+      <table>
+        <tr><th scope="row">Bones</th><td>7 mm spiral on curves, 12 mm flat sprung steel at busk and lacing. Tips dipped, never capped. <b>24–32 per corset</b></td></tr>
+        <tr><th scope="row">Busk</th><td>Stainless, 13 mm, five loop-and-pin, underlaid with a 25 mm modesty placket</td></tr>
+        <tr><th scope="row">Waist tape</th><td>Petersham, caught in every seam. <b>±3 mm at waist</b> after 100 h wear</td></tr>
+        <tr><th scope="row">Layers</th><td>Fashion fabric fused to herringbone coutil, floating cotton lawn lining. Two layers of coutil on sizes 30+</td></tr>
+        <tr><th scope="row">Grommets</th><td>Two-part brass, 5 mm, set at 22 mm pitch; 16 mm at the waist for pull loops</td></tr>
+        <tr><th scope="row">Hand finishing</th><td>Binding felled by hand, bone channels bar-tacked, flossing on request. <b>≈ 6 h of 19</b></td></tr>
+      </table></div>
+  </div>
+</div></section>
+
+<section id="reviews" style="padding-top:0"><div class="w">
+  <header class="sh rv"><span class="m no">§ 06 — Field reports</span><h2>Measured by the people wearing them.</h2><span class="m meta">4.9 / 5 · n = 412</span></header>
+  <div class="revs">
+    <article class="rev rv"><header class="m"><span>FR-0381</span><span class="redt">5.0 / 5</span></header><blockquote>“The finder said 24, my instinct said 22. The finder was right: parallel gap of two fingers after three weeks, no pressure at the ribs. I have stopped trusting my instinct.”</blockquote><cite class="m">Ilse V. — Utrecht</cite>
+      <table><tr><th scope="row">Waist / underbust</th><td>69 / 78 cm</td></tr><tr><th scope="row">Bought</th><td>Meridian, size 24</td></tr><tr><th scope="row">Wear</th><td>8 h/day, 5 months</td></tr></table></article>
+    <article class="rev rv" style="--d:.08s"><header class="m"><span>FR-0407</span><span class="redt">5.0 / 5</span></header><blockquote>“I tightlace and I read spec sheets for a living. First brand that tells me the bone width and the waist tape spec without an email. Hip spring is as drawn.”</blockquote><cite class="m">Margaux D. — Lyon</cite>
+      <table><tr><th scope="row">Waist / underbust</th><td>76 / 86 cm</td></tr><tr><th scope="row">Bought</th><td>Datum, size 26</td></tr><tr><th scope="row">Wear</th><td>Closed at 12 weeks</td></tr></table></article>
+    <article class="rev rv" style="--d:.16s"><header class="m"><span>FR-0412</span><span class="redt">4.5 / 5</span></header><blockquote>“Made to measure for a 14 cm difference between my left and right hip. The toile came with pencil notes on it. Half a point off only because I had to wait five weeks.”</blockquote><cite class="m">Anneke R. — Hamburg</cite>
+      <table><tr><th scope="row">Waist / underbust</th><td>92 / 101 cm</td></tr><tr><th scope="row">Bought</th><td>Cantilever MTM, size 32</td></tr><tr><th scope="row">Wear</th><td>Occasion, 6 h</td></tr></table></article>
+  </div>
+</div></section>
+
+<section class="mtmx" id="mtm"><div class="w">
+  <div class="t rv"><span class="m">§ 07 — Made to measure</span><h2>Your body is not a size chart. Send us the data.</h2>
+    <p>Standard sizes fit most people well. Made to measure fits one person exactly: asymmetry, long torso, high hip, full bust. We redraft all six panels per side, not just the waist.</p>
+    <ol><li><span>01 Measure — 12 points, guided video</span><span>20 min</span></li><li><span>02 Draft and cotton toile, posted to you</span><span>Week 2</span></li><li><span>03 Fit notes back, pattern revised</span><span>Week 3</span></li><li><span>04 Final corset, pattern kept on file</span><span>Week 5</span></li></ol>
+    <a class="btn" href="#fit">Begin a draft — from €380 <i aria-hidden="true">→</i></a></div>
+  <div class="pat rv" style="--d:.12s"><svg class="pp" viewBox="0 0 330 260" role="img" aria-label="Pattern sheet showing corset panels one to six with grainlines and waist notches"></svg></div>
+</div></section>
+
+<section class="news"><div class="w">
+  <h2 class="rv">Revision notes. One email a month: new drafts, fabric lots, fitting method.</h2>
+  <form id="news" class="rv" novalidate><label class="m" for="em">Email address</label><div class="row"><input type="email" id="em" autocomplete="email" placeholder="you@domain.eu" required><button class="btn" type="submit">Subscribe</button></div><p class="err" id="nmsg" role="status"></p></form>
+</div></section>
+</main>
+
+<footer><div class="w">
+  <div class="ft">
+    <div><h3>Shipping</h3><p>EU 2–4 days, tracked, €0 over €250. Worldwide 5–9 days. Packed flat, never rolled.</p></div>
+    <div><h3>Fit promise</h3><p>Wrong size? Exchange free within 60 days, laced or not. If the finder was wrong, return shipping is ours.</p></div>
+    <div><h3>Care</h3><p>Air after wear. Spot clean, never machine wash. Store flat or hung by the laces. Relining service €60.</p></div>
+    <div><h3>Contact</h3><p>fit@vesna.example<br>Pattern Room, Prinsengracht 000, Amsterdam<br>Fittings Thu–Sat by appointment</p></div>
+  </div>
+  <div class="tb m"><span>Vesna · Drawn, cut and sewn in Amsterdam</span><span>DWG VS-000 · Sheet 08/08</span><span>© 2026 · Privacy · Terms</span></div>
+</div></footer>
+<a class="pill" href="../../index.html">← All directions</a>
+
+<script>
+(function(){
+'use strict';
+var d=document,$=function(s){return d.querySelector(s)},$$=function(s){return [].slice.call(d.querySelectorAll(s))};
+d.documentElement.classList.add('js');
+var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* nav + cart */
+var burger=$('#burger'),links=$('#links');
+burger.addEventListener('click',function(){var o=links.classList.toggle('open');burger.setAttribute('aria-expanded',o);burger.textContent=o?'CLOSE':'MENU';});
+links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.textContent='MENU';}});
+var n=0,cart=$('#cart'),count=$('#count');
+$$('[data-add]').forEach(function(b){b.addEventListener('click',function(){n++;count.textContent=(n<10?'0':'')+n;cart.setAttribute('aria-label','Bag, '+n+' item'+(n===1?'':'s'));
+  cart.classList.add('bump');b.classList.add('ok');b.textContent='Added';setTimeout(function(){cart.classList.remove('bump');b.classList.remove('ok');b.textContent='Add to bag';},1100);});});
+
+/* reveals */
+var rv=$$('.rv');
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -8% 0px'});rv.forEach(function(el){io.observe(el);});}
+else rv.forEach(function(el){el.classList.add('in');});
+
+/* exploded view */
+var lys=$$('#layers .ly'),bom=$$('#bom li'),exr=$('#exr'),exo=$('#exo'),NS='http://www.w3.org/2000/svg';
+lys.forEach(function(g,i){var t=d.createElementNS(NS,'g');t.setAttribute('class','tag');
+  t.innerHTML='<path d="M80 '+(i%2?-8:296)+'V'+(i%2?-30:332)+'" stroke="#f5f1e8" fill="none"/><circle cx="80" cy="'+(i%2?-46:348)+'" r="16" fill="#1c2b4a" stroke="#f5f1e8"/><text x="80" y="'+(i%2?-41:353)+'" fill="#f5f1e8">0'+(i+1)+'</text>';g.appendChild(t);});
+function explode(e){var s=10+115*e,x0=(1000-(6*s+160))/2,op=Math.max(0,Math.min(1,(e-.45)*2.4));
+  lys.forEach(function(g,i){var k=i;g.setAttribute('transform','translate('+(x0+k*s).toFixed(1)+' '+(92+(k-3)*6*e).toFixed(1)+')');g.lastChild.style.opacity=op;});
+  exo.textContent=Math.round(e*48)+' mm';}
+/* draw order: lining first so outer fabric sits on top when collapsed */
+var host=$('#layers');lys.slice().reverse().forEach(function(g){host.appendChild(g);});
+explode(0);
+exr.addEventListener('input',function(){auto=false;explode(exr.value/100);});
+function mark(i,on){lys[i].classList.toggle('on',on);bom[i].classList.toggle('on',on);}
+lys.forEach(function(g,i){['mouseenter','focus'].forEach(function(ev){g.addEventListener(ev,function(){mark(i,true);});});['mouseleave','blur'].forEach(function(ev){g.addEventListener(ev,function(){mark(i,false);});});});
+bom.forEach(function(li,i){li.addEventListener('mouseenter',function(){mark(i,true);});li.addEventListener('mouseleave',function(){mark(i,false);});});
+var auto=true;
+function openUp(){if(calm){exr.value=100;explode(1);return;}var t0=null;(function step(t){if(!auto)return;if(!t0)t0=t;var p=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-p,3);exr.value=Math.round(e*100);explode(e);if(p<1)requestAnimationFrame(step);})(performance.now());}
+if('IntersectionObserver' in window){var eo=new IntersectionObserver(function(es){if(es[0].isIntersecting){eo.disconnect();setTimeout(openUp,350);}},{threshold:.45});eo.observe($('#stage'));}else{exr.value=100;explode(1);}
+
+/* pattern pieces 1-6 */
+$$('.pp').forEach(function(svg){var h='',x=14,ws=[40,44,48,46,44,38];
+  ws.forEach(function(w,i){var a=x,b=x+w,n=5+i%3*2,hp=6+i*1.5;
+    h+='<path d="M'+a+' 30L'+b+' '+(24+i%2*8)+'C'+(b-n)+' 90 '+(b-n-2)+' 110 '+(b-n-2)+' 128C'+(b-n-2)+' 160 '+(b+hp-6)+' 200 '+(b+hp-4)+' 232L'+(a-2)+' 238C'+a+' 200 '+(a+n)+' 160 '+(a+n)+' 128C'+(a+n)+' 110 '+(a+2)+' 90 '+a+' 30Z" fill="none" stroke="currentColor" stroke-width="1.3"/>'
+     +'<path d="M'+(a+w/2)+' 62V196m-3-128l3-6 3 6m-6 122l3 6 3-6" fill="none" stroke="currentColor" stroke-width=".8"/>'
+     +'<path d="M'+(a+n-4)+' 128h8M'+(b-n-6)+' 128h8" stroke="currentColor" stroke-width="1.6"/>'
+     +'<text x="'+(a+w/2)+'" y="222" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="currentColor">'+(i+1)+'</text>';x+=w+8;});
+  h+='<path d="M10 128H322" stroke="currentColor" stroke-width=".7" stroke-dasharray="5 4" opacity=".7"/><text x="14" y="14" font-family="IBM Plex Mono,monospace" font-size="9" fill="currentColor">PANELS 1–6 · CUT 2 COUTIL, 2 FASHION, 2 LINING · SA 15 mm</text><text x="322" y="256" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="currentColor">WAISTLINE — — · GRAIN ↕</text>';
+  svg.innerHTML=h;});
+
+/* fit finder */
+var PX=12,T0=40,strp=$('#strp'),redz=$('#redz'),redl=$('#redl'),inst=$('#inst'),err=$('#err'),st=$('#status');
+for(var v=T0;v<=160;v+=5){var s=d.createElement('span');s.textContent=v;s.style.left=(v-T0)*PX+'px';if(v%10)s.style.opacity=.55;strp.appendChild(s);}
+var waist=$('#waist'),waistr=$('#waistr'),ub=$('#ub'),ubr=$('#ubr');
+function pair(a,b){a.addEventListener('input',function(){b.value=a.value;calc();});b.addEventListener('input',function(){a.value=b.value;calc();});}
+pair(waist,waistr);pair(ub,ubr);$$('[name=goal]').forEach(function(r){r.addEventListener('change',calc);});
+function set(id,html){$(id).innerHTML=html;}
+function fail(msg,el){inst.classList.add('bad');st.textContent='Out of range';err.textContent=msg;[waist,ub].forEach(function(i){i.setAttribute('aria-invalid',i===el);});
+  set('#oSize','––<sub>in</sub>');set('#oSizeCm','');set('#oRed','');set('#oSil','—');set('#oSilWhy','');set('#oGap','—');set('#oGapWhy','');set('#oNote','Awaiting a valid reading.');redz.style.width='0';}
+function calc(){var w=parseFloat(waist.value),u=parseFloat(ub.value),goal=$('[name=goal]:checked').value;
+  if(!isNaN(w))strp.style.transform='translateX('+(-(Math.max(T0,Math.min(160,w))-T0)*PX)+'px)';
+  if(isNaN(w)||w<50||w>130)return fail('ERR 01 — Natural waist must be a number between 50 and 130 cm.',waist);
+  if(isNaN(u)||u<55||u>150)return fail('ERR 02 — Underbust must be a number between 55 and 150 cm.',ub);
+  if(u<w-12)return fail('ERR 03 — Underbust is more than 12 cm below waist. Re-measure; the tape may have slipped.',ub);
+  inst.classList.remove('bad');st.textContent='Reading';err.textContent='';waist.setAttribute('aria-invalid','false');ub.setAttribute('aria-invalid','false');
+  var win=w/2.54,red={everyday:2,shaping:3,occasion:4}[goal],raw=Math.floor((win-red)/2)*2,size=Math.max(18,Math.min(40,raw)),mtm=raw!==size;
+  var sizeCm=size*2.54,gapEnd=Math.max(0,(win-red-size)*2.54),gapStart=Math.max(0,(win-1-size)*2.54),diff=u-w,spring=u-sizeCm;
+  var sil,why;
+  if(goal==='occasion'){sil='Overbust';why='Full-torso support for long wear under eveningwear.';}
+  else if(goal==='shaping'){if(diff>=14){sil='Longline';why='Rib-to-waist difference of '+diff.toFixed(1)+' cm needs length to spread the load.';}else{sil='Underbust';why='Moderate taper; standard length distributes 3" comfortably.';}}
+  else{if(diff<8){sil='Waspie';why='Little taper at the ribs ('+diff.toFixed(1)+' cm); a short band avoids rib pressure.';}else{sil='Underbust';why='The general-purpose envelope for daily wear.';}}
+  set('#oSize',size+'<sub>in</sub>');set('#oSizeCm','= '+sizeCm.toFixed(1)+' cm closed');set('#oRed','Waist '+win.toFixed(1)+' in − '+red+' in, rounded down to even');
+  set('#oSil',sil);set('#oSilWhy',why+' Rib spring needed: +'+Math.max(0,spring).toFixed(1)+' cm.');
+  set('#oGap',gapStart.toFixed(1)+' → '+gapEnd.toFixed(1)+' cm');set('#oGapWhy','First wear at −1 in → seasoned at −'+red+' in. Parallel, not V-shaped.');
+  set('#oNote',mtm?'<b>Outside stock range 18–40.</b> Made to measure will draft size '+raw+' in for you.':(gapEnd>4?'Gap above 4 cm when seasoned is normal; this size leaves room to go further.':'This size closes almost fully at your goal. Planning to go further? Size down 2 in.'));
+  var cta=$('#oCta');cta.href=mtm?'#mtm':'#corsets';cta.firstChild.textContent=mtm?'Start a draft ':'View '+sil.toLowerCase()+' parts ';
+  var l=Math.max(T0,sizeCm);redz.style.left=(l-T0)*PX+'px';redz.style.width=Math.max(0,(w-l)*PX)+'px';redl.textContent='CLOSED '+sizeCm.toFixed(1)+' ← '+(w-sizeCm).toFixed(1)+' cm';}
+$('#ff').addEventListener('submit',function(e){e.preventDefault();calc();});
+calc();
+
+/* newsletter */
+$('#news').addEventListener('submit',function(e){e.preventDefault();var em=$('#em'),m=$('#nmsg'),ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim());
+  em.setAttribute('aria-invalid',!ok);m.textContent=ok?'Filed. Revision notes ship on the first Thursday of the month.':'ERR — That does not parse as an email address.';if(ok)em.value='';});
+})();
+</script>
+</body>
+</html>

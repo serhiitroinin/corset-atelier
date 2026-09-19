@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesna — Meadow Stays, slowly made in linen &amp; cotton</title>
+<meta name="description" content="Vesna makes stays and corsets the slow way: natural fibres, steel bones, hand finishing. Find your size with our fit finder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --oat:#efe6d5; --cream:#f7f1e4; --sage:#a8b8a0; --moss:#7a8b5c; --moss-ink:#4f5c38;
+  --rose:#c79a9a; --rose-ink:#8a5555; --terra:#b5673f; --terra-ink:#934c2a; --bark:#3a2e22;
+  --line:rgba(58,46,34,.28);
+  --display:"Fraunces",Georgia,serif; --body:"Lora",Georgia,serif; --hand:"Caveat","Segoe Script",cursive;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--oat);color:var(--bark);font:400 1.0625rem/1.7 var(--body);overflow-x:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .23 0 0 0 0 .18 0 0 0 0 .13 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;margin:0;font-variation-settings:"SOFT" 100,"WONK" 1;letter-spacing:-.01em}
+h2{font-size:clamp(2rem,4.6vw,3.4rem)}
+h2 em,h1 em{font-weight:300}
+p{margin:0 0 1em}
+:focus-visible{outline:2px solid var(--terra-ink);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1180px,100% - 2.5rem);margin-inline:auto}
+section{padding:clamp(3.5rem,8vw,7rem) 0;position:relative}
+.hand{font-family:var(--hand);font-weight:500;color:var(--terra-ink);font-size:1.45rem;line-height:1.15}
+.eyebrow{font-family:var(--hand);font-size:1.6rem;color:var(--moss-ink);display:block;margin-bottom:.3rem;transform:rotate(-1.5deg);transform-origin:left}
+.lede{max-width:34em}
+.skip{position:absolute;left:-999px;top:0;background:var(--bark);color:var(--cream);padding:.6rem 1rem;z-index:100}
+.skip:focus{left:.5rem;top:.5rem}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.botanical{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- running stitch (signature) ---------- */
+.stitch{position:relative;display:block;height:12px;color:var(--terra)}
+.stitch svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.js .stitch svg{clip-path:inset(-4px 100% -4px 0)}
+.js .stitch.in svg{clip-path:inset(-4px 0 -4px 0)}
+.sewn{position:relative;display:inline-block;white-space:nowrap}
+.sewn .stitch{position:absolute;left:0;right:0;bottom:-.16em}
+.rule{width:min(560px,80%);margin:0 auto;position:relative}
+.rule .needle{position:absolute;top:-9px;left:0;width:34px;height:30px;color:var(--bark);opacity:0;pointer-events:none}
+.js .rule.in .needle{animation:needle var(--t,1.6s) linear forwards}
+@keyframes needle{0%{left:0;opacity:1}90%{opacity:1}100%{left:100%;opacity:0}}
+.divider{padding:0;display:flex;align-items:center;gap:1rem;justify-content:center;color:var(--moss)}
+.divider svg.sprig{width:42px;height:42px;flex:none}
+.divider .rule{margin:0;flex:0 1 420px}
+
+/* ---------- reveals ---------- */
+.js .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .reveal.in{opacity:1;transform:rotate(var(--rot,0deg))}
+
+/* ---------- nav ---------- */
+header{position:sticky;top:0;z-index:40;background:rgba(239,230,213,.93);backdrop-filter:blur(6px);border-bottom:1px dashed var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0}
+.wordmark{font-family:var(--display);font-style:italic;font-size:2rem;font-weight:400;text-decoration:none;display:flex;align-items:center;gap:.35rem;font-variation-settings:"SOFT" 100,"WONK" 1;line-height:1}
+.wordmark svg{width:26px;height:26px;color:var(--moss)}
+.links{display:flex;gap:1.8rem;list-style:none;margin:0;padding:0}
+.links a{text-decoration:none;font-size:.98rem;padding:.3rem 0;background:linear-gradient(90deg,var(--terra) 60%,transparent 0) 0 100%/0 2px no-repeat;background-size:0 2px;transition:background-size .5s steps(6)}
+.links a:hover,.links a:focus-visible{background-image:repeating-linear-gradient(90deg,var(--terra) 0 8px,transparent 8px 14px);background-size:100% 2px}
+.nav-right{display:flex;align-items:center;gap:.6rem}
+.cart{font:500 .95rem var(--body);background:none;border:1px solid var(--bark);border-radius:999px;padding:.4rem .95rem;color:var(--bark);cursor:pointer;display:flex;gap:.45rem;align-items:center}
+.cart:hover{background:var(--bark);color:var(--cream)}
+.cart b{display:inline-grid;place-items:center;min-width:1.5rem;height:1.5rem;border-radius:50%;background:var(--terra-ink);color:#fff;font-size:.8rem;font-weight:600}
+.cart b.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.45) rotate(-8deg)}}
+.burger{display:none;background:none;border:0;padding:.5rem;cursor:pointer;color:var(--bark)}
+.burger svg{width:26px;height:26px;display:block}
+@media(max-width:820px){
+  .burger{display:block}
+  .links{position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;background:var(--cream);border-bottom:1px dashed var(--line);padding:.5rem 1.25rem 1.2rem;display:none}
+  .links.open{display:flex}
+  .links a{display:block;padding:.8rem 0;font-family:var(--display);font-size:1.4rem;font-style:italic;border-bottom:1px dashed var(--line)}
+}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(2rem,5vw,4.5rem)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,6vw,5.5rem);align-items:center}
+.hero h1{font-size:clamp(2.7rem,6.6vw,5.4rem);margin:.2rem 0 1.6rem}
+.hero h1 em{color:var(--terra-ink)}
+.salute{font-family:var(--hand);font-size:2rem;color:var(--moss-ink);--rot:-2deg;transform:rotate(-2deg);display:inline-block}
+.hero-cta{display:flex;align-items:center;gap:1.6rem;margin-top:2rem;flex-wrap:wrap}
+.textlink{font-style:italic;text-underline-offset:5px;text-decoration-style:dashed;text-decoration-thickness:1px}
+.textlink:hover{color:var(--terra-ink)}
+.portrait{position:relative;max-width:460px;justify-self:center;width:100%}
+.arch{border-radius:999px 999px 6px 6px;padding:10px;border:1px solid var(--line);background:var(--cream)}
+.arch .ph,.oval .ph,.mat .ph{overflow:hidden;border-radius:inherit;background:linear-gradient(160deg,var(--sage),var(--rose));aspect-ratio:3/4}
+.arch .ph{border-radius:999px 999px 2px 2px}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.cameo{position:absolute;left:-12%;bottom:7%;width:38%;border-radius:50%;padding:7px;background:var(--cream);border:1px solid var(--line);box-shadow:0 14px 30px -18px rgba(58,46,34,.6)}
+.cameo .ph{aspect-ratio:4/5;border-radius:50%;overflow:hidden;background:var(--rose)}
+.pressed{position:absolute;right:-9%;top:9%;width:110px;color:var(--moss-ink);transform:rotate(14deg)}
+.note{position:absolute;display:flex;gap:.3rem;align-items:flex-start}
+.note svg{width:46px;height:34px;flex:none;color:var(--terra-ink)}
+.hero .note{right:0;top:100%;margin:.7rem 0 0;transform:rotate(-2deg);max-width:270px}
+.portrait{margin-bottom:4.5rem}
+.hero .wrap>*,.fit .wrap>*,.craft .wrap>*,.salon>*{min-width:0}
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .portrait{max-width:380px;margin-bottom:5rem}
+  .cameo{left:-3%}.pressed{right:-2%;width:84px}
+}
+
+/* ---------- wax seal ---------- */
+.seal{--s:138px;width:var(--s);height:var(--s);flex:none;display:grid;place-items:center;text-align:center;text-decoration:none;cursor:pointer;border:0;padding:1rem;
+  font:italic 600 1.2rem/1.08 var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;color:#fff6e8;text-shadow:0 1px 0 rgba(70,25,5,.55);
+  border-radius:47% 53% 49% 51%/53% 47% 54% 46%;position:relative;
+  background:radial-gradient(circle at 34% 28%,#bd6c42 0,#a4562f 48%,#7c3d1f 100%);
+  box-shadow:inset 0 0 0 5px rgba(255,220,190,.1),inset 0 -8px 14px rgba(60,20,0,.35),inset 0 6px 10px rgba(255,210,180,.22),0 10px 18px -8px rgba(80,35,10,.65);
+  transition:transform .45s cubic-bezier(.3,1.6,.5,1),box-shadow .3s}
+.seal::before{content:"";position:absolute;inset:11px;border-radius:50%;border:1.5px dashed rgba(255,235,215,.6);box-shadow:inset 0 2px 5px rgba(60,20,0,.4)}
+.seal span{position:relative;max-width:6.2em}
+.seal:hover{transform:rotate(-7deg) scale(1.05)}
+.seal:active{transform:scale(.94);box-shadow:inset 0 0 0 5px rgba(255,220,190,.1),inset 0 4px 16px rgba(60,20,0,.55),0 3px 6px -3px rgba(80,35,10,.6)}
+.seal:focus-visible{outline-offset:6px;border-radius:50%}
+
+/* ---------- salon-hang gallery ---------- */
+.shop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(2rem,5vw,4rem)}
+.salon{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(1.2rem,3vw,2.6rem);align-items:start}
+.piece{position:relative}
+.piece:nth-child(1){grid-column:1/6}
+.piece:nth-child(2){grid-column:6/10;margin-top:5rem}
+.piece:nth-child(3){grid-column:10/13;margin-top:1rem}
+.piece:nth-child(4){grid-column:2/5;margin-top:-2rem}
+.aside{grid-column:5/9;align-self:center;text-align:center;padding:1rem}
+.piece:nth-child(6){grid-column:9/13;margin-top:-6rem}
+.oval{border-radius:50%;padding:9px;border:1px solid var(--line);background:var(--cream)}
+.oval .ph{border-radius:50%}
+.mat{padding:12px;border:1px solid var(--line);background:var(--cream);border-radius:3px;box-shadow:0 0 0 5px var(--oat),0 0 0 6px var(--line)}
+.mat .ph{border-radius:1px}
+.piece:hover .ph img{transform:scale(1.05)}
+.tilt-l{--rot:-1.2deg}.tilt-r{--rot:1deg}
+.plate{padding:1rem .2rem 0;text-align:center}
+.plate h3{font-size:1.55rem;font-style:italic}
+.plate .kind{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--moss-ink);display:block;margin-bottom:.15rem}
+.plate .spec{font-size:.88rem;line-height:1.5;margin:.35rem auto .7rem;max-width:26em;color:#54463a}
+.buy{display:flex;align-items:center;justify-content:center;gap:.9rem}
+.price{font-family:var(--display);font-size:1.25rem}
+.add{font:500 .92rem var(--body);color:var(--bark);background:transparent;border:1.5px dashed var(--terra-ink);border-radius:999px;padding:.42rem 1.05rem;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.add:hover{background:var(--terra-ink);color:#fff;border-style:solid}
+.add.done{background:var(--moss-ink);border-color:var(--moss-ink);border-style:solid;color:#fff}
+.aside svg{width:90px;height:110px;color:var(--moss-ink);margin:0 auto .4rem;display:block}
+.aside .hand{font-size:1.7rem;transform:rotate(-2deg);display:block}
+@media(max-width:900px){
+  .salon{grid-template-columns:1fr 1fr}
+  .salon>*{grid-column:auto!important;margin-top:0!important}
+  .salon>.piece:nth-child(even){margin-top:3.5rem!important}
+}
+@media(max-width:540px){
+  .salon{grid-template-columns:1fr}
+  .salon>.piece{width:min(310px,88%)}
+  .salon>.piece:nth-child(even){margin-top:0!important;justify-self:end}
+}
+
+/* ---------- silhouettes ---------- */
+.silhouettes{background:var(--cream);border-block:1px dashed var(--line)}
+.sil-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.6rem}
+.sil{display:block;text-decoration:none;text-align:center;padding:1.6rem 1rem 1.3rem;border-radius:160px 160px 8px 8px;border:1px solid var(--line);background:var(--oat);transition:transform .5s cubic-bezier(.2,.7,.2,1),background .4s}
+.sil svg{width:92px;height:118px;margin:0 auto;display:block;color:var(--bark);transition:color .4s}
+.sil svg .lace{stroke-dasharray:3 4;color:var(--terra-ink);stroke:currentColor}
+.sil h3{font-size:1.5rem;font-style:italic;margin-top:.5rem}
+.sil p{font-size:.9rem;line-height:1.5;margin:.3rem 0 0;color:#54463a}
+.sil:hover{transform:translateY(-6px);background:#e4ead9}
+.sil:hover svg{color:var(--moss-ink)}
+@media(max-width:820px){.sil-grid{grid-template-columns:1fr 1fr}}
+
+/* ---------- fit finder ---------- */
+.fit .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.fit-intro .hand{display:block;margin-top:1.4rem;transform:rotate(-1.5deg);max-width:17em}
+.howto{list-style:none;padding:0;margin:1.6rem 0 0;counter-reset:h}
+.howto li{counter-increment:h;padding-left:2.6rem;position:relative;margin-bottom:.9rem;font-size:.98rem}
+.howto li::before{content:counter(h);position:absolute;left:0;top:.05rem;width:1.8rem;height:1.8rem;border-radius:50%;border:1.5px dashed var(--moss-ink);display:grid;place-items:center;font:italic 1rem var(--display);color:var(--moss-ink)}
+.page{background:var(--cream);border:1px solid var(--line);border-radius:4px;padding:clamp(1.4rem,3.5vw,2.6rem);position:relative;box-shadow:6px 6px 0 -1px var(--oat),6px 6px 0 0 var(--line),0 30px 50px -40px rgba(58,46,34,.7)}
+.page::before{content:"";position:absolute;inset:9px;border:1.5px dashed rgba(147,76,42,.45);border-radius:2px;pointer-events:none}
+.page>*{position:relative}
+.tape{height:46px;border-radius:3px;background:#f0d9a6;border:1px solid #b89a5a;position:relative;margin:.4rem 0 2rem;overflow:hidden;
+  background-image:repeating-linear-gradient(90deg,rgba(58,46,34,.75) 0 1px,transparent 1px 12.5%),repeating-linear-gradient(90deg,rgba(58,46,34,.5) 0 1px,transparent 1px 1.25%);background-size:100% 22px,100% 10px;background-repeat:no-repeat}
+.tape i{position:absolute;bottom:3px;font:normal 600 .68rem var(--body);color:#5a4524;transform:translateX(3px)}
+.tape .pin{position:absolute;top:0;bottom:0;width:3px;background:var(--terra-ink);left:25%;transition:left .7s cubic-bezier(.3,1.4,.5,1);box-shadow:0 0 0 3px rgba(147,76,42,.2)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+label,.legend{font-family:var(--display);font-style:italic;font-size:1.12rem;display:block;margin-bottom:.3rem}
+.unit{position:relative}
+.unit input{width:100%;font:500 1.5rem var(--display);color:var(--bark);background:transparent;border:0;border-bottom:1.5px dashed var(--bark);padding:.3rem 2.4rem .3rem .1rem;border-radius:0}
+.unit input:focus{outline:none;border-bottom:2px solid var(--terra-ink)}
+.unit input[aria-invalid="true"]{border-bottom-color:#a3271a}
+.unit span{position:absolute;right:.2rem;bottom:.55rem;font-size:.9rem;color:#54463a}
+.err{color:#9a2418;font-size:.86rem;margin:.3rem 0 0;min-height:1.2em}
+fieldset{border:0;padding:0;margin:1.2rem 0 0}
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.goals label{margin:0;cursor:pointer;font-style:normal}
+.goals input{position:absolute;opacity:0}
+.goals span{display:block;text-align:center;border:1px solid var(--line);border-radius:60px 60px 6px 6px;padding:1rem .4rem .8rem;background:var(--oat);transition:background .3s,border-color .3s;height:100%}
+.goals span b{display:block;font:italic 400 1.2rem var(--display)}
+.goals span small{font:400 .8rem/1.35 var(--body);display:block;margin-top:.2rem;color:#54463a}
+.goals input:checked+span{background:#e1e8d6;border:1.5px dashed var(--moss-ink)}
+.goals input:focus-visible+span{outline:2px solid var(--terra-ink);outline-offset:3px}
+.go{margin-top:1.6rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+.btn{font:italic 500 1.15rem var(--display);background:var(--bark);color:var(--cream);border:0;border-radius:999px;padding:.8rem 1.7rem;cursor:pointer;box-shadow:inset 0 0 0 3px var(--bark),inset 0 0 0 4.5px rgba(247,241,228,.0);transition:background .3s;text-decoration:none;display:inline-block;position:relative}
+.btn::after{content:"";position:absolute;inset:4px;border-radius:999px;border:1px dashed rgba(247,241,228,.55)}
+.btn:hover{background:var(--terra-ink)}
+.result{margin-top:1.8rem;padding-top:1.6rem;display:none}
+.result.show{display:block;animation:unfold .8s cubic-bezier(.2,.7,.2,1)}
+@keyframes unfold{from{opacity:0;transform:translateY(14px)}}
+.res-grid{display:grid;grid-template-columns:1fr 130px;gap:1.4rem;align-items:center;margin-top:1.2rem}
+.size{font:300 clamp(3.6rem,9vw,5.4rem)/.9 var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;color:var(--terra-ink)}
+.size small{font-size:1rem;font-family:var(--body);color:var(--bark);display:block;margin-top:.5rem;line-height:1.4}
+.res-list{margin:1rem 0 0;padding:0;list-style:none;font-size:.97rem}
+.res-list li{padding:.55rem 0;border-top:1px dashed var(--line)}
+.res-list b{font:italic 400 1.1rem var(--display);display:block}
+.lacing{width:130px;color:var(--bark)}
+.lacing text{font:500 15px var(--hand);fill:var(--terra-ink)}
+@media(max-width:900px){.fit .wrap{grid-template-columns:1fr}}
+@media(max-width:480px){.fields{grid-template-columns:1fr}.goals{grid-template-columns:1fr}.goals span{border-radius:8px;padding:.7rem}.res-grid{grid-template-columns:1fr}.lacing{margin:0 auto}}
+
+/* ---------- craft ---------- */
+.craft{background:#e3e8d8;border-block:1px dashed var(--line)}
+.craft .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.specimen{position:relative}
+.specimen .ph{aspect-ratio:3/2}
+.specimen .mat{transform:rotate(-1.4deg);box-shadow:0 0 0 5px #e3e8d8,0 0 0 6px var(--line),0 30px 40px -32px rgba(58,46,34,.8)}
+.tapebit{position:absolute;width:86px;height:26px;background:rgba(199,154,154,.75);top:-12px;left:8%;transform:rotate(-6deg);z-index:2}
+.tapebit.b{left:auto;right:7%;top:auto;bottom:-10px;transform:rotate(-4deg);background:rgba(168,184,160,.9)}
+.specimen .note{position:static;margin:1.6rem 0 0 12%;transform:rotate(-2deg)}
+.specimen .note svg{transform:scaleY(-1) rotate(20deg)}
+.layers{list-style:none;padding:0;margin:1.8rem 0 0}
+.layers li{display:grid;grid-template-columns:3.2rem 1fr;gap:.2rem 1rem;padding:.95rem 0;border-top:1px dashed var(--line)}
+.layers li:last-child{border-bottom:1px dashed var(--line)}
+.layers .n{font:italic 300 2rem/1 var(--display);color:var(--terra-ink)}
+.layers h3{font-size:1.25rem;font-style:italic}
+.layers p{grid-column:2;margin:0;font-size:.95rem;line-height:1.55}
+@media(max-width:900px){.craft .wrap{grid-template-columns:1fr}}
+
+/* ---------- letters (reviews) ---------- */
+.letters{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem;align-items:start}
+.letter{background:var(--cream);border:1px solid var(--line);padding:1.8rem 1.5rem 1.4rem;position:relative;margin:0;border-radius:2px;box-shadow:0 24px 30px -28px rgba(58,46,34,.7)}
+.letter:nth-child(1){--rot:-1.3deg}.letter:nth-child(2){--rot:.8deg;margin-top:2.2rem}.letter:nth-child(3){--rot:-.5deg;margin-top:.8rem}
+.letter blockquote{margin:0;font-style:italic;font-size:1.02rem}
+.letter blockquote::first-letter{font:400 3rem/.8 var(--display);float:left;padding:.25rem .4rem 0 0;color:var(--terra-ink)}
+.letter figcaption{margin-top:1rem;font-size:.9rem}
+.letter figcaption b{font:500 1.6rem var(--hand);display:block;color:var(--bark)}
+.measure{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.6rem;padding:0;list-style:none}
+.measure li{font-size:.78rem;border:1px dashed var(--moss-ink);color:var(--moss-ink);border-radius:999px;padding:.12rem .6rem;background:var(--oat)}
+.measure li.bought{background:var(--moss-ink);color:#fff;border-style:solid}
+.stars{color:var(--terra-ink);letter-spacing:.2em;font-size:.9rem;display:block;margin-bottom:.6rem}
+@media(max-width:900px){.letters{grid-template-columns:1fr;max-width:520px;margin-inline:auto}.letter{margin-top:0!important}}
+
+/* ---------- mtm + newsletter + footer ---------- */
+.mtm .card{background:var(--rose);background:linear-gradient(135deg,#d9b7b3,#c79a9a);border-radius:260px 260px 10px 10px;padding:clamp(3rem,7vw,5.5rem) clamp(1.4rem,6vw,5rem) clamp(2.4rem,5vw,4rem);text-align:center;position:relative;border:1px solid var(--line)}
+.mtm .card::before{content:"";position:absolute;inset:12px;border:1.5px dashed rgba(58,46,34,.45);border-radius:250px 250px 6px 6px;pointer-events:none}
+.mtm p{max-width:36em;margin-inline:auto}
+.mtm .seal{margin:1.8rem auto 0}
+.mtm .sprig{width:64px;height:64px;color:var(--bark);margin:0 auto .6rem;display:block}
+.post{text-align:center;padding-top:0}
+.post form{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.4rem;align-items:flex-end}
+.post .unit{width:min(340px,100%);text-align:left}
+.post .unit input{font:400 1.15rem var(--body);padding-right:.1rem}
+.post .ok{font-family:var(--hand);font-size:1.5rem;color:var(--moss-ink);min-height:1.4em;margin-top:.8rem}
+footer{background:var(--bark);color:#eadfca;padding:4rem 0 5rem;font-size:.95rem}
+footer .cols{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:2rem}
+footer h3{font-size:1.2rem;font-style:italic;color:#fff;margin-bottom:.6rem}
+footer p{line-height:1.6;margin:0}
+footer a{text-decoration-style:dashed;text-underline-offset:4px}
+footer a:hover{color:#f0c4a8}
+footer :focus-visible{outline-color:#f0c4a8}
+footer .wordmark{font-size:2.4rem;color:#fff}
+footer .wordmark svg{color:var(--sage)}
+.colophon{margin-top:3rem;padding-top:1.4rem;border-top:1px dashed rgba(234,223,202,.35);font-size:.84rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+@media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr}footer .cols>div:first-child{grid-column:1/-1}}
+.alldir{position:fixed;left:14px;bottom:14px;z-index:50;font:500 .82rem var(--body);background:var(--cream);color:var(--bark);border:1.5px dashed var(--terra-ink);border-radius:999px;padding:.4rem .9rem;text-decoration:none;box-shadow:0 6px 14px -8px rgba(58,46,34,.7)}
+.alldir:hover{background:var(--terra-ink);color:#fff;border-style:solid}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+  .js .stitch svg{clip-path:none}
+  .rule .needle{display:none}
+}
+html,body{overflow-x:clip;max-width:100%}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the good part</a>
+
+<!-- botanical sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="sprig" viewBox="0 0 64 64"><g class="botanical"><path d="M32 60C31 44 33 26 32 6"/><path d="M32 48c-9-1-15-7-17-15 9 0 15 5 17 15zM32 48c9-1 15-7 17-15-9 0-15 5-17 15z"/><path d="M32 32c-7-1-12-6-13-13 7 0 12 5 13 13zM32 32c7-1 12-6 13-13-7 0-12 5-13 13z"/><path d="M32 18c-3-4-3-8 0-13 3 5 3 9 0 13z"/></g></symbol>
+  <symbol id="flower" viewBox="0 0 90 130"><g class="botanical"><path d="M46 128C44 100 50 78 45 50"/><path d="M46 100c-12-2-20-10-24-22 12 1 21 8 24 22zM47 86c10-3 17-10 20-21-11 2-18 9-20 21z"/><circle cx="45" cy="34" r="5"/><path d="M45 29c-5-8-4-16 0-22 4 6 5 14 0 22zM50 32c4-9 11-13 18-13-2 8-8 14-18 13zM50 37c9-1 16 3 19 10-8 2-15-1-19-10zM40 37c-9-1-16 3-19 10 8 2 15-1 19-10zM40 32c-4-9-11-13-18-13 2 8 8 14 18 13zM45 39c-3 6-3 11 0 16 3-5 3-10 0-16z"/><path d="M58 112c6-3 12-3 17 0M30 118c-5-3-10-3-15 0"/></g></symbol>
+  <symbol id="arrow" viewBox="0 0 46 34"><g class="botanical" stroke-width="1.6"><path d="M43 30C30 31 12 24 5 6"/><path d="M3 15L5 5l9 5"/></g></symbol>
+  <symbol id="needle" viewBox="0 0 34 30"><g class="botanical" stroke-width="1.4"><path d="M2 27L30 5"/><ellipse cx="27.5" cy="7" rx="3.2" ry="1.3" transform="rotate(-38 27.5 7)"/></g></symbol>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a class="wordmark" href="#top" aria-label="Vesna, home"><svg aria-hidden="true"><use href="#sprig"/></svg>Vesna</a>
+    <nav aria-label="Main">
+      <ul class="links" id="links">
+        <li><a href="#corsets">Corsets</a></li>
+        <li><a href="#mtm">Made to Measure</a></li>
+        <li><a href="#fit">Fit Guide</a></li>
+        <li><a href="#journal">Journal</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <button class="cart" type="button" aria-live="polite" aria-label="Basket, 0 items" id="cart">Basket <b id="count">0</b></button>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="links" id="burger"><span class="sr">Menu</span>
+        <svg viewBox="0 0 26 26" aria-hidden="true" class="botanical" stroke-width="1.6" stroke-dasharray="5 3"><path d="M3 7h20M3 13h20M3 19h20"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="salute reveal">Dear friend,</span>
+      <h1 class="reveal" style="--d:.1s">Stays made for <span class="sewn"><em>slow mornings</em><span class="stitch" data-delay="700"></span></span> and long walks home.</h1>
+      <p class="lede reveal" style="--d:.2s">We cut each pair of Vesna stays from linen and cotton coutil, bone them in sprung steel, and finish every eyelet edge by hand in a small workroom with the window open. Nothing is hurried. They are made to be laced on a Tuesday, not saved for a ball — though they'll do for that, too.</p>
+      <div class="hero-cta reveal" style="--d:.3s">
+        <a class="seal" href="#corsets"><span>Meet the stays</span></a>
+        <a class="textlink" href="#fit">or find your size first — it takes a minute &amp; a tape</a>
+      </div>
+    </div>
+    <div class="portrait reveal" style="--d:.15s">
+      <div class="arch"><div class="ph"><img src="../../assets/img/regency/hero.jpg" width="900" height="1200" alt="A woman in a walled garden at golden hour, wearing sage floral Vesna stays over a cream linen chemise dress and holding wildflowers" style="object-position:48% 20%" fetchpriority="high"></div></div>
+      <div class="cameo"><div class="ph"><img src="../../assets/img/regency/detail.jpg" width="1200" height="800" alt="Close view of cotton back lacing through brass eyelets" style="object-position:52% 50%"></div></div>
+      <svg class="pressed" viewBox="0 0 90 130" aria-hidden="true"><use href="#flower"/></svg>
+      <p class="note hand"><svg aria-hidden="true"><use href="#arrow"/></svg><span>the Elinor, in meadow jacquard — three summers old &amp; softer every year</span></p>
+    </div>
+  </div>
+</section>
+
+<div class="divider wrap" aria-hidden="true"><svg class="sprig"><use href="#sprig"/></svg><div class="rule"><span class="stitch"></span><svg class="needle"><use href="#needle"/></svg></div><svg class="sprig" style="transform:scaleX(-1)"><use href="#sprig"/></svg></div>
+
+<section id="corsets" aria-labelledby="h-corsets">
+  <div class="wrap">
+    <div class="shop-head">
+      <div class="reveal">
+        <span class="eyebrow">the summer wall</span>
+        <h2 id="h-corsets">Five stays, <em><span class="sewn">cut to order<span class="stitch"></span></span></em></h2>
+      </div>
+      <p class="lede reveal" style="margin:0;max-width:26em;--d:.1s">No warehouse, no seasons. When you order, we cut. Allow three weeks — we'll write when the binding goes on.</p>
+    </div>
+    <div class="salon">
+      <article class="piece reveal">
+        <div class="arch"><div class="ph"><img loading="lazy" src="../../assets/img/regency/p1.jpg" width="900" height="1200" alt="Model in a garden wearing the Marianne underbust stays in sage linen with embroidered side panels, over a cream dress" style="object-position:50% 20%"></div></div>
+        <div class="plate"><span class="kind">Underbust stays</span><h3>The Marianne</h3>
+          <p class="spec">16 spiral steel bones · sage linen, embroidered panels, coutil core · 2" reduction</p>
+          <div class="buy"><span class="price">€185</span><button class="add" type="button" data-name="The Marianne">Add to basket</button></div></div>
+      </article>
+      <article class="piece reveal" style="--d:.1s">
+        <div class="oval"><div class="ph"><img loading="lazy" src="../../assets/img/regency/p3.jpg" width="900" height="1200" alt="Model under an apple tree wearing the cream Hedgerow half-boned stays over a white blouse with sage linen trousers" style="object-position:50% 22%"></div></div>
+        <div class="plate"><span class="kind">Half-boned stays</span><h3>The Hedgerow</h3>
+          <p class="spec">10 flat + 8 spiral bones · cream cotton damask, linen lining · 2" reduction</p>
+          <div class="buy"><span class="price">€210</span><button class="add" type="button" data-name="The Hedgerow">Add to basket</button></div></div>
+      </article>
+      <article class="piece reveal tilt-r" style="--d:.2s">
+        <div class="mat"><div class="ph"><img loading="lazy" src="../../assets/img/regency/p2.jpg" width="900" height="1200" alt="The Elinor overbust stays in sage floral jacquard with shoulder straps, displayed on a linen dress form in a cottage doorway"></div></div>
+        <div class="plate"><span class="kind">Overbust stays</span><h3>The Elinor</h3>
+          <p class="spec">24 spiral steel bones · meadow jacquard over cotton coutil · 3" reduction</p>
+          <div class="buy"><span class="price">€265</span><button class="add" type="button" data-name="The Elinor">Add to basket</button></div></div>
+      </article>
+      <article class="piece reveal tilt-l">
+        <div class="mat"><div class="ph"><img loading="lazy" src="../../assets/img/regency/p1.jpg" width="900" height="1200" alt="Waist-level view of the Primrose waspie in sage linen cinched over a gathered cream dress" style="transform-origin:50% 43%;transform:scale(1.75)"></div></div>
+        <div class="plate"><span class="kind">Waspie</span><h3>The Primrose</h3>
+          <p class="spec">12 spiral steel bones · sage linen twill, cotton lawn lining · 2" reduction</p>
+          <div class="buy"><span class="price">€140</span><button class="add" type="button" data-name="The Primrose">Add to basket</button></div></div>
+      </article>
+      <div class="aside reveal">
+        <svg viewBox="0 0 90 130" aria-hidden="true"><use href="#flower"/></svg>
+        <span class="hand">every pair is numbered inside the lining, &amp; signed by whoever bound it</span>
+      </div>
+      <article class="piece reveal" style="--d:.1s">
+        <div class="arch"><div class="ph"><img loading="lazy" src="../../assets/img/regency/hero.jpg" width="900" height="1200" alt="The Netherfield longline corset in sage jacquard, pointed front worn over a full cream linen skirt" style="transform-origin:50% 40%;transform:scale(1.35)"></div></div>
+        <div class="plate"><span class="kind">Longline corset</span><h3>The Netherfield</h3>
+          <p class="spec">26 spiral steel bones · sage jacquard, double coutil · 4" reduction</p>
+          <div class="buy"><span class="price">€320</span><button class="add" type="button" data-name="The Netherfield">Add to basket</button></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="silhouettes" id="silhouettes" aria-labelledby="h-sil">
+  <div class="wrap">
+    <span class="eyebrow reveal">a field guide</span>
+    <h2 id="h-sil" class="reveal">Shop by <em><span class="sewn">silhouette<span class="stitch"></span></span></em></h2>
+    <div class="sil-grid">
+      <a class="sil reveal" href="#corsets"><svg viewBox="0 0 80 104" class="botanical" aria-hidden="true"><path d="M17 24Q28 10 40 24Q52 10 63 24L58 52Q57 60 62 86Q40 96 18 86Q23 60 22 52Z"/><path class="lace" d="M40 24V92"/><path d="M29 20L30 89M51 20L50 89" opacity=".45"/></svg><h3>Overbust</h3><p>Cups and supports; a bodice in its own right.</p></a>
+      <a class="sil reveal" style="--d:.08s" href="#corsets"><svg viewBox="0 0 80 104" class="botanical" aria-hidden="true"><path d="M20 36Q40 27 60 36L57 56Q56 62 61 84Q40 94 19 84Q24 62 23 56Z"/><path class="lace" d="M40 32V90"/><path d="M30 33L31 88M50 33L49 88" opacity=".45"/></svg><h3>Underbust</h3><p>Sits beneath the bust. The everyday favourite.</p></a>
+      <a class="sil reveal" style="--d:.16s" href="#corsets"><svg viewBox="0 0 80 104" class="botanical" aria-hidden="true"><path d="M22 44Q40 37 58 44L56 56L59 70Q40 79 21 70L24 56Z"/><path class="lace" d="M40 41V75"/><path d="M31 42V73M49 42V73" opacity=".45"/></svg><h3>Waspie</h3><p>A short cinch at the waist, light as a belt.</p></a>
+      <a class="sil reveal" style="--d:.24s" href="#corsets"><svg viewBox="0 0 80 104" class="botanical" aria-hidden="true"><path d="M20 30Q40 21 60 30L57 50Q56 58 65 94Q40 104 15 94Q24 58 23 50Z"/><path class="lace" d="M40 26V99"/><path d="M30 27L28 97M50 27L52 97" opacity=".45"/></svg><h3>Longline</h3><p>Runs over the hip for the smoothest line.</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="fit" id="fit" aria-labelledby="h-fit">
+  <div class="wrap">
+    <div class="fit-intro">
+      <span class="eyebrow reveal">the fit finder</span>
+      <h2 id="h-fit" class="reveal">A tape, a minute, <em>&amp; your <span class="sewn">true size<span class="stitch"></span></span></em></h2>
+      <p class="lede reveal" style="margin-top:1.2rem">Corsets are sized by their closed waist in inches, not by dress size. Tell us two measurements and how you mean to wear them; we'll do the arithmetic our cutter does.</p>
+      <ol class="howto reveal">
+        <li><b>Natural waist</b> — bend sideways; it's the crease. Measure there, snug but breathing.</li>
+        <li><b>Underbust</b> — straight round the ribs, right under the bust, tape level.</li>
+        <li>Measure over a thin layer, standing easy. No holding in.</li>
+      </ol>
+      <span class="hand reveal">between sizes or unsure? write to us — a real person with pins in her mouth will answer</span>
+    </div>
+    <div class="page reveal" style="--d:.1s">
+      <div class="tape" aria-hidden="true"><i style="left:0">50</i><i style="left:12.5%">60</i><i style="left:25%">70</i><i style="left:37.5%">80</i><i style="left:50%">90</i><i style="left:62.5%">100</i><i style="left:75%">110</i><i style="left:87.5%">120</i><span class="pin" id="pin"></span></div>
+      <form id="fitform" novalidate>
+        <div class="fields">
+          <div><label for="waist">Natural waist</label>
+            <div class="unit"><input id="waist" name="waist" type="number" inputmode="decimal" min="50" max="130" step="0.5" placeholder="70" aria-describedby="waist-err" required><span>cm</span></div>
+            <p class="err" id="waist-err" role="alert"></p></div>
+          <div><label for="under">Underbust</label>
+            <div class="unit"><input id="under" name="under" type="number" inputmode="decimal" min="55" max="145" step="0.5" placeholder="78" aria-describedby="under-err" required><span>cm</span></div>
+            <p class="err" id="under-err" role="alert"></p></div>
+        </div>
+        <fieldset>
+          <legend class="legend">How will you wear them?</legend>
+          <div class="goals">
+            <label><input type="radio" name="goal" value="everyday" checked><span><b>Everyday</b><small>gentle support, all-day ease · 2"</small></span></label>
+            <label><input type="radio" name="goal" value="shaping"><span><b>Shaping</b><small>a defined waist, worn regularly · 3"</small></span></label>
+            <label><input type="radio" name="goal" value="occasion"><span><b>Occasion</b><small>the full silhouette for an evening · 4"</small></span></label>
+          </div>
+        </fieldset>
+        <div class="go"><button class="btn" type="submit">Find my size</button><span style="font-size:.88rem;font-style:italic">Nothing is stored. It's just sums.</span></div>
+      </form>
+      <div class="result" id="result" aria-live="polite" tabindex="-1">
+        <span class="stitch" id="res-stitch"></span>
+        <div id="res-body"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="craft" id="craft" aria-labelledby="h-craft">
+  <div class="wrap">
+    <div class="specimen reveal">
+      <span class="tapebit" aria-hidden="true"></span><span class="tapebit b" aria-hidden="true"></span>
+      <div class="mat"><div class="ph"><img loading="lazy" src="../../assets/img/regency/detail.jpg" width="1200" height="800" alt="Macro view of the back of a Vesna corset: cotton lacing through brass eyelets, stitched bone channels and a bound linen edge on sage floral jacquard"></div></div>
+      <p class="note hand"><svg aria-hidden="true"><use href="#arrow"/></svg><span>eleven stitches to the inch — yes, we count</span></p>
+    </div>
+    <div>
+      <span class="eyebrow reveal">under the linen</span>
+      <h2 id="h-craft" class="reveal">What you can't see is <em><span class="sewn">most of it<span class="stitch"></span></span></em></h2>
+      <ol class="layers">
+        <li class="reveal"><span class="n">i.</span><h3>Bones</h3><p>Spiral steel at the curves so you can bend and breathe; flat steel beside the eyelets so the lacing stays true. Every tip dipped and capped.</p></li>
+        <li class="reveal"><span class="n">ii.</span><h3>Busk</h3><p>A sprung steel front busk with brass-finished loops. On and off in seconds, without unlacing the back.</p></li>
+        <li class="reveal"><span class="n">iii.</span><h3>Waist tape</h3><p>A cotton twill tape sewn through every seam at the waist. It takes the strain so the cloth never has to.</p></li>
+        <li class="reveal"><span class="n">iv.</span><h3>Layers</h3><p>Linen or cotton outside, herringbone coutil for strength, a soft cotton lawn lining against the skin. No polyester, anywhere.</p></li>
+        <li class="reveal"><span class="n">v.</span><h3>Hand finishing</h3><p>Binding felled by hand, eyelets set one at a time, threads buried. About nine hours, a pot of tea, one pair of hands.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="journal" aria-labelledby="h-letters">
+  <div class="wrap">
+    <span class="eyebrow reveal">from the post</span>
+    <h2 id="h-letters" class="reveal">Letters from <em><span class="sewn">the wearers<span class="stitch"></span></span></em></h2>
+    <div class="letters">
+      <figure class="letter reveal"><span class="stars" aria-label="5 out of 5">★★★★★</span>
+        <blockquote>I wore the Marianne to a friend's orchard wedding and then, honestly, to the shops on Monday. The fit finder put me in a 26 and the gap was exactly what it said it would be.</blockquote>
+        <figcaption><b>Ottilie, Utrecht</b><ul class="measure"><li>waist 72 cm</li><li>underbust 80 cm</li><li class="bought">bought 26"</li></ul></figcaption></figure>
+      <figure class="letter reveal" style="--d:.1s"><span class="stars" aria-label="5 out of 5">★★★★★</span>
+        <blockquote>My first corset that isn't a costume. The linen breathes at the faire in August, the bones never dig, and there was a handwritten card with the name of the woman who bound it.</blockquote>
+        <figcaption><b>Maren, Aarhus</b><ul class="measure"><li>waist 88 cm</li><li>underbust 94 cm</li><li class="bought">bought 30"</li></ul></figcaption></figure>
+      <figure class="letter reveal" style="--d:.2s"><span class="stars" aria-label="5 out of 5">★★★★★</span>
+        <blockquote>Plus-size and long-waisted, I'd given up. The Netherfield actually covers my hip. I asked for a swap from 36 to 34 after a fortnight — free, and with a kind note.</blockquote>
+        <figcaption><b>Bea, Bristol</b><ul class="measure"><li>waist 99 cm</li><li>underbust 104 cm</li><li class="bought">bought 34"</li></ul></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="mtm" id="mtm" aria-labelledby="h-mtm">
+  <div class="wrap">
+    <div class="card reveal">
+      <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+      <h2 id="h-mtm">Made to <em>your</em> measure</h2>
+      <p style="margin-top:1.2rem">Twelve measurements, a calico toile posted to your door, and a pattern drafted for one person only. Choose your linen, your ribbon, your thread. From €290, in about six weeks — and the pattern is kept on file under your name for next time.</p>
+      <a class="seal" href="mailto:workroom@vesna.example?subject=Made%20to%20measure"><span>Begin a letter</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="post" aria-labelledby="h-post">
+  <div class="wrap">
+    <h2 id="h-post" style="font-size:clamp(1.7rem,3.6vw,2.5rem)">The <em>Hedgerow Post</em></h2>
+    <p class="lede" style="margin:.8rem auto 0">One letter a month: new linens, workroom notes, how to season and mend. Never more.</p>
+    <form id="news" novalidate>
+      <div class="unit"><label for="email">Your email address</label><input id="email" type="email" autocomplete="email" placeholder="you@meadow.cottage" required></div>
+      <button class="btn" type="submit">Post it to me</button>
+    </form>
+    <p class="ok" id="news-ok" role="status"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><a class="wordmark" href="#top"><svg aria-hidden="true"><use href="#sprig"/></svg>Vesna</a><p style="margin-top:.8rem;max-width:22em">Stays and corsets in natural fibres, slowly made. Womenswear to follow, when it's ready.</p></div>
+      <div><h3>Shipping</h3><p>Tracked, plastic-free post. Free within the EU over €150; worldwide from €14. Cut to order: about three weeks.</p></div>
+      <div><h3>The fit promise</h3><p>If the size isn't right, exchange it free within 30 days — even after you've laced it. Returns within 14 days, unworn.</p></div>
+      <div><h3>Care</h3><p>Air after wearing, spot-clean with cool water, dry flat. Never the machine. <a href="#craft">Seasoning guide</a></p></div>
+      <div><h3>Contact</h3><p><a href="mailto:hello@vesna.example">hello@vesna.example</a><br>Replies within two working days, from a person.</p></div>
+    </div>
+    <div class="colophon"><span>© 2026 Vesna Workroom</span><span>Set in Fraunces, Lora &amp; Caveat · stitched with care</span></div>
+  </div>
+</footer>
+
+<a class="alldir" href="../../index.html">← All directions</a>
+
+<script>
+(function(){
+  var d=document, $=function(s){return d.querySelector(s)}, $$=function(s){return Array.prototype.slice.call(d.querySelectorAll(s))};
+  d.documentElement.classList.add('js');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* running stitch: build a dashed path the width of its host, then reveal it stitch by stitch */
+  function sew(el){
+    var w=Math.max(40,Math.round(el.getBoundingClientRect().width)), p='M2 6', i=0, seg=56;
+    for(var x=2;x<w-2;x+=seg){var e=Math.min(x+seg,w-2);p+=' Q'+((x+e)/2)+' '+((i++%2)?10.5:1.5)+' '+e+' 6';}
+    el.innerHTML='<svg viewBox="0 0 '+w+' 12" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="'+p+'" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="9 7"/></svg>';
+    var n=Math.max(3,Math.round(w/16)), t=Math.min(2400,Math.max(600,n*55));
+    el.firstChild.style.transition='clip-path '+t+'ms steps('+n+',end) '+(el.dataset.delay||150)+'ms';
+    if(el.parentNode.classList.contains('rule')) el.parentNode.style.setProperty('--t',(t+150)+'ms');
+  }
+  $$('.stitch').forEach(sew);
+
+  /* scroll reveals + sewing */
+  var targets=$$('.reveal,.stitch,.rule');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -8% 0px'});
+    targets.forEach(function(t){if(t.id!=='res-stitch')io.observe(t);});
+  } else targets.forEach(function(t){t.classList.add('in');});
+
+  /* mobile nav */
+  var burger=$('#burger'), links=$('#links');
+  burger.addEventListener('click',function(){var o=links.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
+  links.addEventListener('click',function(e){if(e.target.tagName==='A'){links.classList.remove('open');burger.setAttribute('aria-expanded','false');}});
+  d.addEventListener('keydown',function(e){if(e.key==='Escape'&&links.classList.contains('open')){links.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.focus();}});
+
+  /* basket */
+  var count=0, badge=$('#count'), cart=$('#cart');
+  $$('.add').forEach(function(b){b.addEventListener('click',function(){
+    count++; badge.textContent=count; cart.setAttribute('aria-label','Basket, '+count+(count===1?' item':' items'));
+    badge.classList.remove('bump'); void badge.offsetWidth; badge.classList.add('bump');
+    b.classList.add('done'); b.textContent='Tucked in ✓';
+    clearTimeout(b._t); b._t=setTimeout(function(){b.classList.remove('done');b.textContent='Add to basket';},1800);
+  });});
+
+  /* fit finder */
+  var form=$('#fitform'), waist=$('#waist'), under=$('#under'), pin=$('#pin'), result=$('#result'), body=$('#res-body'), rs=$('#res-stitch');
+  waist.addEventListener('input',function(){var v=parseFloat(waist.value);if(!isNaN(v))pin.style.left=Math.max(0,Math.min(100,(v-50)/80*100))+'%';});
+  function check(input,lo,hi,name){
+    var v=parseFloat(input.value), err=$('#'+input.id+'-err'), msg='';
+    if(input.value.trim()===''||isNaN(v)) msg='Please enter your '+name+' in centimetres.';
+    else if(v<lo||v>hi) msg='That looks unusual — we expect '+lo+'–'+hi+' cm. Measuring in inches? Multiply by 2.54.';
+    err.textContent=msg; input.setAttribute('aria-invalid',msg?'true':'false');
+    return msg?null:v;
+  }
+  function half(n){return Math.round(n*2)/2;}
+  function lacing(gapCm){
+    var g=Math.max(8,Math.min(46,gapCm*5)), l=60-g/2, r=60+g/2, s='';
+    for(var y=16;y<116;y+=20){s+='<path d="M'+l+' '+y+'L'+r+' '+(y+20)+'M'+r+' '+y+'L'+l+' '+(y+20)+'" stroke="#934c2a" stroke-width="1.4"/>';}
+    for(var y2=16;y2<=116;y2+=20){s+='<circle cx="'+(l-5)+'" cy="'+y2+'" r="2.2"/><circle cx="'+(r+5)+'" cy="'+y2+'" r="2.2"/>';}
+    return '<svg class="lacing botanical" viewBox="0 0 120 160" role="img" aria-label="Diagram of the back lacing with a gap of about '+gapCm+' centimetres"><path d="M8 8H'+l+'V124H8Q14 66 8 8ZM112 8H'+r+'V124H112Q106 66 112 8Z"/>'+s+'<path d="M'+l+' 138H'+r+'M'+l+' 133v10M'+r+' 133v10" stroke="#934c2a"/><text x="60" y="157" text-anchor="middle" stroke="none">'+gapCm+' cm gap</text></svg>';
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var w=check(waist,50,130,'natural waist'), u=check(under,55,145,'underbust');
+    if(w===null||u===null){(w===null?waist:under).focus();result.classList.remove('show');return;}
+    var goal=form.goal.value, red={everyday:2,shaping:3,occasion:4}[goal];
+    var win=w/2.54, size=Math.floor((win-red)/2)*2, html;
+    if(size<18||size>40){
+      html='<span class="eyebrow">a note from the cutter</span><p>Your tape puts you at a '+size+'" — just outside our ready-cut range of 18–40". That is exactly what made-to-measure is for: we’ll draft a pattern for you alone, at no extra charge for size.</p><a class="btn" href="#mtm">Begin made to measure</a>';
+    } else {
+      var diff=u-w, sil, why;
+      if(goal==='occasion'){sil='Overbust';why='a complete bodice line for the evening, no bra beneath.';}
+      else if(goal==='shaping'){ if(diff<10){sil='Longline';why='your ribs and waist are close in measure, so extra length over the hip gives the curve somewhere to go.';} else {sil='Underbust';why='your natural curve suits a classic underbust, easy to wear often under or over clothes.';} }
+      else { if(diff>=12){sil='Waspie';why='you already have a defined waist; a short cinch gives support with the most freedom.';} else {sil='Underbust';why='comfortable for long days and kind to the ribs.';} }
+      var total=win-size, first=half((total-1)*2.54), seasoned=half(Math.max(1,total-red+1)*2.54);
+      if(seasoned>first) seasoned=first;
+      html='<span class="eyebrow">we’d cut you a…</span><div class="res-grid"><div><div class="size">'+size+'"<small>corset size — closes to '+Math.round(size*2.54)+' cm at the waist.<br>Your waist is '+(Math.round(win*10)/10)+'", less a '+red+'" '+goal+' reduction, rounded down to the even size.</small></div></div>'+lacing(first)+'</div>'+
+        '<ul class="res-list"><li><b>Silhouette: '+sil+'</b>'+why.charAt(0).toUpperCase()+why.slice(1)+'</li>'+
+        '<li><b>Lacing gap: about '+first+' cm at first</b>Expect a parallel gap of roughly '+first+' cm for the first dozen wears, easing to about '+seasoned+' cm as the stays season to you. A gap is correct — closed edge-to-edge means a size too large.</li></ul>'+
+        '<div class="go"><a class="btn" href="#corsets">See stays in '+size+'"</a><a class="textlink" href="#silhouettes">what is '+(sil==='Underbust'||sil==='Overbust'?'an ':'a ')+sil.toLowerCase()+'?</a></div>';
+    }
+    body.innerHTML=html;
+    result.classList.remove('show'); rs.classList.remove('in'); void result.offsetWidth;
+    result.classList.add('show'); sew(rs);
+    requestAnimationFrame(function(){requestAnimationFrame(function(){rs.classList.add('in');});});
+    result.focus({preventScroll:true});
+    result.scrollIntoView({behavior:reduce?'auto':'smooth',block:'nearest'});
+  });
+
+  /* newsletter */
+  $('#news').addEventListener('submit',function(e){
+    e.preventDefault(); var em=$('#email'), ok=$('#news-ok');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())){ok.textContent='That address looks a stitch short — try again?';ok.style.color='#9a2418';em.setAttribute('aria-invalid','true');em.focus();return;}
+    em.setAttribute('aria-invalid','false');ok.style.color='';ok.textContent='Lovely. The first letter is on its way — sealed & stamped.';em.value='';
+  });
+
+  /* re-sew on resize so the stitch length stays honest */
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){$$('.stitch').forEach(function(s){var was=s.classList.contains('in');sew(s);if(was){s.firstChild.style.transition='none';}});},250);});
+})();
+</script>
+</body>
+</html>

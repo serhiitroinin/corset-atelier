@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesna — Corsets for every body, sizes 18–40</title>
+<meta name="description" content="Fit-first corsets in sizes 18–40. Take the 30-second fit finder, get your size, silhouette and lacing gap. Free fit exchange, always.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fff8f0; --tomato:#e4572e; --tomato-ink:#b3361a; --cobalt:#1f3a5f; --lemon:#f2c14e; --peach:#f7d9c4; --white:#fffdfa;
+  --disp:"Bricolage Grotesque","Arial Narrow",sans-serif; --body:"Instrument Sans","DM Sans",system-ui,sans-serif;
+  --r:28px; --r-lg:44px; --wrap:min(1240px,100% - 40px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--cobalt);font:400 1.0625rem/1.55 var(--body);overflow-x:hidden}
+img{display:block;max-width:100%}
+h1,h2,h3,h4{font-family:var(--disp);margin:0;line-height:.95;letter-spacing:-.02em;font-weight:800}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--tomato);outline-offset:3px;border-radius:8px}
+.wrap{width:var(--wrap);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--cobalt);color:var(--cream);padding:10px 16px;border-radius:99px;z-index:100}
+.skip:focus{top:12px}
+.narrow{font-stretch:75%;font-variation-settings:"wdth" 75}
+.thin{font-weight:300}
+.eyebrow{font:600 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--tomato-ink)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;border:2.5px solid var(--cobalt);background:var(--cobalt);color:var(--cream);font:700 1rem/1 var(--body);padding:.95em 1.5em;border-radius:99px;text-decoration:none;transition:transform .18s cubic-bezier(.3,1.6,.5,1),box-shadow .18s,background .18s}
+.btn:hover{transform:translate(-2px,-3px) rotate(-1deg);box-shadow:4px 5px 0 var(--tomato)}
+.btn:active{transform:translate(0,0);box-shadow:none}
+.btn.sun{background:var(--lemon);color:var(--cobalt)}
+.btn.sun:hover{box-shadow:4px 5px 0 var(--cobalt)}
+.btn.ghost{background:transparent;color:var(--cobalt)}
+.btn.sm{padding:.7em 1.1em;font-size:.92rem}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,248,240,.92);backdrop-filter:blur(10px);border-bottom:2px solid var(--cobalt)}
+.nav .wrap{display:flex;align-items:center;gap:24px;height:68px}
+.mark{font:800 2rem/1 var(--disp);letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:6px}
+.mark svg{width:26px;height:26px;color:var(--tomato);transition:transform .5s}
+.mark:hover svg{transform:rotate(140deg)}
+.links{display:flex;gap:6px;margin-left:auto;list-style:none;padding:0;margin-block:0}
+.links a{text-decoration:none;font-weight:600;padding:.5em .9em;border-radius:99px;transition:background .2s}
+.links a:hover{background:var(--peach)}
+.cart{border:2.5px solid var(--cobalt);background:var(--white);border-radius:99px;padding:.45em .55em .45em 1em;font-weight:700;display:flex;align-items:center;gap:.5em}
+.cart b{display:grid;place-items:center;min-width:1.8em;height:1.8em;border-radius:99px;background:var(--tomato);color:#fff;font:800 .95rem/1 var(--disp)}
+.cart b.bump{animation:bump .45s cubic-bezier(.3,1.8,.5,1)}
+@keyframes bump{40%{transform:scale(1.5) rotate(-12deg)}}
+.burger{display:none;border:2.5px solid var(--cobalt);background:var(--lemon);border-radius:14px;width:44px;height:44px;padding:0;place-items:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:20px;height:2.5px;background:var(--cobalt);border-radius:2px;position:relative;transition:transform .25s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded=true] span{background:transparent}
+.burger[aria-expanded=true] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded=true] span::after{transform:translateY(-6px) rotate(-45deg)}
+@media (max-width:860px){
+  .burger{display:grid;order:3}
+  .cart{margin-left:auto}
+  .links{position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--cream);border-bottom:2px solid var(--cobalt);padding:12px 20px 20px;gap:2px;display:none}
+  .links.open{display:flex}
+  .links a{display:block;font:800 1.6rem/1.2 var(--disp)}
+}
+
+/* hero */
+.hero{position:relative;padding:clamp(20px,3vw,40px) 0 clamp(40px,6vw,80px)}
+.blob{position:absolute;pointer-events:none;z-index:0;animation:float 14s ease-in-out infinite alternate}
+@keyframes float{to{transform:translate(12px,-18px) rotate(8deg)}}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(24px,4vw,64px);align-items:start}
+.hero h1{font-size:clamp(2.7rem,6.1vw,5.4rem);margin:10px 0 14px}
+.hero h1 em{font-style:normal;color:var(--tomato)}
+.hero h1 .wob{display:inline-block;background:var(--lemon);border-radius:.35em .5em .4em .55em;padding:0 .14em;transform:rotate(-2deg)}
+.lede{font-size:1.125rem;max-width:36em;margin-bottom:22px}
+.shot{position:relative;margin:0}
+.shot .frame{aspect-ratio:3/4;border-radius:48% 52% 44% 56% / 36% 40% 60% 64%;overflow:hidden;border:3px solid var(--cobalt);background:var(--peach);max-height:min(760px,calc(100vh - 110px));margin-inline:auto}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.sticker{position:absolute;display:grid;place-items:center;text-align:center;font:800 1rem/1 var(--disp);border:2.5px solid var(--cobalt);border-radius:50%;width:112px;height:112px;padding:10px;z-index:2;transition:transform .4s cubic-bezier(.3,1.8,.5,1)}
+.sticker:hover{transform:rotate(0) scale(1.08)!important}
+.sticker small{display:block;font:600 .68rem/1.1 var(--body);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.sticker big{font-size:1.55rem;display:block}
+.st1{background:var(--lemon);top:4%;left:-3%;transform:rotate(-12deg)}
+.st2{background:var(--tomato);color:#fff;bottom:9%;right:-2%;transform:rotate(9deg);width:124px;height:124px;font-size:1.15rem}
+.st3{background:var(--white);bottom:-2%;left:8%;transform:rotate(-5deg);border-radius:99px;width:auto;height:auto;padding:12px 18px;font-size:.95rem}
+.shot figcaption{font-size:.85rem;text-align:center;margin-top:12px}
+
+/* quiz */
+.quiz{position:relative;background:var(--white);border:3px solid var(--cobalt);border-radius:var(--r-lg);padding:clamp(18px,2.4vw,30px);box-shadow:8px 9px 0 var(--lemon);scroll-margin-top:90px}
+.q-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.q-top p{font:700 .85rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.track{position:relative;flex:1;height:14px;border-radius:99px;background:var(--peach);border:2px solid var(--cobalt)}
+.track i{position:absolute;inset:0 auto 0 0;width:var(--p,8%);background:var(--tomato);border-radius:99px;transition:width .6s cubic-bezier(.3,1.4,.5,1)}
+.track b{position:absolute;top:50%;left:var(--p,8%);width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:var(--lemon);border:2.5px solid var(--cobalt);transition:left .6s cubic-bezier(.3,1.4,.5,1),transform .6s;transform:rotate(var(--rot,0deg))}
+.track b::after{content:"";position:absolute;left:50%;top:4px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:var(--cobalt)}
+.step{border:0;padding:0;margin:0;min-width:0}
+.step[hidden]{display:none}
+.step.in{animation:stepin .5s cubic-bezier(.2,1.2,.4,1) both}
+.step.in.back{animation-name:stepback}
+@keyframes stepin{from{opacity:0;transform:translateX(34px) rotate(1.2deg)}}
+@keyframes stepback{from{opacity:0;transform:translateX(-34px) rotate(-1.2deg)}}
+.step h2{font-size:clamp(1.6rem,2.6vw,2.25rem);margin-bottom:6px;outline:0}
+.step .hint{font-size:.98rem;margin-bottom:16px}
+.goals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.goal{position:relative}
+.goal input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+.goal span{display:flex;flex-direction:column;gap:6px;height:100%;border:2.5px solid var(--cobalt);border-radius:22px;padding:14px;background:var(--cream);transition:transform .2s cubic-bezier(.3,1.8,.5,1),background .2s}
+.goal svg{width:40px;height:40px}
+.goal strong{font:800 1.15rem/1 var(--disp)}
+.goal small{font-size:.84rem;line-height:1.35}
+.goal:hover span{transform:translateY(-3px) rotate(-1deg)}
+.goal input:checked+span{background:var(--lemon);transform:rotate(-1.5deg) scale(1.02);box-shadow:4px 4px 0 var(--cobalt)}
+.goal input:focus-visible+span{outline:3px solid var(--tomato);outline-offset:3px}
+.measure{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.measure label{display:block;font-weight:700;font-size:.9rem;margin-bottom:6px}
+.bigin{display:flex;align-items:baseline;gap:6px;border:2.5px solid var(--cobalt);border-radius:22px;background:var(--cream);padding:6px 16px}
+.bigin:focus-within{background:#fff;box-shadow:4px 4px 0 var(--lemon)}
+.bigin input{width:3.2ch;box-sizing:content-box;border:0;background:none;font:800 3rem/1.1 var(--disp);color:var(--cobalt);outline:0;-moz-appearance:textfield;padding:0}
+.bigin input::-webkit-outer-spin-button,.bigin input::-webkit-inner-spin-button{-webkit-appearance:none}
+.bigin span{font:700 1.1rem/1 var(--disp)}
+.inch{font:600 1rem/1.3 var(--body);padding-bottom:14px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:none;margin:14px 0 2px}
+input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:99px;background:repeating-linear-gradient(90deg,var(--cobalt) 0 2px,var(--peach) 2px 12px);border:2px solid var(--cobalt)}
+input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:var(--peach);border:2px solid var(--cobalt)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--tomato);border:2.5px solid var(--cobalt);margin-top:-12px;cursor:grab}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--tomato);border:2.5px solid var(--cobalt);cursor:grab}
+.err{min-height:1.5em;color:var(--tomato-ink);font-weight:700;font-size:.92rem;margin-top:6px}
+.q-nav{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap}
+.linkbtn{background:none;border:0;font-weight:700;text-decoration:underline;text-underline-offset:4px;padding:.6em .2em}
+.tip{font-size:.85rem;display:flex;gap:8px;align-items:center}
+.tip svg{flex:none;width:22px;height:22px;color:var(--tomato)}
+/* result */
+.res{display:grid;grid-template-columns:auto 1fr;gap:16px 20px;align-items:center}
+.size-badge{position:relative;display:grid;place-items:center;width:128px;height:128px;border-radius:50%;background:var(--lemon);border:3px solid var(--cobalt);text-align:center;transform:rotate(-6deg);animation:pop .7s cubic-bezier(.3,1.9,.5,1) both}
+@keyframes pop{from{transform:scale(0) rotate(-90deg)}}
+.size-badge small{font:700 .68rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase}
+.size-badge strong{font:800 3.6rem/.85 var(--disp);display:block}
+.size-badge.mtm strong{font-size:2.2rem}
+.res dl{margin:0;display:grid;gap:8px}
+.res dt{font:700 .72rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--tomato-ink)}
+.res dd{margin:2px 0 0;font:800 1.3rem/1.1 var(--disp)}
+.res dd span{display:block;font:400 .9rem/1.4 var(--body);margin-top:3px}
+.gapviz{grid-column:1/-1;display:flex;align-items:center;gap:14px;background:var(--peach);border-radius:20px;padding:12px 16px;font-size:.9rem}
+.gapviz .lace{flex:none;display:flex;height:64px}
+.gapviz .lace i{width:26px;background:var(--cobalt);border-radius:8px 2px 2px 8px}
+.gapviz .lace i:last-child{border-radius:2px 8px 8px 2px}
+.gapviz .lace u{width:var(--g,24px);transition:width .8s cubic-bezier(.3,1.5,.5,1) .3s;background:repeating-linear-gradient(28deg,transparent 0 5px,var(--tomato) 5px 7.5px),repeating-linear-gradient(-28deg,transparent 0 5px,var(--tomato) 5px 7.5px)}
+.also{grid-column:1/-1;display:flex;gap:14px;align-items:center;border:2.5px dashed var(--cobalt);border-radius:22px;padding:10px 14px 10px 10px}
+.also img{width:62px;height:78px;object-fit:cover;border-radius:14px;flex:none}
+.also p{font-size:.9rem;flex:1}
+.also p b{font-family:var(--disp);font-size:1.05rem}
+.confetti{position:absolute;left:80px;top:150px;width:14px;height:14px;border-radius:50% 40% 60% 45%;pointer-events:none;animation:burst 1s cubic-bezier(.1,.7,.3,1) forwards}
+@keyframes burst{to{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:0}}
+@media (max-width:520px){.goals{grid-template-columns:1fr}.goal span{flex-direction:row;align-items:center;flex-wrap:wrap}.goal small{flex-basis:100%}.res{grid-template-columns:1fr}.size-badge{width:110px;height:110px}}
+@media (max-width:940px){.hero-grid{grid-template-columns:1fr}.shot{max-width:520px;margin-inline:auto;width:100%}}
+
+/* marquee */
+.ticker{background:var(--tomato);color:#fff;border-block:3px solid var(--cobalt);overflow:hidden;transform:rotate(-1.2deg) scale(1.02);margin:10px 0 30px}
+.ticker div{display:flex;gap:40px;width:max-content;padding:14px 0;animation:slide 32s linear infinite;font:800 clamp(1.4rem,2.4vw,2rem)/1 var(--disp)}
+.ticker span{display:flex;gap:40px;align-items:center;white-space:nowrap}
+.ticker span::after{content:"";width:22px;height:22px;border-radius:50% 40% 55% 45%;background:var(--lemon);border:2px solid var(--cobalt)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+section{position:relative;padding:clamp(56px,8vw,110px) 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,48px)}
+.head h2{font-size:clamp(2.4rem,5.4vw,4.6rem);max-width:12em}
+.head h2 em{font-style:normal;color:var(--tomato)}
+.head p{max-width:30em}
+
+/* products */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,30px)}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+.card{background:var(--white);border:2.5px solid var(--cobalt);border-radius:var(--r-lg);padding:12px 12px 20px;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.3,1.5,.5,1),box-shadow .3s}
+.card:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:7px 8px 0 var(--c,var(--lemon))}
+.pics{position:relative;aspect-ratio:3/4;border-radius:34px;overflow:hidden;background:var(--c,var(--peach))}
+.pics img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .45s,transform .7s cubic-bezier(.2,1,.3,1)}
+.pics img.on{opacity:1;transform:none}
+.pics .tag{position:absolute;left:12px;top:12px;z-index:2;background:var(--cream);border:2px solid var(--cobalt);border-radius:99px;font:700 .75rem/1 var(--body);padding:.5em .8em}
+.pics .shown{position:absolute;right:12px;bottom:12px;z-index:2;background:var(--cobalt);color:var(--cream);border-radius:99px;font:600 .75rem/1 var(--body);padding:.55em .85em}
+.switch{display:flex;align-items:center;gap:6px;margin:14px 6px 0;flex-wrap:wrap}
+.switch>span{font:700 .78rem/1 var(--body);letter-spacing:.04em;margin-right:4px}
+.switch button{border:2px solid var(--cobalt);background:var(--cream);border-radius:99px;font:800 .95rem/1 var(--disp);min-width:44px;height:36px;padding:0 .7em;transition:transform .2s cubic-bezier(.3,1.8,.5,1),background .2s}
+.switch button:hover{transform:translateY(-2px)}
+.switch button[aria-pressed=true]{background:var(--cobalt);color:var(--cream);transform:rotate(-4deg) scale(1.06)}
+.card h3{font-size:1.75rem;margin:14px 6px 2px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.card h3 span{font-size:1.35rem;font-weight:600}
+.card .kind{margin:0 6px;font-weight:700;font-size:.85rem;color:var(--tomato-ink)}
+.card .spec{margin:6px 6px 16px;font-size:.9rem;flex:1}
+.card .btn{margin:0 6px}
+
+/* silhouettes */
+.sil{background:var(--peach);border-block:3px solid var(--cobalt)}
+.sils{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,24px)}
+@media (max-width:900px){.sils{grid-template-columns:repeat(2,1fr)}}
+.sils a{display:block;text-decoration:none;background:var(--cream);border:2.5px solid var(--cobalt);padding:22px 20px 24px;transition:transform .3s cubic-bezier(.3,1.6,.5,1),background .25s,border-radius .4s}
+.sils li:nth-child(1) a{border-radius:60px 28px 28px 28px}.sils li:nth-child(2) a{border-radius:28px 60px 28px 28px}
+.sils li:nth-child(3) a{border-radius:28px 28px 28px 60px}.sils li:nth-child(4) a{border-radius:28px 28px 60px 28px}
+.sils a:hover{transform:translateY(-6px) rotate(1deg);background:var(--lemon);border-radius:40px}
+.sils svg{width:100%;height:clamp(110px,14vw,170px);stroke:var(--cobalt);stroke-width:2.6;fill:var(--white);stroke-linejoin:round;stroke-linecap:round}
+.sils a:hover svg{fill:var(--tomato)}
+.sils .dash{fill:none;stroke-dasharray:3 5}
+.sils h3{font-size:1.7rem;margin:12px 0 6px}
+.sils p{font-size:.92rem}
+.sils ul,.sils{list-style:none;padding:0;margin:0}
+
+/* craft */
+.craft-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,5vw,72px);align-items:center}
+@media (max-width:900px){.craft-grid{grid-template-columns:1fr}}
+.craft-pic{position:relative}
+.craft-pic img{width:100%;aspect-ratio:3/2;object-fit:cover;border:3px solid var(--cobalt);border-radius:40% 60% 52% 48% / 55% 42% 58% 45%}
+.craft h2{font-size:clamp(2.3rem,4.8vw,4rem);margin:10px 0 16px}
+.parts{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:10px;counter-reset:n}
+.parts li{counter-increment:n;display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start;background:var(--white);border:2px solid var(--cobalt);border-radius:22px;padding:12px 16px 12px 12px;transition:transform .25s}
+.parts li:hover{transform:translateX(6px)}
+.parts li::before{content:counter(n);display:grid;place-items:center;width:48px;height:48px;border-radius:50% 44% 56% 48%;font:800 1.4rem/1 var(--disp);background:var(--lemon);border:2px solid var(--cobalt)}
+.parts li:nth-child(even)::before{background:var(--tomato);color:#fff}
+.parts b{font:800 1.15rem/1.2 var(--disp);display:block}
+.parts span{font-size:.93rem}
+
+/* reviews */
+.rev{background:var(--cobalt);color:var(--cream)}
+.rev .eyebrow{color:var(--lemon)}
+.rev .head h2 em{color:var(--lemon)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.chips button{border:2.5px solid var(--cream);background:transparent;color:var(--cream);border-radius:99px;font:700 .95rem/1 var(--body);padding:.75em 1.15em;transition:transform .2s cubic-bezier(.3,1.8,.5,1),background .2s,color .2s}
+.chips button:hover{transform:translateY(-2px) rotate(-1deg)}
+.chips button[aria-pressed=true]{background:var(--lemon);border-color:var(--lemon);color:var(--cobalt)}
+.rev :focus-visible{outline-color:var(--lemon)}
+.count{font-size:.9rem;margin-bottom:24px;opacity:.9}
+.wall{columns:3;column-gap:22px}
+@media (max-width:980px){.wall{columns:2}}
+@media (max-width:620px){.wall{columns:1}}
+.review{break-inside:avoid;background:var(--cream);color:var(--cobalt);border-radius:var(--r);padding:20px 22px 22px;margin:0 0 22px}
+.review[hidden]{display:none}
+.review.show{animation:pop2 .45s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes pop2{from{opacity:0;transform:scale(.92) rotate(-1.5deg)}}
+.review:nth-child(3n+1){background:var(--peach)}.review:nth-child(4n+2){background:var(--lemon)}
+.meas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;list-style:none;padding:0}
+.meas li{border:2px solid var(--cobalt);border-radius:99px;font:700 .8rem/1 var(--body);padding:.5em .75em;background:var(--white)}
+.meas li.sz{background:var(--cobalt);color:var(--cream)}
+.review blockquote{margin:0;font:600 1.2rem/1.3 var(--disp);letter-spacing:-.01em}
+.review footer{margin-top:12px;font-size:.88rem}
+.stars{color:var(--tomato-ink);letter-spacing:2px}
+
+/* mtm + promise */
+.duo{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(16px,2.2vw,30px)}
+@media (max-width:900px){.duo{grid-template-columns:1fr}}
+.panel{position:relative;overflow:hidden;border:3px solid var(--cobalt);border-radius:var(--r-lg);padding:clamp(26px,4vw,52px)}
+.panel h2{font-size:clamp(2.1rem,4.2vw,3.6rem);margin:10px 0 14px;position:relative}
+.panel p{position:relative;max-width:34em;margin-bottom:22px}
+.mtm{background:var(--lemon)}
+.mtm .blob{right:-70px;bottom:-90px;width:300px;color:var(--tomato)}
+.promise{background:var(--white)}
+.promise ol{margin:0 0 4px;padding-left:1.2em;display:grid;gap:8px;font-weight:600}
+
+/* newsletter */
+.news{padding-top:0}
+.news .panel{background:var(--tomato);color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+@media (max-width:820px){.news .panel{grid-template-columns:1fr}}
+.news h2{margin-top:0}
+.news p{font-size:1.15rem;font-weight:500;margin:0}
+.news form{position:relative;background:var(--cream);color:var(--cobalt);border:2.5px solid var(--cobalt);border-radius:30px;padding:18px}
+.news label{font-weight:700;font-size:.9rem;display:block;margin-bottom:8px}
+.news .row{display:flex;gap:8px;flex-wrap:wrap}
+.news input{flex:1 1 200px;min-width:0;border:2.5px solid var(--cobalt);border-radius:99px;background:#fff;font:inherit;color:inherit;padding:.8em 1.2em}
+.news .msg{min-height:1.4em;margin-top:8px;font-weight:700;font-size:.92rem}
+
+/* footer */
+.foot{background:var(--cobalt);color:var(--cream);padding:clamp(48px,6vw,80px) 0 90px;border-radius:var(--r-lg) var(--r-lg) 0 0}
+.foot-grid{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:32px}
+@media (max-width:980px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.foot-grid{grid-template-columns:1fr}}
+.foot .mark{font-size:3.4rem;color:var(--lemon)}
+.foot h3{font-size:1.25rem;color:var(--lemon);margin-bottom:10px}
+.foot p,.foot li{font-size:.93rem}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.foot a{text-underline-offset:4px}
+.foot a:hover{color:var(--lemon)}
+.foot :focus-visible{outline-color:var(--lemon)}
+.legal{margin-top:44px;padding-top:20px;border-top:1.5px solid rgba(255,248,240,.3);font-size:.82rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.pill{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--cream);color:var(--cobalt);border:2.5px solid var(--cobalt);border-radius:99px;font:700 .82rem/1 var(--body);padding:.7em 1.1em;text-decoration:none;box-shadow:3px 3px 0 var(--tomato);transition:transform .2s}
+.pill:hover{transform:translate(-1px,-2px) rotate(-2deg)}
+.toast{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--lemon);border:2.5px solid var(--cobalt);border-radius:22px;padding:12px 18px;font-weight:700;max-width:min(320px,calc(100vw - 32px));transform:translateY(160%) rotate(3deg);transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.toast.on{transform:none}
+
+.js .reveal{opacity:0;transform:translateY(34px) rotate(.8deg);transition:opacity .7s,transform .8s cubic-bezier(.2,1.1,.3,1);transition-delay:var(--d,0s)}
+.js .reveal.seen{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
+@media (max-width:600px){.sil>.blob{width:70px!important;height:120px!important;top:-90px!important}}
+html,body{overflow-x:clip;max-width:100%}
+</style>
+</head>
+<body>
+<a class="skip" href="#fit">Skip to the fit finder</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="blob-a" viewBox="-80 -80 160 160"><path fill="currentColor" d="M43.6-57.5C56-49.6 65-36 69.8-20.6 74.6-5.2 75.1 12 68.600 26 62.100 40 48.600 50.800 34 58.600 19.400 66.400 3.700 71.200-12.600 70.400-28.900 69.600-45.800 63.200-57.200 51.300-68.600 39.400-74.500 22-74.400 5-74.300-12-68.200-28.600-57.600-40.600-47-52.600-31.900-60-16.600-65.200-1.300-70.400 14.200-73.400 43.600-57.500Z"/></symbol>
+  <symbol id="blob-b" viewBox="-80 -80 160 160"><path fill="currentColor" d="M38-62C50-55 61-46 68-33 75-20 78-4 74 10 70 24 59 36 48 47 37 58 26 68 12 72-2 76-19 74-33 67-47 60-58 48-66 34-74 20-79 4-75-10-71-24-58-36-46-46-34-56-23-64-9-68 5-72 26-69 38-62Z"/></symbol>
+  <symbol id="frond" viewBox="0 0 120 200"><path d="M60 195C57 140 59 80 62 22" stroke="currentColor" stroke-width="9" stroke-linecap="round" fill="none"/><g fill="currentColor"><ellipse cx="62" cy="20" rx="11" ry="20"/><ellipse cx="40" cy="56" rx="10" ry="24" transform="rotate(-38 40 56)"/><ellipse cx="84" cy="56" rx="10" ry="24" transform="rotate(38 84 56)"/><ellipse cx="34" cy="96" rx="12" ry="29" transform="rotate(-44 34 96)"/><ellipse cx="88" cy="96" rx="12" ry="29" transform="rotate(44 88 96)"/><ellipse cx="30" cy="140" rx="13" ry="32" transform="rotate(-50 30 140)"/><ellipse cx="92" cy="140" rx="13" ry="32" transform="rotate(50 92 140)"/></g></symbol>
+  <symbol id="sun" viewBox="0 0 40 40"><circle cx="20" cy="20" r="9" fill="currentColor"/><g stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M20 3v5M20 32v5M3 20h5M32 20h5M8 8l3.500 3.500M28.500 28.500 32 32M8 32l3.500-3.500M28.500 11.500 32 8"/></g></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="#top" aria-label="Vesna home">Vesna<svg aria-hidden="true"><use href="#sun"/></svg></a>
+    <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span></button>
+    <ul class="links" id="menu">
+      <li><a href="#shop">Corsets</a></li>
+      <li><a href="#mtm">Made to Measure</a></li>
+      <li><a href="#fit">Fit Guide</a></li>
+      <li><a href="#craft">Journal</a></li>
+    </ul>
+    <button class="cart" type="button" aria-label="Bag, 0 items" id="cart">Bag <b id="count">0</b></button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="padding-top:clamp(20px,3vw,40px)">
+  <svg class="blob" style="width:min(46vw,560px);right:-8%;top:-40px;color:var(--peach)" aria-hidden="true"><use href="#blob-a"/></svg>
+  <svg class="blob" style="width:130px;height:210px;left:-30px;bottom:20px;color:var(--tomato);animation-duration:18s" aria-hidden="true"><use href="#frond"/></svg>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Corsets in sizes 18–40 · cups B–H</p>
+      <h1><span class="narrow">Corsets for</span> <em>every</em> body. <span class="thin narrow">Yes,</span> <span class="wob">yours.</span></h1>
+      <p class="lede">Steel-boned, comfy enough for jeans on a Tuesday, and sized by your actual measurements — not by a chart that stops at "L". Three questions, thirty seconds, no tape-measure trauma.</p>
+
+      <form class="quiz" id="fit" novalidate aria-labelledby="q-title">
+        <span class="sr" id="q-title">Fit finder</span>
+        <div class="q-top"><p id="q-count" aria-live="polite">Step 1 of 3</p><div class="track" id="track" aria-hidden="true"><i></i><b></b></div></div>
+
+        <fieldset class="step" data-step="0">
+          <legend class="sr">Your goal</legend>
+          <h2 tabindex="-1">What's the corset for?</h2>
+          <p class="hint">No wrong answers. This just decides how snug we go.</p>
+          <div class="goals">
+            <label class="goal"><input type="radio" name="goal" value="everyday" checked><span><svg viewBox="0 0 40 40" aria-hidden="true" style="color:var(--tomato)"><use href="#sun"/></svg><strong>Everyday</strong><small>Jeans, tees, a Tuesday. Gentle hug, 2" in.</small></span></label>
+            <label class="goal"><input type="radio" name="goal" value="shaping"><span><svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="#1f3a5f" stroke-width="3" stroke-linecap="round"><path d="M12 5c0 9 6 10 6 15s-6 6-6 15M28 5c0 9-6 10-6 15s6 6 6 15"/></svg><strong>Shaping</strong><small>A proper curve you can still eat lunch in. 3" in.</small></span></label>
+            <label class="goal"><input type="radio" name="goal" value="occasion"><span><svg viewBox="0 0 40 40" aria-hidden="true" fill="#e4572e" stroke="#1f3a5f" stroke-width="2.500" stroke-linejoin="round"><path d="M20 4l4.200 10.300L35 15.400l-8.200 7.200L29.300 34 20 28l-9.300 6 2.500-11.400L5 15.400l10.800-1.100z"/></svg><strong>Occasion</strong><small>Weddings, stages, big entrances. 4" in.</small></span></label>
+          </div>
+          <div class="q-nav"><span class="tip"><svg aria-hidden="true"><use href="#sun"/></svg>Takes about 30 seconds</span><button class="btn sun" type="submit">Next: your waist →</button></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="1" hidden>
+          <legend class="sr">Natural waist</legend>
+          <h2 tabindex="-1">Your natural waist?</h2>
+          <p class="hint">Bend sideways — the crease is your waist. Measure there, relaxed, no sucking in. It's a number, not a grade.</p>
+          <div class="measure">
+            <div><label for="waist">Natural waist (cm)</label><div class="bigin"><input id="waist" name="waist" type="number" inputmode="decimal" min="50" max="140" step="0.5" value="86" aria-describedby="waist-err"><span>cm</span></div></div>
+            <p class="inch" id="waist-in"></p>
+          </div>
+          <input type="range" id="waist-r" min="50" max="140" step="1" value="86" aria-label="Natural waist slider, centimetres">
+          <p class="err" id="waist-err" role="alert"></p>
+          <div class="q-nav"><button class="linkbtn" type="button" data-back>← Back</button><button class="btn sun" type="submit">Next: underbust →</button></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="2" hidden>
+          <legend class="sr">Underbust</legend>
+          <h2 tabindex="-1">And your underbust?</h2>
+          <p class="hint">Right where a bra band sits, tape level all the way round. Breathe out normally.</p>
+          <div class="measure">
+            <div><label for="ub">Underbust (cm)</label><div class="bigin"><input id="ub" name="ub" type="number" inputmode="decimal" min="55" max="150" step="0.5" value="94" aria-describedby="ub-err"><span>cm</span></div></div>
+            <p class="inch" id="ub-in"></p>
+          </div>
+          <input type="range" id="ub-r" min="55" max="150" step="1" value="94" aria-label="Underbust slider, centimetres">
+          <p class="err" id="ub-err" role="alert"></p>
+          <div class="q-nav"><button class="linkbtn" type="button" data-back>← Back</button><button class="btn sun" type="submit">Show me my size ☀</button></div>
+        </fieldset>
+
+        <div class="step" data-step="3" hidden>
+          <h2 tabindex="-1" id="res-title">Here's your fit.</h2>
+          <p class="hint" id="res-hint"></p>
+          <div class="res">
+            <div class="size-badge" id="badge"><div><small>Corset size</small><strong id="res-size">–</strong></div></div>
+            <dl>
+              <div><dt>Silhouette</dt><dd id="res-sil"></dd></div>
+              <div><dt>Lacing gap</dt><dd id="res-gap"></dd></div>
+            </dl>
+            <div class="gapviz"><div class="lace" id="lace" aria-hidden="true"><i></i><u></u><i></i></div><p id="res-gapnote"></p></div>
+            <div class="also"><img id="also-img" src="../../assets/img/sole/p1.jpg" alt="" width="62" height="78"><p id="also-txt"></p><button class="btn sm" type="button" id="also-add">Add</button></div>
+          </div>
+          <div class="q-nav"><button class="linkbtn" type="button" id="restart">↺ Start over</button><span class="tip"><svg aria-hidden="true"><use href="#sun"/></svg>Wrong size? We swap it free.</span></div>
+        </div>
+      </form>
+    </div>
+
+    <figure class="shot">
+      <div class="frame"><img src="../../assets/img/sole/hero.jpg" alt="Plus-size model laughing on a sunny whitewashed terrace above the sea, wearing a cobalt blue Vesna overbust corset with a flowing cream linen skirt" width="900" height="1200" fetchpriority="high"></div>
+      <div class="sticker st1"><div><small>sizes</small><big>18–40</big></div></div>
+      <div class="sticker st2"><div>free<br>fit<br>exchange</div></div>
+      <div class="sticker st3">worn with jeans, mostly</div>
+      <figcaption>Ilse wears the Riviera overbust in size 34. Waist 94 cm, underbust 98 cm, 36F.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div>
+  <span>sizes 18–40</span><span>free fit exchange</span><span>cups graded B–H</span><span>real steel, real comfy</span><span>wear it with jeans</span><span>zero shame, ever</span>
+  <span>sizes 18–40</span><span>free fit exchange</span><span>cups graded B–H</span><span>real steel, real comfy</span><span>wear it with jeans</span><span>zero shame, ever</span>
+</div></div>
+
+<section id="shop" aria-labelledby="shop-h">
+  <div class="wrap">
+    <div class="head reveal">
+      <div><p class="eyebrow">The corsets</p><h2 id="shop-h">See it on <em>your</em> size, <span class="narrow thin">not just ours.</span></h2></div>
+      <p>Every corset is shot on three bodies. Tap 22, 28 or 34 on any card (or Flat for the dress form) to see how it actually sits — same pattern, graded properly, never just "scaled up".</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="sil" id="silhouettes" aria-labelledby="sil-h">
+  <svg class="blob" style="width:120px;height:200px;right:3%;top:-60px;color:var(--cobalt);animation-duration:20s" aria-hidden="true"><use href="#frond"/></svg>
+  <div class="wrap">
+    <div class="head reveal"><div><p class="eyebrow">Shop by silhouette</p><h2 id="sil-h">Four shapes. <span class="narrow thin">Pick a vibe.</span></h2></div><p>Not sure? The fit finder up top picks one for you. It's bossy in a helpful way.</p></div>
+    <ul class="sils">
+      <li class="reveal"><a href="#shop"><svg viewBox="0 0 80 108" aria-hidden="true"><path d="M22 24c6-8 14-6 18 2 4-8 12-10 18-2 2 18-6 28-5 36 1 12 7 22 9 30-14 6-30 6-44 0 2-8 8-18 9-30 1-8-7-18-5-36Z"/><path class="dash" d="M40 28v64"/></svg><h3>Overbust</h3><p>Bust support built in, cup-graded B to H. Your bra gets the day off.</p></a></li>
+      <li class="reveal" style="--d:.08s"><a href="#shop"><svg viewBox="0 0 80 108" aria-hidden="true"><path d="M24 38c10-4 22-4 32 0 0 10-4 16-3 24 1 10 5 18 7 26-13 6-27 6-40 0 2-8 6-16 7-26 1-8-3-14-3-24Z"/><path class="dash" d="M40 36v54"/></svg><h3>Underbust</h3><p>The all-rounder. Over a tee, under a blazer, with the bra you already love.</p></a></li>
+      <li class="reveal" style="--d:.16s"><a href="#shop"><svg viewBox="0 0 80 108" aria-hidden="true"><path d="M27 48c8-3 18-3 26 0-1 6-1 10 0 14 1 6 2 10 4 14-11 4-23 4-34 0 2-4 3-8 4-14 1-4 1-8 0-14Z"/><path class="dash" d="M40 46v32"/></svg><h3>Waspie</h3><p>Short, light, basically a very committed belt. The easiest first corset.</p></a></li>
+      <li class="reveal" style="--d:.24s"><a href="#shop"><svg viewBox="0 0 80 108" aria-hidden="true"><path d="M24 30c10-4 22-4 32 0 0 12-4 20-3 28 1 14 9 26 12 38-16 6-34 6-50 0 3-12 11-24 12-38 1-8-3-16-3-28Z"/><path class="dash" d="M40 28v72"/></svg><h3>Longline</h3><p>Runs over the hip for a smooth line and zero tummy pinch. Tall or soft-bellied? Start here.</p></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="craft" id="craft" aria-labelledby="craft-h">
+  <div class="wrap craft-grid">
+    <div class="craft-pic reveal">
+      <svg class="blob" style="width:220px;left:-60px;top:-60px;color:var(--lemon);z-index:-1" aria-hidden="true"><use href="#blob-b"/></svg>
+      <img src="../../assets/img/sole/detail.jpg" alt="Close-up of a Vesna corset: steel busk loops, stitched bone channels and hand-finished binding on cotton coutil" width="1200" height="800" loading="lazy">
+      <div class="sticker st2" style="bottom:-6%;right:4%">hand<br>finished</div>
+    </div>
+    <div class="reveal" style="--d:.1s">
+      <p class="eyebrow">What's inside</p>
+      <h2 id="craft-h">Friendly outside. <span class="narrow thin">Serious engineering inside.</span></h2>
+      <p>A corset that fits well feels like a firm hug, not a punishment. That's down to five boring, brilliant things we refuse to skimp on — in a size 18 or a size 40.</p>
+      <ol class="parts">
+        <li><div><b>Spiral steel bones</b><span>12 to 28 of them. They flex with you when you sit, bend and reach for the top shelf. More bones as sizes go up, so support never thins out.</span></div></li>
+        <li><div><b>A steel busk</b><span>The front fastening. Five loops, five pins, on in ten seconds. No wrestling a zip behind your back.</span></div></li>
+        <li><div><b>Waist tape</b><span>A hidden twill ribbon that takes all the strain, so the seams don't. It's why the curve holds for years.</span></div></li>
+        <li><div><b>Three layers</b><span>Cotton coutil for strength, a fashion fabric for looks, soft cotton lining against your skin. Breathable. Not sweaty.</span></div></li>
+        <li><div><b>Hand finishing</b><span>Binding stitched and eyelets set by hand in our Valencia workroom, by people paid properly to do it.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="rev" id="reviews" aria-labelledby="rev-h">
+  <div class="wrap">
+    <div class="head reveal"><div><p class="eyebrow">Review wall</p><h2 id="rev-h">Find someone <em>shaped like you.</em></h2></div><p>Every review leads with measurements, because "runs true to size" means nothing without them. Filter by waist and read from people in your range.</p></div>
+    <div class="chips reveal" role="group" aria-label="Filter reviews by natural waist">
+      <button type="button" aria-pressed="true" data-min="0" data-max="999">All waists</button>
+      <button type="button" aria-pressed="false" data-min="0" data-max="74.9">Under 75 cm</button>
+      <button type="button" aria-pressed="false" data-min="75" data-max="89.9">75–90 cm</button>
+      <button type="button" aria-pressed="false" data-min="90" data-max="104.9">90–105 cm</button>
+      <button type="button" aria-pressed="false" data-min="105" data-max="999">105 cm +</button>
+    </div>
+    <p class="count" id="rev-count" aria-live="polite">Showing all 8 reviews</p>
+    <div class="wall" id="wall">
+      <article class="review" data-waist="94"><ul class="meas"><li>Waist 94 cm</li><li>Underbust 98 cm</li><li>36F</li><li class="sz">Bought 34 · Riviera</li></ul><blockquote>"First corset ever. I braced for it not to fit, because nothing does. It fit. I wore it to a beach wedding, then again with jeans to the office, where I felt like a very organised pirate."</blockquote><footer><span class="stars" aria-label="5 out of 5">★★★★★</span> Ilse, Rotterdam</footer></article>
+      <article class="review" data-waist="68"><ul class="meas"><li>Waist 68 cm</li><li>Underbust 74 cm</li><li class="sz">Bought 22 · Siesta</li></ul><blockquote>"The quiz said size 22 with a 4 inch gap at first. I got exactly a 4 inch gap, and it's down to 2 now. Spooky. Comfortable for a full day of teaching."</blockquote><footer><span class="stars" aria-label="5 out of 5">★★★★★</span> Noor, Ghent</footer></article>
+      <article class="review" data-waist="108"><ul class="meas"><li>Waist 108 cm</li><li>Underbust 106 cm</li><li class="sz">Bought 40 · Tuesday</li></ul><blockquote>"A brand that actually photographs the size 34 instead of telling me to imagine it. The belly panel doesn't dig when I sit. I cried a little, then ordered the lemon one."</blockquote><footer><span class="stars" aria-label="5 out of 5">★★★★★</span> Dami, Dublin</footer></article>
+      <article class="review" data-waist="81"><ul class="meas"><li>Waist 81 cm</li><li>Underbust 86 cm</li><li>32G</li><li class="sz">Bought 26 · Riviera</li></ul><blockquote>"G cup, and the overbust actually holds everything where it should with no spillage. Danced for six hours at my sister's wedding."</blockquote><footer><span class="stars" aria-label="5 out of 5">★★★★★</span> Carlota, Porto</footer></article>
+      <article class="review" data-waist="100"><ul class="meas"><li>Waist 100 cm</li><li>Underbust 101 cm</li><li class="sz">Bought 36 · Siesta</li></ul><blockquote>"Ordered a 38 against the quiz's advice. Quiz was right. Exchange label arrived in an hour, the 36 in four days, no guilt trip."</blockquote><footer><span class="stars" aria-label="4 out of 5">★★★★☆</span> Beth, Leeds</footer></article>
+      <article class="review" data-waist="72"><ul class="meas"><li>Waist 72 cm</li><li>Underbust 78 cm</li><li class="sz">Bought 26 · Limone</li></ul><blockquote>"The waspie is my gateway corset. Goes over a sundress, takes two minutes to lace, and my back likes it on long desk days."</blockquote><footer><span class="stars" aria-label="5 out of 5">★★★★★</span> Anouk, Lyon</footer></article>
+      <article class="review" data-waist="112"><ul class="meas"><li>Waist 112 cm</li><li>Underbust 114 cm</li><li>42H</li><li class="sz">Bought 40 · Piazza</li></ul><blockquote>"Size 40 with the same number of colour options as size 22. It shouldn't be remarkable. It is. Wore it to my own 50th and was insufferable about it."</blockquote><footer><span class="stars" aria-label="5 out of 5">★★★★★</span> Marguerite, Antwerp</footer></article>
+      <article class="review" data-waist="88"><ul class="meas"><li>Waist 88 cm</li><li>Underbust 90 cm</li><li class="sz">Bought 32 · Sunday Market</li></ul><blockquote>"Softer than I expected. Took about a week of short wears to break in, like good boots. Now it's my jeans-and-tee default."</blockquote><footer><span class="stars" aria-label="5 out of 5">★★★★★</span> Sam, Berlin</footer></article>
+    </div>
+  </div>
+</section>
+
+<section id="mtm" aria-label="Made to measure and fit promise">
+  <div class="wrap duo">
+    <div class="panel mtm reveal">
+      <svg class="blob" aria-hidden="true"><use href="#blob-a"/></svg>
+      <p class="eyebrow">Made to measure</p>
+      <h2>Between sizes? Outside them? <span class="narrow thin">We'll just make yours.</span></h2>
+      <p>Send us eight measurements and a photo of your favourite jeans (optional, we're nosy). We draft your pattern, send a cotton mock-up to try at home, then sew the real thing in four weeks. From €229 — the same price as our top ready-made style, because your body isn't a surcharge.</p>
+      <a class="btn" href="#mtm">Start a made-to-measure order</a>
+    </div>
+    <div class="panel promise reveal" style="--d:.1s">
+      <p class="eyebrow">The fit promise</p>
+      <h2 style="font-size:clamp(1.9rem,3vw,2.6rem)">Doesn't fit? Swap it. Free.</h2>
+      <ol><li>Try it at home for 30 days.</li><li>Tell us what's off. A human replies.</li><li>We post the new size before yours is even back.</li></ol>
+      <p style="margin:16px 0 0;font-size:.93rem">No restocking fee, no "store credit only", no quiz about why your body did that.</p>
+    </div>
+  </div>
+</section>
+
+<section class="news" aria-labelledby="news-h">
+  <div class="wrap">
+    <div class="panel reveal">
+      <div><h2 id="news-h">Letters from the sunny side.</h2><p>New colours, honest fit notes, the occasional lemon recipe. Twice a month. €10 off your first corset.</p></div>
+      <form id="news" novalidate>
+        <label for="email">Your email address</label>
+        <div class="row"><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required aria-describedby="news-msg"><button class="btn sun" type="submit">Sign me up</button></div>
+        <p class="msg" id="news-msg" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><a class="mark" href="#top">Vesna</a><p style="margin-top:10px;max-width:24em">Corsets for every body, made in small batches in Valencia. Womenswear to follow, once we've got this bit perfect.</p></div>
+      <div><h3>Shipping</h3><ul><li>Free in the EU over €120</li><li>2–5 working days, tracked</li><li>UK &amp; worldwide from €9</li></ul></div>
+      <div><h3>Fit exchange</h3><ul><li>30 days to try at home</li><li>Free size swaps, both ways</li><li>Full refund if we can't fit you</li></ul></div>
+      <div><h3>Care</h3><ul><li>Air it, don't wash it</li><li>Spot clean, cool damp cloth</li><li>Store flat or over a hanger</li></ul></div>
+      <div><h3>Contact</h3><ul><li><a href="mailto:hola@vesna.example">hola@vesna.example</a></li><li>Fit help, Mon–Sat 9–18 CET</li><li><a href="#fit">Retake the fit finder</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Vesna Corsetry S.L.</span><span>Sizes 18–40. All of them in every colour.</span></div>
+  </div>
+</footer>
+
+<a class="pill" href="../../index.html">← All directions</a>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+  document.documentElement.classList.add('js');
+  var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var IMG='../../assets/img/sole/';
+
+  /* ---------- bag ---------- */
+  var count=0, toastT;
+  function addToBag(name){
+    count++; var c=$('#count'); c.textContent=count;
+    $('#cart').setAttribute('aria-label','Bag, '+count+(count===1?' item':' items'));
+    c.classList.remove('bump'); void c.offsetWidth; c.classList.add('bump');
+    var t=$('#toast'); t.textContent=name+' is in your bag. Good choice.'; t.classList.add('on');
+    clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove('on')},2600);
+  }
+
+  /* ---------- mobile nav ---------- */
+  var burger=$('.burger'), menu=$('#menu');
+  function closeMenu(){menu.classList.remove('open');burger.setAttribute('aria-expanded','false')}
+  burger.addEventListener('click',function(){var o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A')closeMenu()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){closeMenu();burger.focus()}});
+
+  /* ---------- products + "see it on my size" ---------- */
+  var SHOTS=[{f:'p1.jpg',l:'22',a:'Size 22',cap:'Size 22 · waist 68 cm',alt:'worn in size 22 over a white linen shirt and jeans'},{f:'p3.jpg',l:'28',a:'Size 28',cap:'Size 28 · waist 84 cm',alt:'worn in size 28'},{f:'hero.jpg',l:'34',a:'Size 34',cap:'Size 34 · waist 94 cm',alt:'worn in size 34 with a flowing linen skirt'},{f:'p2.jpg',l:'Flat',a:'On the dress form',cap:'On the form · no body needed',alt:'shown on a linen dress form'}];
+  var PRODUCTS=[
+    {n:'Tuesday',k:'Underbust',p:129,s:'20 spiral steel bones · cotton coutil · 3" reduction',c:'#e4572e',tag:'Bestseller',d:2,pos:['50% 30%','50% 35%','50% 45%']},
+    {n:'Limone',k:'Waspie',p:89,s:'12 spiral steel bones · cotton twill · 2" reduction',c:'#f2c14e',tag:'Great first corset',d:0,pos:['50% 55%','50% 60%','50% 62%']},
+    {n:'Riviera',k:'Overbust · cups B–H',p:189,s:'24 spiral + 4 flat steel bones · cup-graded coutil · 4" reduction',c:'#1f3a5f',tag:'',d:1,pos:['50% 15%','50% 12%','50% 22%']},
+    {n:'Siesta',k:'Longline underbust',p:159,s:'26 spiral steel bones · mesh + coutil · 4" reduction',c:'#f7d9c4',tag:'Summer weight',d:0,pos:['40% 40%','60% 40%','45% 50%']},
+    {n:'Piazza',k:'Overbust · cups B–H',p:229,s:'28 steel bones · linen-faced coutil · 4" reduction',c:'#e4572e',tag:'',d:2,pos:['50% 20%','50% 25%','55% 30%']},
+    {n:'Sunday Market',k:'Underbust',p:109,s:'16 spiral steel bones · washed cotton canvas · 2–3" reduction',c:'#f2c14e',tag:'Softest',d:1,pos:['60% 45%','40% 45%','50% 55%']}
+  ];
+  $('#grid').innerHTML=PRODUCTS.map(function(p,i){
+    return '<article class="card reveal" style="--c:'+p.c+';--d:'+(i%3*0.08)+'s"><div class="pics">'+
+      (p.tag?'<span class="tag">'+p.tag+'</span>':'')+
+      SHOTS.map(function(s,j){return '<img src="'+IMG+s.f+'" alt="'+p.n+' corset '+s.alt+'" width="600" height="800" loading="lazy" style="object-position:'+p.pos[j]+'"'+(j===p.d?' class="on"':'')+'>'}).join('')+
+      '<span class="shown" aria-live="polite">'+SHOTS[p.d].cap+'</span></div>'+
+      '<div class="switch" role="group" aria-label="See '+p.n+' on a different size"><span>See it on</span>'+
+      SHOTS.map(function(s,j){return '<button type="button" data-i="'+j+'" aria-pressed="'+(j===p.d)+'" aria-label="'+s.a+'">'+s.l+'</button>'}).join('')+'</div>'+
+      '<h3>'+p.n+' <span>€'+p.p+'</span></h3><p class="kind">'+p.k+' · sizes 18–40</p><p class="spec">'+p.s+'</p>'+
+      '<button class="btn" type="button" data-add="'+p.n+'">Add to bag</button></article>';
+  }).join('');
+  $('#grid').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    if(b.dataset.add){addToBag(b.dataset.add);return}
+    var card=b.closest('.card'), i=+b.dataset.i;
+    $$('.switch button',card).forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    $$('.pics img',card).forEach(function(im,j){im.classList.toggle('on',j===i)});
+    $('.shown',card).textContent=SHOTS[i].cap;
+  });
+
+  /* ---------- fit finder ---------- */
+  var form=$('#fit'), steps=$$('.step',form), cur=0, track=$('#track');
+  var REDUCTION={everyday:2,shaping:3,occasion:4};
+  var PICK={Overbust:{n:'Riviera',f:'hero.jpg'},Longline:{n:'Siesta',f:'p3.jpg'},Waspie:{n:'Limone',f:'p1.jpg'},Underbust:{n:'Tuesday',f:'p1.jpg'}};
+  var lastPick='Tuesday';
+  function toIn(cm){return cm/2.54}
+  function fmt(n){return (Math.round(n*2)/2).toString()}
+
+  function go(n,back){
+    steps[cur].hidden=true; cur=n; var s=steps[cur]; s.hidden=false;
+    s.classList.remove('in','back'); void s.offsetWidth; s.classList.add('in'); if(back)s.classList.add('back');
+    track.style.setProperty('--p',[8,40,72,100][cur]+'%'); track.style.setProperty('--rot',(cur*240)+'deg');
+    $('#q-count').textContent=cur<3?'Step '+(cur+1)+' of 3':'All done';
+    var h=$('h2',s); if(h)h.focus({preventScroll:true});
+  }
+  function check(id,label){
+    var el=$('#'+id), err=$('#'+id+'-err'), v=parseFloat(el.value), min=+el.min, max=+el.max, msg='';
+    if(el.value.trim()===''||isNaN(v)) msg='Pop in your '+label+' in centimetres — a rough number is fine.';
+    else if(v<min) msg='That looks a bit small for a '+label+' in cm. Did you measure in inches? Multiply by 2.54.';
+    else if(v>max) msg='Over '+max+' cm? We\'d love to make yours to measure instead — see Made to Measure below.';
+    err.textContent=msg; el.setAttribute('aria-invalid',msg?'true':'false');
+    if(msg)el.focus();
+    return msg?null:v;
+  }
+  function recommend(waistCm,ubCm,goal){
+    var r=REDUCTION[goal], w=toIn(waistCm), raw=Math.floor((w-r)/2)*2;
+    var inRange=raw>=18&&raw<=40, size=Math.min(40,Math.max(18,raw));
+    var diff=ubCm-waistCm, sil, why;
+    if(goal==='occasion'){sil='Overbust';why='Built-in bust support, cup-graded B–H, so you can skip the bra entirely.'}
+    else if(goal==='shaping'){sil='Longline';why='Extra length over the hip spreads the pressure, so more shaping feels like less.'}
+    else if(diff<8){sil='Waspie';why='Your waist and ribs are close in size, so a short waspie gives shape without squeezing your ribs.'}
+    else{sil='Underbust';why='The easy all-rounder. Works with the bra you already own.'}
+    var cut=diff>=15?'curvy cut':(diff<=2?'straight-rib cut':'classic cut');
+    var gap=Math.round((2+(w-r-size))*2)/2; if(!inRange)gap=2;
+    return {size:size,inRange:inRange,raw:raw,sil:sil,why:why,cut:cut,gap:gap,r:r};
+  }
+  function confetti(){
+    if(calm)return; var cols=['#e4572e','#f2c14e','#1f3a5f','#f7d9c4'];
+    for(var i=0;i<16;i++){(function(i){
+      var c=document.createElement('span'), a=Math.random()*Math.PI*2, d=70+Math.random()*130;
+      c.className='confetti'; c.style.background=cols[i%4];
+      c.style.setProperty('--x',Math.cos(a)*d+'px'); c.style.setProperty('--y',(Math.sin(a)*d-40)+'px'); c.style.setProperty('--r',(Math.random()*540-270)+'deg');
+      c.style.animationDelay=(0.25+Math.random()*0.15)+'s'; form.appendChild(c);
+      setTimeout(function(){c.remove()},1600);
+    })(i)}
+  }
+  function showResult(waist,ub){
+    var goal=form.elements.goal.value, R=recommend(waist,ub,goal), badge=$('#badge');
+    badge.classList.toggle('mtm',!R.inRange);
+    $('#res-size').textContent=R.inRange?R.size:'MTM';
+    $('#res-title').textContent=R.inRange?'You\'re a Vesna '+R.size+'.':'You\'re a made-to-measure.';
+    $('#res-hint').textContent=R.inRange
+      ? 'That\'s your '+fmt(toIn(waist))+'" waist minus '+R.r+'" for '+goal+' wear, rounded down to an even size. It will sound small. It isn\'t — corset sizes are the closed measurement.'
+      : 'Your measurements land just outside our ready-made run of 18–40 (you\'d be around a '+R.raw+'). Good news: we\'ll draft one for you, from €229.';
+    $('#res-sil').innerHTML=R.sil+', '+R.cut+'<span>'+R.why+'</span>';
+    $('#res-gap').innerHTML='about '+R.gap+'" <span>('+Math.round(R.gap*2.54)+' cm) at the back</span>';
+    $('#res-gapnote').textContent='A gap is how it\'s meant to fit, not a sign it\'s too small. It settles to 1–2" after a couple of weeks of wear, and the modesty panel covers it.';
+    $('#lace').style.setProperty('--g','0px');
+    setTimeout(function(){$('#lace').style.setProperty('--g',Math.round(R.gap*11)+'px')},30);
+    var pk=PICK[R.sil]; lastPick=pk.n; $('#also-img').src=IMG+pk.f;
+    $('#also-txt').innerHTML=R.inRange
+      ? 'People with a '+Math.round(waist)+' cm waist mostly bought <b>'+pk.n+'</b> in size <b>'+R.size+'</b>. 9 in 10 kept their first size.'
+      : 'People near your measurements loved <b>'+pk.n+'</b> made to measure. Add it and we\'ll email you for the details.';
+    $('#also-add').setAttribute('aria-label','Add '+pk.n+' to bag');
+    go(3); confetti();
+  }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(cur===0)go(1);
+    else if(cur===1){if(check('waist','natural waist')!==null)go(2)}
+    else if(cur===2){var w=check('waist','natural waist'), u=check('ub','underbust'); if(w===null){go(1,true);return} if(u!==null)showResult(w,u)}
+  });
+  $$('[data-back]',form).forEach(function(b){b.addEventListener('click',function(){go(cur-1,true)})});
+  $('#restart').addEventListener('click',function(){go(0,true)});
+  $('#also-add').addEventListener('click',function(){addToBag(lastPick)});
+  [['waist','waist-r','waist-in'],['ub','ub-r','ub-in']].forEach(function(t){
+    var num=$('#'+t[0]), rng=$('#'+t[1]), out=$('#'+t[2]);
+    function say(){var v=parseFloat(num.value); out.textContent=isNaN(v)?'':'≈ '+fmt(toIn(v))+' inches'}
+    num.addEventListener('input',function(){var v=parseFloat(num.value); if(!isNaN(v))rng.value=v; $('#'+t[0]+'-err').textContent=''; num.removeAttribute('aria-invalid'); say()});
+    rng.addEventListener('input',function(){num.value=rng.value; $('#'+t[0]+'-err').textContent=''; num.removeAttribute('aria-invalid'); say()});
+    say();
+  });
+
+  /* ---------- review wall filter ---------- */
+  var chips=$$('.chips button'), reviews=$$('.review');
+  chips.forEach(function(ch){ch.addEventListener('click',function(){
+    chips.forEach(function(x){x.setAttribute('aria-pressed',x===ch)});
+    var lo=+ch.dataset.min, hi=+ch.dataset.max, n=0;
+    reviews.forEach(function(r){
+      var w=+r.dataset.waist, ok=w>=lo&&w<=hi; r.hidden=!ok;
+      if(ok){n++; r.classList.remove('show'); void r.offsetWidth; r.classList.add('show')}
+    });
+    $('#rev-count').textContent=lo===0&&hi===999?'Showing all '+n+' reviews':'Showing '+n+' review'+(n===1?'':'s')+' from waists '+ch.textContent.toLowerCase();
+  })});
+
+  /* ---------- newsletter ---------- */
+  $('#news').addEventListener('submit',function(e){
+    e.preventDefault(); var em=$('#email'), m=$('#news-msg');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())){m.textContent='That email looks a bit off — mind checking it?';em.setAttribute('aria-invalid','true');em.focus();return}
+    em.removeAttribute('aria-invalid'); m.textContent='You\'re in. €10 code is on its way. ☀'; em.value='';
+  });
+
+  /* ---------- scroll reveals ---------- */
+  var rv=$$('.reveal');
+  if(!('IntersectionObserver' in window)||calm){rv.forEach(function(el){el.classList.add('seen')})}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('seen');io.unobserve(en.target)}})},{threshold:0,rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(function(el){io.observe(el)});
+  }
+})();
+</script>
+</body>
+</html>
