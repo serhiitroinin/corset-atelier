@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesna — 10 design directions for a corset house</title>
+<meta name="description" content="Ten homepage design directions for a women's corset brand, with market research behind each.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f4f1ec; --ink:#16130f; --mute:#7a7268; --line:#d9d3c8; --accent:#b3261e; }
+  * { box-sizing:border-box; margin:0; padding:0 }
+  html { scroll-behavior:smooth }
+  body { background:var(--bg); color:var(--ink); font-family:Geist,system-ui,sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased }
+  a { color:inherit; text-decoration:none }
+  .mono { font-family:"Geist Mono",monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase }
+  header { padding:clamp(1.25rem,3vw,2.5rem); display:flex; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--line) }
+  .intro { padding:clamp(3rem,9vw,8rem) clamp(1.25rem,3vw,2.5rem) clamp(2rem,5vw,4rem); display:grid; grid-template-columns:1.6fr 1fr; gap:3rem; align-items:end }
+  h1 { font-family:"Instrument Serif",serif; font-weight:400; font-size:clamp(3rem,9vw,8.5rem); line-height:.92; letter-spacing:-.02em }
+  h1 em { color:var(--accent) }
+  .intro p { color:var(--mute); max-width:38ch; font-size:1.02rem }
+  .intro p + p { margin-top:1rem }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr)); border-top:1px solid var(--line) }
+  .card { position:relative; border-right:1px solid var(--line); border-bottom:1px solid var(--line); padding:1.25rem; display:flex; flex-direction:column; gap:1rem; transition:background .3s }
+  .card:hover { background:#ebe6dd }
+  .thumb { aspect-ratio:4/5; overflow:hidden; background:#ddd }
+  .thumb img { width:100%; height:100%; object-fit:cover; transition:transform .9s cubic-bezier(.2,.7,.2,1) }
+  .card:hover .thumb img { transform:scale(1.04) }
+  .row { display:flex; justify-content:space-between; align-items:baseline; gap:1rem }
+  .card h2 { font-family:"Instrument Serif",serif; font-weight:400; font-size:2rem; line-height:1 }
+  .card p { color:var(--mute); font-size:.92rem }
+  .sw { display:flex; gap:4px } .sw i { width:18px; height:18px; border-radius:50%; border:1px solid rgba(0,0,0,.12) }
+  .tags { color:var(--mute) }
+  section.research { padding:clamp(3rem,7vw,6rem) clamp(1.25rem,3vw,2.5rem); display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2.5rem }
+  .research h3 { font-family:"Instrument Serif",serif; font-weight:400; font-size:1.7rem; margin:.6rem 0 .8rem }
+  .research li { list-style:none; padding:.55rem 0; border-top:1px solid var(--line); font-size:.92rem; color:#3d372f }
+  footer { padding:2rem clamp(1.25rem,3vw,2.5rem); border-top:1px solid var(--line); color:var(--mute); display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem }
+  @media (max-width:800px){ .intro{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header>
+  <span class="mono">Vesna · corset house · working title</span>
+  <span class="mono">Design exploration · Sept 2026</span>
+</header>
+
+<div class="intro">
+  <h1>Ten ways to <em>lace</em> one brand.</h1>
+  <div>
+    <p>Ten homepage directions for a corset-first womenswear label. Same brand, same catalogue logic, ten different customers and moods. Each is a working page: fit finder, product grid, construction story, reviews with measurements.</p>
+    <p><a class="mono" href="#research" style="border-bottom:1px solid">Research behind the directions ↓</a></p>
+  </div>
+</div>
+
+<main class="grid" id="designs"></main>
+
+<section class="research" id="research">
+  <div>
+    <span class="mono">01 · Market</span>
+    <h3>Corsets left the costume box</h3>
+    <ul>
+      <li>Market estimated at $1.2–1.8B (2025), growing 6–9% a year; bridal and outerwear styling drive it.</li>
+      <li>Styling moved from drama to daywear: corset + tailoring, shirts, denim.</li>
+      <li>Aesthetic engines: regencycore, gothic revival, balletcore/coquette, office siren, bridal, Westwood-archive nostalgia.</li>
+      <li>Underserved and loyal: plus-size and larger-cup buyers, first-timers afraid of fit.</li>
+    </ul>
+  </div>
+  <div>
+    <span class="mono">02 · References</span>
+    <h3>Who owns which corner</h3>
+    <ul>
+      <li>Couture: Vivienne Westwood, Dilara Findikoglu, Schiaparelli</li>
+      <li>Fashion-forward: Miaou, House of CB, Bordelle, Agent Provocateur</li>
+      <li>Heritage and bespoke: Vollers (1899), Dark Garden, What Katie Did</li>
+      <li>Volume and fit-first: Orchard Corset, Corset Story</li>
+      <li>Alt and romance: Killstar, Son de Flor, indie Etsy stay-makers</li>
+    </ul>
+  </div>
+  <div>
+    <span class="mono">03 · UX that sells corsets</span>
+    <h3>Fit risk is the blocker</h3>
+    <ul>
+      <li>Size by waist measurement, never dress size; show expected reduction.</li>
+      <li>Construction spec block: bone count and type, layers, busk, waist tape.</li>
+      <li>Reviews that carry the reviewer's measurements and size bought.</li>
+      <li>Made-to-measure flow with lead time; lacing and seasoning guides.</li>
+      <li>Every direction here ships a working fit finder for that reason.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <span class="mono">Imagery generated for mock-up purposes · prices and names are placeholders</span>
+  <span class="mono">Static HTML/CSS/JS · no build step</span>
+</footer>
+
+<script>
+const designs = [
+  { n:'01', slug:'ivoire',    name:'Ivoire',        tag:'Quiet luxury · editorial',        for:'Luxury buyers, 30+; stretches best to full womenswear.', sw:['#f3eee6','#cdbfae','#8a6f4d','#1b1815'] },
+  { n:'02', slug:'noir',      name:'Cathedral',     tag:'Gothic revival · couture',        for:'Dark-romance and alt customers; candlelight cursor, arch masks.', sw:['#0a0708','#5b0f1a','#b8b2a7','#2a1d1f'] },
+  { n:'03', slug:'regency',   name:'Meadow Stays',  tag:'Regencycore · cottage romance',   for:'Bridgerton and slow-fashion audience; natural fibres, storytelling.', sw:['#efe6d5','#a8b8a0','#c79a9a','#3a2e22'] },
+  { n:'04', slug:'blueprint', name:'Pattern Room',  tag:'Technical · made-to-measure',     for:'Informed tightlacers and craft nerds; the corset as engineering.', sw:['#f5f1e8','#1c2b4a','#c8402f','#9aa3b2'] },
+  { n:'05', slug:'ballet',    name:'Pointe',        tag:'Balletcore · coquette',           for:'Gen-Z and gifting; ribbons, satin sheen, soft pink.', sw:['#fbeff1','#e8b7c4','#c48a9a','#2a2326'] },
+  { n:'06', slug:'club',      name:'Flash',         tag:'Y2K · drop culture',              for:'Going-out buyers, €50–150; tickers, countdowns, flash photography.', sw:['#ffffff','#000000','#ff2e88','#c6ff3d'] },
+  { n:'07', slug:'bridal',    name:'Blanc',         tag:'Bridal · appointment-led',        for:'Brides, €300–2k; fitting timeline and atelier booking.', sw:['#fffdf9','#e9dfd2','#b99b6b','#2e2a27'] },
+  { n:'08', slug:'heritage',  name:'Workshop',      tag:'Heritage maker · Victorian',      for:'Trust through craft: ledger typography, engraved ornaments.', sw:['#ead9bd','#6e1f2a','#3b2a1c','#a5763e'] },
+  { n:'09', slug:'gazette',   name:'Gazette',       tag:'Magazine · red, black, white',    for:'Fashion-press energy; oversized type, issue-based drops.', sw:['#ffffff','#e10b17','#0a0a0a','#eeeeee'] },
+  { n:'10', slug:'sole',      name:'Every Body',    tag:'Inclusive daywear · fit-first',   for:'First-timers and plus-size; fit quiz as the hero, sunny palette.', sw:['#fff8f0','#e4572e','#1f3a5f','#f2c14e'] },
+];
+document.getElementById('designs').innerHTML = designs.map(d => `
+  <a class="card" href="designs/${d.slug}/">
+    <div class="row"><span class="mono">${d.n}</span><span class="sw">${d.sw.map(c=>`<i style="background:${c}"></i>`).join('')}</span></div>
+    <div class="thumb"><img loading="lazy" src="assets/img/${d.slug}/hero.jpg" alt="${d.name} direction hero"></div>
+    <div class="row"><h2>${d.name}</h2><span class="mono">View →</span></div>
+    <span class="mono tags">${d.tag}</span>
+    <p>${d.for}</p>
+  </a>`).join('');
+</script>
+</body>
+</html>
