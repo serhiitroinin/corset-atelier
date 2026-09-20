@@ -1,3 +1,4 @@
 logs/
 *.png
 .DS_Store
+refs/

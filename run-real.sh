@@ -1,0 +1,19 @@
+#!/bin/bash
+cd "$(dirname "$0")"
+./gen5.sh real-1 refs/mcc/r1-0.jpg "white / bone cotton underbust corset, mid length, gently curved top edge, pointed lower front, silver busk, matte cotton twill." "1. p1.png — portrait 3:4 ON-MODEL: a woman wearing this exact corset over a crisp white shirt with pleated grey trousers.
+2. g1.png — portrait 3:4 PACKSHOT: only this exact corset, front view, photographed as an invisible-mannequin (ghost mannequin) product shot, closed busk, centred, on a seamless warm off-white background with a soft shadow, even studio light, nothing else in frame.
+3. detail.png — landscape 3:2 macro: the back of this exact corset laid flat on pale linen, showing its silver eyelets, white lacing and clean topstitching." &
+./gen5.sh real-2 refs/mcc/r6-0.jpg "beige / sand cotton underbust corset with a strong hourglass curve, pointed lower front, silver busk, matte cotton." "1. p2.png — portrait 3:4 ON-MODEL: a woman wearing this exact corset over a fine ivory knit top with straight mid-blue jeans, gold hoops.
+2. g2.png — portrait 3:4 PACKSHOT: only this exact corset, front view, photographed as an invisible-mannequin (ghost mannequin) product shot, closed busk, centred, on a seamless warm off-white background with a soft shadow, even studio light, nothing else in frame.
+3. hero.png — portrait 3:4 CAMPAIGN: a woman wearing this exact corset over an ivory silk shirt with high-waisted cream tailored trousers and an oversized camel coat on her shoulders, sunlit limestone interior." &
+./gen5.sh real-3 refs/mcc/r3-0.jpg "beige WASPIE: a very short waist-cincher about 23 cm tall, panels of beige satin alternating with semi-sheer beige sport mesh, silver busk with few fastenings." "1. p3.png — portrait 3:4 ON-MODEL: a woman wearing this exact short waspie belted over an oatmeal knit dress.
+2. g3.png — portrait 3:4 PACKSHOT: only this exact corset, front view, photographed as an invisible-mannequin (ghost mannequin) product shot, closed busk, centred, on a seamless warm off-white background with a soft shadow, even studio light, nothing else in frame." &
+./gen5.sh real-4 refs/mcc/r4-0.jpg "black matte cotton LONG-TORSO underbust corset, tall, extending down over the upper hip, silver busk, silver eyelets." "1. p4.png — portrait 3:4 ON-MODEL: a plus-size woman wearing this exact longline corset over a fine black turtleneck with black wide trousers.
+2. g4.png — portrait 3:4 PACKSHOT: only this exact corset, front view, photographed as an invisible-mannequin (ghost mannequin) product shot, closed busk, centred, on a seamless warm off-white background with a soft shadow, even studio light, nothing else in frame." &
+wait
+./gen5.sh real-5 refs/mcc/r5-0.jpg "black satin OVERBUST corset with a sweetheart neckline, strapless, silver busk, small side hip lacing with silver eyelets at the hips." "1. p5.png — portrait 3:4 ON-MODEL: a woman wearing this exact overbust corset as a top over a thin white long-sleeve tee, with an ivory bias slip skirt and a black blazer on her shoulders.
+2. g5.png — portrait 3:4 PACKSHOT: only this exact corset, front view, photographed as an invisible-mannequin (ghost mannequin) product shot, closed busk, centred, on a seamless warm off-white background with a soft shadow, even studio light, nothing else in frame." &
+./gen5.sh real-6 refs/mcc/r7-0.jpg "buttercream pale-yellow cotton underbust corset with a front ZIP closure (no busk), and side hip panels of mesh with ribbon hip-tie lacing in a peach satin ribbon." "1. p6.png — portrait 3:4 ON-MODEL: a dark-skinned woman wearing this exact corset over a white poplin shirt dress, open ivory cardigan.
+2. g6.png — portrait 3:4 PACKSHOT: only this exact corset, front view, photographed as an invisible-mannequin (ghost mannequin) product shot, closed busk, centred, on a seamless warm off-white background with a soft shadow, even studio light, nothing else in frame." &
+wait
+echo ALL DONE
