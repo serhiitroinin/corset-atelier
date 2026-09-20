@@ -9,12 +9,12 @@ const DAILY_LIMIT = Number(process.env.DAILY_LIMIT || 150);
 const PER_IP_LIMIT = Number(process.env.PER_IP_LIMIT || 8);
 
 const GARMENTS = {
-  severine: { file: 'g1.jpg', d: 'the Séverine, an underbust corset in bone-coloured cotton coutil with a front busk, sitting from under the bust to the top of the hip' },
-  aurele:   { file: 'g2.jpg', d: 'the Aurèle, a strapless overbust corset top in ivory satin with a gentle sweetheart neckline' },
-  odile:    { file: 'g3.jpg', d: 'the Odile, a waspie: a short waist-cincher about 18 cm tall in sand-beige cotton sateen, worn over clothing at the waist' },
-  maren:    { file: 'g4.jpg', d: 'the Maren, a longline underbust corset in caramel tan that extends over the hip' },
-  colombe:  { file: 'g5.jpg', d: 'the Colombe, an overbust corset top in soft black satin with a sweetheart neckline' },
-  isaure:   { file: 'g6.jpg', d: 'the Isaure, a square-neck corset top in champagne satin with two slim shoulder straps' }
+  severine: { file: 'g1.jpg', d: 'the Séverine, an underbust corset in plain white cotton; it sits just beneath the bust and ends at the high hip with a gently curved lower edge, with a silver steel busk closure down the centre front, vertical stitched bone channels and lacing at the back' },
+  aurele:   { file: 'g2.jpg', d: 'the Aurèle, an underbust corset in beige (warm sand) cotton with a pronounced hourglass curve, a small waist flaring to a rounded hip; it sits just beneath the bust and ends at the high hip, dipping to a soft point at the centre front, with a silver steel busk closure down the centre front and lacing at the back' },
+  odile:    { file: 'g3.jpg', d: 'the Odile, a waspie (short waist cincher, about 24 cm high at the front) in beige, made of glossy satin panels alternating with panels of open sport mesh; it covers only the waist, from below the ribs to the top of the hip, with a short silver steel busk closure at the front and lacing at the back' },
+  maren:    { file: 'g4.jpg', d: 'the Maren, a long-torso underbust corset in matte black cotton, about 37 cm high at the front; it sits just beneath the bust and extends down over the upper hip, ending in a soft point at the centre front, with a long silver steel busk closure down the centre front and lacing at the back' },
+  colombe:  { file: 'g5.jpg', d: 'the Colombe, a strapless overbust corset in glossy black satin with a sweetheart neckline finished by a small fold-down pointed lapel with one silver snap at the top of each cup; it covers the bust and ends at the high hip, with a silver steel busk closure down the centre front, a column of criss-cross lacing through silver eyelets down each side that ends in black ties at the hip, and lacing at the back' },
+  isaure:   { file: 'g6.jpg', d: 'the Isaure, an underbust corset in buttercream (pale yellow) cotton; it closes with a dark zip down the centre front (no busk, no clasps), and has peach mesh panels at each hip laced criss-cross with peach satin ribbon tied in a bow; it sits just beneath the bust and ends at the high hip, with lacing at the back' }
 };
 
 const prompt = d => `Virtual try-on. Image 1 is a photo of a person. Image 2 is a product photo of a corset: ${d}. Produce a photorealistic photo of the SAME person from image 1 wearing the corset from image 2 as a top layer. Keep the person's face, hair, skin tone, body shape, pose, the rest of their outfit, the background and the lighting unchanged. Reproduce the corset's exact colour, fabric, neckline, length and closure; fit it naturally to their body with realistic folds and shadows. Do not slim or reshape the body. Do not add text or logos. Tasteful, fully clothed fashion e-commerce image.`;

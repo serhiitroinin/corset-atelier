@@ -352,6 +352,7 @@ footer.site{border-top:1px solid var(--sand);padding-top:clamp(50px,6vw,90px);pa
 @keyframes lacing{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
 .st-tag{position:absolute;z-index:3;left:14px;top:12px;background:var(--bone);color:var(--ink);padding:5px 10px}
 .st-act{margin-top:18px}
+.st-note{display:block;margin-bottom:12px}
 .st-act .links{display:flex;flex-wrap:wrap;gap:0 26px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--sand)}
 @media (max-width:899px){
   .trust{grid-template-columns:repeat(2,1fr)}
@@ -371,6 +372,92 @@ footer.site{border-top:1px solid var(--sand);padding-top:clamp(50px,6vw,90px);pa
   .line i{animation:none;transform:none;opacity:.5}
   .stage[data-state=done] img{animation:none}
 }
+/* shop: catalogue controls, results, bag drawer, quick view */
+.btn.solid{background:var(--ink);color:var(--bone)}
+.btn.solid:hover{background:transparent;color:var(--ink)}
+.btn.full{width:100%;justify-content:center}
+.cat{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0 24px;padding:4px 0;margin-bottom:clamp(36px,5vw,72px);border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);background:var(--bone)}
+.cat-f{display:flex;flex-wrap:wrap;gap:0 clamp(16px,2.2vw,34px)}
+.chip{position:relative;background:none;border:0;padding:0;min-height:44px;cursor:pointer;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;color:var(--mute);transition:color .6s var(--ease)}
+.chip::after{content:"";position:absolute;left:0;right:.26em;bottom:9px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:right;transition:transform .8s var(--ease)}
+.chip:hover,.chip[aria-pressed=true]{color:var(--ink)}
+.chip[aria-pressed=true]::after{transform:scaleX(1);transform-origin:left}
+.cat-s{display:flex;align-items:center;gap:14px}
+.cat-s .size{min-height:44px;font-size:18px}
+.cat-n{margin:calc(clamp(36px,5vw,72px)*-1 + 14px) 0 clamp(22px,3vw,40px);background:var(--bone);display:table}
+.results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(40px,5vw,72px) clamp(16px,2.4vw,40px);padding-bottom:clamp(70px,10vw,160px)}
+.results:focus{outline:0}
+[data-pid] .fig{cursor:pointer}
+.qv-open{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;letter-spacing:inherit;text-align:left;cursor:pointer;display:inline-flex;align-items:center;min-height:40px}
+.card-h{align-items:center}
+
+.scrim{position:fixed;inset:0;z-index:70;background:rgba(27,24,21,.42);opacity:0;transition:opacity .6s var(--ease)}
+.scrim.on{opacity:1}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(480px,100%);display:flex;flex-direction:column;background:var(--bone);border-left:1px solid var(--sand);transform:translateX(100%);transition:transform .7s var(--ease);--dp:clamp(20px,3vw,36px)}
+.drawer.on{transform:none}
+.drawer:focus,.qv:focus{outline:0}
+.dr-h{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px var(--dp);border-bottom:1px solid var(--sand)}
+.dr-h h2{font-size:34px;line-height:1.1}
+.dr-h h2 em{color:var(--bronze);font-size:.7em;margin-left:4px}
+.dr-b{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 var(--dp)}
+.lines li{display:grid;grid-template-columns:78px minmax(0,1fr) auto;gap:6px 18px;padding:22px 0;border-bottom:1px solid var(--sand)}
+.ln-th{grid-row:1/3;width:78px;height:104px;background:var(--linen);overflow:hidden}
+.ln-m h3{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.1;margin-bottom:4px}
+.ln-p{font-size:21px;line-height:1.2;white-space:nowrap}
+.ln-a{grid-column:2/4;display:flex;justify-content:space-between;align-items:center;gap:12px;align-self:end}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--sand)}
+.qty button{width:40px;height:40px;border:0;background:none;cursor:pointer;font-family:var(--serif);font-size:20px;line-height:1;transition:background .6s var(--ease),color .6s var(--ease)}
+.qty button:hover:not(:disabled){background:var(--ink);color:var(--bone)}
+.qty button:disabled{opacity:.3;cursor:not-allowed}
+.qty button:focus-visible{outline-offset:-3px}
+.qty span{min-width:30px;text-align:center;font-family:var(--serif);font-size:20px;font-variant-numeric:lining-nums}
+.dr-empty{padding:clamp(40px,8vh,90px) 0;text-align:left}
+.dr-empty .serif{font-size:32px;font-style:italic;line-height:1.2;margin-bottom:8px}
+.dr-empty .btn{margin-top:26px}
+.dr-f{padding:18px var(--dp) max(20px,env(safe-area-inset-bottom));border-top:1px solid var(--sand);background:var(--bone)}
+.ship-t{font-size:13.5px;color:var(--mute);line-height:1.5}
+.ship-bar{height:1px;background:var(--sand);margin:12px 0 6px;position:relative}
+.ship-bar i{position:absolute;left:0;top:-1px;height:3px;width:100%;background:var(--ink);transform-origin:left;transform:scaleX(0);transition:transform .9s var(--ease)}
+.sums div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:9px 0;border-bottom:1px solid var(--sand)}
+.sums dd{font-family:var(--serif);font-size:22px;line-height:1.25}
+.dr-f .hint{margin:12px 0 16px}
+
+.qv{position:fixed;inset:0;margin:auto;z-index:80;width:min(1080px,calc(100% - 64px));height:min(780px,calc(100% - 64px));background:var(--bone);overflow:hidden;opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.qv.on{opacity:1;transform:none}
+.qv-x{position:absolute;top:8px;right:clamp(16px,3vw,40px);z-index:3;background-color:var(--bone);padding:0 12px;min-height:44px}
+.qv-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);height:100%}
+.qv-media{position:relative;background:var(--linen);min-height:0}
+.qv-fig{height:100%}
+.qv-th{position:absolute;left:16px;bottom:16px;display:flex;gap:10px}
+.qv-th button{width:54px;height:72px;padding:0;border:0;background:var(--bone);cursor:pointer;outline:1px solid transparent;outline-offset:3px;transition:outline-color .6s var(--ease)}
+.qv-th button[aria-pressed=true]{outline-color:var(--ink)}
+.qv-th button:focus-visible{outline:2px solid var(--bronze)}
+.qv-info{overflow-y:auto;overscroll-behavior:contain;padding:clamp(56px,5vw,72px) clamp(20px,4vw,56px) clamp(28px,4vw,48px)}
+.qv-info h3{margin-top:12px}
+.qv-info .body{margin:6px 0 22px;max-width:44ch}
+.qv-spec{border-top:1px solid var(--sand);margin-bottom:22px}
+.qv-spec div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0;border-bottom:1px solid var(--sand)}
+.qv-spec dd{font-family:var(--serif);font-size:20px;line-height:1.25;text-align:right}
+.qv-stock{min-height:1.6em;margin-top:8px}
+.qv-stock.low{color:var(--bronze)}
+.qv-links{display:flex;flex-wrap:wrap;gap:0 26px;margin-top:10px;padding-top:8px;border-top:1px solid var(--sand)}
+.news form.done label,.news form.done .row{display:none}
+.news form.done .msg{font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.3;color:var(--ink);margin-top:0}
+.news .msg:focus{outline:0}
+@media (max-width:899px){
+  .results{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x proximity;margin:0 calc(var(--pad)*-1);padding:0 var(--pad) clamp(70px,10vw,160px);scroll-padding-left:var(--pad);scrollbar-width:none}
+  .results::-webkit-scrollbar{display:none}
+  .results .card{flex:0 0 clamp(250px,27vw,400px)}
+  .drawer{width:100%;border-left:0}
+  .qv{width:100%;height:100%}
+  .qv-in{display:block;overflow-y:auto;overscroll-behavior:contain}
+  .qv-fig{height:auto;aspect-ratio:3/4;max-height:58vh}
+  .qv-info{overflow:visible;padding-top:26px}
+}
+@media (max-width:520px){
+  .chip{letter-spacing:.18em}.chip::after{right:.18em}
+  .cat-f{gap:0 16px}
+}
 html,body{overflow-x:clip;max-width:100%}
 </style>
 </head>
@@ -389,7 +476,7 @@ html,body{overflow-x:clip;max-width:100%}
     </ul>
   </nav>
   <div class="nav-r">
-    <button class="bag" id="bag" type="button" aria-live="polite" aria-label="Bag, 0 items">Bag <span id="bagN">0</span></button>
+    <button class="bag" id="bag" type="button" aria-haspopup="dialog" aria-controls="drawer" aria-label="Bag, 0 items">Bag <span id="bagN">0</span></button>
     <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
   </div>
 </header>
@@ -400,10 +487,10 @@ html,body{overflow-x:clip;max-width:100%}
   <p class="label hero-meta">N°00 &nbsp;—&nbsp; Autumn, Winter &nbsp;·&nbsp; Ready to wear</p>
   <h1 class="hl" id="h1"><span>The waist,</span><span>quietly held.</span></h1>
   <figure class="fig hero-fig clip" data-rv>
-    <img src="../../assets/img/maison/hero.jpg" alt="A woman in an ivory satin strapless corset top, cream trousers and a camel coat worn open" width="1200" height="1600" fetchpriority="high">
+    <img src="../../assets/img/maison/hero.jpg" alt="A woman in the Aurèle underbust corset in sand cotton over a cream shirt, with cream trousers and a camel coat worn open" width="1200" height="1600" fetchpriority="high">
     <p class="hl" aria-hidden="true"><span>The waist,</span><span>quietly held.</span></p>
   </figure>
-  <p class="label hero-cap"><span>Aurèle, in ivory satin</span><span>€229</span></p>
+  <p class="label hero-cap"><span>Aurèle, in sand cotton</span><span>€149</span></p>
   <div class="hero-copy rv d2" data-rv>
     <p>Steel-boned corsets, ready to wear. In stock in sizes 18 to 40″, and on their way within 24 hours. Nothing announces itself. Everything holds.</p>
     <div class="hero-cta"><a class="btn" href="#collection">View the collection</a><a class="link" href="#fit">Find your size</a></div>
@@ -424,18 +511,33 @@ html,body{overflow-x:clip;max-width:100%}
   <header class="grid head">
     <span class="no rv" data-rv>N°01</span>
     <h2 id="h-col" class="rv" data-rv>The <em>collection</em></h2>
-    <p class="body rv d1" data-rv>Six pieces. Each built on cotton coutil and boned in sprung steel. In stock in sizes 18 to 40″, shipped within 24 hours. The first exchange is free, and you may pay in three with Klarna.</p>
+    <p class="body rv d1" data-rv>Six pieces, €99 to €169. Each boned in spiral and flat steel, with a floating modesty panel behind the laces. In stock in sizes 18 to 40″, shipped within 24 hours. The first exchange is free, and you may pay in three with Klarna.</p>
   </header>
 
-  <article class="grid feat">
-    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p1.jpg" alt="Model wearing the Séverine underbust corset in bone coutil over a white shirt, with tailored trousers" width="1200" height="1600"></figure>
+  <div class="cat rv" data-rv id="cat">
+    <div class="cat-f" role="group" aria-label="Filter by type">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="chip" data-filter="underbust" aria-pressed="false">Underbust</button>
+      <button type="button" class="chip" data-filter="overbust" aria-pressed="false">Overbust</button>
+      <button type="button" class="chip" data-filter="waspie" aria-pressed="false">Waspie</button>
+    </div>
+    <div class="cat-s">
+      <label class="label" for="sort">Sort</label>
+      <select class="size" id="sort"><option value="featured">Featured</option><option value="asc">Price, low to high</option><option value="desc">Price, high to low</option></select>
+    </div>
+  </div>
+  <p class="label cat-n" id="catN" role="status" hidden></p>
+  <div class="results" id="results" role="group" aria-label="Products" tabindex="-1" hidden></div>
+
+  <article class="grid feat" id="editFirst" data-pid="severine">
+    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p1.jpg" alt="Model wearing the Séverine underbust corset in white cotton over a white shirt, with grey tailored trousers" width="1200" height="1600"></figure>
     <div class="info rv d1" data-rv>
       <span class="label">Underbust &nbsp;·&nbsp; 1 / 6</span>
       <h3>Séverine</h3>
-      <p class="price">€149</p>
-      <p class="spec">20 spiral steel bones · herringbone coutil, bone · 3" reduction</p>
+      <p class="price">€139</p>
+      <p class="spec">20 spiral + 6 flat steel bones · white cotton · steel busk</p>
       <p class="rate"><b aria-hidden="true">★</b> 4.8 (312) · In stock</p>
-      <p class="body">The house underbust, and where most begin. A clean front, a soft point at the hip, a waist that arrives without drama. Made to go over a shirt.</p>
+      <p class="body">The house underbust, and where most begin. White cotton, a clean front, a soft point at the hip, a waist that arrives without drama. Made to go over a shirt.</p>
       <div class="buy">
         <label class="vh" for="sz-severine">Size, Séverine</label>
         <select class="size" id="sz-severine" data-for="severine"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
@@ -446,17 +548,17 @@ html,body{overflow-x:clip;max-width:100%}
   </article>
 </section>
 
-<section aria-label="More from the collection">
+<section aria-label="More from the collection" id="editRest">
   <div class="wrap rail-top">
     <h3>Four more, in stock</h3>
     <div class="rail-ctrl"><button type="button" id="prev" aria-label="Previous products">←</button><button type="button" id="next" aria-label="Next products">→</button></div>
   </div>
   <div class="rail" id="rail" tabindex="0" role="group" aria-label="Product rail, scroll horizontally">
-    <article class="card">
-      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p2.jpg" alt="Model wearing the Aurèle strapless overbust corset in ivory satin with straight blue jeans" width="1200" height="1600"></figure>
-      <span class="label">Overbust · 2 / 6</span>
-      <div class="card-h"><h4>Aurèle</h4><span class="price">€229</span></div>
-      <p class="spec">24 spiral steel bones · ivory satin on coutil · 4" reduction</p>
+    <article class="card" data-pid="aurele">
+      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p2.jpg" alt="Model wearing the Aurèle underbust corset in sand cotton over a cream ribbed knit top, with straight blue jeans" width="1200" height="1600"></figure>
+      <span class="label">Underbust · 2 / 6</span>
+      <div class="card-h"><h4>Aurèle</h4><span class="price">€149</span></div>
+      <p class="spec">20 spiral + 6 flat steel bones · sand cotton · hourglass curve</p>
       <p class="rate"><b aria-hidden="true">★</b> 4.9 (486) · In stock</p>
       <div class="buy">
         <label class="vh" for="sz-aurele">Size, Aurèle</label>
@@ -465,11 +567,11 @@ html,body{overflow-x:clip;max-width:100%}
         <a class="link" href="#tryon" data-try="aurele">Try it on</a>
       </div>
     </article>
-    <article class="card">
-      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p3.jpg" alt="Model wearing the Odile waspie in sand cotton sateen over a fine knit dress" width="1200" height="1600"></figure>
+    <article class="card" data-pid="odile">
+      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p3.jpg" alt="Model wearing the Odile waspie in beige satin and mesh over a fine knit dress" width="1200" height="1600"></figure>
       <span class="label">Waspie · 3 / 6</span>
       <div class="card-h"><h4>Odile</h4><span class="price">€99</span></div>
-      <p class="spec">14 flat &amp; spiral bones · sand cotton sateen · 3" reduction</p>
+      <p class="spec">18 spiral + 6 flat steel bones · beige satin and sport mesh</p>
       <p class="rate"><b aria-hidden="true">★</b> 4.7 (641) · In stock</p>
       <div class="buy">
         <label class="vh" for="sz-odile">Size, Odile</label>
@@ -478,11 +580,11 @@ html,body{overflow-x:clip;max-width:100%}
         <a class="link" href="#tryon" data-try="odile">Try it on</a>
       </div>
     </article>
-    <article class="card">
-      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p4.jpg" alt="Model wearing the Maren longline underbust corset in caramel coutil over a fine turtleneck" width="1200" height="1600"></figure>
+    <article class="card" data-pid="maren">
+      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p4.jpg" alt="Model wearing the Maren longline underbust corset in black cotton over a black turtleneck, with wide black trousers" width="1200" height="1600"></figure>
       <span class="label">Longline · 4 / 6</span>
-      <div class="card-h"><h4>Maren</h4><span class="price">€199</span></div>
-      <p class="spec">26 spiral steel bones · caramel double coutil · 4" reduction</p>
+      <div class="card-h"><h4>Maren</h4><span class="price">€149</span></div>
+      <p class="spec">20 spiral + 6 flat steel bones · black cotton · for a long torso</p>
       <p class="rate"><b aria-hidden="true">★</b> 4.8 (203) · In stock</p>
       <div class="buy">
         <label class="vh" for="sz-maren">Size, Maren</label>
@@ -491,11 +593,11 @@ html,body{overflow-x:clip;max-width:100%}
         <a class="link" href="#tryon" data-try="maren">Try it on</a>
       </div>
     </article>
-    <article class="card">
-      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p5.jpg" alt="Model wearing the Colombe sweetheart overbust corset in soft black satin with a slip skirt and an open blazer" width="1200" height="1600"></figure>
+    <article class="card" data-pid="colombe">
+      <figure class="fig clip" data-rv><img src="../../assets/img/maison/p5.jpg" alt="Model wearing the Colombe strapless overbust corset in black satin, laced at the sides with ties at the hip, over a white top with a cream slip skirt and a black blazer on the shoulders" width="1200" height="1600"></figure>
       <span class="label">Overbust · 5 / 6</span>
-      <div class="card-h"><h4>Colombe</h4><span class="price">€249</span></div>
-      <p class="spec">28 spiral steel bones · soft black satin on coutil · sweetheart · 4" reduction</p>
+      <div class="card-h"><h4>Colombe</h4><span class="price">€169</span></div>
+      <p class="spec">20 spiral + 6 flat steel bones · black satin · snap lapels · hip ties</p>
       <p class="rate"><b aria-hidden="true">★</b> 4.8 (159) · In stock</p>
       <div class="buy">
         <label class="vh" for="sz-colombe">Size, Colombe</label>
@@ -507,15 +609,15 @@ html,body{overflow-x:clip;max-width:100%}
   </div>
   <div class="rail-bar" aria-hidden="true"><i id="railBar"></i></div>
 
-  <article class="grid feat alt wrap">
-    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p6.jpg" alt="Model wearing the Isaure square-neck corset with straps in champagne satin under an open cardigan, with linen trousers" width="1200" height="1600"></figure>
+  <article class="grid feat alt wrap" data-pid="isaure">
+    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p6.jpg" alt="Model wearing the Isaure underbust corset in buttercream cotton, with a front zip and peach ribbon ties at the hip, over a white shirt dress and under an open cream cardigan" width="1200" height="1600"></figure>
     <div class="info rv d1" data-rv>
-      <span class="label">Overbust, with straps &nbsp;·&nbsp; 6 / 6</span>
+      <span class="label">Underbust, front zip &nbsp;·&nbsp; 6 / 6</span>
       <h3>Isaure</h3>
-      <p class="price">€219</p>
-      <p class="spec">22 spiral steel bones · champagne satin on coutil · 3" reduction</p>
+      <p class="price">€129</p>
+      <p class="spec">20 spiral + 6 flat steel bones · buttercream cotton · front zip · hip ties</p>
       <p class="rate"><b aria-hidden="true">★</b> 4.8 (119) · In stock</p>
-      <p class="body">A square neckline and two quiet straps. It reads as a top, and behaves as a corset. Under a cardigan at noon, alone in the evening.</p>
+      <p class="body">An underbust in buttercream cotton that closes with a zip at the front, not a busk. Mesh panels at the hip, laced with peach ribbon. Under a cardigan at noon, over a shirt dress.</p>
       <div class="buy">
         <label class="vh" for="sz-isaure">Size, Isaure</label>
         <select class="size" id="sz-isaure" data-for="isaure"><option value="">Size</option><option value="18">18″</option><option value="20">20″</option><option value="22">22″</option><option value="24">24″</option><option value="26">26″</option><option value="28">28″</option><option value="30">30″</option><option value="32">32″</option><option value="34">34″</option><option value="36">36″</option><option value="38">38″</option><option value="40">40″</option></select>
@@ -585,6 +687,7 @@ html,body{overflow-x:clip;max-width:100%}
         <span class="label st-tag" id="stTag" hidden>AI preview</span>
       </div>
       <div class="st-act" id="stAct" hidden>
+        <p class="label st-note" id="stNote">AI-generated preview. Fit and colour may differ.</p>
         <div class="links"><button class="link" type="button" id="stTog" aria-pressed="false">View original</button><a class="link" id="stDl" href="#" download="vesna-preview.png">Download</a><button class="link" type="button" id="stAgain">Try another piece</button></div>
         <div class="buy">
           <label class="vh" for="sz-stage">Size</label>
@@ -606,11 +709,11 @@ html,body{overflow-x:clip;max-width:100%}
   <div class="sil rv" data-rv>
     <a href="#collection">
       <svg viewBox="0 0 88 132" aria-hidden="true"><path d="M14 22 C24 10 38 12 44 24 C50 12 64 10 74 22 C74 48 64 58 64 74 C64 92 72 104 76 116 C56 126 32 126 12 116 C16 104 24 92 24 74 C24 58 14 48 14 22Z"/><path class="x" d="M44 24V122M40 40l8 8m0-8l-8 8M40 60l8 8m0-8l-8 8M40 80l8 8m0-8l-8 8M40 100l8 8m0-8l-8 8"/></svg>
-      <h3>Overbust</h3><p>From hip to neckline. A garment in itself.</p><span class="label">Aurèle · Colombe · Isaure</span>
+      <h3>Overbust</h3><p>From hip to neckline. A garment in itself.</p><span class="label">Colombe</span>
     </a>
     <a href="#collection">
       <svg viewBox="0 0 88 132" aria-hidden="true"><path d="M16 44 C30 36 58 36 72 44 C70 58 64 64 64 78 C64 94 72 104 76 116 C56 126 32 126 12 116 C16 104 24 94 24 78 C24 64 18 58 16 44Z"/><path class="x" d="M44 38V122M40 52l8 8m0-8l-8 8M40 72l8 8m0-8l-8 8M40 92l8 8m0-8l-8 8"/></svg>
-      <h3>Underbust</h3><p>Sits beneath the bust. The one to live in.</p><span class="label">Séverine</span>
+      <h3>Underbust</h3><p>Sits beneath the bust. The one to live in.</p><span class="label">Séverine · Aurèle · Isaure</span>
     </a>
     <a href="#collection">
       <svg viewBox="0 0 88 132" aria-hidden="true"><path d="M20 58 C34 52 54 52 68 58 C66 66 64 70 64 78 C64 86 67 92 70 100 C54 106 34 106 18 100 C21 92 24 86 24 78 C24 70 22 66 20 58Z"/><path class="x" d="M44 54V104M40 64l8 8m0-8l-8 8M40 84l8 8m0-8l-8 8"/></svg>
@@ -618,7 +721,7 @@ html,body{overflow-x:clip;max-width:100%}
     </a>
     <a href="#collection">
       <svg viewBox="0 0 88 132" aria-hidden="true"><path d="M16 34 C30 26 58 26 72 34 C70 50 64 56 64 70 C64 88 76 100 80 124 C58 132 30 132 8 124 C12 100 24 88 24 70 C24 56 18 50 16 34Z"/><path class="x" d="M44 28V129M40 42l8 8m0-8l-8 8M40 62l8 8m0-8l-8 8M40 82l8 8m0-8l-8 8M40 102l8 8m0-8l-8 8"/></svg>
-      <h3>Longline</h3><p>Extends over the hip. Smooth under a bias skirt.</p><span class="label">Maren</span>
+      <h3>Longline</h3><p>An underbust cut longer, for a long torso.</p><span class="label">Maren</span>
     </a>
   </div>
 </section>
@@ -674,12 +777,12 @@ html,body{overflow-x:clip;max-width:100%}
     <p class="body rv d1" data-rv>Most of a corset is hidden. Ours is built the way corsets at three times the price are built. Steel throughout, and tested for 200 wears.</p>
   </header>
   <div class="grid">
-    <figure class="fig clip" data-rv><img src="../../assets/img/maison/detail.jpg" alt="The back of a bone coutil corset laid flat on linen: two-part eyelets, crossed lacing, stitched bone channels and bound edges" width="1800" height="1200"></figure>
+    <figure class="fig clip" data-rv><img src="../../assets/img/maison/detail.jpg" alt="The back of a white cotton corset laid flat on linen: two-part eyelets, crossed lacing, stitched bone channels and bound edges" width="1800" height="1200"></figure>
     <ol>
       <li class="rv" data-rv><div><h3>The bones</h3><p>Spiral steel at the curves, flat steel at the back. No plastic, anywhere. Each bone tipped and cased in its own channel so it never finds the cloth.</p></div></li>
-      <li class="rv" data-rv><div><h3>The busk</h3><p>A steel busk, five or six loops. It closes with one quiet sound and stays closed.</p></div></li>
+      <li class="rv" data-rv><div><h3>The busk</h3><p>A steel busk at the front. It closes with one quiet sound and stays closed. Isaure alone closes with a zip.</p></div></li>
       <li class="rv" data-rv><div><h3>The waist tape</h3><p>A band of grosgrain stitched inside at the narrowest point. It takes the strain, so the seams need not.</p></div></li>
-      <li class="rv" data-rv><div><h3>The layers</h3><p>Coutil for strength, satin or sateen for the eye, cotton against the skin. Cut on grain. Always.</p></div></li>
+      <li class="rv" data-rv><div><h3>The layers</h3><p>Cotton for most, satin for Colombe, mesh where the body wants air. Behind the laces, a floating modesty panel. Always.</p></div></li>
       <li class="rv" data-rv><div><h3>The test</h3><p>Two-part eyelets that do not pull through. Bound edges, stitched flat. Every style is laced, worn and unlaced 200 times before it goes on sale.</p></div></li>
     </ol>
   </div>
@@ -711,7 +814,7 @@ html,body{overflow-x:clip;max-width:100%}
 <section class="mtm dark wrap" id="styling" aria-labelledby="h-mtm">
   <span class="stitch" aria-hidden="true" data-rv><svg viewBox="0 0 14 42"><path d="M1 1 13 13"/><path d="M13 1 1 13"/><path d="M1 15 13 27"/><path d="M13 15 1 27"/><path d="M1 29 13 41"/><path d="M13 29 1 41"/></svg></span>
   <div class="grid">
-    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p5.jpg" alt="The Colombe corset in soft black satin, worn with a slip skirt under an open blazer" width="1200" height="1600" style="object-position:50% 30%"></figure>
+    <figure class="fig clip" data-rv><img src="../../assets/img/maison/p5.jpg" alt="The Colombe corset in black satin, worn over a white top with a cream slip skirt, a black blazer on the shoulders" width="1200" height="1600" style="object-position:50% 30%"></figure>
     <div class="txt rv d1" data-rv>
       <span class="no">N°07</span>
       <h2 id="h-mtm">Morning <em>to evening</em></h2>
@@ -747,6 +850,67 @@ html,body{overflow-x:clip;max-width:100%}
   </div>
   <div class="fbase"><span class="wordmark" aria-hidden="true">Vesna</span><span class="label">© 2026 Vesna &nbsp;·&nbsp; Terms &nbsp;·&nbsp; Privacy</span></div>
 </footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<p class="vh" id="shopLive" role="status" aria-live="polite"></p>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerT" tabindex="-1" hidden>
+  <header class="dr-h">
+    <h2 id="drawerT">Your bag <em id="drawerN"></em></h2>
+    <button class="link" type="button" data-close>Close</button>
+  </header>
+  <div class="dr-b">
+    <ul class="lines" id="bagLines"></ul>
+    <div class="dr-empty" id="bagEmpty" hidden>
+      <p class="serif">Your bag is empty.</p>
+      <p class="hint">Six pieces, in stock in sizes 18 to 40″.</p>
+      <a class="btn" href="#collection" data-close>View the collection</a>
+    </div>
+  </div>
+  <footer class="dr-f" id="bagFoot">
+    <p class="ship-t" id="shipT"></p>
+    <div class="ship-bar" aria-hidden="true"><i id="shipBar"></i></div>
+    <dl class="sums">
+      <div><dt class="label">Subtotal</dt><dd id="bagSub">€0</dd></div>
+      <div><dt class="label">Shipping</dt><dd id="bagShip">—</dd></div>
+    </dl>
+    <p class="hint">Prices include VAT. Discount codes are entered at checkout.</p>
+    <a class="btn solid full" id="toCheckout" href="checkout.html">Checkout</a>
+  </footer>
+</aside>
+
+<div class="qv" id="qv" role="dialog" aria-modal="true" aria-labelledby="qvName" tabindex="-1" hidden>
+  <button class="link qv-x" type="button" data-close>Close</button>
+  <div class="qv-in">
+    <div class="qv-media">
+      <figure class="fig qv-fig"><img id="qvImg" alt="" width="1200" height="1600"></figure>
+      <div class="qv-th" role="group" aria-label="Product images">
+        <button type="button" id="qvT1" aria-pressed="true"><img id="qvT1i" alt="" width="1200" height="1600"><span class="vh">Worn</span></button>
+        <button type="button" id="qvT2" aria-pressed="false"><img id="qvT2i" alt="" width="900" height="1200"><span class="vh">The piece on its own</span></button>
+      </div>
+    </div>
+    <div class="qv-info info">
+      <span class="label" id="qvType"></span>
+      <h3 id="qvName"></h3>
+      <p class="price" id="qvPrice"></p>
+      <p class="rate" id="qvRate"></p>
+      <p class="body" id="qvDesc"></p>
+      <dl class="qv-spec">
+        <div><dt class="label">Bones</dt><dd id="qvBones"></dd></div>
+        <div><dt class="label">Fabric</dt><dd id="qvFabric"></dd></div>
+        <div><dt class="label">Reduction</dt><dd id="qvRed"></dd></div>
+        <div><dt class="label">Length</dt><dd id="qvLen"></dd></div>
+      </dl>
+      <div class="buy">
+        <label class="vh" for="sz-qv">Size</label>
+        <select class="size" id="sz-qv" aria-describedby="qvStock"></select>
+        <button class="btn" type="button" id="qvAdd" data-add="">Add to bag</button>
+      </div>
+      <p class="hint qv-stock" id="qvStock" role="status"></p>
+      <div class="qv-links"><button class="link" type="button" id="qvTry">Try it on</button><a class="link" href="#fit" data-close>Find your size</a></div>
+    </div>
+  </div>
+</div>
 
 <a class="pill" href="../../index.html">← All directions</a>
 
@@ -798,35 +962,261 @@ window.TRYON = TRYON;
   menu.addEventListener('click',function(e){if(e.target.tagName==='A')setMenu(false)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);burger.focus()}});
 
-  /* bag */
-  var count=0, bag=$('bag'), bagN=$('bagN');
-  document.querySelectorAll('.size').forEach(function(s){s.addEventListener('change',function(){s.classList.remove('need')})});
-  document.querySelectorAll('[data-add]').forEach(function(b){
-    b.setAttribute('data-label',b.textContent);
-    b.addEventListener('click',function(){
-      var wrap=b.closest('.buy'), s=wrap?wrap.querySelector('.size'):null;
-      clearTimeout(b._t);
-      if(s&&!s.value){
-        s.classList.add('need'); s.focus(); b.textContent='Choose a size';
-        b._t=setTimeout(function(){b.textContent=b.getAttribute('data-label')},1800); return;
-      }
-      count++; bagN.textContent=count; bag.setAttribute('aria-label','Bag, '+count+(count===1?' item':' items'));
-      bag.classList.add('bump'); b.textContent=b.getAttribute('data-add')+(s?', '+s.value+'″':'')+' — added';
-      setTimeout(function(){bag.classList.remove('bump')},600);
-      b._t=setTimeout(function(){b.textContent=b.getAttribute('data-label')},2200);
-    });
-  });
-
   /* rail */
   var rail=$('rail'), bar=$('railBar');
   function step(dir){var c=rail.querySelector('.card');var w=c?c.getBoundingClientRect().width+24:320;rail.scrollBy({left:dir*w,behavior:rm?'auto':'smooth'})}
   $('prev').addEventListener('click',function(){step(-1)}); $('next').addEventListener('click',function(){step(1)});
   function railBar(){var max=rail.scrollWidth-rail.clientWidth, vis=rail.clientWidth/rail.scrollWidth;bar.style.width=(Math.min(1,vis)*100)+'%';bar.style.transform='translateX('+((max>0?rail.scrollLeft/max:0)*(1/Math.min(1,vis)-1)*100)+'%)'}
   rail.addEventListener('scroll',railBar,{passive:true}); window.addEventListener('resize',railBar); railBar();
-  var drag=null;
-  rail.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&!e.target.closest('button,a,select'))drag={x:e.clientX,s:rail.scrollLeft}});
-  window.addEventListener('pointermove',function(e){if(drag){rail.style.scrollSnapType='none';rail.scrollLeft=drag.s-(e.clientX-drag.x)}});
+  var drag=null, railMoved=false;
+  rail.addEventListener('pointerdown',function(e){railMoved=false;if(e.pointerType==='mouse'&&!e.target.closest('button,a,select'))drag={x:e.clientX,s:rail.scrollLeft}});
+  window.addEventListener('pointermove',function(e){if(drag){if(Math.abs(e.clientX-drag.x)>6)railMoved=true;rail.style.scrollSnapType='none';rail.scrollLeft=drag.s-(e.clientX-drag.x)}});
   window.addEventListener('pointerup',function(){if(drag){drag=null;rail.style.scrollSnapType=''}});
+
+  /* shop: catalogue data, persistent bag, drawer, quick view, filter and sort */
+  var PRODUCTS=[
+    {id:'severine',n:1,name:'Séverine',price:139,type:'underbust',label:'Underbust',rate:'4.8',revs:312,bones:'20 spiral, 6 flat steel',fabric:'White cotton',red:'Up to 3″',len:'12.5″ (32 cm) at the front',
+      spec:'20 spiral + 6 flat steel bones · white cotton · steel busk',
+      alt:'Model wearing the Séverine underbust corset in white cotton over a white shirt, with grey tailored trousers',
+      desc:'The house underbust, and where most begin. White cotton, a clean front, a soft point at the hip, a waist that arrives without drama. Made to go over a shirt.'},
+    {id:'aurele',n:2,name:'Aurèle',price:149,type:'underbust',label:'Underbust',rate:'4.9',revs:486,bones:'20 spiral, 6 flat steel',fabric:'Sand cotton',red:'Up to 4″',len:'13″ (33 cm) at the front',
+      spec:'20 spiral + 6 flat steel bones · sand cotton · hourglass curve',
+      alt:'Model wearing the Aurèle underbust corset in sand cotton over a cream ribbed knit top, with straight blue jeans',
+      desc:'An underbust in sand cotton, cut with a strong hourglass curve and room at the hip. With jeans by day. Over a shirt, under a coat.'},
+    {id:'odile',n:3,name:'Odile',price:99,type:'waspie',label:'Waspie',rate:'4.7',revs:641,bones:'18 spiral, 6 flat steel',fabric:'Beige satin and sport mesh',red:'Up to 3″',len:'9.5″ (24 cm) at the front',
+      spec:'18 spiral + 6 flat steel bones · beige satin and sport mesh',
+      alt:'Model wearing the Odile waspie in beige satin and mesh over a fine knit dress',
+      desc:'A short band at the waist, in beige satin panels set between sport mesh. Over a shirt, a knit dress, a coat. It covers the waist and nothing more.'},
+    {id:'maren',n:4,name:'Maren',price:149,type:'underbust',label:'Longline underbust',rate:'4.8',revs:203,bones:'20 spiral, 6 flat steel',fabric:'Black cotton',red:'Up to 4″',len:'14.5″ (37 cm) at the front',
+      spec:'20 spiral + 6 flat steel bones · black cotton · for a long torso',
+      alt:'Model wearing the Maren longline underbust corset in black cotton over a black turtleneck, with wide black trousers',
+      desc:'A longline underbust in black cotton, cut for a long torso. Steady over a fine knit, quiet with black trousers.'},
+    {id:'colombe',n:5,name:'Colombe',price:169,type:'overbust',label:'Overbust',rate:'4.8',revs:159,bones:'20 spiral, 6 flat steel',fabric:'Black satin',red:'Moderate',len:'Cut for a shorter torso',
+      spec:'20 spiral + 6 flat steel bones · black satin · snap lapels · hip ties',
+      alt:'Model wearing the Colombe strapless overbust corset in black satin, laced at the sides with ties at the hip, over a white top with a cream slip skirt and a black blazer on the shoulders',
+      desc:'A strapless sweetheart overbust in black satin with small snap-down lapels, cut for a shorter torso, with lacing at each side to set the hip. Under a blazer at six, with a slip skirt after dark.'},
+    {id:'isaure',n:6,name:'Isaure',price:129,type:'underbust',label:'Underbust, front zip',rate:'4.8',revs:119,bones:'20 spiral, 6 flat steel',fabric:'Buttercream cotton, mesh hip panels',red:'Moderate',len:'11.25″ (29 cm) at the front',
+      spec:'20 spiral + 6 flat steel bones · buttercream cotton · front zip · hip ties',
+      alt:'Model wearing the Isaure underbust corset in buttercream cotton, with a front zip and peach ribbon ties at the hip, over a white shirt dress and under an open cream cardigan',
+      desc:'An underbust in buttercream cotton that closes with a zip at the front, not a busk. Mesh panels at the hip, laced with peach ribbon. Under a cardigan at noon, over a shirt dress.'}
+  ];
+  var SIZES=[18,20,22,24,26,28,30,32,34,36,38,40], IMG='../../assets/img/maison/';
+  var FREE_OVER=120, SHIP_STD=6.95, MAX_QTY=5, BAG_KEY='vesna_bag';
+  var BY_ID={}, BY_NAME={}, STOCK={}, prefSize='';
+  function money(n){return '€'+(Math.round(n*100)%100?n.toFixed(2):Math.round(n))}
+  /* demo stock, deterministic per product: one size sold out, two low, the rest in stock */
+  function seedStock(id){
+    var h=7, i, out={}; for(i=0;i<id.length;i++) h=(h*31+id.charCodeAt(i))>>>0;
+    var sold=h%12, low1=(sold+3+h%4)%12, low2=(sold+7+(h>>>3)%3)%12;
+    SIZES.forEach(function(s,k){out[s]=k===sold?'out':(k===low1||k===low2)?'low':'in'});
+    return out;
+  }
+  PRODUCTS.forEach(function(p){BY_ID[p.id]=p;BY_NAME[p.name]=p;STOCK[p.id]=seedStock(p.id)});
+  function fillSizes(sel,id,detail){
+    var keep=sel.value, st=STOCK[id], h='<option value="">Size</option>';
+    SIZES.forEach(function(s){
+      var k=st[s]; h+='<option value="'+s+'"'+(k==='out'?' disabled':'')+'>'+s+'″'+(detail&&k==='out'?' · sold out':detail&&k==='low'?' · low stock':'')+'</option>';
+    });
+    sel.innerHTML=h; sel.value=(keep&&st[keep]!=='out')?keep:'';
+  }
+  document.querySelectorAll('select.size[data-for]').forEach(function(s){fillSizes(s,s.getAttribute('data-for'))});
+
+  /* bag state */
+  var bagBtn=$('bag'), bagN=$('bagN'), mem=[];
+  function cleanBag(a){
+    var out=[]; if(!Array.isArray(a))return out;
+    a.forEach(function(l){
+      var q=l&&parseInt(l.qty,10), s=l&&parseInt(l.size,10);
+      if(l&&BY_ID[l.id]&&SIZES.indexOf(s)>-1&&q>=1) out.push({id:l.id,size:s,qty:Math.min(MAX_QTY,q)});
+    });
+    return out;
+  }
+  function readBag(){try{return cleanBag(JSON.parse(window.localStorage.getItem(BAG_KEY)||'[]'))}catch(e){return mem}}
+  function writeBag(){mem=bagItems;try{window.localStorage.setItem(BAG_KEY,JSON.stringify(bagItems))}catch(e){}}
+  var bagItems=readBag();
+  function bagCount(){return bagItems.reduce(function(n,l){return n+l.qty},0)}
+  function bagSub(){return bagItems.reduce(function(n,l){return n+l.qty*BY_ID[l.id].price},0)}
+  function findLine(id,size){for(var i=0;i<bagItems.length;i++)if(bagItems[i].id===id&&bagItems[i].size===size)return bagItems[i];return null}
+  function say(t){var l=$('shopLive');l.textContent='';setTimeout(function(){l.textContent=t},30)}
+
+  function renderBag(){
+    var n=bagCount(), sub=bagSub(), left=FREE_OVER-sub;
+    bagN.textContent=n; bagBtn.setAttribute('aria-label','Bag, '+n+(n===1?' item':' items'));
+    $('drawerN').textContent=n?'('+n+')':'';
+    $('bagLines').innerHTML=bagItems.map(function(l){
+      var p=BY_ID[l.id], k=l.id+'|'+l.size, t=p.name+', size '+l.size+'″';
+      return '<li data-k="'+k+'"><span class="ln-th"><img src="'+IMG+'g'+p.n+'.jpg" alt="" width="900" height="1200" loading="lazy"></span>'+
+        '<div class="ln-m"><h3>'+p.name+'</h3><span class="label">'+p.label+' · Size '+l.size+'″</span></div>'+
+        '<span class="price ln-p">'+money(p.price*l.qty)+'</span>'+
+        '<div class="ln-a"><div class="qty" role="group" aria-label="Quantity, '+t+'"><button type="button" data-q="-1" aria-label="One fewer, '+t+'"'+(l.qty<=1?' disabled':'')+'>−</button><span aria-label="Quantity">'+l.qty+'</span><button type="button" data-q="1" aria-label="One more, '+t+'"'+(l.qty>=MAX_QTY?' disabled':'')+'>+</button></div>'+
+        '<button class="link" type="button" data-rm aria-label="Remove '+t+'">Remove</button></div></li>';
+    }).join('');
+    $('bagLines').hidden=n===0; $('bagEmpty').hidden=n>0; $('bagFoot').hidden=n===0;
+    $('shipT').textContent=left>0?money(left)+' away from free shipping.':'Shipping is free on this order.';
+    $('shipBar').style.transform='scaleX('+Math.min(1,sub/FREE_OVER).toFixed(3)+')';
+    $('bagSub').textContent=money(sub); $('bagShip').textContent=left>0?money(SHIP_STD):'Free';
+  }
+  function addToBag(id,size){
+    var l=findLine(id,size);
+    if(l){if(l.qty>=MAX_QTY)return false;l.qty++}else bagItems.push({id:id,size:size,qty:1});
+    writeBag(); renderBag(); return true;
+  }
+  renderBag();
+  window.addEventListener('storage',function(e){if(e.key===BAG_KEY||e.key===null){bagItems=readBag();renderBag()}});
+  window.addEventListener('pageshow',function(e){if(e.persisted){bagItems=readBag();renderBag()}});
+
+  /* add to bag: every [data-add] button, size required */
+  document.addEventListener('change',function(e){if(e.target.classList&&e.target.classList.contains('size'))e.target.classList.remove('need')});
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-add]'); if(!b)return;
+    var wrap=b.closest('.buy'), s=wrap?wrap.querySelector('.size'):null, p=BY_NAME[b.getAttribute('data-add')];
+    if(!b.hasAttribute('data-label'))b.setAttribute('data-label',b.textContent);
+    function back(ms){b._t=setTimeout(function(){b.textContent=b.getAttribute('data-label')},ms)}
+    clearTimeout(b._t);
+    if(!p||!s)return;
+    if(!s.value){s.classList.add('need');s.focus();b.textContent='Choose a size';back(1800);return}
+    var size=parseInt(s.value,10);
+    if(STOCK[p.id][size]==='out'){s.classList.add('need');s.focus();b.textContent=size+'″ is sold out';back(2200);return}
+    if(!addToBag(p.id,size)){b.textContent='Five per size at most';back(2200);return}
+    bagBtn.classList.add('bump'); b.textContent=p.name+', '+size+'″ — added';
+    say(p.name+', size '+size+'″, added to bag. '+bagCount()+(bagCount()===1?' item':' items')+' in bag.');
+    setTimeout(function(){bagBtn.classList.remove('bump')},600); back(2200);
+  });
+
+  /* dialogs: one at a time, focus trapped, Esc closes, focus returns to the opener */
+  var scrim=$('scrim'), modal=null, opener=null;
+  function lockScroll(on){
+    var sw=window.innerWidth-root.clientWidth;
+    document.body.style.overflow=on?'hidden':''; document.body.style.paddingRight=on&&sw>0?sw+'px':'';
+  }
+  function tabbables(el){
+    return [].filter.call(el.querySelectorAll('a[href],button,select,input,[tabindex]:not([tabindex="-1"])'),function(n){return !n.disabled&&n.getClientRects().length>0});
+  }
+  function closeModal(silent){
+    var el=modal; if(!el)return; modal=null;
+    el.classList.remove('on'); scrim.classList.remove('on'); lockScroll(false);
+    clearTimeout(el._t); el._t=setTimeout(function(){el.hidden=true;if(!modal)scrim.hidden=true},rm?0:700);
+    if(!silent&&opener&&document.contains(opener))opener.focus({preventScroll:true});
+    opener=null;
+  }
+  function openModal(el,from){
+    if(modal)closeModal(true);
+    if(menu.classList.contains('open'))setMenu(false);
+    opener=from||document.activeElement; modal=el;
+    clearTimeout(el._t); el.hidden=false; scrim.hidden=false; lockScroll(true);
+    void el.offsetWidth; el.classList.add('on'); scrim.classList.add('on');
+    el.focus({preventScroll:true});
+  }
+  scrim.addEventListener('click',function(){closeModal()});
+  document.addEventListener('keydown',function(e){
+    if(!modal)return;
+    if(e.key==='Escape'){e.preventDefault();closeModal();return}
+    if(e.key!=='Tab')return;
+    var f=tabbables(modal), first=f[0], last=f[f.length-1], a=document.activeElement;
+    if(!f.length){e.preventDefault();return}
+    if(e.shiftKey&&(a===first||a===modal||!modal.contains(a))){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&(a===last||!modal.contains(a))){e.preventDefault();first.focus()}
+  });
+  document.addEventListener('click',function(e){
+    var c=e.target.closest&&e.target.closest('[data-close]'); if(!c||!modal)return;
+    closeModal(c.tagName==='A');
+  });
+
+  /* bag drawer */
+  var drawer=$('drawer');
+  bagBtn.addEventListener('click',function(){renderBag();openModal(drawer,bagBtn)});
+  $('bagLines').addEventListener('click',function(e){
+    var b=e.target.closest('button'), li=b&&b.closest('li'); if(!li)return;
+    var k=li.getAttribute('data-k').split('|'), l=findLine(k[0],parseInt(k[1],10)); if(!l)return;
+    var p=BY_ID[l.id], idx=bagItems.indexOf(l), t=p.name+', size '+l.size+'″', sel;
+    if(b.hasAttribute('data-rm')){
+      bagItems.splice(idx,1); writeBag(); renderBag(); say(t+', removed from bag.');
+      var rest=$('bagLines').querySelectorAll('[data-rm]');
+      (rest[Math.min(idx,rest.length-1)]||drawer.querySelector('.dr-empty .btn')||drawer).focus();
+      return;
+    }
+    l.qty=Math.max(1,Math.min(MAX_QTY,l.qty+parseInt(b.getAttribute('data-q'),10)));
+    writeBag(); renderBag(); say(t+', quantity '+l.qty+'.');
+    sel='li[data-k="'+li.getAttribute('data-k')+'"] ';
+    (drawer.querySelector(sel+'[data-q="'+b.getAttribute('data-q')+'"]:not(:disabled)')||drawer.querySelector(sel+'[data-q]:not(:disabled)')||drawer).focus();
+  });
+
+  /* quick view */
+  var qv=$('qv'), qvSel=$('sz-qv'), qvAdd=$('qvAdd'), qvId='';
+  function qvImage(i){
+    var p=BY_ID[qvId], im=$('qvImg');
+    im.src=IMG+(i?'g':'p')+p.n+'.jpg'; im.alt=i?'The '+p.name+' on its own, seen from the front':p.alt;
+    im.style.objectFit=i?'contain':''; 
+    $('qvT1').setAttribute('aria-pressed',i?'false':'true'); $('qvT2').setAttribute('aria-pressed',i?'true':'false');
+  }
+  function qvStock(){
+    var st=STOCK[qvId], v=qvSel.value, el=$('qvStock'), out=SIZES.filter(function(s){return st[s]==='out'});
+    el.className='hint qv-stock'+(v&&st[v]==='low'?' low':'');
+    el.textContent=v?(st[v]==='low'?'Low stock in '+v+'″.':'In stock in '+v+'″. Ships within 24 hours.'):(out.length?out.join('″, ')+'″ is sold out.':'');
+  }
+  function openQV(id,from,size){
+    var p=BY_ID[id]; if(!p)return; qvId=id;
+    $('qvType').textContent=p.label+' · '+p.n+' / 6'; $('qvName').textContent=p.name; $('qvPrice').textContent=money(p.price);
+    $('qvRate').innerHTML='<b aria-hidden="true">★</b> '+p.rate+' ('+p.revs+' reviews)';
+    $('qvDesc').textContent=p.desc; $('qvBones').textContent=p.bones; $('qvFabric').textContent=p.fabric; $('qvRed').textContent=p.red; $('qvLen').textContent=p.len;
+    $('qvT1i').src=IMG+'p'+p.n+'.jpg'; $('qvT2i').src=IMG+'g'+p.n+'.jpg'; qvImage(0);
+    qvSel.value=''; fillSizes(qvSel,id,true); size=size||prefSize; qvSel.value=(size&&STOCK[id][size]!=='out')?size:''; qvSel.classList.remove('need'); qvStock();
+    clearTimeout(qvAdd._t); qvAdd.setAttribute('data-add',p.name); qvAdd.setAttribute('data-label','Add to bag'); qvAdd.textContent='Add to bag';
+    qv.querySelector('.qv-in').scrollTop=0; qv.querySelector('.qv-info').scrollTop=0;
+    openModal(qv,from);
+  }
+  $('qvT1').addEventListener('click',function(){qvImage(0)}); $('qvT2').addEventListener('click',function(){qvImage(1)});
+  qvSel.addEventListener('change',qvStock);
+  $('qvTry').addEventListener('click',function(){
+    var r=tf.querySelector('input[name=piece][value="'+qvId+'"]');
+    closeModal(true); if(r){r.checked=true;ready()}
+    $('tryon').scrollIntoView({behavior:rm?'auto':'smooth',block:'start'}); if(r)r.focus({preventScroll:true});
+  });
+  document.querySelectorAll('[data-pid]').forEach(function(a){
+    var h=a.querySelector('h3,h4'); if(h)h.innerHTML='<button class="qv-open" type="button" aria-haspopup="dialog">'+h.innerHTML+'</button>';
+  });
+  document.addEventListener('click',function(e){
+    var t=e.target.closest&&e.target.closest('[data-pid] .fig,.qv-open'), a=t&&t.closest('[data-pid]'); if(!a)return;
+    if(railMoved){railMoved=false;return}
+    var s=a.querySelector('select.size');
+    openQV(a.getAttribute('data-pid'),a.querySelector('.qv-open'),s?s.value:'');
+  });
+
+  /* catalogue: filter and sort. The default view is the editorial layout; any other choice lists the matching pieces. */
+  var results=$('results'), catN=$('catN'), fType='all', fSort='featured';
+  function cardHTML(p){
+    return '<article class="card" data-pid="'+p.id+'"><figure class="fig"><img src="'+IMG+'p'+p.n+'.jpg" alt="'+p.alt+'" width="1200" height="1600" loading="lazy"></figure>'+
+      '<span class="label">'+p.label+' · '+p.n+' / 6</span>'+
+      '<div class="card-h"><h4><button class="qv-open" type="button" aria-haspopup="dialog">'+p.name+'</button></h4><span class="price">'+money(p.price)+'</span></div>'+
+      '<p class="spec">'+p.spec+'</p><p class="rate"><b aria-hidden="true">★</b> '+p.rate+' ('+p.revs+') · In stock</p>'+
+      '<div class="buy"><label class="vh" for="szr-'+p.id+'">Size, '+p.name+'</label><select class="size" id="szr-'+p.id+'"></select>'+
+      '<button class="link" type="button" data-add="'+p.name+'">Add to bag</button><a class="link" href="#tryon" data-try="'+p.id+'">Try it on</a></div></article>';
+  }
+  function renderCat(){
+    var def=fType==='all'&&fSort==='featured', list;
+    $('editFirst').hidden=!def; $('editRest').hidden=!def; results.hidden=def; catN.hidden=def;
+    if(def){results.innerHTML='';railBar();return}
+    list=PRODUCTS.filter(function(p){return fType==='all'||p.type===fType});
+    if(fSort!=='featured')list.sort(function(a,b){return fSort==='asc'?a.price-b.price:b.price-a.price});
+    results.innerHTML=list.map(cardHTML).join('');
+    list.forEach(function(p){var s=$('szr-'+p.id);fillSizes(s,p.id);if(prefSize&&STOCK[p.id][prefSize]!=='out')s.value=prefSize});
+    catN.textContent=list.length+(list.length===1?' piece':' pieces'); results.scrollLeft=0;
+  }
+  document.querySelectorAll('[data-filter]').forEach(function(b){
+    b.addEventListener('click',function(){
+      fType=b.getAttribute('data-filter');
+      document.querySelectorAll('[data-filter]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false')});
+      renderCat();
+    });
+  });
+  $('sort').addEventListener('change',function(){fSort=this.value;renderCat()});
+  /* a "By silhouette" tile applies the matching filter */
+  document.querySelectorAll('.sil a').forEach(function(a){
+    a.addEventListener('click',function(){
+      var t=a.querySelector('h3').textContent.toLowerCase(); if(t==='longline')t='underbust';
+      var b=document.querySelector('[data-filter="'+t+'"]'); if(b)b.click();
+    });
+  });
 
   /* fit finder */
   var RED={everyday:2,shaping:3,occasion:4};
@@ -864,7 +1254,7 @@ window.TRYON = TRYON;
 
     var red=RED[goal], wi=w/2.54, raw=Math.floor((wi-red)/2)*2, size=Math.min(40,Math.max(18,raw)), off=raw!==size;
     var diff=u-w, sil;
-    if(goal==='occasion') sil=diff<4?'Longline overbust':'Overbust';
+    if(goal==='occasion') sil=diff<4?'Longline':'Overbust';
     else if(goal==='shaping') sil=(w>=80||diff<6)?'Longline':'Underbust';
     else sil=diff>=12?'Waspie':'Underbust';
     var seasoned=Math.max(0,(wi-red-size)*2.54), first=seasoned+red*2.54*0.5;
@@ -879,7 +1269,7 @@ window.TRYON = TRYON;
       ?'Your measurements sit outside our range of 18 to 40. Size '+size+' is the nearest, and it may not be right. Write to us before you order and we will tell you honestly.'
       :'A '+Math.round(wi)+'" waist, less '+red+' for '+goal+' wear, rounded down to an even size. Size '+size+' is now selected on every piece. Under 8 cm of gap at first lacing is correct.';
     var link=$('rLink'); link.hidden=false; link.textContent=off?'Ask us about sizing':'View the '+sil.toLowerCase(); link.setAttribute('href',off?'mailto:help@vesna.example?subject=Sizing':'#collection');
-    if(!off) document.querySelectorAll('.size').forEach(function(s){s.value=String(size);s.classList.remove('need')});
+    if(!off){prefSize=String(size);document.querySelectorAll('select.size:not(#sort)').forEach(function(s){var f=s.getAttribute('data-for');s.value=(f&&STOCK[f][size]==='out')?'':String(size);s.classList.remove('need')})}
     $('gapCap').textContent=off?'Back lacing':'≈ '+half5(first)+' cm at first';
     tweenGap(off?30:10+Math.min(12,first)*3);
     res.classList.remove('updated'); void res.offsetWidth; res.classList.add('updated');
@@ -889,12 +1279,12 @@ window.TRYON = TRYON;
 
   /* virtual try-on */
   var GARMENTS={
-    severine:{name:'Séverine',file:'g1.jpg',desc:'the Séverine, an underbust corset in bone-coloured (warm off-white) herringbone cotton coutil; it sits beneath the bust and ends at the high hip, with a steel busk closure down the centre front and lacing at the back'},
-    aurele:{name:'Aurèle',file:'g2.jpg',desc:'the Aurèle, a strapless overbust corset in ivory satin with a softly curved straight neckline; it ends at the high hip, with a steel busk closure down the centre front and lacing at the back'},
-    odile:{name:'Odile',file:'g3.jpg',desc:'the Odile, a waspie (short waist cincher) in sand-coloured matte cotton sateen; it covers only the waist, from below the ribs to the top of the hip, with a short steel busk closure at the front and lacing at the back'},
-    maren:{name:'Maren',file:'g4.jpg',desc:'the Maren, a longline underbust corset in caramel cotton coutil; it sits beneath the bust and extends smoothly over the hip, with a long steel busk closure down the centre front and lacing at the back'},
-    colombe:{name:'Colombe',file:'g5.jpg',desc:'the Colombe, a strapless overbust corset in soft black satin with a sweetheart neckline; it ends at the high hip, with a steel busk closure down the centre front and lacing at the back'},
-    isaure:{name:'Isaure',file:'g6.jpg',desc:'the Isaure, an overbust corset in champagne satin with a square neckline and two narrow shoulder straps; it ends at the high hip, with a steel busk closure down the centre front and lacing at the back'}
+    severine:{name:'Séverine',file:'g1.jpg',desc:'the Séverine, an underbust corset in plain white cotton; it sits just beneath the bust and ends at the high hip with a gently curved lower edge, with a silver steel busk closure down the centre front, vertical stitched bone channels and lacing at the back'},
+    aurele:{name:'Aurèle',file:'g2.jpg',desc:'the Aurèle, an underbust corset in beige (warm sand) cotton with a pronounced hourglass curve, a small waist flaring to a rounded hip; it sits just beneath the bust and ends at the high hip, dipping to a soft point at the centre front, with a silver steel busk closure down the centre front and lacing at the back'},
+    odile:{name:'Odile',file:'g3.jpg',desc:'the Odile, a waspie (short waist cincher, about 24 cm high at the front) in beige, made of glossy satin panels alternating with panels of open sport mesh; it covers only the waist, from below the ribs to the top of the hip, with a short silver steel busk closure at the front and lacing at the back'},
+    maren:{name:'Maren',file:'g4.jpg',desc:'the Maren, a long-torso underbust corset in matte black cotton, about 37 cm high at the front; it sits just beneath the bust and extends down over the upper hip, ending in a soft point at the centre front, with a long silver steel busk closure down the centre front and lacing at the back'},
+    colombe:{name:'Colombe',file:'g5.jpg',desc:'the Colombe, a strapless overbust corset in glossy black satin with a sweetheart neckline finished by a small fold-down pointed lapel with one silver snap at the top of each cup; it covers the bust and ends at the high hip, with a silver steel busk closure down the centre front, a column of criss-cross lacing through silver eyelets down each side that ends in black ties at the hip, and lacing at the back'},
+    isaure:{name:'Isaure',file:'g6.jpg',desc:'the Isaure, an underbust corset in buttercream (pale yellow) cotton; it closes with a dark zip down the centre front (no busk, no clasps), and has peach mesh panels at each hip laced criss-cross with peach satin ribbon tied in a bow; it sits just beneath the bust and ends at the high hip, with lacing at the back'}
   };
   var GARMENT_REL='../../assets/img/maison/', KEY_NAME='vesna_openai_key';
   function tryPrompt(g){
@@ -1019,11 +1409,10 @@ window.TRYON = TRYON;
 
   /* step 2: piece, also preselected from the product links */
   tf.querySelectorAll('input[name=piece]').forEach(function(r){r.addEventListener('change',ready)});
-  document.querySelectorAll('[data-try]').forEach(function(a){
-    a.addEventListener('click',function(){
-      var r=tf.querySelector('input[name=piece][value="'+a.getAttribute('data-try')+'"]');
-      if(r){r.checked=true;ready()}
-    });
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('[data-try]'); if(!a)return;
+    var r=tf.querySelector('input[name=piece][value="'+a.getAttribute('data-try')+'"]');
+    if(r){r.checked=true;ready()}
   });
   consent.addEventListener('change',ready);
 
@@ -1088,8 +1477,8 @@ window.TRYON = TRYON;
   /* newsletter */
   $('newsForm').addEventListener('submit',function(ev){
     ev.preventDefault(); var em=$('email'), msg=$('newsMsg');
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())){msg.textContent='That address does not look complete.';em.setAttribute('aria-invalid','true');em.focus();return}
-    em.removeAttribute('aria-invalid'); msg.textContent='Thank you. The next letter will find you.'; em.value='';
+    if(!em.checkValidity()||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())){msg.textContent='That address does not look complete.';em.setAttribute('aria-invalid','true');em.focus();return}
+    em.removeAttribute('aria-invalid'); em.value=''; this.classList.add('done'); msg.setAttribute('tabindex','-1'); msg.textContent='Thank you. The next letter will find you.'; msg.focus({preventScroll:true});
   });
 })();
 </script>

@@ -1,1 +1,1 @@
-{ "functions": { "api/tryon.js": { "maxDuration": 120, "memory": 1024 } } }
+{ "functions": { "api/tryon.js": { "maxDuration": 120, "memory": 1024 }, "api/checkout.js": { "maxDuration": 15 } } }

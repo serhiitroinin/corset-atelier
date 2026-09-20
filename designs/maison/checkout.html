@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Vesna</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#f3eee6; --linen:#e6dccd; --sand:#cdbfae; --bronze:#8a6f4d; --ink:#1b1815; --mute:#5e554b; --bad:#8c2f1f;
+  --serif:"Cormorant Garamond","Cormorant",Garamond,"Times New Roman",serif;
+  --sans:"Jost","Figtree",system-ui,sans-serif;
+  --pad:clamp(28px,6vw,104px);
+  --ease:cubic-bezier(.19,.7,.12,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bone);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.7}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit}
+h1,h2,h3,p,figure,ul,ol,dl,dd,fieldset{margin:0;padding:0}
+ul,ol{list-style:none} fieldset{border:0;min-width:0}
+button,input,select{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--bone);padding:10px 16px;z-index:100}
+.skip:focus{left:8px}
+.label{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--mute);line-height:1.6}
+.serif{font-family:var(--serif);font-weight:300}
+.hint{font-size:13.5px;color:var(--mute);line-height:1.6;max-width:56ch}
+.price{font-family:var(--serif);font-size:21px;font-weight:400;line-height:1.2;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:48px;padding:0 28px;border:1px solid var(--ink);background:transparent;cursor:pointer;text-decoration:none;
+  font-size:11px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);transition:background .7s var(--ease),color .7s var(--ease)}
+.btn:hover{background:var(--ink);color:var(--bone)}
+.btn.solid{background:var(--ink);color:var(--bone)}
+.btn.solid:hover{background:transparent;color:var(--ink)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.link{display:inline-flex;align-items:center;min-height:40px;background:none;border:0;padding:0;cursor:pointer;text-decoration:none;font-size:11px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);
+  background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-size:100% 1px;background-position:0 calc(50% + 14px);transition:background-size .8s var(--ease)}
+.link:hover{background-size:0 1px;background-position:100% calc(50% + 14px)}
+
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px var(--pad);background:var(--bone);border-bottom:1px solid var(--sand)}
+.wordmark{font-family:var(--serif);font-weight:300;font-size:30px;letter-spacing:.34em;text-transform:uppercase;text-decoration:none;line-height:1;margin-right:-.34em;display:inline-flex;align-items:center;min-height:40px}
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+main{padding-top:clamp(36px,5vw,72px);padding-bottom:clamp(80px,10vw,150px)}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(44px,5.4vw,80px);line-height:1;letter-spacing:-.01em;margin:14px 0 0}
+h1 em,h2 em{font-style:italic;font-weight:300}
+h1:focus,h2:focus{outline:0}
+.no{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--bronze);line-height:1}
+
+.steps{display:flex;flex-wrap:wrap;gap:0 clamp(18px,3vw,44px);margin:clamp(26px,3.5vw,48px) 0 0;border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);padding:12px 0}
+.steps li{display:flex;align-items:baseline;gap:10px;color:var(--mute)}
+.steps li i{font-family:var(--serif);font-style:italic;font-size:18px;letter-spacing:0;text-transform:none;color:var(--bronze)}
+.steps li[aria-current=step]{color:var(--ink)}
+
+.co{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(12px,2vw,32px);align-items:start;margin-top:clamp(30px,4vw,60px)}
+.co-l{grid-column:1/8}
+.co-r{grid-column:9/13;position:sticky;top:104px;background:var(--linen);padding:clamp(22px,2.4vw,36px)}
+
+.cstep{border-top:1px solid var(--sand);padding:22px 0 30px;scroll-margin-top:96px}
+.cstep:first-child{border-top:0;padding-top:0}
+.cstep-h{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:40px}
+.cstep-h h2{display:flex;align-items:baseline;gap:14px;font-size:11px}
+.cstep-h h2 i{font-family:var(--serif);font-style:italic;color:var(--bronze);font-size:18px;letter-spacing:0;text-transform:none}
+.cstep:not(.todo) .cstep-h h2{color:var(--ink)}
+.cstep-sum{font-family:var(--serif);font-size:21px;line-height:1.4;margin-top:4px}
+.cstep form{margin-top:18px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(16px,2vw,32px)}
+.f{margin-bottom:6px}
+.f label{display:block}
+.f label small{font-size:inherit;letter-spacing:.12em;text-transform:none;color:var(--mute);opacity:.85}
+.f input,.f select{display:block;width:100%;min-height:48px;background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:6px 0;font-family:var(--serif);font-size:22px;font-weight:300;line-height:1.2;font-variant-numeric:lining-nums}
+.f select{-webkit-appearance:none;appearance:none;cursor:pointer;padding-right:30px;
+  background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%231b1815'/%3E%3C/svg%3E") no-repeat right 4px center/11px 7px}
+.f input::placeholder{color:#857a6e;font-style:italic;opacity:1}
+.f input:focus,.f select:focus{outline:0;border-bottom:2px solid var(--bronze);padding-bottom:5px}
+.f input[aria-invalid=true],.f select[aria-invalid=true],.f input[aria-invalid=true]:focus,.f select[aria-invalid=true]:focus{border-bottom:2px solid var(--bad);padding-bottom:5px}
+.ferr{color:var(--bad);font-size:13.5px;font-weight:400;line-height:1.5;min-height:1.5em;margin-top:4px}
+.opts{margin:10px 0 4px}
+.opts legend{margin-bottom:12px;padding-top:14px}
+.opt{position:relative;display:grid;grid-template-columns:18px 1fr auto;gap:2px 16px;align-items:center;padding:14px 16px;min-height:64px;border:1px solid var(--sand);margin-top:-1px;cursor:pointer;transition:border-color .6s var(--ease),background .6s var(--ease)}
+.opt input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer}
+.opt i{width:18px;height:18px;border:1px solid var(--ink);border-radius:50%;position:relative}
+.opt i::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--ink);opacity:0;transition:opacity .5s var(--ease)}
+.opt input:checked~i::after{opacity:1}
+.opt:has(input:checked){border-color:var(--ink);z-index:1;background:rgba(230,220,205,.35)}
+.opt input:focus-visible~i{outline:1px solid var(--ink);outline-offset:4px}
+.opt b{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.2;display:block}
+.opt small{font-size:13.5px;color:var(--mute);display:block;line-height:1.5}
+.go{display:flex;flex-wrap:wrap;align-items:center;gap:10px 26px;margin-top:22px}
+.demo{border:1px dashed var(--bronze);padding:clamp(20px,3vw,32px);margin-top:18px}
+.demo .serif{font-size:clamp(24px,2.2vw,30px);line-height:1.2;margin:6px 0 8px}
+.pay-err{margin-top:14px}
+
+.sum-t{display:flex;justify-content:space-between;align-items:baseline;gap:16px;cursor:default;list-style:none;min-height:40px}
+.sum-t::-webkit-details-marker{display:none}
+.sum-t .price{font-size:22px}
+.sum-t .tg{display:none}
+.sum-lines{border-top:1px solid var(--sand);margin-top:12px}
+.sum-lines li{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:0 14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--sand)}
+.sum-lines .th{width:54px;height:72px;background:var(--bone);overflow:hidden}
+.sum-lines h3{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.15;margin-bottom:2px}
+.code{margin-top:18px}
+.code .row{display:flex;border-bottom:1px solid var(--ink)}
+.code .row:focus-within{border-bottom-width:2px;border-color:var(--bronze)}
+.code input{flex:1;min-width:0;background:transparent;border:0;border-radius:0;padding:8px 0;min-height:46px;font-family:var(--serif);font-size:21px;font-weight:300;text-transform:uppercase}
+.code input::placeholder{text-transform:none;font-style:italic;color:#857a6e;opacity:1}
+.code input:focus{outline:0}
+.code button{border:0;background:none;cursor:pointer;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;padding:0 0 0 18px;min-height:46px}
+.code .on{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.tot{margin-top:10px}
+.tot div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:10px 0;border-bottom:1px solid var(--sand)}
+.tot dd{font-family:var(--serif);font-size:21px;line-height:1.25;text-align:right;white-space:nowrap}
+.tot .grand{border-bottom:0;padding-top:16px}
+.tot .grand dt{color:var(--ink)}
+.tot .grand dt small{display:block;letter-spacing:.12em;text-transform:none;color:var(--mute);font-size:12.5px}
+.tot .grand dd{font-size:32px}
+
+.solo{max-width:760px}
+.solo .serif{font-size:clamp(26px,2.6vw,36px);font-style:italic;line-height:1.3;margin:22px 0 28px}
+.ordno{font-family:var(--serif);font-weight:300;font-size:clamp(54px,8vw,112px);line-height:.95;letter-spacing:.02em;margin:22px 0 12px;overflow-wrap:anywhere}
+.conf{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(12px,2vw,32px);align-items:start;margin-top:clamp(30px,4vw,56px)}
+.conf-l{grid-column:1/8}
+.conf-r{grid-column:9/13;background:var(--linen);padding:clamp(22px,2.4vw,36px)}
+.facts{border-top:1px solid var(--sand)}
+.facts div{display:grid;grid-template-columns:minmax(120px,1fr) 2fr;gap:4px 20px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--sand)}
+.facts dd{font-family:var(--serif);font-size:21px;line-height:1.3;overflow-wrap:anywhere}
+.notice{border:1px dashed var(--bronze);padding:16px 20px;margin:0 0 26px}
+.notice .label{color:var(--ink)}
+.conf-l .btn{margin-top:30px}
+
+footer.site{border-top:1px solid var(--sand);padding-top:26px;padding-bottom:40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px}
+footer.site a{text-underline-offset:4px;text-decoration-thickness:1px}
+
+@media (max-width:899px){
+  .wordmark{font-size:25px}
+  .co,.conf{display:flex;flex-direction:column;align-items:stretch}
+  .co-r{order:-1;position:static;margin:0 calc(var(--pad)*-1) 34px;padding:8px var(--pad)}
+  .conf-r{margin-top:40px}
+  .sum-t{cursor:pointer;align-items:center;min-height:48px}
+  .sum-t .tg{display:inline;margin-left:10px;font-family:var(--serif);font-size:18px;letter-spacing:0}
+  .co-r[open]{padding-bottom:22px}
+  .steps li .nm{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .steps li[aria-current=step] .nm{position:static;width:auto;height:auto;overflow:visible;clip:auto}
+}
+@media (max-width:520px){
+  .row2{grid-template-columns:1fr}
+  .nav .link{letter-spacing:.18em}
+  .facts div{grid-template-columns:1fr}
+  .opt{padding:14px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}
+}
+html,body{overflow-x:clip;max-width:100%}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="wordmark" href="index.html" aria-label="Vesna, home">Vesna</a>
+  <a class="link" href="index.html#collection">Back to the shop</a>
+</header>
+
+<main id="main" class="wrap">
+  <noscript><p class="serif" style="font-size:28px">Checkout needs JavaScript. Please enable it, or write to help@vesna.example.</p></noscript>
+
+  <!-- empty bag -->
+  <section class="solo" id="vEmpty" hidden>
+    <span class="no">Checkout</span>
+    <h1 tabindex="-1">Your bag <em>is empty</em></h1>
+    <p class="serif">There is nothing to check out yet.</p>
+    <a class="btn" href="index.html#collection">View the collection</a>
+  </section>
+
+  <!-- checkout -->
+  <section id="vCheckout" hidden aria-labelledby="coH">
+    <span class="no">Checkout</span>
+    <h1 id="coH" tabindex="-1">Your <em>order</em></h1>
+    <p class="notice" id="cancelNote" role="status" hidden style="margin:26px 0 0"><span class="label">Payment cancelled</span><br>Nothing was charged. Your bag is as you left it.</p>
+    <ol class="steps label" id="steps" aria-label="Checkout steps">
+      <li><i>01</i><span class="nm">Contact</span></li>
+      <li><i>02</i><span class="nm">Delivery</span></li>
+      <li><i>03</i><span class="nm">Payment</span></li>
+      <li><i>04</i><span class="nm">Confirmation</span></li>
+    </ol>
+
+    <div class="co">
+      <div class="co-l">
+        <section class="cstep" id="s0" aria-labelledby="s0h">
+          <div class="cstep-h"><h2 class="label" id="s0h" tabindex="-1"><i>01</i>Contact</h2><button class="link" type="button" data-edit="0" hidden>Edit<span class="vh"> contact</span></button></div>
+          <p class="cstep-sum" id="s0sum" hidden></p>
+          <form id="f0" novalidate>
+            <div class="f">
+              <label class="label" for="email">Email</label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required maxlength="120" placeholder="your@address" aria-describedby="email-e"
+                data-req="Please enter your email address." data-bad="That address does not look complete.">
+              <p class="ferr" id="email-e"></p>
+            </div>
+            <div class="f">
+              <label class="label" for="phone">Phone <small>· optional, for the courier</small></label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="24" pattern="[0-9+\(\) .\-]{7,24}" aria-describedby="phone-e"
+                data-bad="Please use digits, spaces and + only, or leave it empty.">
+              <p class="ferr" id="phone-e"></p>
+            </div>
+            <div class="go"><button class="btn" type="submit">Continue to delivery</button></div>
+          </form>
+        </section>
+
+        <section class="cstep todo" id="s1" aria-labelledby="s1h">
+          <div class="cstep-h"><h2 class="label" id="s1h" tabindex="-1"><i>02</i>Delivery</h2><button class="link" type="button" data-edit="1" hidden>Edit<span class="vh"> delivery</span></button></div>
+          <p class="cstep-sum" id="s1sum" hidden></p>
+          <form id="f1" novalidate hidden>
+            <div class="row2">
+              <div class="f"><label class="label" for="fn">First name</label>
+                <input id="fn" name="firstName" type="text" autocomplete="given-name" required maxlength="60" aria-describedby="fn-e" data-req="Please enter your first name."><p class="ferr" id="fn-e"></p></div>
+              <div class="f"><label class="label" for="ln">Last name</label>
+                <input id="ln" name="lastName" type="text" autocomplete="family-name" required maxlength="60" aria-describedby="ln-e" data-req="Please enter your last name."><p class="ferr" id="ln-e"></p></div>
+            </div>
+            <div class="f"><label class="label" for="country">Country</label>
+              <select id="country" name="country" autocomplete="country" required aria-describedby="country-e" data-req="Please choose a country.">
+                <option value="">Choose a country</option>
+                <option value="AT">Austria</option><option value="BE">Belgium</option><option value="BG">Bulgaria</option><option value="HR">Croatia</option><option value="CY">Cyprus</option><option value="CZ">Czechia</option><option value="DK">Denmark</option><option value="EE">Estonia</option><option value="FI">Finland</option><option value="FR">France</option><option value="DE">Germany</option><option value="GR">Greece</option><option value="HU">Hungary</option><option value="IE">Ireland</option><option value="IT">Italy</option><option value="LV">Latvia</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MT">Malta</option><option value="NL">Netherlands</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="RO">Romania</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="ES">Spain</option><option value="SE">Sweden</option><option value="GB">United Kingdom</option>
+              </select><p class="ferr" id="country-e"></p></div>
+            <div class="f"><label class="label" for="a1">Street and number</label>
+              <input id="a1" name="line1" type="text" autocomplete="address-line1" required maxlength="100" aria-describedby="a1-e" data-req="Please enter your street and house number."><p class="ferr" id="a1-e"></p></div>
+            <div class="f"><label class="label" for="a2">Apartment, floor <small>· optional</small></label>
+              <input id="a2" name="line2" type="text" autocomplete="address-line2" maxlength="100" aria-describedby="a2-e"><p class="ferr" id="a2-e"></p></div>
+            <div class="row2">
+              <div class="f"><label class="label" for="pc">Postal code</label>
+                <input id="pc" name="postal" type="text" autocomplete="postal-code" autocapitalize="characters" spellcheck="false" required maxlength="10" pattern="[A-Za-z0-9][A-Za-z0-9 \-]{2,9}" aria-describedby="pc-e"
+                  data-req="Please enter your postal code." data-bad="That postal code does not look right for the country chosen."><p class="ferr" id="pc-e"></p></div>
+              <div class="f"><label class="label" for="city">City</label>
+                <input id="city" name="city" type="text" autocomplete="address-level2" required maxlength="80" aria-describedby="city-e" data-req="Please enter your city."><p class="ferr" id="city-e"></p></div>
+            </div>
+            <fieldset class="opts">
+              <legend class="label">Shipping method</legend>
+              <label class="opt"><input type="radio" name="method" value="standard" checked><i aria-hidden="true"></i><span><b>Standard</b><small>2–4 days · free over €120</small></span><span class="price" id="stdP">€6.95</span></label>
+              <label class="opt"><input type="radio" name="method" value="express"><i aria-hidden="true"></i><span><b>Express</b><small>1–2 days</small></span><span class="price">€14.95</span></label>
+            </fieldset>
+            <div class="go"><button class="btn" type="submit">Continue to payment</button></div>
+          </form>
+        </section>
+
+        <section class="cstep todo" id="s2" aria-labelledby="s2h">
+          <div class="cstep-h"><h2 class="label" id="s2h" tabindex="-1"><i>03</i>Payment</h2></div>
+          <form id="f2" novalidate hidden>
+            <div class="demo" id="payDemo" hidden>
+              <span class="label">Demo mode</span>
+              <p class="serif">Demo mode: no payment is taken.</p>
+              <p class="hint">This shop is a front-end demonstration. No card details are asked for, nothing is charged and nothing is shipped.</p>
+            </div>
+            <div id="payLive" hidden>
+              <p class="hint" style="margin-top:18px">You will pay on Stripe's secure checkout page and return here afterwards. Vesna does not see or store your card details.</p>
+            </div>
+            <p class="ferr pay-err" id="payErr" role="alert"></p>
+            <div class="go"><button class="btn solid" type="submit" id="payGo">Place demo order</button><span class="label" id="payTotal"></span></div>
+          </form>
+        </section>
+      </div>
+
+      <details class="co-r" id="sum" open>
+        <summary class="sum-t" id="sumT"><span class="label">Order summary<span class="tg" aria-hidden="true" id="sumTg">+</span></span><span class="price" id="sumTop"></span></summary>
+        <ul class="sum-lines" id="sumLines"></ul>
+        <form class="code" id="codeForm" novalidate>
+          <div id="codeOff">
+            <label class="label" for="code">Discount code</label>
+            <div class="row"><input id="code" name="code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="Enter a code" aria-describedby="code-e"><button type="submit">Apply</button></div>
+          </div>
+          <div class="on" id="codeOn" hidden><span class="label" id="codeName"></span><button class="link" type="button" id="codeRm">Remove<span class="vh"> discount code</span></button></div>
+          <p class="ferr" id="code-e" role="status"></p>
+        </form>
+        <dl class="tot">
+          <div><dt class="label">Subtotal</dt><dd id="tSub"></dd></div>
+          <div id="tDiscRow" hidden><dt class="label" id="tDiscL">Discount</dt><dd id="tDisc"></dd></div>
+          <div><dt class="label">Shipping</dt><dd id="tShip"></dd></div>
+          <div class="grand"><dt class="label">Total<small>incl. VAT</small></dt><dd id="tTotal"></dd></div>
+        </dl>
+      </details>
+    </div>
+  </section>
+
+  <!-- confirmation -->
+  <section id="vDone" hidden aria-labelledby="doneH">
+    <span class="no" id="doneNo">Order confirmed</span>
+    <h1 id="doneH" tabindex="-1">Thank <em>you</em></h1>
+    <p class="ordno" id="doneNum"></p>
+    <div class="conf">
+      <div class="conf-l">
+        <p class="notice" id="doneDemo" hidden><span class="label">Demo order</span><br>No payment was taken and nothing will be shipped.</p>
+        <dl class="facts" id="doneFacts"></dl>
+        <a class="btn" href="index.html#collection">Back to the shop</a>
+      </div>
+      <div class="conf-r" id="doneSum" hidden>
+        <span class="label">Order summary</span>
+        <ul class="sum-lines" id="doneLines"></ul>
+        <dl class="tot">
+          <div><dt class="label">Subtotal</dt><dd id="dSub"></dd></div>
+          <div id="dDiscRow" hidden><dt class="label" id="dDiscL">Discount</dt><dd id="dDisc"></dd></div>
+          <div><dt class="label">Shipping</dt><dd id="dShip"></dd></div>
+          <div class="grand"><dt class="label">Total<small>incl. VAT</small></dt><dd id="dTotal"></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site wrap">
+  <span class="label">© 2026 Vesna</span>
+  <span class="label">Help: <a href="mailto:help@vesna.example" style="text-transform:none;letter-spacing:.08em">help@vesna.example</a></span>
+</footer>
+
+<script>
+/* ------------------------------------------------------------------
+   CHECKOUT CONFIG
+   checkoutEndpoint empty  -> demo mode: no payment is taken, no card fields are shown,
+                              "Place demo order" completes the order in this browser only.
+   checkoutEndpoint set    -> POST {items:[{id,size,qty}], email, shipping, discount, returnUrl}
+                              to it, expect {url}, and redirect there (Stripe Checkout).
+                              e.g. 'https://corset-tryon.vercel.app/api/checkout'
+   Prices shown here are for display. The server keeps its own price list.
+------------------------------------------------------------------- */
+var SHOP = { checkoutEndpoint: '' };
+window.SHOP = SHOP;
+
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var IMG='../../assets/img/maison/';
+  var PRODUCTS={
+    severine:{n:1,name:'Séverine',price:139,label:'Underbust'},
+    aurele:{n:2,name:'Aurèle',price:149,label:'Underbust'},
+    odile:{n:3,name:'Odile',price:99,label:'Waspie'},
+    maren:{n:4,name:'Maren',price:149,label:'Longline underbust'},
+    colombe:{n:5,name:'Colombe',price:169,label:'Overbust'},
+    isaure:{n:6,name:'Isaure',price:129,label:'Underbust, front zip'}
+  };
+  var COUNTRIES={}; [].forEach.call($('country').options,function(o){if(o.value)COUNTRIES[o.value]=o.textContent});
+  var FREE_OVER=12000, SHIP={standard:695,express:1495}, DAYS={standard:[2,4],express:[1,2]}, CODES={VESNA10:10};
+  var BAG_KEY='vesna_bag', ORDERS_KEY='vesna_orders', PENDING_KEY='vesna_pending', DRAFT_KEY='vesna_checkout_draft';
+  var POSTAL={NL:'\\d{4} ?[A-Za-z]{2}',BE:'\\d{4}',AT:'\\d{4}',DK:'\\d{4}',LU:'\\d{4}',HU:'\\d{4}',BG:'\\d{4}',CY:'\\d{4}',SI:'\\d{4}',
+    DE:'\\d{5}',FR:'\\d{5}',IT:'\\d{5}',ES:'\\d{5}',FI:'\\d{5}',EE:'\\d{5}',HR:'\\d{5}',SE:'\\d{3} ?\\d{2}',CZ:'\\d{3} ?\\d{2}',SK:'\\d{3} ?\\d{2}',GR:'\\d{3} ?\\d{2}',
+    PL:'\\d{2}-\\d{3}',PT:'\\d{4}-\\d{3}',RO:'\\d{6}',IE:'[A-Za-z]\\d[\\dWw] ?[A-Za-z\\d]{4}',GB:'[A-Za-z]{1,2}\\d[A-Za-z\\d]? ?\\d[A-Za-z]{2}'};
+  var POSTAL_ANY='[A-Za-z0-9][A-Za-z0-9 \\-]{2,9}';
+
+  function money(c){return (c<0?'−':'')+'€'+(Math.abs(c)%100?(Math.abs(c)/100).toFixed(2):Math.abs(c)/100)}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function load(store,key,fb){try{var v=JSON.parse(store.getItem(key));return v==null?fb:v}catch(e){return fb}}
+  function save(store,key,v){try{store.setItem(key,JSON.stringify(v))}catch(e){}}
+  function drop(store,key){try{store.removeItem(key)}catch(e){}}
+  function readBag(){
+    var a=load(window.localStorage,BAG_KEY,[]), out=[]; if(!Array.isArray(a))return out;
+    a.forEach(function(l){var q=l&&parseInt(l.qty,10), s=l&&parseInt(l.size,10);
+      if(l&&PRODUCTS[l.id]&&s>=18&&s<=40&&s%2===0&&q>=1)out.push({id:l.id,size:s,qty:Math.min(5,q)})});
+    return out;
+  }
+  function show(id){['vEmpty','vCheckout','vDone'].forEach(function(v){$(v).hidden=v!==id});var h=$(id).querySelector('h1');window.scrollTo(0,0);if(h)h.focus({preventScroll:true})}
+
+  /* totals, in cents. Free standard shipping is judged on the subtotal before any discount. */
+  var items=readBag(), discount='', method='standard';
+  function totals(list,code,m){
+    var sub=list.reduce(function(n,l){return n+l.qty*PRODUCTS[l.id].price*100},0);
+    var pct=CODES[code]||0, disc=Math.round(sub*pct/100);
+    var ship=m==='express'?SHIP.express:(sub>=FREE_OVER?0:SHIP.standard);
+    return {sub:sub,pct:pct,disc:disc,ship:ship,total:sub-disc+ship};
+  }
+  function linesHTML(list){
+    return list.map(function(l){var p=PRODUCTS[l.id];
+      return '<li><span class="th"><img src="'+IMG+'g'+p.n+'.jpg" alt="" width="900" height="1200"></span><div><h3>'+p.name+'</h3><span class="label">Size '+l.size+'″ · Qty '+l.qty+'</span></div><span class="price">'+money(p.price*100*l.qty)+'</span></li>';
+    }).join('');
+  }
+  function paintTotals(pre,t,code){
+    $(pre+'Sub').textContent=money(t.sub); $(pre+'DiscRow').hidden=!t.disc;
+    $(pre+'DiscL').textContent='Discount · '+code; $(pre+'Disc').textContent=money(-t.disc);
+    $(pre+'Ship').textContent=t.ship?money(t.ship):'Free'; $(pre+'Total').textContent=money(t.total);
+  }
+  function paint(){
+    var t=totals(items,discount,method);
+    $('sumLines').innerHTML=linesHTML(items); paintTotals('t',t,discount);
+    $('sumTop').textContent=money(t.total); $('stdP').textContent=t.sub>=FREE_OVER?'Free':money(SHIP.standard);
+    $('payTotal').textContent='Total '+money(t.total)+' incl. VAT';
+    $('codeOff').hidden=!!discount; $('codeOn').hidden=!discount; $('codeName').textContent=discount?discount+' applied · '+t.pct+'% off':'';
+  }
+
+  /* order summary collapses on small screens only */
+  var sum=$('sum'), wide=window.matchMedia('(min-width:900px)');
+  function sumMode(){sum.open=wide.matches;$('sumTg').textContent=sum.open?'–':'+'}
+  (wide.addEventListener?wide.addEventListener.bind(wide,'change'):wide.addListener.bind(wide))(sumMode);
+  $('sumT').addEventListener('click',function(e){if(wide.matches)e.preventDefault()});
+  sum.addEventListener('toggle',function(){$('sumTg').textContent=sum.open?'–':'+'});
+
+  /* discount code */
+  $('codeForm').addEventListener('submit',function(ev){
+    ev.preventDefault(); var i=$('code'), v=i.value.trim().toUpperCase(), e=$('code-e');
+    if(!v){e.textContent='Please enter a code.';i.setAttribute('aria-invalid','true');i.focus();return}
+    if(!CODES[v]){e.textContent='That code is not valid.';i.setAttribute('aria-invalid','true');i.focus();return}
+    i.removeAttribute('aria-invalid'); i.value=''; discount=v; paint(); e.textContent=''; saveDraft(); $('codeRm').focus();
+  });
+  $('code').addEventListener('input',function(){this.removeAttribute('aria-invalid');$('code-e').textContent=''});
+  $('codeRm').addEventListener('click',function(){discount='';paint();saveDraft();$('code').focus()});
+
+  /* validation: native constraints, our own words */
+  function check(i){
+    var e=$(i.id+'-e'), v=i.validity, msg='', val=(i.value||'').trim();
+    if(i.required&&!val) msg=i.getAttribute('data-req')||'Please fill this in.';
+    else if(!v.valid) msg=i.getAttribute('data-bad')||'Please check this.';
+    else if(i.type==='email'&&val&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)) msg=i.getAttribute('data-bad');
+    if(msg)i.setAttribute('aria-invalid','true');else i.removeAttribute('aria-invalid');
+    if(e)e.textContent=msg; return !msg;
+  }
+  function checkForm(f){
+    var bad=null; [].forEach.call(f.querySelectorAll('input:not([type=radio]),select'),function(i){if(!check(i)&&!bad)bad=i});
+    if(bad)bad.focus(); return !bad;
+  }
+  [].forEach.call(document.querySelectorAll('.f input,.f select'),function(i){
+    i.addEventListener('blur',function(){if(i.value||i.getAttribute('aria-invalid'))check(i)});
+    i.addEventListener('input',function(){if(i.getAttribute('aria-invalid'))check(i)});
+    i.addEventListener('change',function(){if(i.getAttribute('aria-invalid'))check(i)});
+  });
+  function postalRule(){var pc=$('pc');pc.pattern=POSTAL[$('country').value]||POSTAL_ANY;if(pc.value)check(pc)}
+  $('country').addEventListener('change',postalRule);
+
+  /* steps */
+  var step=0, forms=[$('f0'),$('f1'),$('f2')];
+  function val(id){return $(id).value.trim()}
+  function contact(){return {email:val('email'),phone:val('phone')}}
+  function shipping(){return {firstName:val('fn'),lastName:val('ln'),line1:val('a1'),line2:val('a2'),postal:val('pc').toUpperCase(),city:val('city'),country:$('country').value,phone:val('phone'),method:method}}
+  function methodName(m){return m==='express'?'Express, 1–2 days':'Standard, 2–4 days'}
+  function addressLine(s){return [s.firstName+' '+s.lastName,s.line1,s.line2,s.postal+' '+s.city,COUNTRIES[s.country]||s.country].filter(Boolean).join(', ')}
+  function goStep(n,focus){
+    step=n;
+    forms.forEach(function(f,i){
+      var sec=$('s'+i), ed=sec.querySelector('[data-edit]'), sm=$('s'+i+'sum');
+      f.hidden=i!==n; sec.classList.toggle('todo',i>n);
+      if(ed)ed.hidden=!(i<n); if(sm)sm.hidden=!(i<n);
+    });
+    $('s0sum').textContent=contact().email+(contact().phone?' · '+contact().phone:'');
+    $('s1sum').textContent=addressLine(shipping())+' · '+methodName(method);
+    [].forEach.call($('steps').children,function(li,i){
+      if(i===n)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current');
+      li.classList.toggle('was',i<n);
+    });
+    var live=!!SHOP.checkoutEndpoint; $('payDemo').hidden=live; $('payLive').hidden=!live;
+    $('payGo').textContent=live?'Continue to payment':'Place demo order';
+    if(focus){var h=$('s'+n+'h');h.focus({preventScroll:true});$('s'+n).scrollIntoView({behavior:rm?'auto':'smooth',block:'start'})}
+  }
+  function saveDraft(){
+    var d={c:contact(),s:shipping(),discount:discount,step:step}; save(window.sessionStorage,DRAFT_KEY,d);
+  }
+  function loadDraft(){
+    var d=load(window.sessionStorage,DRAFT_KEY,null); if(!d||!d.c||!d.s)return;
+    $('email').value=d.c.email||''; $('phone').value=d.c.phone||'';
+    $('fn').value=d.s.firstName||''; $('ln').value=d.s.lastName||''; $('a1').value=d.s.line1||''; $('a2').value=d.s.line2||'';
+    $('pc').value=d.s.postal||''; $('city').value=d.s.city||''; if(COUNTRIES[d.s.country])$('country').value=d.s.country;
+    if(d.s.method==='express'){method='express';forms[1].elements.method.value='express'}
+    if(CODES[d.discount])discount=d.discount;
+    postalRule();
+    var n=0; while(n<Math.min(2,d.step||0)&&quiet(forms[n]))n++;
+    step=n;
+  }
+  function quiet(f){return [].every.call(f.querySelectorAll('input:not([type=radio]),select'),function(i){var ok=check(i);if(!ok){i.removeAttribute('aria-invalid');$(i.id+'-e').textContent=''}return ok})}
+  forms[0].addEventListener('submit',function(ev){ev.preventDefault();if(checkForm(this)){goStep(1,true);saveDraft()}});
+  forms[1].addEventListener('submit',function(ev){ev.preventDefault();postalRule();if(checkForm(this)){goStep(2,true);saveDraft()}});
+  [].forEach.call(forms[1].elements.method,function(r){r.addEventListener('change',function(){method=r.value;paint()})});
+  [].forEach.call(document.querySelectorAll('[data-edit]'),function(b){b.addEventListener('click',function(){goStep(parseInt(b.getAttribute('data-edit'),10),true)})});
+
+  /* order */
+  function orderNo(){
+    var A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789', out='', r=new Uint8Array(6), i;
+    if(window.crypto&&window.crypto.getRandomValues)window.crypto.getRandomValues(r);else for(i=0;i<6;i++)r[i]=Math.floor(Math.random()*256);
+    for(i=0;i<6;i++)out+=A[r[i]%A.length]; return 'VS-'+out;
+  }
+  function addWorkdays(d,n){var x=new Date(d.getTime());while(n>0){x.setDate(x.getDate()+1);if(x.getDay()!==0&&x.getDay()!==6)n--}return x}
+  function eta(fromISO,m){
+    var d=new Date(fromISO), r=DAYS[m]||DAYS.standard, a=addWorkdays(d,r[0]), b=addWorkdays(d,r[1]);
+    var f=function(x,month){return x.toLocaleDateString('en-GB',month?{weekday:'short',day:'numeric',month:'long'}:{weekday:'short',day:'numeric'})};
+    return (a.getMonth()===b.getMonth()?f(a,false):f(a,true))+' – '+f(b,true);
+  }
+  function buildOrder(demo){
+    var t=totals(items,discount,method);
+    return {number:'',date:new Date().toISOString(),demo:demo,email:contact().email,shipping:shipping(),discount:discount,
+      items:items.map(function(l){return {id:l.id,size:l.size,qty:l.qty,name:PRODUCTS[l.id].name,price:PRODUCTS[l.id].price}}),totals:t};
+  }
+  function finish(o){
+    var all=load(window.localStorage,ORDERS_KEY,[]); if(!Array.isArray(all))all=[];
+    all.push(o); save(window.localStorage,ORDERS_KEY,all);
+    save(window.localStorage,BAG_KEY,[]); drop(window.localStorage,PENDING_KEY); drop(window.sessionStorage,DRAFT_KEY);
+    confirmView(o);
+  }
+  function confirmView(o){
+    $('doneNo').textContent=o&&o.demo?'Demo order placed':'Order confirmed';
+    $('doneNum').textContent=o.number||''; $('doneNum').hidden=!o.number;
+    $('doneDemo').hidden=!o.demo;
+    var full=!!(o.items&&o.items.length), s=o.shipping||{}, rows=[];
+    $('doneH').innerHTML=full&&s.firstName?'Thank you, <em>'+esc(s.firstName)+'</em>':'Thank <em>you</em>';
+    if(full){
+      rows.push(['Email',o.email],['Deliver to',addressLine(s)],['Shipping',methodName(s.method)],['Estimated delivery',eta(o.date,s.method)]);
+      $('doneLines').innerHTML=linesHTML(o.items); paintTotals('d',o.totals,o.discount);
+    } else rows.push(['Payment','Received. The details of this order were saved in the browser it was placed from.']);
+    $('doneFacts').innerHTML=rows.map(function(r){return '<div><dt class="label">'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('');
+    $('doneSum').hidden=!full;
+    document.title='Order '+(o.number||'confirmed')+' — Vesna';
+    show('vDone');
+  }
+
+  forms[2].addEventListener('submit',function(ev){
+    ev.preventDefault(); var go=$('payGo'), err=$('payErr'); err.textContent='';
+    if(!quiet(forms[0])){goStep(0,true);checkForm(forms[0]);return}
+    if(!quiet(forms[1])){goStep(1,true);checkForm(forms[1]);return}
+    items=readBag(); if(!items.length){show('vEmpty');return}
+    if(!SHOP.checkoutEndpoint){var o=buildOrder(true);o.number=orderNo();finish(o);return}
+    go.disabled=true; go.textContent='Opening payment…'; saveDraft();
+    save(window.localStorage,PENDING_KEY,buildOrder(false));
+    fetch(SHOP.checkoutEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({items:items,email:contact().email,shipping:shipping(),discount:discount,returnUrl:location.origin+location.pathname})
+    }).then(function(r){
+      return r.json().catch(function(){return {}}).then(function(j){
+        if(!r.ok||!j||!/^https:\/\//.test(j.url||''))throw new Error((j&&j.error)||'The payment page could not be opened. Please try again.');
+        window.location.assign(j.url);
+      });
+    }).catch(function(e){
+      drop(window.localStorage,PENDING_KEY);
+      err.textContent=e instanceof TypeError?'We could not reach the payment service. Check your connection and try again.':e.message;
+      go.disabled=false; go.textContent='Continue to payment';
+    });
+  });
+
+  /* entry */
+  var q=new URLSearchParams(location.search), num=(q.get('order')||'').toUpperCase();
+  if(!/^VS-[A-Z0-9]{6}$/.test(num))num='';
+  if(q.get('paid')==='1'){
+    var past=load(window.localStorage,ORDERS_KEY,[]), hit=null, pend=load(window.localStorage,PENDING_KEY,null);
+    if(Array.isArray(past)&&num)past.forEach(function(o){if(o&&o.number===num)hit=o});
+    if(hit)confirmView(hit);
+    else if(pend&&pend.items&&pend.items.length){pend.number=num;pend.paidAt=new Date().toISOString();finish(pend)}
+    else confirmView({number:num,demo:false});
+    return;
+  }
+  if(!items.length){show('vEmpty');return}
+  loadDraft(); paint(); sumMode(); goStep(step,false);
+  $('vCheckout').hidden=false; $('vEmpty').hidden=true; $('vDone').hidden=true;
+  if(q.get('cancelled')==='1'){$('cancelNote').hidden=false;drop(window.localStorage,PENDING_KEY)}
+  window.addEventListener('storage',function(e){if(e.key===BAG_KEY&&!$('vCheckout').hidden){items=readBag();if(items.length)paint();else show('vEmpty')}});
+})();
+</script>
+</body>
+</html>
